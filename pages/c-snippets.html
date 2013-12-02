@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>tty</title>
+        <title>C Snippets</title>
         <!-- Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=The+Girl+Next+Door' rel='stylesheet' type='text/css'>
@@ -44,7 +44,7 @@
 <body id="index" class="home">
      <div class="navigation">
         <ol class="nav">
-          <li class="current"><a href="">Blog</a> </li>
+          <li><a href="">Blog</a> </li>
           <li><a href="/archives.html">Archive</a></li>
           <li><a href="/tags.html">Tags</a> </li>
           <li><a href="/">RSS</a> </li>
@@ -54,16 +54,37 @@
                 <div class="banner"><a href="">tty <strong></strong></a></div>
         </header><!-- /#banner -->
         <nav id="menu"><ul>
+            <li class="active"><a href="/pages/c-snippets.html">C Snippets</a></li>
+            <li><a href="/pages/python-snippets.html">Python Snippets</a></li>
         </ul></nav><!-- /#menu -->
         <div class="box">
-<ul>
-    <li><a href="/category/debian.html">Debian</a></li>
-    <li><a href="/category/emacs.html">emacs</a></li>
-    <li><a href="/category/me.html">Me</a></li>
-    <li><a href="/category/postgresql.html">Postgresql</a></li>
-    <li><a href="/category/tools.html">Tools</a></li>
-    <li><a href="/category/vcs.html">vcs</a></li>
-</ul>
+    <h2>C Snippets</h2>
+    <h2>Simple Swap Function</h2>
+<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">){</span>
+  <span class="o">*</span><span class="n">a</span><span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="o">+*</span><span class="n">b</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">b</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">a</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;before: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;after: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Expected output:</p>
+<div class="highlight"><pre><span class="n">before</span><span class="o">:</span> <span class="n">a</span><span class="o">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">b</span><span class="o">:</span> <span class="mi">2</span>
+<span class="n">after</span><span class="o">:</span> <span class="n">a</span><span class="o">:</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">b</span><span class="o">:</span> <span class="mi">1</span>
+</pre></div>
             <hr/>
             <footer id="contentinfo" class="footer">
                 <div>

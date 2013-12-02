@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>tty</title>
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=The+Girl+Next+Door' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Marcellus' rel='stylesheet' type='text/css'>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css" />
+        <meta charset="utf-8" />
+      
+
+        <!-- Javascript-->
+        <script async src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script async type="text/javascript"> 
+        $(function() {
+            function invisibleMenu() {
+                var now = 0;
+                var pixels = 300;
+                var opacity = -1;
+
+                var move = function() {
+                    now = $(window).scrollTop();
+                    if (now > pixels && opacity !== 0)
+                        opacity = 0;
+                    else if (now < pixels){
+                        // Depends on the position not if scrolls down or up
+                        opacity = (1 - now/pixels);
+                    }
+                    $("div.navigation").css({"opacity": opacity});
+                }
+                $(window).scroll(move);
+                move();
+            }
+            invisibleMenu();
+          });
+          </script> 
+</head>
+
+<body id="index" class="home">
+     <div class="navigation">
+        <ol class="nav">
+          <li class="current"><a href="">Blog</a> </li>
+          <li><a href="/archives.html">Archive</a></li>
+          <li><a href="/tags.html">Tags</a> </li>
+          <li><a href="">RSS</a> </li>
+        </ol>
+      </div>
+        <header id="banner" class="body">
+                <div class="banner"><a href="">tty <strong></strong></a></div>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+        </ul></nav><!-- /#menu -->
+        <div class="box">
+<section id="content" class="body">
+  <header class="post">
+    <h1 class="entry-title">
+      erc
+    </h1>
+  </header>
+  <footer class="post-info">
+    <abbr>
+      Mon 02 December 2013 
+         By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+  
+    </abbr>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>This is my configuration for erc</p>
+<ul>
+<li>erc-cmd-NP function send the current track being played to the current chat buffer (channel or private)</li>
+<li>The connect-* functions provide a quick access to the defined IRC server.</li>
+</ul>
+<div class="highlight"><pre><span class="p">;;</span>
+<span class="p">;;</span> <span class="n">erc</span><span class="p">.</span><span class="n">el</span>
+<span class="p">;;</span> <span class="n">Login</span> <span class="o">:</span> <span class="o">&lt;</span><span class="n">freyes</span><span class="err">@</span><span class="n">wampa</span><span class="o">&gt;</span>
+<span class="p">;;</span> <span class="n">Started</span> <span class="n">on</span>  <span class="n">Mon</span> <span class="n">Aug</span> <span class="mi">30</span> <span class="mi">23</span><span class="o">:</span><span class="mo">04</span><span class="o">:</span><span class="mi">16</span> <span class="mi">2010</span> <span class="n">Felipe</span> <span class="n">Reyes</span>
+<span class="p">;;</span> <span class="err">$</span><span class="n">Id</span><span class="err">$</span>
+<span class="p">;;</span> 
+<span class="p">(</span><span class="n">defun</span> <span class="n">erc</span><span class="o">-</span><span class="n">cmd</span><span class="o">-</span><span class="n">NP</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">rest</span> <span class="n">ignore</span><span class="p">)</span>
+  <span class="s">&quot;Display the current EMMS track to the current ERC buffer.&quot;</span>
+  <span class="p">(</span><span class="n">let</span> <span class="p">((</span><span class="n">string</span> <span class="p">(</span><span class="n">emms</span><span class="o">-</span><span class="n">show</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">if</span> <span class="n">string</span>
+        <span class="p">(</span><span class="n">erc</span><span class="o">-</span><span class="n">send</span><span class="o">-</span><span class="n">message</span> <span class="n">string</span><span class="p">)</span>
+      <span class="p">(</span><span class="n">message</span> <span class="s">&quot;Nothing is playing!&quot;</span><span class="p">))))</span>
+<span class="p">(</span><span class="n">defun</span> <span class="n">connect</span><span class="o">-</span><span class="n">freenode</span> <span class="p">()</span>
+  <span class="p">(</span><span class="n">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">erc</span>
+   <span class="o">:</span><span class="n">server</span> <span class="s">&quot;irc.freenode.net&quot;</span>
+   <span class="o">:</span><span class="n">port</span> <span class="mi">6667</span>
+   <span class="o">:</span><span class="n">nick</span> <span class="s">&quot;freyes&quot;</span>
+   <span class="o">:</span><span class="n">password</span> <span class="s">&quot;XXXXXX&quot;</span>
+   <span class="o">:</span><span class="n">full</span><span class="o">-</span><span class="n">name</span> <span class="s">&quot;Felipe Reyes&quot;</span><span class="p">))</span>
+
+<span class="p">(</span><span class="n">defun</span> <span class="n">connect</span><span class="o">-</span><span class="n">gnome</span> <span class="p">()</span>
+  <span class="p">(</span><span class="n">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">erc</span>
+   <span class="o">:</span><span class="n">server</span> <span class="s">&quot;irc.gnome.org&quot;</span>
+   <span class="o">:</span><span class="n">port</span> <span class="mi">6667</span>
+   <span class="o">:</span><span class="n">nick</span> <span class="s">&quot;freyes&quot;</span>
+   <span class="o">:</span><span class="n">password</span> <span class="s">&quot;XXXXX&quot;</span>
+   <span class="o">:</span><span class="n">full</span><span class="o">-</span><span class="n">name</span> <span class="s">&quot;Felipe Reyes&quot;</span><span class="p">))</span>
+
+<span class="p">(</span><span class="n">defun</span> <span class="n">connect</span><span class="o">-</span><span class="n">oftc</span> <span class="p">()</span>
+  <span class="p">(</span><span class="n">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">erc</span>
+   <span class="o">:</span><span class="n">server</span> <span class="s">&quot;irc.oftc.net&quot;</span>
+   <span class="o">:</span><span class="n">port</span> <span class="mi">6667</span>
+   <span class="o">:</span><span class="n">nick</span> <span class="s">&quot;freyes&quot;</span>
+   <span class="o">:</span><span class="n">password</span> <span class="s">&quot;XXXXXX&quot;</span>
+   <span class="o">:</span><span class="n">full</span><span class="o">-</span><span class="n">name</span> <span class="s">&quot;Felipe Reyes&quot;</span><span class="p">))</span>
+
+<span class="p">(</span><span class="n">setq</span> <span class="n">erc</span><span class="o">-</span><span class="k">auto</span><span class="o">-</span><span class="n">query</span> <span class="err">&#39;</span><span class="n">frame</span><span class="p">)</span>
+</pre></div>
+  </div><!-- /.entry-content -->
+</section>
+            <hr/>
+            <footer id="contentinfo" class="footer">
+                <div>
+                    <a href="">Felipe Reyes</a> (2012)
+                </div>
+                <div>
+                    This work is licensed under <a rel="license" href="http://opensource.org/licenses/bsd-3-clause">3 clause BSD</a>. Source code available on <a rel="source code" href="https://github.com/slok/blog">Github</a>
+                </div>
+                <div>
+                    powered by <a href="http://getpelican.com/">Pelican</a>
+                    and <a href="http://python.org">Python</a>. 
+                    <a href="http://github.com/slok/iris">Theme</a> by <a href="http://xlarrakoetxea.org">Xabier Larrakoetxea</a> based on <a href="http://flask.pocoo.org/">Flask</a> theme
+                </div>
+                <div>
+                    Social icons (font awesome) by <a href="http://fortawesome.github.com/Font-Awesome/"> fort awesome</a>.
+                    <a href="http://www.google.com/webfonts/specimen/The+Girl+Next+Door">Title</a>, <a href="http://www.google.com/webfonts/specimen/Marcellus">headers</a> and <a href="http://www.google.com/webfonts/specimen/Inconsolata">source code</a> fonts by google fonts
+                </div>
+                <div class="social">
+                        <a href="http://www.metaklass.org/"><i class="icon-@niedbalski"></i>  </a>
+                        <a href="mailto:freyes@tty.cl"><i class="icon-envelope"></i> </a>
+                </div>
+            </footer><!-- /#contentinfo -->
+        </div>
+        <!--Add statistycs-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', "UA-2675698-3"]);
+_gaq.push(['_setDomainName', "freyes.github.io"]);  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

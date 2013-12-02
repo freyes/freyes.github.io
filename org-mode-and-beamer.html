@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>tty</title>
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=The+Girl+Next+Door' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Marcellus' rel='stylesheet' type='text/css'>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css" />
+        <meta charset="utf-8" />
+      
+
+        <!-- Javascript-->
+        <script async src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script async type="text/javascript"> 
+        $(function() {
+            function invisibleMenu() {
+                var now = 0;
+                var pixels = 300;
+                var opacity = -1;
+
+                var move = function() {
+                    now = $(window).scrollTop();
+                    if (now > pixels && opacity !== 0)
+                        opacity = 0;
+                    else if (now < pixels){
+                        // Depends on the position not if scrolls down or up
+                        opacity = (1 - now/pixels);
+                    }
+                    $("div.navigation").css({"opacity": opacity});
+                }
+                $(window).scroll(move);
+                move();
+            }
+            invisibleMenu();
+          });
+          </script> 
+</head>
+
+<body id="index" class="home">
+     <div class="navigation">
+        <ol class="nav">
+          <li class="current"><a href="">Blog</a> </li>
+          <li><a href="/archives.html">Archive</a></li>
+          <li><a href="/tags.html">Tags</a> </li>
+          <li><a href="">RSS</a> </li>
+        </ol>
+      </div>
+        <header id="banner" class="body">
+                <div class="banner"><a href="">tty <strong></strong></a></div>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+        </ul></nav><!-- /#menu -->
+        <div class="box">
+<section id="content" class="body">
+  <header class="post">
+    <h1 class="entry-title">
+      Org-mode and Beamer
+    </h1>
+  </header>
+  <footer class="post-info">
+    <abbr>
+      Mon 02 December 2013 
+         By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+  
+    </abbr>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <h2>Overview</h2>
+<p>The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. </p>
+<h2>Example</h2>
+<p>Here it is an example of how a presentation file should look like</p>
+<div class="highlight"><pre><span class="cp">#+TITLE:     Org Mode and Beamer</span>
+<span class="cp">#+AUTHOR:    Felipe Reyes</span>
+<span class="cp">#+EMAIL:     freyes@tty.cl</span>
+<span class="cp">#+DATE:      2011-08-25 Tue</span>
+<span class="cp">#+DESCRIPTION:</span>
+<span class="cp">#+KEYWORDS:  org-mode, beamer, tutorial</span>
+<span class="cp">#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t &lt;:t</span>
+<span class="cp">#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc</span>
+<span class="cp">#+INFOJS_OPT: view:nil toc:nil ltoc:nil mouse:underline buttons:0 path:http:</span><span class="c1">//orgmode.org/org-info.js</span>
+<span class="cp">#+EXPORT_SELECT_TAGS: export</span>
+<span class="cp">#+EXPORT_EXCLUDE_TAGS: noexport</span>
+<span class="cp">#+LINK_UP:   </span>
+<span class="cp">#+LINK_HOME: </span>
+<span class="cp">#+LaTeX_CLASS: beamer</span>
+<span class="cp">#+BEAMER_HEADER_EXTRA: \usetheme{Madrid}\usecolortheme{default}</span>
+<span class="cp">#+MACRO: BEAMERMODE presentation</span>
+<span class="cp">#+MACRO: BEAMERINSTITUTE tty.cl</span>
+<span class="cp">#+BEAMER_FRAME_LEVEL: 2</span>
+<span class="cp">#+STARTUP: beamer</span>
+
+<span class="o">*</span> <span class="n">Org</span> <span class="n">Mode</span> <span class="n">and</span> <span class="n">Beamer</span>
+<span class="o">**</span> <span class="n">Overview</span>
+   <span class="o">-</span> <span class="n">This</span> <span class="n">is</span> <span class="n">a</span> <span class="n">bullet</span> <span class="n">list</span>
+     <span class="o">-</span> <span class="n">nested</span> <span class="n">items</span>
+     <span class="o">-</span> <span class="n">more</span> <span class="n">items</span>
+   <span class="o">-</span> <span class="n">Resume</span> <span class="n">the</span> <span class="n">top</span> <span class="n">level</span> <span class="n">list</span>
+<span class="o">**</span> <span class="n">Numbered</span> <span class="n">List</span>
+   <span class="mi">1</span><span class="p">)</span> <span class="n">one</span>
+   <span class="mi">2</span><span class="p">)</span> <span class="n">two</span>
+   <span class="mi">3</span><span class="p">)</span> <span class="n">three</span>
+<span class="o">**</span> <span class="n">Source</span> <span class="n">Code</span> <span class="n">Example</span>
+<span class="cp">#+BEGIN_LaTeX</span>
+<span class="err">\</span><span class="n">begin</span><span class="p">{</span><span class="n">lstlisting</span><span class="p">}[</span><span class="n">language</span><span class="o">=</span><span class="n">python</span><span class="p">]</span>
+<span class="n">import</span> <span class="n">os</span>
+
+<span class="n">def</span> <span class="n">my_fun</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;.&quot;</span><span class="p">)</span><span class="o">:</span>
+    <span class="n">print</span> <span class="n">os</span><span class="p">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="err">\</span><span class="n">end</span><span class="p">{</span><span class="n">lstlisting</span><span class="p">}</span>
+<span class="cp">#+END_LaTeX</span>
+</pre></div>
+
+
+<p>Let's review it by section</p>
+<ul>
+<li>First you just need to set the basic information about your presentation (title, author, email, date, description and keywords)</li>
+<li>Then you indicate if you want some extra options in each slide</li>
+<li>BEAMER_HEADER_EXTRA: include raw LaTeX statements, this is used to define the beamer's theme, in this case we are using the theme <em>Madrid</em> with the <em>default</em> color theme.</li>
+<li>BEAMERMODE: set the presentation mode in beamer</li>
+<li>BEAMERINSTITUTE: let you define your college, business, etc.</li>
+<li>At the end we just write our slides, each level 2 section is a slide.</li>
+</ul>
+<p>You can open the file [[file:org-mode.beamer.presentation.org]] in emacs and use the shortcut <code>C-c C-e p</code> to generate a pdf of the presentation. The produced pdf can be downloaded [[file:org-mode.beamer.presentation.pdf][here]]</p>
+<h2>Setup</h2>
+<p>Execute the following command in Debian or Ubuntu</p>
+<div class="highlight"><pre><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">texlive</span><span class="o">-</span><span class="n">extra</span><span class="o">-</span><span class="n">utils</span> \
+    <span class="n">texlive</span><span class="o">-</span><span class="n">binaries</span> \
+    <span class="n">latex</span><span class="o">-</span><span class="n">beamer</span> \
+    <span class="n">texlive</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">extra</span>
+</pre></div>
+
+
+<p>Add the following to your <em>.emacs</em> file:</p>
+<div class="highlight"><pre><span class="p">;;</span> <span class="n">beamer</span>
+<span class="p">;;</span> <span class="err">#</span><span class="o">+</span><span class="n">LaTeX_CLASS</span><span class="o">:</span> <span class="n">beamer</span> <span class="n">in</span> <span class="n">org</span> <span class="n">files</span>
+<span class="p">(</span><span class="n">unless</span> <span class="p">(</span><span class="n">boundp</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">-</span><span class="n">export</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">classes</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">setq</span> <span class="n">org</span><span class="o">-</span><span class="n">export</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">classes</span> <span class="n">nil</span><span class="p">))</span>
+<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">-</span><span class="n">export</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">classes</span>
+  <span class="p">;;</span> <span class="n">beamer</span> <span class="n">class</span><span class="p">,</span> <span class="k">for</span> <span class="n">presentations</span>
+  <span class="err">&#39;</span><span class="p">(</span><span class="s">&quot;beamer&quot;</span>
+     <span class="s">&quot;</span><span class="se">\\</span><span class="s">documentclass[11pt]{beamer}</span><span class="se">\n</span>
+      <span class="err">\\</span><span class="n">mode</span><span class="o">&lt;</span><span class="p">{{{</span><span class="n">beamermode</span><span class="p">}}}</span><span class="o">&gt;</span><span class="err">\</span><span class="n">n</span>
+      <span class="err">\\</span><span class="n">beamertemplateballitem</span><span class="err">\</span><span class="n">n</span>
+      <span class="err">\\</span><span class="n">setbeameroption</span><span class="p">{</span><span class="n">show</span> <span class="n">notes</span><span class="p">}</span>
+      <span class="err">\\</span><span class="n">usepackage</span><span class="p">[</span><span class="n">utf8</span><span class="p">]{</span><span class="n">inputenc</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
+      <span class="err">\\</span><span class="n">usepackage</span><span class="p">[</span><span class="n">T1</span><span class="p">]{</span><span class="n">fontenc</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
+      <span class="err">\\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">hyperref</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
+      <span class="err">\\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">color</span><span class="p">}</span>
+      <span class="err">\\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">listings</span><span class="p">}</span>
+      <span class="err">\\</span><span class="n">lstset</span><span class="p">{</span><span class="n">numbers</span><span class="o">=</span><span class="n">none</span><span class="p">,</span><span class="n">language</span><span class="o">=</span><span class="p">[</span><span class="n">ISO</span><span class="p">]</span><span class="n">C</span><span class="o">++</span><span class="p">,</span><span class="n">tabsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+  <span class="n">frame</span><span class="o">=</span><span class="n">single</span><span class="p">,</span>
+  <span class="n">basicstyle</span><span class="o">=</span><span class="err">\\</span><span class="n">small</span><span class="p">,</span>
+  <span class="n">showspaces</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span><span class="n">showstringspaces</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span>
+  <span class="n">showtabs</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span>
+  <span class="n">keywordstyle</span><span class="o">=</span><span class="err">\\</span><span class="n">color</span><span class="p">{</span><span class="n">blue</span><span class="p">}</span><span class="err">\\</span><span class="n">bfseries</span><span class="p">,</span>
+  <span class="n">commentstyle</span><span class="o">=</span><span class="err">\\</span><span class="n">color</span><span class="p">{</span><span class="n">red</span><span class="p">},</span>
+  <span class="p">}</span><span class="err">\</span><span class="n">n</span>
+      <span class="err">\\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">verbatim</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
+      <span class="err">\\</span><span class="n">institute</span><span class="p">{{{{</span><span class="n">beamerinstitute</span><span class="p">}}}}</span><span class="err">\</span><span class="n">n</span>          
+       <span class="err">\\</span><span class="n">subject</span><span class="p">{{{{</span><span class="n">beamersubject</span><span class="p">}}}}</span><span class="err">\</span><span class="n">n</span><span class="s">&quot;</span>
+
+     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">section{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">section*{%s}&quot;</span><span class="p">)</span>
+
+     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">begin{frame}[fragile]</span><span class="se">\\</span><span class="s">frametitle{%s}&quot;</span>
+       <span class="s">&quot;</span><span class="se">\\</span><span class="s">end{frame}&quot;</span>
+       <span class="s">&quot;</span><span class="se">\\</span><span class="s">begin{frame}[fragile]</span><span class="se">\\</span><span class="s">frametitle{%s}&quot;</span>
+       <span class="s">&quot;</span><span class="se">\\</span><span class="s">end{frame}&quot;</span><span class="p">)))</span>
+
+<span class="p">;;</span> <span class="n">letter</span> <span class="n">class</span><span class="p">,</span> <span class="k">for</span> <span class="n">formal</span> <span class="n">letters</span>
+<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">-</span><span class="n">export</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">classes</span>
+  <span class="err">&#39;</span><span class="p">(</span><span class="s">&quot;letter&quot;</span>
+     <span class="s">&quot;</span><span class="se">\\</span><span class="s">documentclass[11pt]{letter}</span><span class="se">\n</span>
+      <span class="err">\\</span><span class="n">usepackage</span><span class="p">[</span><span class="n">utf8</span><span class="p">]{</span><span class="n">inputenc</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
+      <span class="err">\\</span><span class="n">usepackage</span><span class="p">[</span><span class="n">T1</span><span class="p">]{</span><span class="n">fontenc</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
+      <span class="err">\\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">color</span><span class="p">}</span><span class="s">&quot;</span>
+
+     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">section{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">section*{%s}&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">subsection{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">subsection*{%s}&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">subsubsection{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">subsubsection*{%s}&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">paragraph{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">paragraph*{%s}&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">subparagraph{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">subparagraph*{%s}&quot;</span><span class="p">)))</span>
+</pre></div>
+
+
+<h2>Links</h2>
+<ul>
+<li><a href="https://bitbucket.org/rivanvx/beamer/wiki/Home">Beamer development repo</a></li>
+<li><a href="http://orgmode.org/worg/org-tutorials/org-beamer/tutorial.html">Worg beamer tutorial</a></li>
+<li><a href="http://orgmode.org/manual/Beamer-class-export.html">org-mode beamer</a></li>
+<li><a href="http://emacs-fu.blogspot.com/2009/10/writing-presentations-with-org-mode-and.html">emacs-fu: writing presentations with org-mode and beamer</a></li>
+</ul>
+  </div><!-- /.entry-content -->
+</section>
+            <hr/>
+            <footer id="contentinfo" class="footer">
+                <div>
+                    <a href="">Felipe Reyes</a> (2012)
+                </div>
+                <div>
+                    This work is licensed under <a rel="license" href="http://opensource.org/licenses/bsd-3-clause">3 clause BSD</a>. Source code available on <a rel="source code" href="https://github.com/slok/blog">Github</a>
+                </div>
+                <div>
+                    powered by <a href="http://getpelican.com/">Pelican</a>
+                    and <a href="http://python.org">Python</a>. 
+                    <a href="http://github.com/slok/iris">Theme</a> by <a href="http://xlarrakoetxea.org">Xabier Larrakoetxea</a> based on <a href="http://flask.pocoo.org/">Flask</a> theme
+                </div>
+                <div>
+                    Social icons (font awesome) by <a href="http://fortawesome.github.com/Font-Awesome/"> fort awesome</a>.
+                    <a href="http://www.google.com/webfonts/specimen/The+Girl+Next+Door">Title</a>, <a href="http://www.google.com/webfonts/specimen/Marcellus">headers</a> and <a href="http://www.google.com/webfonts/specimen/Inconsolata">source code</a> fonts by google fonts
+                </div>
+                <div class="social">
+                        <a href="http://www.metaklass.org/"><i class="icon-@niedbalski"></i>  </a>
+                        <a href="mailto:freyes@tty.cl"><i class="icon-envelope"></i> </a>
+                </div>
+            </footer><!-- /#contentinfo -->
+        </div>
+        <!--Add statistycs-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', "UA-2675698-3"]);
+_gaq.push(['_setDomainName', "freyes.github.io"]);  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>

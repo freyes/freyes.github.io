@@ -65,6 +65,117 @@
             <article class="archive">
                 <header> 
                     <h1 class="archive-entry-title">
+                        <a href="/how-to-start-with-emacs.html" rel="bookmark" title="Permalink to How to start with Emacs">How to start with Emacs</a>
+                    </h1> 
+                </header>
+                <footer class="post-info">
+                    <abbr>
+                      Tue 03 December 2013 
+                         By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+  
+                    </abbr>
+                    <div class="entry-summary"> <h2>Part 0</h2>
+<p>Before I could really be productive with emacs, I failed a couple of
+times, because I knew that emacs were powerful, but the default
+configuration shows you a simple text editor that look awful, without
+syntax highlight, without anti-alias, a color schema that really
+sucks.</p>
+<p>In GNU/Linux ...</p>
+                    <a href="/how-to-start-with-emacs.html">read more</a></div>
+                </footer><!-- /.post-info -->
+                <!-- /.entry-content -->
+            </article>
+        </li>
+        
+        <li>
+            <article class="archive">
+                <header> 
+                    <h1 class="archive-entry-title">
+                        <a href="/emacs.html" rel="bookmark" title="Permalink to .emacs">.emacs</a>
+                    </h1> 
+                </header>
+                <footer class="post-info">
+                    <abbr>
+                      Mon 02 December 2013 
+                         By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+  
+                    </abbr>
+                    <div class="entry-summary"> <p>I hope you enjoy disecting my emacs config :D</p>
+<div class="highlight"><pre><span class="p">;;</span> <span class="k">to</span> <span class="nb">debug</span> <span class="nx">the</span> <span class="bp">.</span><span class="nx">emacs</span> <span class="nb">file</span>
+<span class="p">(</span><span class="nx">setq</span> <span class="nb">debug</span><span class="na">-on-error</span> <span class="nx">nil</span><span class="p">)</span>
+
+<span class="p">;;</span> <span class="nx">setup</span> <span class="nx">the</span> <span class="nb">default</span> <span class="nb">mode</span> <span class="k">to</span> <span class="nx">use</span>
+<span class="p">;;</span><span class="nx">Text</span> <span class="nb">mode</span> <span class="nx">is</span> <span class="nx">happier</span> <span class="nx">than</span> <span class="nx">Fundamental</span> <span class="nb">mode</span> <span class="p">;</span><span class="o">-</span><span class="p">)</span>
+<span class="p">(</span><span class="nx">setq</span> <span class="nb">default</span><span class="na">-major-mode</span> <span class="s1">&#39;text-mode)</span>
+
+<span class="s1">;; define the mail and name</span>
+<span class="s1">(setq user-mail-address &quot;your@mail.com&quot;)</span>
+<span class="s1">(setq user-full-name &quot;Your Name&quot;)</span>
+
+<span class="s1">;;;;;;;;;;;;,;</span>
+<span class="s1">;; UI ...</span></pre></div>
+                    <a href="/emacs.html">read more</a></div>
+                </footer><!-- /.post-info -->
+                <!-- /.entry-content -->
+            </article>
+        </li>
+        
+        <li>
+            <article class="archive">
+                <header> 
+                    <h1 class="archive-entry-title">
+                        <a href="/erc.html" rel="bookmark" title="Permalink to erc">erc</a>
+                    </h1> 
+                </header>
+                <footer class="post-info">
+                    <abbr>
+                      Mon 02 December 2013 
+                         By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+  
+                    </abbr>
+                    <div class="entry-summary"> <p>This is my configuration for erc</p>
+<ul>
+<li>erc-cmd-NP function send the current track being played to the current chat buffer (channel or private)</li>
+<li>The connect-* functions provide a quick access to the defined IRC server.</li>
+</ul>
+<div class="highlight"><pre><span class="p">;;</span>
+<span class="p">;;</span> <span class="n">erc</span><span class="p">.</span><span class="n">el</span>
+<span class="p">;;</span> <span class="n">Login</span> <span class="o">:</span> <span class="o">&lt;</span><span class="n">freyes</span><span class="err">@</span><span class="n">wampa</span><span class="o">&gt;</span>
+<span class="p">;;</span> <span class="n">Started</span> <span class="n">on</span>  <span class="n">Mon</span> <span class="n">Aug</span> <span class="mi">30</span> <span class="mi">23</span><span class="o">:</span><span class="mo">04</span><span class="o">:</span><span class="mi">16</span> <span class="mi">2010</span> <span class="n">Felipe</span> <span class="n">Reyes ...</span></pre></div>
+                    <a href="/erc.html">read more</a></div>
+                </footer><!-- /.post-info -->
+                <!-- /.entry-content -->
+            </article>
+        </li>
+        
+        <li>
+            <article class="archive">
+                <header> 
+                    <h1 class="archive-entry-title">
+                        <a href="/org-mode-and-beamer.html" rel="bookmark" title="Permalink to Org-mode and Beamer">Org-mode and Beamer</a>
+                    </h1> 
+                </header>
+                <footer class="post-info">
+                    <abbr>
+                      Mon 02 December 2013 
+                         By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+  
+                    </abbr>
+                    <div class="entry-summary"> <h2>Overview</h2>
+<p>The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. </p>
+<h2>Example</h2>
+<p>Here it is an example of how a presentation file should look like</p>
+<div class="highlight"><pre><span class="cp">#+TITLE:     Org Mode and Beamer ...</span></pre></div>
+                    <a href="/org-mode-and-beamer.html">read more</a></div>
+                </footer><!-- /.post-info -->
+                <!-- /.entry-content -->
+            </article>
+        </li>
+        
+        <li>
+            <article class="archive">
+                <header> 
+                    <h1 class="archive-entry-title">
                         <a href="/postgresql-tips-n-tricks.html" rel="bookmark" title="Permalink to Postgresql Tips n' Tricks">Postgresql Tips n' Tricks</a>
                     </h1> 
                 </header>
@@ -132,6 +243,29 @@ section (I don't want to do a simply copy-paste ...</p>
             <article class="archive">
                 <header> 
                     <h1 class="archive-entry-title">
+                        <a href="/emacs-tips.html" rel="bookmark" title="Permalink to Emacs Tips">Emacs Tips</a>
+                    </h1> 
+                </header>
+                <footer class="post-info">
+                    <abbr>
+                      Tue 01 January 2013 
+                         By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+  
+                    </abbr>
+                    <div class="entry-summary"> <ul>
+<li>If you start emacs with "emacs -q" and the problem goes away, the problem is on your end: check your .emacs. </li>
+<li>If "emacs -q" has problems and "emacs -Q" does not, it's caused by your distro or local admin.</li>
+</ul>
+                    <a href="/emacs-tips.html">read more</a></div>
+                </footer><!-- /.post-info -->
+                <!-- /.entry-content -->
+            </article>
+        </li>
+        
+        <li>
+            <article class="archive">
+                <header> 
+                    <h1 class="archive-entry-title">
                         <a href="/mercurial.html" rel="bookmark" title="Permalink to Mercurial">Mercurial</a>
                     </h1> 
                 </header>
@@ -188,7 +322,7 @@ section (I don't want to do a simply copy-paste ...</p>
                     <div class="entry-summary"> <p>The Rxvt terminal is a really good terminal emulator, actually it has been my
 default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).</p>
-<p><img alt="Screenshot" src="/images/urxvt_shot.20110601.jpg" /></p>
+<p><img alt="Screenshot" src="{filename}/images/urxvt_shot.20110601.jpg" /></p>
 <p>To install it you just must do the follow:</p>
 <div class="highlight"><pre><span class="n">aptitude</span> <span class="n">install ...</span></pre></div>
                     <a href="/rxvt-unicode.html">read more</a></div>
@@ -217,8 +351,8 @@ developer (or at least I try)</p>
 <li><a href="http://www.linkedin.com/in/freyesas">Linkedin</a></li>
 <li><a href="https://www.ohloh.net/accounts/freyes">Ohloh</a></li>
 </ul>
-<p><img alt="Yeah, that's me." src="/images/freyes.jpg" /></p>
-<p><a href="http://www.fsf.org/register_form?referrer=9394"><img src="/images/freyes-fsf-member.png" alt="[FSF Associate Member]" width="88" height="31" /></a> Proud FSF associate member :)</p>
+<p><img alt="Yeah, that's me." src="{filename}/images/freyes.jpg" /></p>
+<p><a href="http://www.fsf.org/register_form?referrer=9394"><img src="{filename}/images/freyes-fsf-member.png" alt="[FSF Associate Member]" width="88" height="31" /></a> Proud FSF associate member :)</p>
 <h2>GNU/Linux Distributions Used</h2>
 <ul>
 <li>RedHat (6.0, 6.2, 7.3)</li>

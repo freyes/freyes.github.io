@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>tty</title>
+        <!-- Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=The+Girl+Next+Door' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Marcellus' rel='stylesheet' type='text/css'>
+        
+        <!-- CSS -->
+        <link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/css/pygments.css" type="text/css" />
+        <link rel="stylesheet" href="/theme/css/font-awesome.css" type="text/css" />
+        <meta charset="utf-8" />
+      
+
+        <!-- Javascript-->
+        <script async src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+        <script async type="text/javascript"> 
+        $(function() {
+            function invisibleMenu() {
+                var now = 0;
+                var pixels = 300;
+                var opacity = -1;
+
+                var move = function() {
+                    now = $(window).scrollTop();
+                    if (now > pixels && opacity !== 0)
+                        opacity = 0;
+                    else if (now < pixels){
+                        // Depends on the position not if scrolls down or up
+                        opacity = (1 - now/pixels);
+                    }
+                    $("div.navigation").css({"opacity": opacity});
+                }
+                $(window).scroll(move);
+                move();
+            }
+            invisibleMenu();
+          });
+          </script> 
+</head>
+
+<body id="index" class="home">
+     <div class="navigation">
+        <ol class="nav">
+          <li class="current"><a href="">Blog</a> </li>
+          <li><a href="/archives.html">Archive</a></li>
+          <li><a href="/tags.html">Tags</a> </li>
+          <li><a href="">RSS</a> </li>
+        </ol>
+      </div>
+        <header id="banner" class="body">
+                <div class="banner"><a href="">tty <strong></strong></a></div>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+        </ul></nav><!-- /#menu -->
+        <div class="box">
+<section id="content" class="body">
+  <header class="post">
+    <h1 class="entry-title">
+      How to start with Emacs
+    </h1>
+  </header>
+  <footer class="post-info">
+    <abbr>
+      Tue 03 December 2013 
+         By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+  
+    </abbr>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <h2>Part 0</h2>
+<p>Before I could really be productive with emacs, I failed a couple of
+times, because I knew that emacs were powerful, but the default
+configuration shows you a simple text editor that look awful, without
+syntax highlight, without anti-alias, a color schema that really
+sucks.</p>
+<p>In GNU/Linux (to not piss off rms xD)I was never found a really nice
+(text) editor, because all the available suck at some point (even
+emacs sucks sometime, but suck less than the rest :P), so when I met
+zeus lead me in the first steps giving me some elisp tips, I could
+start swimming by myself and improving my emacs configuration file,
+and even teaching some tips to the mentor :P.</p>
+<p>So I will start a series of articles of how to start with emacs,
+especially giving the recipes (elisp code) of how to obtain the
+desired behavior.</p>
+<h2>Part 1</h2>
+<p>First of all, All my tips related to the underlying Operative System
+are using GNU/Linux Debian, so if you are using another distribution
+(or even another OS) you will have to look for the appropriate way to
+do the task, if you send me how to do it with another OS I will add it
+to the entry.</p>
+<h3>What is emacs?</h3>
+<p>Well, emacs doesn't exists, the correct name is GNU Emacs for the
+series of post, because there is a lot different flavors of emacs, for
+example XEmacs, Aquamacs, and others.</p>
+<p>The GNU Emacs website says:</p>
+<div class="highlight"><pre><span class="n">GNU</span> <span class="n">Emacs</span> <span class="n">is</span> <span class="n">an</span> <span class="n">extensible</span><span class="p">,</span> <span class="n">customizable</span> <span class="n">text</span> <span class="n">editor</span><span class="err">—</span><span class="n">and</span> <span class="n">more</span><span class="p">.</span> <span class="n">At</span>
+<span class="n">its</span> <span class="n">core</span> <span class="n">is</span> <span class="n">an</span> <span class="n">interpreter</span> <span class="k">for</span> <span class="n">Emacs</span> <span class="n">Lisp</span><span class="p">,</span> <span class="n">a</span> <span class="n">dialect</span> <span class="n">of</span> <span class="n">the</span> <span class="n">Lisp</span>
+<span class="n">programming</span> <span class="n">language</span> <span class="n">with</span> <span class="n">extensions</span> <span class="n">to</span> <span class="n">support</span> <span class="n">text</span> <span class="n">editing</span><span class="p">.</span>
+</pre></div>
+
+
+<p>What can I do with emacs?</p>
+<p>It's a text editor, so write text :P, but also:</p>
+<ul>
+<li>Develop software in a wide range of compute languages, like C, C++,
+  elisp, C#, ruby, python, java, ...</li>
+<li>
+<p>Mail client</p>
+</li>
+<li>
+<p>Chat with your irc folks</p>
+</li>
+<li>
+<p>Surf on the web</p>
+</li>
+<li>
+<p>And other things that will be discussed in their respectives posts</p>
+</li>
+</ul>
+<h3>Install GNU Emacs</h3>
+<p>First you must decide witch version of emacs do you want to use?,
+exists emacs22, which is the current stable release, and also emacs23
+(aka emacs-cvs) which is the development version, but currently is in
+the state of features freeze, so It's pretty stable to me, if you use
+emacs22 you will not have anti-alias, something that is very nice to
+the eyes when you spend the day developing, almost all the tips
+discussed in the series will be neutral, except the related with
+anti-alias and multi-tty.</p>
+<h3>Debian</h3>
+<p>To use emacs22 you can just use the debian official archive and
+execute</p>
+<div class="highlight"><pre><span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">emacs22</span>
+</pre></div>
+
+
+<p>But if you want to use the emacs cvs there is a repository maintained
+by Romain Francoise of the package emacs-snapshot which is a binary
+package of the cvs code (this is the one that I use). To use this repo
+you must the following to you source.list (to obtain more details
+visit the webpage of the repo)</p>
+<div class="highlight"><pre><span class="k">deb</span> <span class="s">http://emacs.naquadah.org/</span> <span class="kp">unstable/</span>
+</pre></div>
+
+
+<p>Then just install the emacs-snapshot package.</p>
+<h2>Part 2</h2>
+<p>Emacs uses a configuration file that is by default placed in your home
+directory, the file is called .emacs (I don't know if on win32 systems
+is also called .emacs). This file contents is elisp code, so for full
+control of emacs it's imperative learn elisp, but I still didn't learn
+elisp and I'm an emacs user :), so you can learn elisp while you are
+looking for snippets of code.</p>
+<h3>Concepts</h3>
+<p>I will have to explain some concepts that are important to understand
+why emacs behave in the way that it does.</p>
+<p>In emacs there are buffers, there is the minibuffer that is where you
+type the emacs commands (or elisp interactive functions), and the
+other buffers could represent an opened file, a pipe, or just a
+temporary editing space that is not attached to a file, the name of
+the last type of buffers start and end with <em>, for example </em>scratch*</p>
+<p>Emacs has something called 'modes', it's something like the way that a
+determined buffer must behave, for example if you are going to open C
+source code file the c-mode should be loaded, and it will help you in
+task of develop with the C language. There are 2 kinds of modes, the
+major and minor modes, one buffer can only have one major mode and
+zero or more minor modes.</p>
+<h3>First tweaks</h3>
+<p>Emacs is a software with a huge history and tradition, so there are
+some things that for somebody that is formed in the last 10 years in
+computing terms there some musts that you must have in you emacs
+config file, like the transient-mark-mode</p>
+<p>The transient mark mode highlights the selected region of text, by
+defaults this is disabled so I recommend you enable it with pasting
+the following in your .emacs</p>
+<div class="highlight"><pre><span class="p">(</span><span class="n">transient</span><span class="o">-</span><span class="n">mark</span><span class="o">-</span><span class="n">mode</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+
+<p>Fill you name and email to let the modes that need that information
+could use, this is done with the following snippet of code</p>
+<div class="highlight"><pre><span class="p">(</span><span class="n">setq</span> <span class="n">user</span><span class="o">-</span><span class="n">mail</span><span class="o">-</span><span class="n">address</span> <span class="s">&quot;homer@example.com&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">setq</span> <span class="n">user</span><span class="o">-</span><span class="n">full</span><span class="o">-</span><span class="n">name</span> <span class="s">&quot;Homer J. Simpsons&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>If you like to use Ctrl+g to jump to a line number then you should add
+the following code</p>
+<div class="highlight"><pre><span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">[(</span><span class="n">control</span> <span class="n">g</span><span class="p">)]</span> <span class="err">&#39;</span><span class="k">goto</span><span class="o">-</span><span class="n">line</span><span class="p">)</span>
+</pre></div>
+
+
+<p>One of the sweetest feature that must have a text editor is syntax
+highlight, well emacs has this, but disabled by default, with the
+following code you will have it enabled always</p>
+<div class="highlight"><pre><span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">font</span><span class="o">-</span><span class="n">lock</span><span class="p">)</span>
+<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">font</span><span class="o">-</span><span class="n">lock</span><span class="o">-</span><span class="n">mode</span> <span class="n">t</span><span class="p">)</span>
+</pre></div>
+
+
+<p>I think that this is enough for this entry, the next entries probably
+will be more fun to write and read, because i will start talking about
+the major modes, one mode per entry, probably the next one will be the
+C mode.</p>
+<h2>Emacswiki</h2>
+<p><a href="http://www.emacswiki.org/">Emacswiki</a> is probably the best source to find emacs-specific tip-n-tricks</p>
+<h2>Initial Configuration</h2>
+<p>Suggested initial configuration:</p>
+<div class="highlight"><pre><span class="p">;;</span> <span class="n">to</span> <span class="n">debug</span> <span class="n">the</span> <span class="p">.</span><span class="n">emacs</span> <span class="n">file</span>
+<span class="p">(</span><span class="n">setq</span> <span class="n">debug</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">error</span> <span class="n">nil</span><span class="p">)</span>
+<span class="p">(</span><span class="n">setq</span> <span class="n">visible</span><span class="o">-</span><span class="n">bell</span> <span class="n">nil</span><span class="p">)</span>
+
+<span class="p">;;</span> <span class="n">setup</span> <span class="n">the</span> <span class="k">default</span> <span class="n">mode</span> <span class="n">to</span> <span class="n">use</span>
+<span class="p">;;</span><span class="n">Text</span> <span class="n">mode</span> <span class="n">is</span> <span class="n">happier</span> <span class="n">than</span> <span class="n">Fundamental</span> <span class="n">mode</span> <span class="p">;</span><span class="o">-</span><span class="p">)</span>
+<span class="p">(</span><span class="n">setq</span> <span class="k">default</span><span class="o">-</span><span class="n">major</span><span class="o">-</span><span class="n">mode</span> <span class="err">&#39;</span><span class="n">text</span><span class="o">-</span><span class="n">mode</span><span class="p">)</span>
+
+<span class="p">;;</span> <span class="n">define</span> <span class="n">the</span> <span class="n">mail</span> <span class="n">and</span> <span class="nf">name</span>
+<span class="p">(</span><span class="n">setq</span> <span class="n">user</span><span class="o">-</span><span class="n">mail</span><span class="o">-</span><span class="n">address</span> <span class="s">&quot;foo@example.com&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">setq</span> <span class="n">user</span><span class="o">-</span><span class="n">full</span><span class="o">-</span><span class="n">name</span> <span class="s">&quot;Foo Bar&quot;</span><span class="p">)</span>
+
+<span class="p">;;</span> <span class="n">be</span> <span class="n">nice</span> <span class="n">with</span> <span class="n">X</span> <span class="nf">clipboard</span>
+<span class="p">(</span><span class="n">setq</span> <span class="n">x</span><span class="o">-</span><span class="n">select</span><span class="o">-</span><span class="n">enable</span><span class="o">-</span><span class="n">clipboard</span> <span class="n">t</span><span class="p">)</span>
+
+<span class="p">;;</span> <span class="n">use</span> <span class="n">Control</span><span class="o">+</span><span class="n">g</span> <span class="n">fot</span> <span class="k">goto</span><span class="o">-</span><span class="n">line</span>
+<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">[(</span><span class="n">control</span> <span class="n">g</span><span class="p">)]</span> <span class="err">&#39;</span><span class="k">goto</span><span class="o">-</span><span class="n">line</span><span class="p">)</span>
+
+<span class="p">;;</span> <span class="n">enable</span> <span class="n">menubar</span> <span class="n">and</span> <span class="n">tool</span> <span class="nf">bar</span>
+<span class="p">(</span><span class="n">menu</span><span class="o">-</span><span class="n">bar</span><span class="o">-</span><span class="n">mode</span> <span class="mi">1</span><span class="p">)</span>
+<span class="p">(</span><span class="n">tool</span><span class="o">-</span><span class="n">bar</span><span class="o">-</span><span class="n">mode</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="p">;;</span> <span class="n">turn</span> <span class="n">on</span> <span class="n">font</span><span class="o">-</span><span class="n">lock</span> <span class="n">mode</span>
+<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">font</span><span class="o">-</span><span class="n">lock</span><span class="o">-</span><span class="n">mode</span> <span class="n">t</span><span class="p">)</span>
+<span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">font</span><span class="o">-</span><span class="n">lock</span><span class="p">)</span> <span class="p">;</span> <span class="n">enable</span> <span class="n">syntax</span> <span class="n">highlighting</span>
+
+<span class="p">;;</span> <span class="n">simple</span> <span class="n">cut</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">paste</span>
+<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">[</span><span class="n">f2</span><span class="p">]</span> <span class="err">&#39;</span><span class="n">clipboard</span><span class="o">-</span><span class="n">kill</span><span class="o">-</span><span class="n">region</span><span class="p">)</span>
+<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">[</span><span class="n">f3</span><span class="p">]</span> <span class="err">&#39;</span><span class="n">clipboard</span><span class="o">-</span><span class="n">kill</span><span class="o">-</span><span class="n">ring</span><span class="o">-</span><span class="n">save</span><span class="p">)</span>
+<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">[</span><span class="n">f4</span><span class="p">]</span> <span class="err">&#39;</span><span class="n">clipboard</span><span class="o">-</span><span class="n">yank</span><span class="p">)</span>
+
+<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">[</span><span class="n">end</span><span class="p">]</span> <span class="err">&#39;</span><span class="n">end</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">line</span><span class="p">)</span>
+<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">[</span><span class="n">home</span><span class="p">]</span> <span class="err">&#39;</span><span class="n">beginning</span><span class="o">-</span><span class="n">of</span><span class="o">-</span><span class="n">line</span><span class="p">)</span>
+
+<span class="p">;;</span><span class="n">touche</span> <span class="n">del</span> <span class="n">et</span> <span class="nf">suppr</span>
+<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">[</span><span class="n">delete</span><span class="p">]</span> <span class="err">&#39;</span><span class="n">delete</span><span class="o">-</span><span class="kt">char</span><span class="p">)</span>
+
+<span class="p">;;(</span><span class="n">dysplay</span> <span class="n">question</span> <span class="n">in</span> <span class="err">&#39;</span><span class="n">y</span><span class="o">/</span><span class="n">n</span><span class="err">&#39;</span> <span class="n">instead</span> <span class="n">of</span> <span class="err">&#39;</span><span class="n">yes</span><span class="o">/</span><span class="n">no</span><span class="err">&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">fset</span> <span class="err">&#39;</span><span class="n">yes</span><span class="o">-</span><span class="n">or</span><span class="o">-</span><span class="n">no</span><span class="o">-</span><span class="n">p</span> <span class="err">&#39;</span><span class="n">y</span><span class="o">-</span><span class="n">or</span><span class="o">-</span><span class="n">n</span><span class="o">-</span><span class="n">p</span><span class="p">)</span>
+
+<span class="p">;;</span> <span class="n">tramp</span> <span class="n">let</span> <span class="n">you</span> <span class="n">open</span> <span class="n">remote</span> <span class="n">files</span> <span class="n">over</span> <span class="nf">ssh</span>
+<span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">tramp</span><span class="p">)</span>
+<span class="p">(</span><span class="n">setq</span> <span class="n">tramp</span><span class="o">-</span><span class="k">default</span><span class="o">-</span><span class="n">method</span> <span class="s">&quot;ssh&quot;</span><span class="p">)</span>
+
+<span class="p">;;;</span> <span class="n">Prevent</span> <span class="n">Extraneous</span> <span class="n">Tabs</span>
+<span class="p">(</span><span class="n">setq</span><span class="o">-</span><span class="k">default</span> <span class="n">indent</span><span class="o">-</span><span class="n">tabs</span><span class="o">-</span><span class="n">mode</span> <span class="n">nil</span><span class="p">)</span>
+</pre></div>
+  </div><!-- /.entry-content -->
+</section>
+            <hr/>
+            <footer id="contentinfo" class="footer">
+                <div>
+                    <a href="">Felipe Reyes</a> (2012)
+                </div>
+                <div>
+                    This work is licensed under <a rel="license" href="http://opensource.org/licenses/bsd-3-clause">3 clause BSD</a>. Source code available on <a rel="source code" href="https://github.com/slok/blog">Github</a>
+                </div>
+                <div>
+                    powered by <a href="http://getpelican.com/">Pelican</a>
+                    and <a href="http://python.org">Python</a>. 
+                    <a href="http://github.com/slok/iris">Theme</a> by <a href="http://xlarrakoetxea.org">Xabier Larrakoetxea</a> based on <a href="http://flask.pocoo.org/">Flask</a> theme
+                </div>
+                <div>
+                    Social icons (font awesome) by <a href="http://fortawesome.github.com/Font-Awesome/"> fort awesome</a>.
+                    <a href="http://www.google.com/webfonts/specimen/The+Girl+Next+Door">Title</a>, <a href="http://www.google.com/webfonts/specimen/Marcellus">headers</a> and <a href="http://www.google.com/webfonts/specimen/Inconsolata">source code</a> fonts by google fonts
+                </div>
+                <div class="social">
+                        <a href="http://www.metaklass.org/"><i class="icon-@niedbalski"></i>  </a>
+                        <a href="mailto:freyes@tty.cl"><i class="icon-envelope"></i> </a>
+                </div>
+            </footer><!-- /#contentinfo -->
+        </div>
+        <!--Add statistycs-->
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', "UA-2675698-3"]);
+_gaq.push(['_setDomainName', "freyes.github.io"]);  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+</body>
+</html>
