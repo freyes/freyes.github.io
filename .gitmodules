@@ -2,3 +2,6 @@
 	path = output
 	url = git@github.com:freyes/freyes.github.io.git
 	branch = master
+[submodule "pelican-bootstrap3"]
+	path = pelican-bootstrap3
+	url = https://github.com/DandyDev/pelican-bootstrap3.git
