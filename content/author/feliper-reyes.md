@@ -9,9 +9,9 @@ developer (or at least I try)
 * [Linkedin](http://www.linkedin.com/in/freyesas)
 * [Ohloh](https://www.ohloh.net/accounts/freyes)
 
-![Yeah, that's me.]({filename}/images/freyes.jpg)
+![Yeah, that's me.](/images/freyes.jpg)
 
-<a href="http://www.fsf.org/register_form?referrer=9394"><img src="{filename}/images/freyes-fsf-member.png" alt="[FSF Associate Member]" width="88" height="31" /></a> Proud FSF associate member :)
+<a href="http://www.fsf.org/register_form?referrer=9394"><img src="/images/freyes-fsf-member.png" alt="[FSF Associate Member]" width="88" height="31" /></a> Proud FSF associate member :)
 
 ## GNU/Linux Distributions Used
 
