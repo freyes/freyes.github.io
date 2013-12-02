@@ -1,5 +1,7 @@
 Title: Python Snippets
 Date: 2013-01-01
+Category: Snippets
+Tags: python, snippets
 
 ## Property
 

@@ -1,5 +1,6 @@
 Title: C Snippets
 Date: 2013-01-01
+Category: Snippets
 
 ## Simple Swap Function
 
