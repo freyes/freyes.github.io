@@ -1,4 +1,4 @@
-Title: Skype installation in GNU/Debian AMD64
+Title: Skype in GNU/Debian AMD64
 Author: Felipe Reyes
 Date: 2013-02-18 04:59
 Category: Debian
