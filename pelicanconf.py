@@ -31,8 +31,11 @@ DEFAULT_PAGINATION = 20
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 STATIC_PATHS = ['images']
-THEME = "pelican-bootstrap3"
+THEME = "iris"
 USE_OPEN_GRAPH = False
-GOOGLE_ANALYTICS = "UA-2675698-3"
+GOOGLE_ANALYTICS = GOOGLE_ANALYTICS_CODE ="UA-2675698-3"
+GOOGLE_ANALYTICS_DOMAIN = "freyes.github.io"
+GOOGLE_ANALYTICS_DOMAIN_UP = False
 GITHUB_USER = "freyes"
 BOOTSTRAP_THEME = "slate"
+EMAIL = "freyes@tty.cl"
