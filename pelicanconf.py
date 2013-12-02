@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'Felipe Reyes'
-SITENAME = u'tty'
-SITEURL = ''
+SITENAME = u'Felipe Reyes'
+SITEURL = 'http://freyes.github.io'
 
 TIMEZONE = 'America/Santiago'
 
@@ -24,6 +24,7 @@ LINKS =  (('Pelican', 'http://getpelican.com/'),
 # Social widget
 SOCIAL = (
     ('@niedbalski', 'http://www.metaklass.org/'),
+    ("Monkey Project", "http://monkey-project.com/"),
 )
 
 DEFAULT_PAGINATION = 20
