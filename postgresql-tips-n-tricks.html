@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta name="tags" contents="postgresql" />
+    <meta name="tags" contents="tips" />
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="">tty <strong></strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/postgresql-tips-n-tricks.html" rel="bookmark"
+         title="Permalink to Postgresql Tips n' Tricks">Postgresql Tips n' Tricks</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <abbr class="published" title="2013-11-22T15:23:00">
+      Fri 22 November 2013
+    </abbr>
+    <address class="vcard author">
+      By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+    </address>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <ul class="simple">
+<li>pg_stat_activity</li>
+</ul>
+<p><a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html">pg_stat_activity</a>
+is a view that belongs to the postgresql catalog, it helps you to view the
+status of the queries that are in execution, the explanation of each column
+can be found in the postgresql manual <a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html">The Statistics Collector</a>
+section (I don't want to do a simply copy-paste, so see the official documentation).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="49%" />
+<col width="21%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Column</th>
+<th class="head">Type</th>
+<th class="head">Modifiers</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>datid</td>
+<td>oid</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>datname</td>
+<td>name</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>procpid</td>
+<td>integer</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>usesysid</td>
+<td>oid</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>usename</td>
+<td>name</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>current_query</td>
+<td>text</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>waiting</td>
+<td>boolean</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>xact_start</td>
+<td>timestamp with time zone</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>query_start</td>
+<td>timestamp with time zone</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>backend_start</td>
+<td>timestamp with time zone</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>client_addr</td>
+<td>inet</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td>client_port</td>
+<td>integer</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">pg_stat_activity</span><span class="p">;</span>
+</pre></div>
+<ul>
+<li><p class="first">If you want to view the queries that are stuck (usually due to a lock or simply waiting for I/O) you can execute the following query:</p>
+<div class="highlight"><pre><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">pg_stat_activity</span> <span class="k">WHERE</span> <span class="n">waiting</span> <span class="o">=</span> <span class="k">TRUE</span><span class="p">;</span>
+</pre></div>
+</li>
+</ul>
+
+  </div><!-- /.entry-content -->
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+</body>
+</html>

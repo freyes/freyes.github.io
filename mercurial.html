@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <meta name="tags" contents="mercurial" />
+    <meta name="tags" contents="vcs" />
+
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="">tty <strong></strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+        </ul></nav><!-- /#menu -->
+<section id="content" class="body">
+  <header>
+    <h2 class="entry-title">
+      <a href="/mercurial.html" rel="bookmark"
+         title="Permalink to Mercurial">Mercurial</a></h2>
+ 
+  </header>
+  <footer class="post-info">
+    <abbr class="published" title="2012-12-03T17:42:08">
+      Mon 03 December 2012
+    </abbr>
+    <address class="vcard author">
+      By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+    </address>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>This is my mercurial configuration (~/.hgrc)</p>
+<div class="highlight"><pre><span class="k">[ui]</span>
+<span class="na">username</span> <span class="o">=</span> <span class="s">Foo Bar &lt;foobar@example.com&gt;</span>
+<span class="na">merge</span> <span class="o">=</span> <span class="s">emacs</span>
+
+<span class="k">[extensions]</span>
+<span class="na">pager</span> <span class="o">=</span>
+<span class="na">rebase</span> <span class="o">=</span> 
+<span class="na">churn</span> <span class="o">=</span>
+<span class="na">hgshelve</span> <span class="o">=</span> <span class="s">~/.hg.d/hgshelve.py</span>
+<span class="na">keyword</span> <span class="o">=</span>
+<span class="na">fetch</span> <span class="o">=</span>
+<span class="na">activity</span><span class="o">=</span><span class="s">~/.hg.d/hgactivity/activity.py</span>
+<span class="na">mq</span> <span class="o">=</span>
+<span class="na">hg_histedit</span><span class="o">=</span><span class="s">~/.hg.d/hg_histedit.py</span>
+<span class="na">color</span> <span class="o">=</span>
+
+<span class="k">[diff]</span>
+<span class="na">git</span> <span class="o">=</span> <span class="s">on</span>
+
+<span class="k">[pager]</span>
+<span class="na">pager</span> <span class="o">=</span> <span class="s">LESS=&#39;FSRX&#39; less</span>
+<span class="na">attend</span> <span class="o">=</span> <span class="s">glog</span>
+
+<span class="k">[keywordmaps]</span>
+<span class="na">Author</span> <span class="o">=</span> <span class="s">{author|user}</span>
+<span class="na">Date</span> <span class="o">=</span> <span class="s">{date|utcdate}</span>
+<span class="na">Header</span> <span class="o">=</span> <span class="s">{file},v {node|short} {date|utcdate} {author|user}</span>
+<span class="na">Id</span> <span class="o">=</span> <span class="s">{file|basename},v {node|short} {date|utcdate} {author|user}</span>
+<span class="na">RCSFile</span> <span class="o">=</span> <span class="s">{file|basename},v</span>
+<span class="na">RCSfile</span> <span class="o">=</span> <span class="s">{file|basename},v</span>
+<span class="na">Revision</span> <span class="o">=</span> <span class="s">{node|short}</span>
+<span class="na">Source</span> <span class="o">=</span> <span class="s">{root}/{file},v</span>
+
+<span class="k">[web]</span>
+<span class="na">cacerts</span> <span class="o">=</span> <span class="s">/etc/ssl/certs/ca-certificates.crt</span>
+
+<span class="k">[alias]</span>
+<span class="na">sst</span> <span class="o">=</span> <span class="s">!hg status $($HG root) $HG_ARGS</span>
+
+<span class="k">[merge-tools]</span>
+<span class="na">emacs.args</span> <span class="o">=</span> <span class="s">-q --eval &quot;(ediff-merge-with-ancestor \&quot;$local\&quot; \&quot;$other\&quot; \&quot;$base\&quot; nil \&quot;$output\&quot;)&quot;</span>
+</pre></div>
+  </div><!-- /.entry-content -->
+</section>
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+</body>
+</html>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>tty</title><link href="/" rel="alternate"></link><link href="/feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2013-11-22T15:23:00-03:00</updated><entry><title>Postgresql Tips n' Tricks</title><link href="/postgresql-tips-n-tricks.html" rel="alternate"></link><updated>2013-11-22T15:23:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-11-22:postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;li&gt;pg_stat_activity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;pg_stat_activity&lt;/a&gt;
+is a view that belongs to the postgresql catalog, it helps you to view the
+status of the queries that are in execution, the explanation of each column
+can be found in the postgresql manual &lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;The Statistics Collector&lt;/a&gt;
+section (I don't want to do a simply copy-paste, so see the official documentation).&lt;/p&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;colgroup&gt;
+&lt;col width="30%" /&gt;
+&lt;col width="49%" /&gt;
+&lt;col width="21%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;Column&lt;/th&gt;
+&lt;th class="head"&gt;Type&lt;/th&gt;
+&lt;th class="head"&gt;Modifiers&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;datid&lt;/td&gt;
+&lt;td&gt;oid&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;datname&lt;/td&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;procpid&lt;/td&gt;
+&lt;td&gt;integer&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;usesysid&lt;/td&gt;
+&lt;td&gt;oid&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;usename&lt;/td&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;current_query&lt;/td&gt;
+&lt;td&gt;text&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;waiting&lt;/td&gt;
+&lt;td&gt;boolean&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;xact_start&lt;/td&gt;
+&lt;td&gt;timestamp with time zone&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;query_start&lt;/td&gt;
+&lt;td&gt;timestamp with time zone&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;backend_start&lt;/td&gt;
+&lt;td&gt;timestamp with time zone&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;client_addr&lt;/td&gt;
+&lt;td&gt;inet&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;client_port&lt;/td&gt;
+&lt;td&gt;integer&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;pg_stat_activity&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;If you want to view the queries that are stuck (usually due to a lock or simply waiting for I/O) you can execute the following query:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;pg_stat_activity&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;waiting&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</summary><category term="postgresql"></category><category term="tips"></category></entry><entry><title>Skype installation in GNU/Debian AMD64</title><link href="/skype-installation-in-gnudebian-amd64.html" rel="alternate"></link><updated>2013-02-18T04:59:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-02-18:skype-installation-in-gnudebian-amd64.html</id><summary type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Check if your system has i386 arch support enabled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="err"&gt;$&lt;/span&gt; &lt;span class="n"&gt;dpkg&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;print&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;foreign&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;architectures&lt;/span&gt;
+&lt;span class="n"&gt;i386&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;If you don't have i386 support enable it with the following commands:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# dpkg --add-architecture i386&lt;/span&gt;
+&lt;span class="c"&gt;# apt-get update&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Then install the skype's dependencies with the following command:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;# apt-get install libqtgui4:i386 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libqtwebkit4:i386 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libqt4-network:i386 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libqtcore4:i386 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libxss1:i386 \&lt;/span&gt;
+&lt;span class="cp"&gt;      lib32stdc++6 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libxv1:i386 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libasound2:i386 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libqt4-dbus:i386 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libssl1.0.0:i386 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libasound2-plugins:i386 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libqt4-xml \&lt;/span&gt;
+&lt;span class="cp"&gt;      libqtcore4 \&lt;/span&gt;
+&lt;span class="cp"&gt;      libqtdbus4 \&lt;/span&gt;
+&lt;span class="cp"&gt;      qdbus&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;And then you are ready to install skype&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# dpkg -i skype-debian_4.1.0.20-1_i386.deb&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="debian"></category><category term="skype"></category><category term="tips"></category></entry><entry><title>Mercurial</title><link href="/mercurial.html" rel="alternate"></link><updated>2012-12-03T17:42:08-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2012-12-03:mercurial.html</id><summary type="html">&lt;p&gt;This is my mercurial configuration (~/.hgrc)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[ui]&lt;/span&gt;
+&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Foo Bar &amp;lt;foobar@example.com&amp;gt;&lt;/span&gt;
+&lt;span class="na"&gt;merge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;emacs&lt;/span&gt;
+
+&lt;span class="k"&gt;[extensions]&lt;/span&gt;
+&lt;span class="na"&gt;pager&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;rebase&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 
+&lt;span class="na"&gt;churn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;hgshelve&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;~/.hg.d/hgshelve.py&lt;/span&gt;
+&lt;span class="na"&gt;keyword&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;fetch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;activity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;~/.hg.d/hgactivity/activity.py&lt;/span&gt;
+&lt;span class="na"&gt;mq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;hg_histedit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;~/.hg.d/hg_histedit.py&lt;/span&gt;
+&lt;span class="na"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+
+&lt;span class="k"&gt;[diff]&lt;/span&gt;
+&lt;span class="na"&gt;git&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;on&lt;/span&gt;
+
+&lt;span class="k"&gt;[pager]&lt;/span&gt;
+&lt;span class="na"&gt;pager&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;LESS=&amp;#39;FSRX&amp;#39; less&lt;/span&gt;
+&lt;span class="na"&gt;attend&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;glog&lt;/span&gt;
+
+&lt;span class="k"&gt;[keywordmaps]&lt;/span&gt;
+&lt;span class="na"&gt;Author&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{author|user}&lt;/span&gt;
+&lt;span class="na"&gt;Date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{date|utcdate}&lt;/span&gt;
+&lt;span class="na"&gt;Header&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{file},v {node|short} {date|utcdate} {author|user}&lt;/span&gt;
+&lt;span class="na"&gt;Id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{file|basename},v {node|short} {date|utcdate} {author|user}&lt;/span&gt;
+&lt;span class="na"&gt;RCSFile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{file|basename},v&lt;/span&gt;
+&lt;span class="na"&gt;RCSfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{file|basename},v&lt;/span&gt;
+&lt;span class="na"&gt;Revision&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{node|short}&lt;/span&gt;
+&lt;span class="na"&gt;Source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{root}/{file},v&lt;/span&gt;
+
+&lt;span class="k"&gt;[web]&lt;/span&gt;
+&lt;span class="na"&gt;cacerts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/etc/ssl/certs/ca-certificates.crt&lt;/span&gt;
+
+&lt;span class="k"&gt;[alias]&lt;/span&gt;
+&lt;span class="na"&gt;sst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;!hg status $($HG root) $HG_ARGS&lt;/span&gt;
+
+&lt;span class="k"&gt;[merge-tools]&lt;/span&gt;
+&lt;span class="na"&gt;emacs.args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;-q --eval &amp;quot;(ediff-merge-with-ancestor \&amp;quot;$local\&amp;quot; \&amp;quot;$other\&amp;quot; \&amp;quot;$base\&amp;quot; nil \&amp;quot;$output\&amp;quot;)&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="mercurial"></category><category term="vcs"></category></entry><entry><title>rxvt-unicode</title><link href="/rxvt-unicode.html" rel="alternate"></link><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2011-06-11:rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+default terminal since at least 4 years ago. I started using it after getting
+ tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="/images/urxvt_shot.20110601.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;aptitude&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;rxvt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;unicode&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you want to use it as your default x-terminal-emulator you have to
+set the proper alternative like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;alternatives&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;terminal&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;emulator&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;urxvt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The configuration must go on your ~/.Xdefaults file, here is my configuration&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;foreground&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;grey90&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cursorColor&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mf"&gt;729f&lt;/span&gt;&lt;span class="n"&gt;cf&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;font&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;xos4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;terminus&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;medium&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;normal&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;140&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;72&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;72&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;iso8859&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;scrollBar&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;shading&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;50&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;transparent&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;True&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fade&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;80&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;fadeColor&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="n"&gt;e9b96e&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tintColor&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="n"&gt;c5c5c&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;urgentOnBell&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;urllauncher&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;iceweasel&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;matcher&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;button&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;        &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;depth&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;24&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;background&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;rgba&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mo"&gt;0000&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mo"&gt;0000&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mo"&gt;0000&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dddd&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once you put the configuration you can reload it using this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;xrdb&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;merge&lt;/span&gt; &lt;span class="o"&gt;~/&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Xdefaults&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Remember to install the terminus fonts if you want to use my configuration&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;aptitude&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;xfonts&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;terminus&lt;/span&gt; &lt;span class="n"&gt;xfonts&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;terminus&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dos&lt;/span&gt; &lt;span class="n"&gt;xfonts&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;terminus&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;oblique&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="debian"></category><category term="linux"></category><category term="tips"></category><category term="rxvt"></category></entry><entry><title>About Me</title><link href="/about-me.html" rel="alternate"></link><updated>2010-10-10T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2010-10-10:about-me.html</id><summary type="html">&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
+developer (or at least I try)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.flickr.com/photos/freyes"&gt;Flickr&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.linkedin.com/in/freyesas"&gt;Linkedin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.ohloh.net/accounts/freyes"&gt;Ohloh&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="Yeah, that's me." src="/images/freyes.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.fsf.org/register_form?referrer=9394"&gt;&lt;img src="/images/freyes-fsf-member.png" alt="[FSF Associate Member]" width="88" height="31" /&gt;&lt;/a&gt; Proud FSF associate member :)&lt;/p&gt;
+&lt;h2&gt;GNU/Linux Distributions Used&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;RedHat (6.0, 6.2, 7.3)&lt;/li&gt;
+&lt;li&gt;Slackware (unknown version)&lt;/li&gt;
+&lt;li&gt;Suse (unknown version)&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.debian.org"&gt;Debian&lt;/a&gt; &lt;a href="http://www.debian.org/releases/woody/"&gt;Woody&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/sarge"&gt;Sarge&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/etch/"&gt;Etch&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/lenny/"&gt;Lenny&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/squeeze"&gt;Squeeze&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/unstable"&gt;Sid&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.ubuntu.com"&gt;Ubuntu&lt;/a&gt; (4.10, 5.04, 5.10, 6.04, 8.04, 8.10, etc.)&lt;/li&gt;
+&lt;li&gt;CentOS (5.x)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Specific Skills&lt;/h2&gt;
+&lt;h3&gt;Programming Languages&lt;/h3&gt;
+&lt;p&gt;These are all the languages that at some point I've used, some of them
+I don't even remember them :).&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://en.wikipeida.org/wiki/C_(programming_language)"&gt;C&lt;/a&gt;, the father of all the languages :)&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Python_%28programming_language%29"&gt;Python&lt;/a&gt;, excelent high level scripting language&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Pascal_%28programming_language%29"&gt;Pascal&lt;/a&gt;, a nice language to learn&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Perl_%28programming_language%29"&gt;Perl&lt;/a&gt; a really good scripting language for file processing&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/PL/pgSQL"&gt;Pl/pgSQL&lt;/a&gt; the procedural programming language of PostgreSQL&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Java_%28programming_language%29"&gt;Java&lt;/a&gt;, I've done just the basics with this one, only the neccessary to maintain a webapp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Cloud&lt;/h3&gt;
+&lt;p&gt;I've worked heavily with &lt;a href="https://aws.amazon.com/"&gt;Amazon Web Services&lt;/a&gt; technologies, specially with the following services:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;EC2&lt;/li&gt;
+&lt;li&gt;S3&lt;/li&gt;
+&lt;li&gt;RDS (mysql)&lt;/li&gt;
+&lt;li&gt;CloudWatch to gather stats about my compute cluster instances and post processing it to analyze CPU usage.&lt;/li&gt;
+&lt;li&gt;CloudFormation to deploy a complete stack using EC2, Route53, RDS and other services.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Also I've submitted patches to &lt;a href="http://openstack.org/"&gt;OpenStack&lt;/a&gt;, specifically to &lt;a href="https://github.com/openstack/swift"&gt;Swift&lt;/a&gt;
+and &lt;a href="https://github.com/openstack-infra/jenkins-job-builder/"&gt;jenkins-job-builder&lt;/a&gt;, you can see
+&lt;a href="https://review.openstack.org/#/dashboard/2424"&gt;my list of contributions in Gerrit&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;Web&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/PHP_%28programming_language%29"&gt;PHP&lt;/a&gt; a simple language for basic websites&lt;/li&gt;
+&lt;li&gt;Javascript (jquery, mochikit, Emberjs)&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Actionscript"&gt;ActionScript&lt;/a&gt; and &lt;a href="http://en.wikipedia.org/wiki/Adobe_Flex"&gt;Adobe Flex&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Frameworks (libraries)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.djangoproject.com/"&gt;Django&lt;/a&gt; is a high-level Python Web framework
+  that encourages rapid development and clean, pragmatic design.&lt;/li&gt;
+&lt;li&gt;PyGTK and its friends (cairo, pango, glib, ...)&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://bottlepy.org"&gt;Bottle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://flask.pocoo.org"&gt;Flask&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://jinja.pocoo.org/"&gt;Jinja2&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;System Administration&lt;/h2&gt;
+&lt;p&gt;Several years administrating GNU/Linux based servers (physical and virtual machines) for fun and profit.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Debian&lt;/li&gt;
+&lt;li&gt;Ubuntu&lt;/li&gt;
+&lt;li&gt;CentOS&lt;/li&gt;
+&lt;li&gt;OpenWRT&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Services&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Mail (postfix, dovecot)&lt;/li&gt;
+&lt;li&gt;Web (apache)&lt;/li&gt;
+&lt;li&gt;Firewall (homebrew iptables rules, shorewall)&lt;/li&gt;
+&lt;li&gt;Routers&lt;/li&gt;
+&lt;li&gt;Etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Others&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Xen based virtualization&lt;/li&gt;
+&lt;li&gt;Databases: &lt;a href="http://www.mysql.org"&gt;MySQL&lt;/a&gt;, &lt;a href="http://www.postgresql.org"&gt;PostgreSQL&lt;/a&gt;, &lt;a href="http://www.oracle.com"&gt;Oracle&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.rabbitmq.com"&gt;RabbitMQ&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://celeryproject.org/"&gt;Celery&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary></entry></feed>

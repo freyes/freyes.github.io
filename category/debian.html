@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>tty</title>
+        <meta charset="utf-8" />
+        <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="tty Full Atom Feed" />
+        <link href="/feeds/debian.atom.xml" type="application/atom+xml" rel="alternate" title="tty Categories Atom Feed" />
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="">tty <strong></strong></a></h1>
+        </header><!-- /#banner -->
+        <nav id="menu"><ul>
+        </ul></nav><!-- /#menu -->
+<section id="content">
+<h2>Articles in the Debian category</h2>
+
+<ol id="post-list">
+        <li><article class="hentry">
+                <header> <h2 class="entry-title"><a href="/skype-installation-in-gnudebian-amd64.html" rel="bookmark" title="Permalink to Skype installation in GNU/Debian AMD64">Skype installation in GNU/Debian AMD64</a></h2> </header>
+                <footer class="post-info">
+                    <abbr class="published" title="2013-02-18T04:59:00"> Mon 18 February 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a></address>                </footer><!-- /.post-info -->
+                <div class="entry-content"> <p>How to install Skype in Debian amd64</p>
+<ul>
+<li>Check if your system has i386 arch support enabled</li>
+</ul>
+<div class="highlight"><pre><span class="err">$</span> <span class="n">dpkg</span> <span class="o">--</span><span class="n">print</span><span class="o">-</span><span class="n">foreign</span><span class="o">-</span><span class="n">architectures</span>
+<span class="n">i386</span>
+</pre></div>
+
+
+<ul>
+<li>If you don't have i386 support enable it with the following commands:</li>
+</ul>
+<div class="highlight"><pre><span class="c"># dpkg --add-architecture i386</span>
+<span class="c"># apt-get update</span>
+</pre></div>
+
+
+<ul>
+<li>Then install the skype's dependencies with the following command:</li>
+</ul>
+<div class="highlight"><pre><span class="cp"># apt-get ...</span></pre></div> </div><!-- /.entry-content -->
+        </article></li>
+</ol><!-- /#posts-list -->
+<p class="paginator">
+    Page 1 / 1
+</p>
+</section><!-- /#content -->
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>,
+                which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+</body>
+</html>
