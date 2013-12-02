@@ -23,7 +23,7 @@ LINKS =  (('Pelican', 'http://getpelican.com/'),
 
 # Social widget
 SOCIAL = (
-    ('Jorge', 'http://frontend-jniedbalski.rhcloud.com/'),
+    ('@niedbalski', 'http://www.metaklass.org/'),
 )
 
 DEFAULT_PAGINATION = 20
