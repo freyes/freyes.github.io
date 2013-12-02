@@ -47,7 +47,7 @@
           <li class="current"><a href="">Blog</a> </li>
           <li><a href="/archives.html">Archive</a></li>
           <li><a href="/tags.html">Tags</a> </li>
-          <li><a href="/">RSS</a> </li>
+          <li><a href="">RSS</a> </li>
         </ol>
       </div>
         <header id="banner" class="body">
@@ -56,25 +56,21 @@
         <nav id="menu"><ul>
         </ul></nav><!-- /#menu -->
         <div class="box">
-        
-<section id="content">
-<div class="posts">
-    <ol id="post-list">
-        
-        <li>
-            <article class="archive">
-                <header> 
-                    <h1 class="archive-entry-title">
-                        <a href="/skype-in-gnudebian-amd64.html" rel="bookmark" title="Permalink to Skype in GNU/Debian AMD64">Skype in GNU/Debian AMD64</a>
-                    </h1> 
-                </header>
-                <footer class="post-info">
-                    <abbr>
-                      Mon 18 February 2013 
-                         By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+<section id="content" class="body">
+  <header class="post">
+    <h1 class="entry-title">
+      Skype in GNU/Debian AMD64
+    </h1>
+  </header>
+  <footer class="post-info">
+    <abbr>
+      Mon 18 February 2013 
+         By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
   
-                    </abbr>
-                    <div class="entry-summary"> <p>How to install Skype in Debian amd64</p>
+    </abbr>
+  </footer><!-- /.post-info -->
+  <div class="entry-content">
+    <p>How to install Skype in Debian amd64</p>
 <ul>
 <li>Check if your system has i386 arch support enabled</li>
 </ul>
@@ -94,18 +90,31 @@
 <ul>
 <li>Then install the skype's dependencies with the following command:</li>
 </ul>
-<div class="highlight"><pre><span class="cp"># apt-get ...</span></pre></div>
-                    <a href="/skype-in-gnudebian-amd64.html">read more</a></div>
-                </footer><!-- /.post-info -->
-                <!-- /.entry-content -->
-            </article>
-        </li>
-    </ol><!-- /#posts-list -->
-</div>
-<p class="paginator">
-    Page 1 / 1
-</p>
-</section><!-- /#content -->
+<div class="highlight"><pre><span class="cp"># apt-get install libqtgui4:i386 \</span>
+<span class="cp">      libqtwebkit4:i386 \</span>
+<span class="cp">      libqt4-network:i386 \</span>
+<span class="cp">      libqtcore4:i386 \</span>
+<span class="cp">      libxss1:i386 \</span>
+<span class="cp">      lib32stdc++6 \</span>
+<span class="cp">      libxv1:i386 \</span>
+<span class="cp">      libasound2:i386 \</span>
+<span class="cp">      libqt4-dbus:i386 \</span>
+<span class="cp">      libssl1.0.0:i386 \</span>
+<span class="cp">      libasound2-plugins:i386 \</span>
+<span class="cp">      libqt4-xml \</span>
+<span class="cp">      libqtcore4 \</span>
+<span class="cp">      libqtdbus4 \</span>
+<span class="cp">      qdbus</span>
+</pre></div>
+
+
+<ul>
+<li>And then you are ready to install skype</li>
+</ul>
+<div class="highlight"><pre><span class="c"># dpkg -i skype-debian_4.1.0.20-1_i386.deb</span>
+</pre></div>
+  </div><!-- /.entry-content -->
+</section>
             <hr/>
             <footer id="contentinfo" class="footer">
                 <div>
