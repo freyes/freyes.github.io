@@ -31,7 +31,7 @@ DEFAULT_PAGINATION = 20
 DISPLAY_PAGES_ON_MENU = True
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
-STATIC_PATHS = ['images']
+STATIC_PATHS = ['images', 'CNAME']
 THEME = "iris"
 USE_OPEN_GRAPH = False
 GOOGLE_ANALYTICS = GOOGLE_ANALYTICS_CODE ="UA-2675698-3"
