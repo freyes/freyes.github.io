@@ -71,11 +71,11 @@
   <div id="content-wrapper">
     <div class="container">
       <p class="socialconnect">
-        <a href="#" title="Connect on Twitter"><i class="fa fa-twitter"></i></a>
-        <a href="#" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a>
-        <a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a>
-        <a href="#" title="Connect on Facebook"><i class="fa fa-facebook"></i></a>
-        <a class="subscribe" href="#" title="Subscribe"><span class="text">Subscribe</span><i class="fa fa-envelope-o"></i></a>
+        {% if TWITTER_ID %}<a href="https://twitter.com/{{TWITTER_ID}}" title="Connect on Twitter"><i class="fa fa-twitter"></i></a>{% endif %}
+        {% if LINKEDIN_ID %}<a href="https://www.linkedin.com/in/{{LINKED_IN}}" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a>{% endif %}
+        {% if GITHUB_ID %}<a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a>{% endif %}
+        {% if FACEBOOK_ID %}<a href="#" title="Connect on Facebook"><i class="fa fa-facebook"></i></a>{% endif %}
+        {% if SUBSCRIBE %}<a class="subscribe" href="#" title="Subscribe"><span class="text">Subscribe</span><i class="fa fa-envelope-o"></i></a>{% endif %}
       </p>
         {% block content %}
         {% endblock %}
@@ -87,11 +87,11 @@
     <div id="footer" class="container clearfix">
       <p class="copyrights pull-left">Copyright ©2013 Felipe Reyes. All rights reserved.</p>
       <p class="socialconnect footer pull-right">
-        <a href="#" title="Connect on Twitter"><i class="fa fa-twitter"></i></a>
-        <a href="#" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a>
-        <a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a>
-        <a href="#" title="Connect on Facebook"><i class="fa fa-facebook"></i></a>
-        <a class="subscribe" href="#" title="Subscribe"><span class="text">Subscribe</span><i class="fa fa-envelope-o"></i></a>
+        {% if TWITTER_ID %}<a href="https://twitter.com/{{TWITTER_ID}}" title="Connect on Twitter"><i class="fa fa-twitter"></i></a>{% endif %}
+        {% if LINKEDIN_ID %}<a href="https://www.linkedin.com/in/{{LINKED_IN}}" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a>{% endif %}
+        {% if GITHUB_ID %}<a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a>{% endif %}
+        {% if FACEBOOK_ID %}<a href="#" title="Connect on Facebook"><i class="fa fa-facebook"></i></a>{% endif %}
+        {% if SUBSCRIBE %}<a class="subscribe" href="#" title="Subscribe"><span class="text">Subscribe</span><i class="fa fa-envelope-o"></i></a>{% endif %}
       </p>
     </div>
   </div>
