@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>Felipe's Blog</title>
+        <meta charset="utf-8" />
+        <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Felipe's Blog Full Atom Feed" />
+        <link href="http://tty.cl//feeds/snippets.atom.xml" type="application/atom+xml" rel="alternate" title="Felipe's Blog Categories Atom Feed" />
+
+
+
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/style.css" rel="stylesheet">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+
+<body id="index" class="home">
+  <div id="header-wrapper" class="navbar navbar-fixed-top">
+    <div id="header">
+      <div class="container">
+        <div class="logo navbar-header">
+          <a class="navbar-brand" href="#" title="me">
+            <img class="image" height="38" width="38" src="/theme/images/logo.png" />
+            <span class="name">Felipe's Blog</span>
+          </a>
+          <p class="subtitle">Random thoughts and my brain's dumpster</p>
+        </div>
+        <div id="top-nav-list" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+
+                <li><a href="./pages/about.html">About</a></li>
+                <li><a href="./pages/contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="content-wrapper">
+    <div class="container">
+      <p class="socialconnect">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a>      </p>
+<div class="content brarius6">
+  <h1 class="page-title">
+    <a href="./c-snippets.html" rel="bookmark"
+       title="Permalink to C Snippets">
+      C Snippets
+    </a>
+  </h1>
+  <div class="page-subtitle">
+    <abbr class="published" title="2013-01-01T00:00:00">
+      Tue 01 January 2013
+    </abbr>
+    <address class="vcard author">
+      By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a>
+    </address>
+  </div>
+  <div class="content-body">
+    <h2>Simple Swap Function</h2>
+<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
+
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">){</span>
+  <span class="o">*</span><span class="n">a</span><span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="o">+*</span><span class="n">b</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">b</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">a</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;before: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;after: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>Expected output:</p>
+<div class="highlight"><pre><span class="n">before</span><span class="o">:</span> <span class="n">a</span><span class="o">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">b</span><span class="o">:</span> <span class="mi">2</span>
+<span class="n">after</span><span class="o">:</span> <span class="n">a</span><span class="o">:</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">b</span><span class="o">:</span> <span class="mi">1</span>
+</pre></div>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  <div id="footer-wrapper">
+    <div id="footer" class="container clearfix">
+      <p class="copyrights pull-left">Copyright ©2013 Felipe Reyes. All rights reserved.</p>
+      <p class="socialconnect footer pull-right">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a>      </p>
+    </div>
+  </div>
+</body>
+</html>

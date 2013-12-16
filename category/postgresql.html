@@ -1,82 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>Felipe Reyes</title>
-        <!-- Fonts -->
-        <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=The+Girl+Next+Door' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Marcellus' rel='stylesheet' type='text/css'>
-        
-        <!-- CSS -->
-        <link rel="stylesheet" href="http://freyes.github.io/theme/css/main.css" type="text/css" />
-        <link rel="stylesheet" href="http://freyes.github.io/theme/css/pygments.css" type="text/css" />
-        <link rel="stylesheet" href="http://freyes.github.io/theme/css/font-awesome.css" type="text/css" />
+        <title>Felipe's Blog</title>
         <meta charset="utf-8" />
-      
-
-        <!-- Javascript-->
-        <script async src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-        <script async type="text/javascript"> 
-        $(function() {
-            function invisibleMenu() {
-                var now = 0;
-                var pixels = 300;
-                var opacity = -1;
-
-                var move = function() {
-                    now = $(window).scrollTop();
-                    if (now > pixels && opacity !== 0)
-                        opacity = 0;
-                    else if (now < pixels){
-                        // Depends on the position not if scrolls down or up
-                        opacity = (1 - now/pixels);
-                    }
-                    $("div.navigation").css({"opacity": opacity});
-                }
-                $(window).scroll(move);
-                move();
-            }
-            invisibleMenu();
-          });
-          </script> 
+        <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Felipe's Blog Full Atom Feed" />
+        <link href="http://tty.cl//feeds/postgresql.atom.xml" type="application/atom+xml" rel="alternate" title="Felipe's Blog Categories Atom Feed" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/style.css" rel="stylesheet">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
 
 <body id="index" class="home">
-     <div class="navigation">
-        <ol class="nav">
-          <li class="current"><a href="http://freyes.github.io">Blog</a> </li>
-          <li><a href="http://freyes.github.io/archives.html">Archive</a></li>
-          <li><a href="http://freyes.github.io/tags.html">Tags</a> </li>
-          <li><a href="http://freyes.github.io/">RSS</a> </li>
-        </ol>
+  <div id="header-wrapper" class="navbar navbar-fixed-top">
+    <div id="header">
+      <div class="container">
+        <div class="logo navbar-header">
+          <a class="navbar-brand" href="#" title="me">
+            <img class="image" height="38" width="38" src="/theme/images/logo.png" />
+            <span class="name">Felipe's Blog</span>
+          </a>
+          <p class="subtitle">Random thoughts and my brain's dumpster</p>
+        </div>
+        <div id="top-nav-list" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+
+                <li><a href="../pages/about.html">About</a></li>
+                <li><a href="../pages/contact.html">Contact</a></li>
+          </ul>
+        </div>
       </div>
-        <header id="banner" class="body">
-                <div class="banner"><a href="http://freyes.github.io">Felipe Reyes <strong></strong></a></div>
-        </header><!-- /#banner -->
-        <nav id="menu"><ul>
-            <li><a href="http://freyes.github.io/pages/c-snippets.html">C Snippets</a></li>
-            <li><a href="http://freyes.github.io/pages/python-snippets.html">Python Snippets</a></li>
-        </ul></nav><!-- /#menu -->
-        <div class="box">
-        
-<section id="content">
-<div class="posts">
-    <ol id="post-list">
-        
-        <li>
-            <article class="archive">
-                <header> 
-                    <h1 class="archive-entry-title">
-                        <a href="http://freyes.github.io/postgresql-tips-n-tricks.html" rel="bookmark" title="Permalink to Postgresql Tips n' Tricks">Postgresql Tips n' Tricks</a>
-                    </h1> 
-                </header>
-                <footer class="post-info">
-                    <abbr>
-                      Fri 22 November 2013 
-                         By <a class="url fn" href="http://freyes.github.io/author/felipe-reyes.html">Felipe Reyes</a>
-  
-                    </abbr>
-                    <div class="entry-summary"> <ul class="simple">
+    </div>
+  </div>
+  <div id="content-wrapper">
+    <div class="container">
+      <p class="socialconnect">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a>      </p>
+
+<div class="content content-list">
+  <ol class="article-list">
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="../postgresql-tips-n-tricks.html" rel="bookmark" title="Permalink to Postgresql Tips n' Tricks">Postgresql Tips n' Tricks</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2013-11-22T15:23:00"> Fri 22 November 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="../author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <ul class="simple">
 <li>pg_stat_activity</li>
 </ul>
 <p><a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html">pg_stat_activity</a>
@@ -84,55 +55,20 @@ is a view that belongs to the postgresql catalog, it helps you to view the
 status of the queries that are in execution, the explanation of each column
 can be found in the postgresql manual <a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html">The Statistics Collector</a>
 section (I don't want to do a simply copy-paste ...</p>
-                    <a href="http://freyes.github.io/postgresql-tips-n-tricks.html">read more</a></div>
-                </footer><!-- /.post-info -->
-                <!-- /.entry-content -->
-            </article>
-        </li>
-    </ol><!-- /#posts-list -->
+      </div>
+    </li>
+  </ol>
 </div>
-<p class="paginator">
-    Page 1 / 1
-</p>
-</section><!-- /#content -->
-            <hr/>
-            <footer id="contentinfo" class="footer">
-                <div>
-                    <a href="http://freyes.github.io">Felipe Reyes</a> (2012)
-                </div>
-                <div>
-                    This work is licensed under <a rel="license" href="http://opensource.org/licenses/bsd-3-clause">3 clause BSD</a>. Source code available on <a rel="source code" href="https://github.com/slok/blog">Github</a>
-                </div>
-                <div>
-                    powered by <a href="http://getpelican.com/">Pelican</a>
-                    and <a href="http://python.org">Python</a>. 
-                    <a href="http://github.com/slok/iris">Theme</a> by <a href="http://xlarrakoetxea.org">Xabier Larrakoetxea</a> based on <a href="http://flask.pocoo.org/">Flask</a> theme
-                </div>
-                <div>
-                    Social icons (font awesome) by <a href="http://fortawesome.github.com/Font-Awesome/"> fort awesome</a>.
-                    <a href="http://www.google.com/webfonts/specimen/The+Girl+Next+Door">Title</a>, <a href="http://www.google.com/webfonts/specimen/Marcellus">headers</a> and <a href="http://www.google.com/webfonts/specimen/Inconsolata">source code</a> fonts by google fonts
-                </div>
-                <div class="social">
-                        <a href="http://www.metaklass.org/"><i class="icon-@niedbalski"></i>  </a>
-                        <a href="http://monkey-project.com/"><i class="icon-Monkey Project"></i>  </a>
-                        <a href="mailto:freyes@tty.cl"><i class="icon-envelope"></i> </a>
-                </div>
-            </footer><!-- /#contentinfo -->
-        </div>
-        <!--Add statistycs-->
-<script type="text/javascript">
 
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', "UA-2675698-3"]);
-_gaq.push(['_setDomainName', "freyes.github.io"]);  _gaq.push(['_trackPageview']);
+    </div>
+  </div>
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
-
+  <div id="footer-wrapper">
+    <div id="footer" class="container clearfix">
+      <p class="copyrights pull-left">Copyright ©2013 Felipe Reyes. All rights reserved.</p>
+      <p class="socialconnect footer pull-right">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a>      </p>
+    </div>
+  </div>
 </body>
 </html>
