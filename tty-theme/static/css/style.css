@@ -94,11 +94,11 @@ ol,ul {
 }
 
 a.navbar-brand:hover {
-    color:#0ad!important;
+    color:#565656!important;
 }
 
 #header-wrapper {
-    background:#34495e;
+    background:#323232;
     border-bottom:1px solid #101010;
 }
 
@@ -363,8 +363,8 @@ a.navbar-brand:hover {
 
 .socialconnect a:hover {
     top:0;
-    color:#0ad;
-    background:#34495e;
+    color:#565656;
+    background:#323232;
     border-bottom:1px solid #101010;
 }
 
@@ -385,7 +385,7 @@ a.navbar-brand:hover {
 }
 
 .socialconnect.footer a:hover {
-    color:#0ad;
+    color:#565656;
     background:none;
     border-bottom:none;
 }
@@ -397,7 +397,7 @@ a.navbar-brand:hover {
 
 .inline-social a:hover {
     text-decoration:none;
-    border-bottom:1px solid #0ad;
+    border-bottom:1px solid #565656;
 }
 
 #disqus_thread {
@@ -746,7 +746,7 @@ blockquote {
 }
 
 .active-menu-item,#archive-page #archive-menu-item,.navbar .nav a:hover,.navbar .nav>.active>a {
-    color:#0ad;
+    color:#565656;
     text-decoration:none;
     background-color:rgba(0,0,0,0.2);
     -webkit-box-shadow:inset 0 3px 8px rgba(0,0,0,0.125);
@@ -755,7 +755,7 @@ blockquote {
 }
 
 a,a:hover,.page-subtitle a.category {
-    color:#0ad;
+    color:#565656;
 }
 
 .content blockquote p,.content blockquote ul,.content-body ol li,.content-body ul li {
