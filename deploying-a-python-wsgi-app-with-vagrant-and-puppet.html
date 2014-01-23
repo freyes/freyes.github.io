@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>TTY.cl</title>
+          <title>TTY.cl</title>
         <meta charset="utf-8" />
         <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Full Atom Feed" />
         <link href="http://tty.cl//feeds/articles.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Categories Atom Feed" />
+
+
+
+    <meta name="tags" contents="python" />
+    <meta name="tags" contents="vagrant" />
+    <meta name="tags" contents="puppet" />
+    <meta name="tags" contents="wsgi" />
+
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
         <link href="/theme/css/style.css" rel="stylesheet">
@@ -36,41 +44,39 @@
     <div class="container">
       <p class="socialconnect">
 <a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
-
-<div class="content content-list">
-  <ol class="article-list">
-    <li class="article clearfix bradius6">
-      <h2 class="page-title">
-        <a href="/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="bookmark" title="Permalink to Deploying a Python WSGI app with Vagrant and Puppet">Deploying a Python WSGI app with Vagrant and Puppet</a>
-      </h2>
-      <div class="page-subtitle">
-        <abbr class="published" title="2014-01-22T00:00:00"> Wed 22 January 2014 </abbr>
-<address class="vcard author">By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
-      <div class="article-summary">
-        <p>These days the tendency among software companies is to have everything under
+<div class="content brarius6">
+  <h1 class="page-title">
+    <a href="/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="bookmark"
+       title="Permalink to Deploying a Python WSGI app with Vagrant and Puppet">
+      Deploying a Python WSGI app with Vagrant and Puppet
+    </a>
+  </h1>
+  <div class="page-subtitle">
+    <abbr class="published" title="2014-01-22T00:00:00">
+      Wed 22 January 2014
+    </abbr>
+    <address class="vcard author">
+      By <a class="url fn" href="/author/felipe-reyes.html">Felipe Reyes</a>
+    </address>
+  </div>
+  <div class="content-body">
+    <p>These days the tendency among software companies is to have everything under
 version control systems (i.e. <a href="http://git-scm.com/">Git</a>,
 <a href="http://mercurial.selenic.com/">Mercurial</a>), all these is part of two software
 development strategies: <a href="http://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a>
 and <a href="http://en.wikipedia.org/wiki/Continuous_delivery">continuous delivery</a>.
-To read more about them I recommend you to read <a href="http://www.amazon.com/Continuous-Integration-Improving-Software-Reducing/dp/0321336380/ref=sr_1_1?ie=UTF8&amp;qid=1390443569&amp;sr=8-1&amp;keywords=continuous+integration">"Continuous Integration: Improving Software Quality and Reducing ...</a></p>
-      </div>
-    </li>
-    <li class="article clearfix bradius6">
-      <h2 class="page-title">
-        <a href="/mysql-and-the-key-cache-buffer.html" rel="bookmark" title="Permalink to MySQL and the Key Cache Buffer">MySQL and the Key Cache Buffer</a>
-      </h2>
-      <div class="page-subtitle">
-        <abbr class="published" title="2011-12-18T00:00:00"> Sun 18 December 2011 </abbr>
-<address class="vcard author">By <a class="url fn" href="/author/jonathan-gonzalez.html">Jonathan Gonzalez</a></address>      </div>
-      <div class="article-summary">
-        <h1>Why did I learn?</h1>
-<p>It's always important to recognize why this happened, well, here in my
-work a few weeks ago I set up a <a href="http://code.google.com/p/mysql-cacti-templates/">few new templates</a> for our <a href="http://www.cacti.net/">Cacti</a>, among
-many useful templates it comes with some very handy templates for
-<a href="http://www.mysql.com">MySQL</a>, it comes with a pretty ...</p>
-      </div>
-    </li>
-  </ol>
+To read more about them I recommend you to read <a href="http://www.amazon.com/Continuous-Integration-Improving-Software-Reducing/dp/0321336380/ref=sr_1_1?ie=UTF8&amp;qid=1390443569&amp;sr=8-1&amp;keywords=continuous+integration">"Continuous Integration: Improving Software Quality and Reducing Risk"</a>
+and <a href="http://www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912/ref=sr_1_3?ie=UTF8&amp;qid=1390443569&amp;sr=8-3&amp;keywords=continuous+integration">"Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation"</a></p>
+<p>So I took <a href="http://www.vagrantup.com/">Vagrant</a> to provision the machines that
+will run my <a href="https://github.com/freyes/flask-hello-world">example webapp</a>, and
+<a href="http://puppetlabs.com">Puppet</a> will take care of configuring my system.</p>
+<p>My recipes are in continuous development, so you should refer to the git
+repositories for the latest information about how they work.</p>
+<ul>
+<li><a href="https://github.com/freyes/vagrant-puppet-example">Vagrant and Puppet recipes</a></li>
+<li><a href="https://github.com/freyes/flask-hello-world">Flask hello world</a></li>
+</ul>
+  </div>
 </div>
 
     </div>

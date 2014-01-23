@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="/" rel="alternate"></link><link href="http://tty.cl//feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2013-12-03T00:00:00-03:00</updated><entry><title>How to start with Emacs</title><link href="/how-to-start-with-emacs.html" rel="alternate"></link><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="/" rel="alternate"></link><link href="http://tty.cl//feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2014-01-22T00:00:00-03:00</updated><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
+&lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
+development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
+and &lt;a href="http://en.wikipedia.org/wiki/Continuous_delivery"&gt;continuous delivery&lt;/a&gt;.
+To read more about them I recommend you to read &lt;a href="http://www.amazon.com/Continuous-Integration-Improving-Software-Reducing/dp/0321336380/ref=sr_1_1?ie=UTF8&amp;amp;qid=1390443569&amp;amp;sr=8-1&amp;amp;keywords=continuous+integration"&gt;"Continuous Integration: Improving Software Quality and Reducing Risk"&lt;/a&gt;
+and &lt;a href="http://www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912/ref=sr_1_3?ie=UTF8&amp;amp;qid=1390443569&amp;amp;sr=8-3&amp;amp;keywords=continuous+integration"&gt;"Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation"&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So I took &lt;a href="http://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt; to provision the machines that
+will run my &lt;a href="https://github.com/freyes/flask-hello-world"&gt;example webapp&lt;/a&gt;, and
+&lt;a href="http://puppetlabs.com"&gt;Puppet&lt;/a&gt; will take care of configuring my system.&lt;/p&gt;
+&lt;p&gt;My recipes are in continuous development, so you should refer to the git
+repositories for the latest information about how they work.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/freyes/vagrant-puppet-example"&gt;Vagrant and Puppet recipes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/freyes/flask-hello-world"&gt;Flask hello world&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</summary><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry><entry><title>How to start with Emacs</title><link href="/how-to-start-with-emacs.html" rel="alternate"></link><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
 &lt;p&gt;Before I could really be productive with emacs, I failed a couple of
 times, because I knew that emacs were powerful, but the default
 configuration shows you a simple text editor that look awful, without
@@ -1391,7 +1406,7 @@ will have to wait less.&lt;/p&gt;
 &lt;p&gt;Well, I'll still working with some &lt;a href="http://www.mysql.com]"&gt;MySQL&lt;/a&gt; optimization things, so, I'll
 probably upload more things related to this kind of optimizations.&lt;/p&gt;
 &lt;p&gt;Remember, creating graphs of your system will always help you to
-diagnostic your system =)&lt;/p&gt;</summary></entry><entry><title>rxvt-unicode</title><link href="/rxvt-unicode.html" rel="alternate"></link><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2011-06-11:rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+diagnostic your system =)&lt;/p&gt;</summary><category term="mysql"></category><category term="tuning"></category><category term="database"></category><category term="cache"></category></entry><entry><title>rxvt-unicode</title><link href="/rxvt-unicode.html" rel="alternate"></link><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2011-06-11:rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
 default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Screenshot" src="/images/urxvt_shot.20110601.jpg" /&gt;&lt;/p&gt;
