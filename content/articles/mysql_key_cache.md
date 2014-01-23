@@ -1,6 +1,7 @@
 Title: MySQL and the Key Cache Buffer
 Date: 2011-12-18
 Author: Jonathan Gonzalez
+Tags: mysql, tuning, database, cache
 
 # Why did I learn?
 
