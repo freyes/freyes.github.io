@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 AUTHOR = u'Felipe Reyes'
-SITENAME = u"Felipe's Blog"
-SITESUBTITLE = "Random thoughts and my brain's dumpster"
+SITENAME = u"TTY.cl"
+SITESUBTITLE = "Random thoughts and knowledge"
 SITEURL = 'http://tty.cl/'
 
 TIMEZONE = 'America/Santiago'
