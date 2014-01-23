@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Felipe's Blog</title><link href="/" rel="alternate"></link><link href="http://tty.cl//feeds/debian.atom.xml" rel="self"></link><id>/</id><updated>2013-02-18T04:59:00-03:00</updated><entry><title>Skype in GNU/Debian AMD64</title><link href="/skype-in-gnudebian-amd64.html" rel="alternate"></link><updated>2013-02-18T04:59:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-02-18:skype-in-gnudebian-amd64.html</id><summary type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="/" rel="alternate"></link><link href="http://tty.cl//feeds/debian.atom.xml" rel="self"></link><id>/</id><updated>2013-02-18T04:59:00-03:00</updated><entry><title>Skype in GNU/Debian AMD64</title><link href="/skype-in-gnudebian-amd64.html" rel="alternate"></link><updated>2013-02-18T04:59:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-02-18:skype-in-gnudebian-amd64.html</id><summary type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Check if your system has i386 arch support enabled&lt;/li&gt;
 &lt;/ul&gt;

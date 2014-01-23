@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Felipe's Blog</title><link href="/" rel="alternate"></link><link href="http://tty.cl//feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2013-12-03T00:00:00-03:00</updated><entry><title>How to start with Emacs</title><link href="/how-to-start-with-emacs.html" rel="alternate"></link><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="/" rel="alternate"></link><link href="http://tty.cl//feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2013-12-03T00:00:00-03:00</updated><entry><title>How to start with Emacs</title><link href="/how-to-start-with-emacs.html" rel="alternate"></link><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
 &lt;p&gt;Before I could really be productive with emacs, I failed a couple of
 times, because I knew that emacs were powerful, but the default
 configuration shows you a simple text editor that look awful, without
