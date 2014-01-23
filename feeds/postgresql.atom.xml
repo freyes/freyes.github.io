@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Felipe's Blog</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/postgresql.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2013-11-22T15:23:00-03:00</updated><entry><title>Postgresql Tips n' Tricks</title><link href="http://tty.cl/postgresql-tips-n-tricks.html" rel="alternate"></link><updated>2013-11-22T15:23:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-11-22:postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Felipe's Blog</title><link href="/" rel="alternate"></link><link href="http://tty.cl//feeds/postgresql.atom.xml" rel="self"></link><id>/</id><updated>2013-11-22T15:23:00-03:00</updated><entry><title>Postgresql Tips n' Tricks</title><link href="/postgresql-tips-n-tricks.html" rel="alternate"></link><updated>2013-11-22T15:23:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-11-22:postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
 &lt;li&gt;pg_stat_activity&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;pg_stat_activity&lt;/a&gt;

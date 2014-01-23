@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Felipe's Blog</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/tools.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2011-06-11T23:10:00-04:00</updated><entry><title>rxvt-unicode</title><link href="http://tty.cl/rxvt-unicode.html" rel="alternate"></link><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2011-06-11:rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Felipe's Blog</title><link href="/" rel="alternate"></link><link href="http://tty.cl//feeds/tools.atom.xml" rel="self"></link><id>/</id><updated>2011-06-11T23:10:00-04:00</updated><entry><title>rxvt-unicode</title><link href="/rxvt-unicode.html" rel="alternate"></link><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2011-06-11:rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
 default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="/images/urxvt_shot.20110601.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;aptitude&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;rxvt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;unicode&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
