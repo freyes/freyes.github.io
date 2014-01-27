@@ -6,7 +6,7 @@ import os
 AUTHOR = u'Felipe Reyes'
 SITENAME = u"TTY.cl"
 SITESUBTITLE = "Random thoughts and knowledge"
-SITEURL = "http://tty.cl/"
+SITEURL = "http://tty.cl"
 
 TIMEZONE = 'America/Santiago'
 
@@ -33,7 +33,7 @@ SOCIAL = (
 DEFAULT_PAGINATION = 20
 DISPLAY_PAGES_ON_MENU = True
 DISPLAY_CATEGORIES_ON_MENU = False
-RELATIVE_URLS = bool(os.environ.get("RELATIVE_URLS") == "1")
+RELATIVE_URLS = False
 STATIC_PATHS = ['images', 'CNAME']
 PATH = 'content'
 THEME = "tty-theme"
