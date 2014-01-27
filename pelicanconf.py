@@ -48,3 +48,4 @@ TWITTER_ID = "gnusis"
 LINKEDIN_ID = "freyesas"
 GITHUB_ID = "freyes"
 FLICKR_ID = "freyes"
+TWITTER_SHARE = True
