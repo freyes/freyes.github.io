@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="/" rel="alternate"></link><link href="http://tty.cl//feeds/all.atom.xml" rel="self"></link><id>/</id><updated>2014-01-22T00:00:00-03:00</updated><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/all.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2014-01-22T00:00:00-03:00</updated><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
 version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
 &lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
 development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
@@ -14,7 +14,7 @@ repositories for the latest information about how they work.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/freyes/vagrant-puppet-example"&gt;Vagrant and Puppet recipes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/freyes/flask-hello-world"&gt;Flask hello world&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry><entry><title>How to start with Emacs</title><link href="/how-to-start-with-emacs.html" rel="alternate"></link><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
+&lt;/ul&gt;</summary><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry><entry><title>How to start with Emacs</title><link href="http://tty.cl/how-to-start-with-emacs.html" rel="alternate"></link><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
 &lt;p&gt;Before I could really be productive with emacs, I failed a couple of
 times, because I knew that emacs were powerful, but the default
 configuration shows you a simple text editor that look awful, without
@@ -198,7 +198,7 @@ C mode.&lt;/p&gt;
 
 &lt;span class="p"&gt;;;;&lt;/span&gt; &lt;span class="n"&gt;Prevent&lt;/span&gt; &lt;span class="n"&gt;Extraneous&lt;/span&gt; &lt;span class="n"&gt;Tabs&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt; &lt;span class="n"&gt;indent&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tabs&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt; &lt;span class="n"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>.emacs</title><link href="/emacs.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-12-02:emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>.emacs</title><link href="http://tty.cl/emacs.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="nb"&gt;debug&lt;/span&gt; &lt;span class="nx"&gt;the&lt;/span&gt; &lt;span class="bp"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;emacs&lt;/span&gt; &lt;span class="nb"&gt;file&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;setq&lt;/span&gt; &lt;span class="nb"&gt;debug&lt;/span&gt;&lt;span class="na"&gt;-on-error&lt;/span&gt; &lt;span class="nx"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -714,7 +714,7 @@ C mode.&lt;/p&gt;
 &lt;span class="s2"&gt;;;  (interactive)&lt;/span&gt;
 &lt;span class="s2"&gt;;;  (let (parens-require-spaces)&lt;/span&gt;
 &lt;span class="s2"&gt;;;    (insert-pair)))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>erc</title><link href="/erc.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-12-02:erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>erc</title><link href="http://tty.cl/erc.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;erc-cmd-NP function send the current track being played to the current chat buffer (channel or private)&lt;/li&gt;
 &lt;li&gt;The connect-* functions provide a quick access to the defined IRC server.&lt;/li&gt;
@@ -759,7 +759,7 @@ C mode.&lt;/p&gt;
    &lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;full&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Felipe Reyes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;erc&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;auto&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Org-mode and Beamer</title><link href="/org-mode-and-beamer.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-12-02:org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Org-mode and Beamer</title><link href="http://tty.cl/org-mode-and-beamer.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. &lt;/p&gt;
 &lt;h2&gt;Example&lt;/h2&gt;
 &lt;p&gt;Here it is an example of how a presentation file should look like&lt;/p&gt;
@@ -882,7 +882,7 @@ C mode.&lt;/p&gt;
 &lt;li&gt;&lt;a href="http://orgmode.org/worg/org-tutorials/org-beamer/tutorial.html"&gt;Worg beamer tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://orgmode.org/manual/Beamer-class-export.html"&gt;org-mode beamer&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://emacs-fu.blogspot.com/2009/10/writing-presentations-with-org-mode-and.html"&gt;emacs-fu: writing presentations with org-mode and beamer&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Postgresql Tips n' Tricks</title><link href="/postgresql-tips-n-tricks.html" rel="alternate"></link><updated>2013-11-22T15:23:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-11-22:postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Postgresql Tips n' Tricks</title><link href="http://tty.cl/postgresql-tips-n-tricks.html" rel="alternate"></link><updated>2013-11-22T15:23:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-11-22:postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
 &lt;li&gt;pg_stat_activity&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;pg_stat_activity&lt;/a&gt;
@@ -961,7 +961,7 @@ section (I don't want to do a simply copy-paste, so see the official documentati
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="postgresql"></category><category term="tips"></category></entry><entry><title>Skype in GNU/Debian AMD64</title><link href="/skype-in-gnudebian-amd64.html" rel="alternate"></link><updated>2013-02-18T04:59:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-02-18:skype-in-gnudebian-amd64.html</id><summary type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
+</summary><category term="postgresql"></category><category term="tips"></category></entry><entry><title>Skype in GNU/Debian AMD64</title><link href="http://tty.cl/skype-in-gnudebian-amd64.html" rel="alternate"></link><updated>2013-02-18T04:59:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-02-18:skype-in-gnudebian-amd64.html</id><summary type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Check if your system has i386 arch support enabled&lt;/li&gt;
 &lt;/ul&gt;
@@ -1003,7 +1003,7 @@ section (I don't want to do a simply copy-paste, so see the official documentati
 &lt;li&gt;And then you are ready to install skype&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="c"&gt;# dpkg -i skype-debian_4.1.0.20-1_i386.deb&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="debian"></category><category term="skype"></category><category term="tips"></category></entry><entry><title>C Snippets</title><link href="/c-snippets.html" rel="alternate"></link><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-01-01:c-snippets.html</id><summary type="html">&lt;h2&gt;Simple Swap Function&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="debian"></category><category term="skype"></category><category term="tips"></category></entry><entry><title>C Snippets</title><link href="http://tty.cl/c-snippets.html" rel="alternate"></link><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:c-snippets.html</id><summary type="html">&lt;h2&gt;Simple Swap Function&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;stdio.h&amp;gt;&lt;/span&gt;
 
 &lt;span class="kr"&gt;inline&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
@@ -1028,10 +1028,10 @@ section (I don't want to do a simply copy-paste, so see the official documentati
 &lt;p&gt;Expected output:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;before&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
 &lt;span class="n"&gt;after&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Emacs Tips</title><link href="/emacs-tips.html" rel="alternate"></link><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-01-01:emacs-tips.html</id><summary type="html">&lt;ul&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Emacs Tips</title><link href="http://tty.cl/emacs-tips.html" rel="alternate"></link><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:emacs-tips.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;If you start emacs with "emacs -q" and the problem goes away, the problem is on your end: check your .emacs. &lt;/li&gt;
 &lt;li&gt;If "emacs -q" has problems and "emacs -Q" does not, it's caused by your distro or local admin.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Python Snippets</title><link href="/python-snippets.html" rel="alternate"></link><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2013-01-01:python-snippets.html</id><summary type="html">&lt;h2&gt;Property&lt;/h2&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Python Snippets</title><link href="http://tty.cl/python-snippets.html" rel="alternate"></link><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:python-snippets.html</id><summary type="html">&lt;h2&gt;Property&lt;/h2&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;Property&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;fget&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fdel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="n"&gt;fdoc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__doc__&lt;/span&gt;
@@ -1261,7 +1261,7 @@ section (I don't want to do a simply copy-paste, so see the official documentati
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Original snippet available at http://snippets.dzone.com/posts/show/757&lt;/p&gt;</summary><category term="python"></category><category term="snippets"></category></entry><entry><title>Mercurial</title><link href="/mercurial.html" rel="alternate"></link><updated>2012-12-03T17:42:08-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2012-12-03:mercurial.html</id><summary type="html">&lt;p&gt;This is my mercurial configuration (~/.hgrc)&lt;/p&gt;
+&lt;p&gt;Original snippet available at http://snippets.dzone.com/posts/show/757&lt;/p&gt;</summary><category term="python"></category><category term="snippets"></category></entry><entry><title>Mercurial</title><link href="http://tty.cl/mercurial.html" rel="alternate"></link><updated>2012-12-03T17:42:08-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2012-12-03:mercurial.html</id><summary type="html">&lt;p&gt;This is my mercurial configuration (~/.hgrc)&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[ui]&lt;/span&gt;
 &lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Foo Bar &amp;lt;foobar@example.com&amp;gt;&lt;/span&gt;
 &lt;span class="na"&gt;merge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;emacs&lt;/span&gt;
@@ -1303,7 +1303,7 @@ section (I don't want to do a simply copy-paste, so see the official documentati
 
 &lt;span class="k"&gt;[merge-tools]&lt;/span&gt;
 &lt;span class="na"&gt;emacs.args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;-q --eval &amp;quot;(ediff-merge-with-ancestor \&amp;quot;$local\&amp;quot; \&amp;quot;$other\&amp;quot; \&amp;quot;$base\&amp;quot; nil \&amp;quot;$output\&amp;quot;)&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="mercurial"></category><category term="vcs"></category></entry><entry><title>MySQL and the Key Cache Buffer</title><link href="/mysql-and-the-key-cache-buffer.html" rel="alternate"></link><updated>2011-12-18T00:00:00-03:00</updated><author><name>Jonathan Gonzalez</name></author><id>tag:,2011-12-18:mysql-and-the-key-cache-buffer.html</id><summary type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="mercurial"></category><category term="vcs"></category></entry><entry><title>MySQL and the Key Cache Buffer</title><link href="http://tty.cl/mysql-and-the-key-cache-buffer.html" rel="alternate"></link><updated>2011-12-18T00:00:00-03:00</updated><author><name>Jonathan Gonzalez</name></author><id>tag:tty.cl,2011-12-18:mysql-and-the-key-cache-buffer.html</id><summary type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
 &lt;p&gt;It's always important to recognize why this happened, well, here in my
 work a few weeks ago I set up a &lt;a href="http://code.google.com/p/mysql-cacti-templates/"&gt;few new templates&lt;/a&gt; for our &lt;a href="http://www.cacti.net/"&gt;Cacti&lt;/a&gt;, among
 many useful templates it comes with some very handy templates for
@@ -1406,10 +1406,10 @@ will have to wait less.&lt;/p&gt;
 &lt;p&gt;Well, I'll still working with some &lt;a href="http://www.mysql.com]"&gt;MySQL&lt;/a&gt; optimization things, so, I'll
 probably upload more things related to this kind of optimizations.&lt;/p&gt;
 &lt;p&gt;Remember, creating graphs of your system will always help you to
-diagnostic your system =)&lt;/p&gt;</summary><category term="mysql"></category><category term="tuning"></category><category term="database"></category><category term="cache"></category></entry><entry><title>rxvt-unicode</title><link href="/rxvt-unicode.html" rel="alternate"></link><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2011-06-11:rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+diagnostic your system =)&lt;/p&gt;</summary><category term="mysql"></category><category term="tuning"></category><category term="database"></category><category term="cache"></category></entry><entry><title>rxvt-unicode</title><link href="http://tty.cl/rxvt-unicode.html" rel="alternate"></link><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2011-06-11:rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
 default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot" src="/images/urxvt_shot.20110601.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg" /&gt;&lt;/p&gt;
 &lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;aptitude&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;rxvt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;unicode&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -1446,7 +1446,7 @@ set the proper alternative like this&lt;/p&gt;
 
 &lt;p&gt;Remember to install the terminus fonts if you want to use my configuration&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;aptitude&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;xfonts&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;terminus&lt;/span&gt; &lt;span class="n"&gt;xfonts&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;terminus&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;dos&lt;/span&gt; &lt;span class="n"&gt;xfonts&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;terminus&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;oblique&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="debian"></category><category term="linux"></category><category term="tips"></category><category term="rxvt"></category></entry><entry><title>About Me</title><link href="/about-me.html" rel="alternate"></link><updated>2010-10-10T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:,2010-10-10:about-me.html</id><summary type="html">&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="debian"></category><category term="linux"></category><category term="tips"></category><category term="rxvt"></category></entry><entry><title>About Me</title><link href="http://tty.cl/about-me.html" rel="alternate"></link><updated>2010-10-10T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2010-10-10:about-me.html</id><summary type="html">&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
 developer (or at least I try)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.flickr.com/photos/freyes"&gt;Flickr&lt;/a&gt;&lt;/li&gt;
