@@ -43,7 +43,7 @@
   </div>
   {% if TWITTER_SHARE %}
   <div class="pull-right">
-    <a href="https://twitter.com/share?text={{ article.title|striptags }}&url={{ SITEURL }}/{{ article.url }}&via={{ TWITTER_ID }}" type="button" class="btn btn-info">
+    <a href="https://twitter.com/share?text={{ article.title|striptags }}&url={{ SITEURL|urlencode }}/{{ article.url|urlencode }}&via={{ TWITTER_ID }}" type="button" class="btn btn-info">
       <i class="fa fa-twitter-square"></i> Tweet</a>
   </div>
   {% endif %}
