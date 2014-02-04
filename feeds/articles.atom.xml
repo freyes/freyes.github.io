@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/articles.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2014-01-22T00:00:00-03:00</updated><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/articles.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2014-01-27T00:00:00-03:00</updated><entry><title>Open Source Project Development Tools: part 1</title><link href="http://tty.cl/open-source-project-development-tools-part-1.html" rel="alternate"></link><updated>2014-01-27T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-27:open-source-project-development-tools-part-1.html</id><summary type="html">&lt;p&gt;This is a series of article to explain the tools I choose to use when I start a new project.&lt;/p&gt;
+&lt;h1&gt;Version Control System&lt;/h1&gt;
+&lt;p&gt;I've used for professional development Subversion (svn), Mercurial (hg) and Git,
+I've reached a decent proficiency with all of them, and I have to say that Git
+is the best fit for me, no news you'll say, but thanks to &lt;a href="https://github.com"&gt;GitHub&lt;/a&gt;
+the popularity of Git sky rocketed and a lot of people is being benefited by the
+popularity of Github.&lt;/p&gt;
+&lt;p&gt;I'm not implying that developers using other tools are wrong, but you have to
+recognize that these use CVS, Perforce or even svn is a nightmare for
+programmers that already felt the privileges of using a VCS like Git or Mercurial.&lt;/p&gt;
+&lt;h1&gt;Why Git?&lt;/h1&gt;
+&lt;p&gt;There are as many reasons as git users, but these are some of my favorite
+features on my day to day work.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://magit.github.io/"&gt;magit&lt;/a&gt;, it's a git interface for Emacs, it makes the
+  use of git inside Emacs a pleasure.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com"&gt;GitHub&lt;/a&gt;, free for open source, easy to use for closed
+  source development, &lt;a href="https://travis-ci.com"&gt;Travis&lt;/a&gt; integration (more on this later).
+  wiki and bug tracker.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.kernel.org/pub/software/scm/git/docs/git-bisect.html"&gt;git bisect&lt;/a&gt;,
+  have you ever had to deal with a regression and you have a point in time where a
+  feature works, and another one where it doesn't?, well &lt;code&gt;git bisect&lt;/code&gt; let you do
+  a binary search easily. I recommend you to read
+  &lt;a href="http://schacon.github.io/git/git-bisect-lk2009.html"&gt;"Fighting regressions with git bisect" by Christian Couder&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://www.kernel.org/pub/software/scm/git/docs/git-grep.html"&gt;git grep&lt;/a&gt;,
+  it does what you expect from it (grep over all the versioned files), if you are
+  coming from &lt;code&gt;svn&lt;/code&gt; then you can drop &lt;a href="http://beyondgrep.com/"&gt;ack-grep&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin"&gt;Jenkins Git Plugin&lt;/a&gt;,
+  it's way better than the plugin for Mercurial, it has the option to look for
+  changes without having a copy of the repo (see &lt;a href="https://www.kernel.org/pub/software/scm/git/docs/git-ls-remote.html"&gt;git ls-remote&lt;/a&gt;),
+  this let you keep you &lt;a href="http://jenkins-ci.org/"&gt;jenkins&lt;/a&gt; slaves turned off and
+  the master takes care of polling for changes, once a new change appears then
+  the slave is turned on and the build is triggered.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;On the next part of this series I'll be covering continuous integration tools
+and the workflows.&lt;/p&gt;</summary><category term="development"></category></entry><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
 version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
 &lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
 development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
