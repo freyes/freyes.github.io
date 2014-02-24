@@ -1,50 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/articles.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2014-01-27T00:00:00-03:00</updated><entry><title>Open Source Project Development Tools: part 1</title><link href="http://tty.cl/open-source-project-development-tools-part-1.html" rel="alternate"></link><updated>2014-01-27T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-27:open-source-project-development-tools-part-1.html</id><summary type="html">&lt;p&gt;This is a series of article to explain the tools I choose to use when I start a new project.&lt;/p&gt;
-&lt;h1&gt;Version Control System&lt;/h1&gt;
-&lt;p&gt;I've used for professional development Subversion (svn), Mercurial (hg) and Git,
-I've reached a decent proficiency with all of them, and I have to say that Git
-is the best fit for me, no news you'll say, but thanks to &lt;a href="https://github.com"&gt;GitHub&lt;/a&gt;
-the popularity of Git sky rocketed and a lot of people is being benefited by the
-popularity of Github.&lt;/p&gt;
-&lt;p&gt;I'm not implying that developers using other tools are wrong, but you have to
-recognize that these use CVS, Perforce or even svn is a nightmare for
-programmers that already felt the privileges of using a VCS like Git or Mercurial.&lt;/p&gt;
-&lt;h1&gt;Why Git?&lt;/h1&gt;
-&lt;p&gt;There are as many reasons as git users, but these are some of my favorite
-features on my day to day work.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="http://magit.github.io/"&gt;magit&lt;/a&gt;, it's a git interface for Emacs, it makes the
-  use of git inside Emacs a pleasure.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="https://github.com"&gt;GitHub&lt;/a&gt;, free for open source, easy to use for closed
-  source development, &lt;a href="https://travis-ci.com"&gt;Travis&lt;/a&gt; integration (more on this later).
-  wiki and bug tracker.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="https://www.kernel.org/pub/software/scm/git/docs/git-bisect.html"&gt;git bisect&lt;/a&gt;,
-  have you ever had to deal with a regression and you have a point in time where a
-  feature works, and another one where it doesn't?, well &lt;code&gt;git bisect&lt;/code&gt; let you do
-  a binary search easily. I recommend you to read
-  &lt;a href="http://schacon.github.io/git/git-bisect-lk2009.html"&gt;"Fighting regressions with git bisect" by Christian Couder&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="https://www.kernel.org/pub/software/scm/git/docs/git-grep.html"&gt;git grep&lt;/a&gt;,
-  it does what you expect from it (grep over all the versioned files), if you are
-  coming from &lt;code&gt;svn&lt;/code&gt; then you can drop &lt;a href="http://beyondgrep.com/"&gt;ack-grep&lt;/a&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href="https://wiki.jenkins-ci.org/display/JENKINS/Git+Plugin"&gt;Jenkins Git Plugin&lt;/a&gt;,
-  it's way better than the plugin for Mercurial, it has the option to look for
-  changes without having a copy of the repo (see &lt;a href="https://www.kernel.org/pub/software/scm/git/docs/git-ls-remote.html"&gt;git ls-remote&lt;/a&gt;),
-  this let you keep you &lt;a href="http://jenkins-ci.org/"&gt;jenkins&lt;/a&gt; slaves turned off and
-  the master takes care of polling for changes, once a new change appears then
-  the slave is turned on and the build is triggered.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;On the next part of this series I'll be covering continuous integration tools
-and the workflows.&lt;/p&gt;</summary><category term="development"></category></entry><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/articles.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2014-01-22T00:00:00-03:00</updated><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
 version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
 &lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
 development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
@@ -71,36 +26,29 @@ of this article&lt;/p&gt;
 &lt;p&gt;Since you may not have cacti installed you may need to know what do
 you have and how it's working now.&lt;/p&gt;
 &lt;p&gt;First the value of your 'key buffer size':&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="n"&gt;variables&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;key%&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;p&gt;&lt;code&gt;sql
+show variables like 'key%';&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;This will show at least, two good things that may be useful for you,
 'key buffer size', yes the size of our key buffer! and
 'key cache block size' useful to end our tiny article&lt;/p&gt;
 &lt;p&gt;Well, now we have to know how the key buffer its used:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Key%&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;p&gt;&lt;code&gt;sql
+show status like 'Key%';&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;All the rows returned from this command are useful! I'll use and
 example of one of our servers:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;mysql&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;show&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="n"&gt;like&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;Key&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;span class="o"&gt;+------------------------+-----------+&lt;/span&gt;
-&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Variable_name&lt;/span&gt;          &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Value&lt;/span&gt;     &lt;span class="o"&gt;|&lt;/span&gt;
-&lt;span class="o"&gt;+------------------------+-----------+&lt;/span&gt;
-&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Key_blocks_not_flushed&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;         &lt;span class="o"&gt;|&lt;/span&gt;
-&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Key_blocks_unused&lt;/span&gt;      &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;240934&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
-&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Key_blocks_used&lt;/span&gt;        &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;97093&lt;/span&gt;     &lt;span class="o"&gt;|&lt;/span&gt;
-&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Key_read_requests&lt;/span&gt;      &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;211305615&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt;
-&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Key_reads&lt;/span&gt;              &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;321341&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
-&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Key_write_requests&lt;/span&gt;     &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;9268658&lt;/span&gt;   &lt;span class="o"&gt;|&lt;/span&gt;
-&lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;Key_writes&lt;/span&gt;             &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="mi"&gt;397761&lt;/span&gt;    &lt;span class="o"&gt;|&lt;/span&gt;
-&lt;span class="o"&gt;+------------------------+-----------+&lt;/span&gt;
-&lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="n"&gt;rows&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mf"&gt;0.00&lt;/span&gt; &lt;span class="n"&gt;sec&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;p&gt;&lt;code&gt;mysql&amp;gt; show status like 'Key%';
++------------------------+-----------+
+| Variable_name          | Value     |
++------------------------+-----------+
+| Key_blocks_not_flushed | 0         |
+| Key_blocks_unused      | 240934    |
+| Key_blocks_used        | 97093     |
+| Key_read_requests      | 211305615 |
+| Key_reads              | 321341    |
+| Key_write_requests     | 9268658   |
+| Key_writes             | 397761    |
++------------------------+-----------+
+7 rows in set (0.00 sec)&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;We now have all the data we need to evaluate  our current situation.&lt;/p&gt;
 &lt;h1&gt;Use the collected data&lt;/h1&gt;
 &lt;p&gt;We will suppose that the value of 'key buffer size' it's '402653184'
@@ -111,16 +59,10 @@ transformation:&lt;/p&gt;
 &lt;p&gt;We have a Key cache buffer of 384MB which looks like a lot of space,
 but how much of that space it's currently used? well, you will have to
 do simple calculation:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;key_buffer_usage&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;Key_blocks_unused&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;key_cache_block_size&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;key_buffer_size&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;p&gt;&lt;code&gt;key_buffer_usage = ( Key_blocks_unused * key_cache_block_size ) / key_buffer_size ) * 100&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;So with our collected that we will suppose that the value of
 'key cache block size' it's 1024 which it's the default value.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;240934&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;402653184&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mf"&gt;61.2&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;p&gt;&lt;code&gt;( (240934 * 1024) / 402653184 ) * 100 = 61.2&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;So, we have about 61.2 percent of our buffer used, ok this seems to be
 right, but there's another data we may find useful! look this extract
 from the &lt;a href="http://dev.mysql.com/doc/"&gt;MySQL Documentation&lt;/a&gt;:&lt;/p&gt;
@@ -128,10 +70,7 @@ from the &lt;a href="http://dev.mysql.com/doc/"&gt;MySQL Documentation&lt;/a&gt;
 0.01."&lt;/p&gt;
 &lt;p&gt;Ok, what the heck this guys mean by that? Well, let's try our maths to
 calculate our ratio!&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="n"&gt;key_reads_ratio&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt; &lt;span class="n"&gt;Key_reads&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="n"&gt;Key_read_requests&lt;/span&gt; &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;p&gt;&lt;code&gt;key_reads_ratio =  ( Key_reads / Key_read_requests ) * 100&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;And with our data it will be something like:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;( 321341 / 211305615 ) * 100 = 0.152074046&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;So, we have a ratio of about 0.15, this doesn't seem a lot to me, but
@@ -144,10 +83,8 @@ can't restart your database right?&lt;/p&gt;
 &lt;p&gt;Well, if you access your database as 'root' user you can start to
 throw a few commands to set these values!&lt;/p&gt;
 &lt;p&gt;Let's say we want to set up our key buffer, we should do this:&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="k"&gt;global&lt;/span&gt; &lt;span class="n"&gt;key_buffer_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
+&lt;p&gt;&lt;code&gt;sql
+set global key_buffer_size=512*1024*1024;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Thus, we will set our key_buffer to 512M and our system will have a
 lot of more key cached and our ratio will go down! awesome right? but
 wait, there's a tricks an some cautions you may want to take!&lt;/p&gt;

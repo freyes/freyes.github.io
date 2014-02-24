@@ -7,6 +7,7 @@
         <link href="http://tty.cl//feeds/emacs.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Categories Atom Feed" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
         <link href="/theme/css/style.css" rel="stylesheet">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
@@ -65,19 +66,17 @@ sucks.</p>
 <address class="vcard author">By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
       <div class="article-summary">
         <p>I hope you enjoy disecting my emacs config :D</p>
-<div class="highlight"><pre><span class="p">;;</span> <span class="k">to</span> <span class="nb">debug</span> <span class="nx">the</span> <span class="bp">.</span><span class="nx">emacs</span> <span class="nb">file</span>
-<span class="p">(</span><span class="nx">setq</span> <span class="nb">debug</span><span class="na">-on-error</span> <span class="nx">nil</span><span class="p">)</span>
-
-<span class="p">;;</span> <span class="nx">setup</span> <span class="nx">the</span> <span class="nb">default</span> <span class="nb">mode</span> <span class="k">to</span> <span class="nx">use</span>
-<span class="p">;;</span><span class="nx">Text</span> <span class="nb">mode</span> <span class="nx">is</span> <span class="nx">happier</span> <span class="nx">than</span> <span class="nx">Fundamental</span> <span class="nb">mode</span> <span class="p">;</span><span class="o">-</span><span class="p">)</span>
-<span class="p">(</span><span class="nx">setq</span> <span class="nb">default</span><span class="na">-major-mode</span> <span class="s1">&#39;text-mode)</span>
-
-<span class="s1">;; define the mail and name</span>
-<span class="s1">(setq user-mail-address &quot;your@mail.com&quot;)</span>
-<span class="s1">(setq user-full-name &quot;Your Name&quot;)</span>
-
-<span class="s1">;;;;;;;;;;;;,;</span>
-<span class="s1">;; UI ...</span></pre></div>
+<p>```elisp
+;; to debug the .emacs file
+(setq debug-on-error nil)</p>
+<p>;; setup the default mode to use
+;;Text mode is happier than Fundamental mode ;-)
+(setq default-major-mode 'text-mode)</p>
+<p>;; define the mail and name
+(setq user-mail-address "your@mail.com")
+(setq user-full-name "Your Name")</p>
+<p>;;;;;;;;;;;;,;
+;; UI setup ...</p>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -93,10 +92,12 @@ sucks.</p>
 <li>erc-cmd-NP function send the current track being played to the current chat buffer (channel or private)</li>
 <li>The connect-* functions provide a quick access to the defined IRC server.</li>
 </ul>
-<div class="highlight"><pre><span class="p">;;</span>
-<span class="p">;;</span> <span class="n">erc</span><span class="p">.</span><span class="n">el</span>
-<span class="p">;;</span> <span class="n">Login</span> <span class="o">:</span> <span class="o">&lt;</span><span class="n">freyes</span><span class="err">@</span><span class="n">wampa</span><span class="o">&gt;</span>
-<span class="p">;;</span> <span class="n">Started</span> <span class="n">on</span>  <span class="n">Mon</span> <span class="n">Aug</span> <span class="mi">30</span> <span class="mi">23</span><span class="o">:</span><span class="mo">04</span><span class="o">:</span><span class="mi">16</span> <span class="mi">2010</span> <span class="n">Felipe</span> <span class="n">Reyes ...</span></pre></div>
+<p>```elisp
+;;
+;; erc.el
+;; Login : <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#102;&#114;&#101;&#121;&#101;&#115;&#64;&#119;&#97;&#109;&#112;&#97;">&#102;&#114;&#101;&#121;&#101;&#115;&#64;&#119;&#97;&#109;&#112;&#97;</a>
+;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes
+;; $Id ...</p>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -111,7 +112,8 @@ sucks.</p>
 <p>The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. </p>
 <h2>Example</h2>
 <p>Here it is an example of how a presentation file should look like</p>
-<div class="highlight"><pre><span class="cp">#+TITLE:     Org Mode and Beamer ...</span></pre></div>
+<p>```</p>
+<h1>+TITLE:     Org Mode and Beamer ...</h1>
       </div>
     </li>
     <li class="article clearfix bradius6">

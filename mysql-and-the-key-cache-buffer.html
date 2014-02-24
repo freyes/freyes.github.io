@@ -15,6 +15,7 @@
 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
         <link href="/theme/css/style.css" rel="stylesheet">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
@@ -72,36 +73,29 @@ of this article</p>
 <p>Since you may not have cacti installed you may need to know what do
 you have and how it's working now.</p>
 <p>First the value of your 'key buffer size':</p>
-<div class="highlight"><pre><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">&#39;key%&#39;</span><span class="p">;</span>
-</pre></div>
-
-
+<p><code>sql
+show variables like 'key%';</code></p>
 <p>This will show at least, two good things that may be useful for you,
 'key buffer size', yes the size of our key buffer! and
 'key cache block size' useful to end our tiny article</p>
 <p>Well, now we have to know how the key buffer its used:</p>
-<div class="highlight"><pre><span class="k">show</span> <span class="n">status</span> <span class="k">like</span> <span class="s1">&#39;Key%&#39;</span><span class="p">;</span>
-</pre></div>
-
-
+<p><code>sql
+show status like 'Key%';</code></p>
 <p>All the rows returned from this command are useful! I'll use and
 example of one of our servers:</p>
-<div class="highlight"><pre><span class="n">mysql</span><span class="o">&gt;</span> <span class="n">show</span> <span class="n">status</span> <span class="n">like</span> <span class="err">&#39;</span><span class="n">Key</span><span class="o">%</span><span class="err">&#39;</span><span class="p">;</span>
-<span class="o">+------------------------+-----------+</span>
-<span class="o">|</span> <span class="n">Variable_name</span>          <span class="o">|</span> <span class="n">Value</span>     <span class="o">|</span>
-<span class="o">+------------------------+-----------+</span>
-<span class="o">|</span> <span class="n">Key_blocks_not_flushed</span> <span class="o">|</span> <span class="mi">0</span>         <span class="o">|</span>
-<span class="o">|</span> <span class="n">Key_blocks_unused</span>      <span class="o">|</span> <span class="mi">240934</span>    <span class="o">|</span>
-<span class="o">|</span> <span class="n">Key_blocks_used</span>        <span class="o">|</span> <span class="mi">97093</span>     <span class="o">|</span>
-<span class="o">|</span> <span class="n">Key_read_requests</span>      <span class="o">|</span> <span class="mi">211305615</span> <span class="o">|</span>
-<span class="o">|</span> <span class="n">Key_reads</span>              <span class="o">|</span> <span class="mi">321341</span>    <span class="o">|</span>
-<span class="o">|</span> <span class="n">Key_write_requests</span>     <span class="o">|</span> <span class="mi">9268658</span>   <span class="o">|</span>
-<span class="o">|</span> <span class="n">Key_writes</span>             <span class="o">|</span> <span class="mi">397761</span>    <span class="o">|</span>
-<span class="o">+------------------------+-----------+</span>
-<span class="mi">7</span> <span class="n">rows</span> <span class="n">in</span> <span class="n">set</span> <span class="p">(</span><span class="mf">0.00</span> <span class="n">sec</span><span class="p">)</span>
-</pre></div>
-
-
+<p><code>mysql&gt; show status like 'Key%';
++------------------------+-----------+
+| Variable_name          | Value     |
++------------------------+-----------+
+| Key_blocks_not_flushed | 0         |
+| Key_blocks_unused      | 240934    |
+| Key_blocks_used        | 97093     |
+| Key_read_requests      | 211305615 |
+| Key_reads              | 321341    |
+| Key_write_requests     | 9268658   |
+| Key_writes             | 397761    |
++------------------------+-----------+
+7 rows in set (0.00 sec)</code></p>
 <p>We now have all the data we need to evaluate  our current situation.</p>
 <h1>Use the collected data</h1>
 <p>We will suppose that the value of 'key buffer size' it's '402653184'
@@ -112,16 +106,10 @@ transformation:</p>
 <p>We have a Key cache buffer of 384MB which looks like a lot of space,
 but how much of that space it's currently used? well, you will have to
 do simple calculation:</p>
-<div class="highlight"><pre><span class="n">key_buffer_usage</span> <span class="o">=</span> <span class="p">(</span> <span class="n">Key_blocks_unused</span> <span class="o">*</span> <span class="n">key_cache_block_size</span> <span class="p">)</span> <span class="o">/</span> <span class="n">key_buffer_size</span> <span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
-</pre></div>
-
-
+<p><code>key_buffer_usage = ( Key_blocks_unused * key_cache_block_size ) / key_buffer_size ) * 100</code></p>
 <p>So with our collected that we will suppose that the value of
 'key cache block size' it's 1024 which it's the default value.</p>
-<div class="highlight"><pre><span class="p">(</span> <span class="p">(</span><span class="mi">240934</span> <span class="o">*</span> <span class="mi">1024</span><span class="p">)</span> <span class="o">/</span> <span class="mi">402653184</span> <span class="p">)</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">=</span> <span class="mf">61.2</span>
-</pre></div>
-
-
+<p><code>( (240934 * 1024) / 402653184 ) * 100 = 61.2</code></p>
 <p>So, we have about 61.2 percent of our buffer used, ok this seems to be
 right, but there's another data we may find useful! look this extract
 from the <a href="http://dev.mysql.com/doc/">MySQL Documentation</a>:</p>
@@ -129,10 +117,7 @@ from the <a href="http://dev.mysql.com/doc/">MySQL Documentation</a>:</p>
 0.01."</p>
 <p>Ok, what the heck this guys mean by that? Well, let's try our maths to
 calculate our ratio!</p>
-<div class="highlight"><pre><span class="n">key_reads_ratio</span> <span class="o">=</span>  <span class="p">(</span> <span class="n">Key_reads</span> <span class="o">/</span> <span class="n">Key_read_requests</span> <span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
-</pre></div>
-
-
+<p><code>key_reads_ratio =  ( Key_reads / Key_read_requests ) * 100</code></p>
 <p>And with our data it will be something like:</p>
 <p><code>( 321341 / 211305615 ) * 100 = 0.152074046</code></p>
 <p>So, we have a ratio of about 0.15, this doesn't seem a lot to me, but
@@ -145,10 +130,8 @@ can't restart your database right?</p>
 <p>Well, if you access your database as 'root' user you can start to
 throw a few commands to set these values!</p>
 <p>Let's say we want to set up our key buffer, we should do this:</p>
-<div class="highlight"><pre><span class="k">set</span> <span class="k">global</span> <span class="n">key_buffer_size</span><span class="o">=</span><span class="mi">512</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">;</span>
-</pre></div>
-
-
+<p><code>sql
+set global key_buffer_size=512*1024*1024;</code></p>
 <p>Thus, we will set our key_buffer to 512M and our system will have a
 lot of more key cached and our ratio will go down! awesome right? but
 wait, there's a tricks an some cautions you may want to take!</p>

@@ -14,6 +14,7 @@
 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
         <link href="/theme/css/style.css" rel="stylesheet">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
@@ -63,45 +64,44 @@
 <ul>
 <li>Check if your system has i386 arch support enabled</li>
 </ul>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">dpkg</span> <span class="o">--</span><span class="n">print</span><span class="o">-</span><span class="n">foreign</span><span class="o">-</span><span class="n">architectures</span>
-<span class="n">i386</span>
-</pre></div>
-
-
+<p><code>$ dpkg --print-foreign-architectures
+i386</code></p>
 <ul>
 <li>If you don't have i386 support enable it with the following commands:</li>
 </ul>
-<div class="highlight"><pre><span class="c"># dpkg --add-architecture i386</span>
-<span class="c"># apt-get update</span>
-</pre></div>
-
-
+<p>```</p>
+<h1>dpkg --add-architecture i386</h1>
+<h1>apt-get update</h1>
+<p>```</p>
 <ul>
 <li>Then install the skype's dependencies with the following command:</li>
 </ul>
-<div class="highlight"><pre><span class="cp"># apt-get install libqtgui4:i386 \</span>
-<span class="cp">      libqtwebkit4:i386 \</span>
-<span class="cp">      libqt4-network:i386 \</span>
-<span class="cp">      libqtcore4:i386 \</span>
-<span class="cp">      libxss1:i386 \</span>
-<span class="cp">      lib32stdc++6 \</span>
-<span class="cp">      libxv1:i386 \</span>
-<span class="cp">      libasound2:i386 \</span>
-<span class="cp">      libqt4-dbus:i386 \</span>
-<span class="cp">      libssl1.0.0:i386 \</span>
-<span class="cp">      libasound2-plugins:i386 \</span>
-<span class="cp">      libqt4-xml \</span>
-<span class="cp">      libqtcore4 \</span>
-<span class="cp">      libqtdbus4 \</span>
-<span class="cp">      qdbus</span>
+<p>```</p>
+<h1>apt-get install libqtgui4:i386 \</h1>
+<div class="codehilite"><pre>  <span class="nl">libqtwebkit4:</span><span class="n">i386</span> \
+  <span class="n">libqt4</span><span class="o">-</span><span class="n">network</span><span class="o">:</span><span class="n">i386</span> \
+  <span class="nl">libqtcore4:</span><span class="n">i386</span> \
+  <span class="nl">libxss1:</span><span class="n">i386</span> \
+  <span class="n">lib32stdc</span><span class="o">++</span><span class="mi">6</span> \
+  <span class="nl">libxv1:</span><span class="n">i386</span> \
+  <span class="nl">libasound2:</span><span class="n">i386</span> \
+  <span class="n">libqt4</span><span class="o">-</span><span class="n">dbus</span><span class="o">:</span><span class="n">i386</span> \
+  <span class="n">libssl1</span><span class="mf">.0.0</span><span class="o">:</span><span class="n">i386</span> \
+  <span class="n">libasound2</span><span class="o">-</span><span class="n">plugins</span><span class="o">:</span><span class="n">i386</span> \
+  <span class="n">libqt4</span><span class="o">-</span><span class="n">xml</span> \
+  <span class="n">libqtcore4</span> \
+  <span class="n">libqtdbus4</span> \
+  <span class="n">qdbus</span>
 </pre></div>
 
 
+<p>```</p>
 <ul>
 <li>And then you are ready to install skype</li>
 </ul>
-<div class="highlight"><pre><span class="c"># dpkg -i skype-debian_4.1.0.20-1_i386.deb</span>
-</pre></div>
+<p>```</p>
+<h1>dpkg -i skype-debian_4.1.0.20-1_i386.deb</h1>
+<p>```</p>
   </div>
   <div class="pull-right">
     <a href="https://twitter.com/share?text=Skype in GNU/Debian AMD64&url=http%3A//tty.cl/skype-in-gnudebian-amd64.html&via=gnusis" type="button" class="btn btn-info">

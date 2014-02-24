@@ -11,6 +11,7 @@
 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
         <link href="/theme/css/style.css" rel="stylesheet">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
@@ -57,31 +58,25 @@
   </div>
   <div class="content-body">
     <h2>Simple Swap Function</h2>
-<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">){</span>
-  <span class="o">*</span><span class="n">a</span><span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="o">+*</span><span class="n">b</span><span class="p">;</span>
-  <span class="o">*</span><span class="n">b</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
-  <span class="o">*</span><span class="n">a</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;before: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-  <span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
-
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;after: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-
+<p>```C</p>
+<h1>include <stdio.h></h1>
+<p>inline void swap(int <em>a, int </em>b){
+  <em>a= </em>a+<em>b;
+  </em>b=<em>a-</em>b;
+  <em>a=</em>a-*b;
+}</p>
+<p>int main() {
+  int a = 1;
+  int b = 2;</p>
+<p>printf("before: a: %d - b: %d\n", a, b);
+  swap(&amp;a, &amp;b);</p>
+<p>printf("after: a: %d - b: %d\n", a, b);
+  return 0;
+}
+```</p>
 <p>Expected output:</p>
-<div class="highlight"><pre><span class="n">before</span><span class="o">:</span> <span class="n">a</span><span class="o">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">b</span><span class="o">:</span> <span class="mi">2</span>
-<span class="n">after</span><span class="o">:</span> <span class="n">a</span><span class="o">:</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">b</span><span class="o">:</span> <span class="mi">1</span>
-</pre></div>
+<p><code>before: a: 1 - b: 2
+after: a: 2 - b: 1</code></p>
   </div>
   <div class="pull-right">
     <a href="https://twitter.com/share?text=C Snippets&url=http%3A//tty.cl/c-snippets.html&via=gnusis" type="button" class="btn btn-info">

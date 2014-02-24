@@ -11,6 +11,7 @@
 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
         <link href="/theme/css/style.css" rel="stylesheet">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
@@ -57,522 +58,435 @@
   </div>
   <div class="content-body">
     <p>I hope you enjoy disecting my emacs config :D</p>
-<div class="highlight"><pre><span class="p">;;</span> <span class="k">to</span> <span class="nb">debug</span> <span class="nx">the</span> <span class="bp">.</span><span class="nx">emacs</span> <span class="nb">file</span>
-<span class="p">(</span><span class="nx">setq</span> <span class="nb">debug</span><span class="na">-on-error</span> <span class="nx">nil</span><span class="p">)</span>
-
-<span class="p">;;</span> <span class="nx">setup</span> <span class="nx">the</span> <span class="nb">default</span> <span class="nb">mode</span> <span class="k">to</span> <span class="nx">use</span>
-<span class="p">;;</span><span class="nx">Text</span> <span class="nb">mode</span> <span class="nx">is</span> <span class="nx">happier</span> <span class="nx">than</span> <span class="nx">Fundamental</span> <span class="nb">mode</span> <span class="p">;</span><span class="o">-</span><span class="p">)</span>
-<span class="p">(</span><span class="nx">setq</span> <span class="nb">default</span><span class="na">-major-mode</span> <span class="s1">&#39;text-mode)</span>
-
-<span class="s1">;; define the mail and name</span>
-<span class="s1">(setq user-mail-address &quot;your@mail.com&quot;)</span>
-<span class="s1">(setq user-full-name &quot;Your Name&quot;)</span>
-
-<span class="s1">;;;;;;;;;;;;,;</span>
-<span class="s1">;; UI setup ;;</span>
-<span class="s1">;;;;;;;;;;;;;;</span>
-<span class="s1">(require &#39;</span><span class="nx">swbuff</span><span class="p">)</span>
-<span class="p">(</span><span class="k">require</span> <span class="err">&#39;</span><span class="n">linum</span><span class="p">)</span>
-<span class="p">;;</span> <span class="nx">setup</span> <span class="nx">the</span> <span class="nx">tab</span> <span class="k">to</span> <span class="mi">4</span> <span class="nx">spaces</span> <span class="nb">width</span>
-<span class="p">(</span><span class="nx">setq</span> <span class="nx">tab</span><span class="na">-width</span> <span class="mi">4</span><span class="p">)</span>
-
-<span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">eq</span> <span class="nx">window</span><span class="na">-system</span> <span class="s1">&#39;x)</span>
-<span class="s1">    (set-face-attribute &#39;</span><span class="nb">default</span> <span class="nx">nil</span> <span class="p">:</span><span class="nx">font</span> <span class="s2">&quot;Consolas-10&quot;</span><span class="p">))</span>
-<span class="p">;;</span> <span class="nx">avoid</span> <span class="nx">minimize</span> <span class="k">on</span> <span class="nx">C</span><span class="na">-z</span><span class="p">,</span> <span class="nx">but</span> <span class="n">only</span> <span class="k">in</span> <span class="nx">X</span>
-<span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">eq</span> <span class="nx">window</span><span class="na">-system</span> <span class="s1">&#39;x)</span>
-<span class="s1">    (global-set-key [C-z] nil))</span>
-
-<span class="s1">;; setup default font for mac</span>
-<span class="s1">(if (eq system-type &#39;</span><span class="nx">darwin</span><span class="p">)</span>
-    <span class="p">(</span><span class="nb">set</span><span class="na">-face-attribute</span> <span class="s1">&#39;default nil :font &quot;Consolas-14&quot;))</span>
-
-<span class="s1">(tool-bar-mode -1) ;; turn off toolbar</span>
-<span class="s1">(scroll-bar-mode -1) ;; turn off scrollbar</span>
-
-<span class="s1">;; Show tabs</span>
-<span class="s1">(defface extra-whitespace-face</span>
-<span class="s1">  &#39;</span><span class="p">((</span><span class="nb">t</span> <span class="p">(:</span><span class="nx">background</span> <span class="s2">&quot;dim gray&quot;</span><span class="p">)))</span>
-  <span class="s2">&quot;Used for tabs and such.&quot;</span><span class="p">)</span>
-<span class="p">(</span><span class="nx">defvar</span> <span class="nx">my</span><span class="na">-extra-keywords</span>
-  <span class="s1">&#39;((&quot;</span><span class="se">\t</span><span class="s1">&quot; . &#39;</span><span class="nx">extra</span><span class="na">-whitespace-face</span><span class="p">)))</span>
-
-<span class="p">;;</span> <span class="nx">color</span><span class="na">-theme</span>
-<span class="p">(</span><span class="nb">add</span><span class="na">-to-list</span> <span class="s1">&#39;load-path &quot;~/.emacs.d/elisp/color-theme/&quot;)</span>
-<span class="s1">(require &#39;</span><span class="nx">color</span><span class="na">-theme</span><span class="p">)</span>
-<span class="p">;;</span> <span class="p">(</span><span class="k">require</span> <span class="err">&#39;</span><span class="n">color</span><span class="na">-theme-tango</span><span class="p">)</span>
-<span class="p">;;</span> <span class="p">(</span><span class="nx">color</span><span class="na">-theme-tango</span><span class="p">)</span>
-
-<span class="p">(</span><span class="k">require</span> <span class="err">&#39;</span><span class="n">color</span><span class="na">-theme-arjen</span><span class="p">)</span>
-<span class="p">(</span><span class="nx">color</span><span class="na">-theme-arjen</span><span class="p">)</span>
-
-<span class="p">(</span><span class="nx">iswitchb</span><span class="na">-mode</span> <span class="mi">1</span><span class="p">)</span>
-<span class="p">(</span><span class="bp">global</span><span class="na">-set-key</span> <span class="p">(</span><span class="nx">kbd</span> <span class="s2">&quot;&lt;C-tag&gt;&quot;</span><span class="p">)</span>           <span class="s1">&#39;swbuff-switch-to-next-buffer)</span>
-<span class="s1">(global-set-key (kbd &quot;&lt;C-S-iso-lefttab&gt;&quot;) &#39;</span><span class="nx">swbuff</span><span class="na">-switch-to-previous-buffer</span><span class="p">)</span>
-
-<span class="p">;;;;;;;;;;</span>
-<span class="p">;;</span> <span class="nx">Text</span> <span class="p">;;</span>
-<span class="p">;;;;;;;;;;</span>
-<span class="p">(</span><span class="nb">add</span><span class="na">-hook</span> <span class="s1">&#39;text-mode-hook</span>
-<span class="s1">          (lambda () (font-lock-add-keywords nil my-extra-keywords)))</span>
-
-<span class="s1">;;;;;;;;;;;;;;;</span>
-<span class="s1">;; rect-mark ;;</span>
-<span class="s1">;;;;;;;;;;;;;;;</span>
-<span class="s1">(require &#39;</span><span class="nb">rect</span><span class="na">-mark</span><span class="p">)</span>
-<span class="p">(</span><span class="bp">global</span><span class="na">-set-key</span> <span class="p">(</span><span class="nx">kbd</span> <span class="s2">&quot;C-x r C-SPC&quot;</span><span class="p">)</span> <span class="s1">&#39;rm-set-mark)</span>
-<span class="s1">(global-set-key (kbd &quot;C-x r C-x&quot;)   &#39;</span><span class="nx">rm</span><span class="na">-exchange-point-and-mark</span><span class="p">)</span>
-<span class="p">(</span><span class="bp">global</span><span class="na">-set-key</span> <span class="p">(</span><span class="nx">kbd</span> <span class="s2">&quot;C-x r C-w&quot;</span><span class="p">)</span>   <span class="s1">&#39;rm-kill-region)</span>
-<span class="s1">(global-set-key (kbd &quot;C-x r M-w&quot;)   &#39;</span><span class="nx">rm</span><span class="na">-kill-ring-save</span><span class="p">)</span>
-
-<span class="p">;;;;;;;;;</span>
-<span class="p">;;</span> <span class="nb">sql</span> <span class="p">;;</span>
-<span class="p">;;;;;;;;;</span>
-<span class="p">(</span><span class="nb">add</span><span class="na">-hook</span> <span class="s1">&#39;sql-mode-hook</span>
-<span class="s1">           (lambda ()</span>
-<span class="s1">             (font-lock-add-keywords nil my-extra-keywords)))</span>
-
-<span class="s1">;;;;;;;;;;;;;;</span>
-<span class="s1">;; Org mode ;;</span>
-<span class="s1">;;;;;;;;;;;;;;</span>
-<span class="s1">(load-file &quot;~/.emacs.d/org-mode.el&quot;)</span>
-
-<span class="s1">;;;;;;;;;;;;;;;;;;;;</span>
-<span class="s1">;; remember notes ;;</span>
-<span class="s1">;;;;;;;;;;;;;;;;;;;;</span>
-<span class="s1">(add-to-list &#39;</span><span class="nx">load</span><span class="na">-path</span> <span class="s2">&quot;~/.emacs.d/elisp/remember-el&quot;</span><span class="p">)</span>
-
-<span class="p">;;</span> <span class="p">(</span><span class="k">require</span> <span class="err">&#39;</span><span class="n">remember</span><span class="na">-autoloads</span><span class="p">)</span>
-<span class="p">(</span><span class="nx">autoload</span> <span class="s1">&#39;remember &quot;remember&quot; nil t)</span>
-<span class="s1">(setq remember-data-file &quot;~/.notes.txt&quot;)</span>
-<span class="s1">(global-set-key (kbd &quot;C-c r&quot;) &#39;</span><span class="nx">remember</span><span class="p">)</span>
-
-<span class="p">(</span><span class="nx">defun</span> <span class="nx">wicked</span><span class="p">/</span><span class="nx">remember</span><span class="na">-review-file</span> <span class="p">()</span>
-  <span class="s2">&quot;Open `remember-data-file&#39;.&quot;</span>
-  <span class="p">(</span><span class="nx">interactive</span><span class="p">)</span>
-  <span class="p">(</span><span class="nb">find</span><span class="na">-file-other-window</span> <span class="nx">remember</span><span class="na">-data-file</span><span class="p">))</span>
-<span class="p">(</span><span class="bp">global</span><span class="na">-set-key</span> <span class="p">(</span><span class="nx">kbd</span> <span class="s2">&quot;C-c r&quot;</span><span class="p">)</span> <span class="s1">&#39;wicked/remember-review-file)</span>
-
-<span class="s1">;;;;;;;;;;;;;;;</span>
-<span class="s1">;; yasnippet ;;</span>
-<span class="s1">;;;;;;;;;;;;;;;</span>
-<span class="s1">(require &#39;</span><span class="nx">yasnippet</span><span class="p">)</span>
-<span class="p">(</span><span class="nx">yas</span><span class="p">/</span><span class="nb">initialize</span><span class="p">)</span>
-<span class="p">(</span><span class="nx">yas</span><span class="p">/</span><span class="nx">load</span><span class="na">-directory</span> <span class="s2">&quot;~/.emacs.d/snippets/&quot;</span><span class="p">)</span>
-
-<span class="p">;;;;;;;;;;;;;;;;</span>
-<span class="p">;;</span> <span class="nb">javascript</span> <span class="p">;;</span>
-<span class="p">;;;;;;;;;;;;;;;;</span>
-<span class="p">(</span><span class="nx">autoload</span> <span class="s1">&#39;js2-mode &quot;js2-mode&quot; nil t)</span>
-<span class="s1">(add-to-list &#39;</span><span class="nx">auto</span><span class="na">-mode-alist</span>
-             <span class="s1">&#39;(&quot;</span><span class="se">\\</span><span class="s1">.js$&quot; . js2-mode))</span>
-
-<span class="s1">(add-to-list &#39;</span><span class="nx">auto</span><span class="na">-mode-alist</span>
-             <span class="s1">&#39;(&quot;</span><span class="se">\\</span><span class="s1">.dot$&quot; . graphviz-dot-mode))</span>
-
-<span class="s1">;;;;;;;;;;;</span>
-<span class="s1">;; dired ;;</span>
-<span class="s1">;;;;;;;;;;;</span>
-<span class="s1">(require &#39;</span><span class="nx">dired</span><span class="na">-x</span><span class="p">)</span>
-<span class="p">(</span><span class="k">require</span> <span class="err">&#39;</span><span class="n">dired</span><span class="na">-single</span><span class="p">)</span> <span class="p">;;</span> <span class="nx">http</span><span class="p">:</span><span class="c1">//www.northbound-train.com/emacs/dired-single.el</span>
-<span class="p">(</span><span class="nx">defun</span> <span class="nx">my</span><span class="na">-dired-init</span> <span class="p">()</span>
-  <span class="s2">&quot;Bunch of stuff to run for dired, either immediately or when it&#39;s</span>
-<span class="s2">         loaded.&quot;</span>
-  <span class="p">;;</span> <span class="o">&lt;</span><span class="nb">add</span> <span class="nx">other</span> <span class="nx">stuff</span> <span class="nx">here</span><span class="o">&gt;</span>
-  <span class="p">(</span><span class="k">define</span><span class="na">-key</span> <span class="nx">dired</span><span class="na">-mode-map</span> <span class="err">[</span><span class="k">return</span><span class="cp">]</span> &#39;dired-single-buffer)
-  (define-key dired-mode-map <span class="cp">[</span><span class="nx">mouse</span><span class="o">-</span><span class="mi">1</span><span class="cp">]</span> &#39;dired-single-buffer-mouse)
-  (define-key dired-mode-map &quot;^&quot;
+<p>```elisp
+;; to debug the .emacs file
+(setq debug-on-error nil)</p>
+<p>;; setup the default mode to use
+;;Text mode is happier than Fundamental mode ;-)
+(setq default-major-mode 'text-mode)</p>
+<p>;; define the mail and name
+(setq user-mail-address "your@mail.com")
+(setq user-full-name "Your Name")</p>
+<p>;;;;;;;;;;;;,;
+;; UI setup ;;
+;;;;;;;;;;;;;;
+(require 'swbuff)
+(require 'linum)
+;; setup the tab to 4 spaces width
+(setq tab-width 4)</p>
+<p>(if (eq window-system 'x)
+    (set-face-attribute 'default nil :font "Consolas-10"))
+;; avoid minimize on C-z, but only in X
+(if (eq window-system 'x)
+    (global-set-key [C-z] nil))</p>
+<p>;; setup default font for mac
+(if (eq system-type 'darwin)
+    (set-face-attribute 'default nil :font "Consolas-14"))</p>
+<p>(tool-bar-mode -1) ;; turn off toolbar
+(scroll-bar-mode -1) ;; turn off scrollbar</p>
+<p>;; Show tabs
+(defface extra-whitespace-face
+  '((t (:background "dim gray")))
+  "Used for tabs and such.")
+(defvar my-extra-keywords
+  '(("\t" . 'extra-whitespace-face)))</p>
+<p>;; color-theme
+(add-to-list 'load-path "~/.emacs.d/elisp/color-theme/")
+(require 'color-theme)
+;; (require 'color-theme-tango)
+;; (color-theme-tango)</p>
+<p>(require 'color-theme-arjen)
+(color-theme-arjen)</p>
+<p>(iswitchb-mode 1)
+(global-set-key (kbd "<C-tag>")           'swbuff-switch-to-next-buffer)
+(global-set-key (kbd "<C-S-iso-lefttab>") 'swbuff-switch-to-previous-buffer)</p>
+<p>;;;;;;;;;;
+;; Text ;;
+;;;;;;;;;;
+(add-hook 'text-mode-hook
+          (lambda () (font-lock-add-keywords nil my-extra-keywords)))</p>
+<p>;;;;;;;;;;;;;;;
+;; rect-mark ;;
+;;;;;;;;;;;;;;;
+(require 'rect-mark)
+(global-set-key (kbd "C-x r C-SPC") 'rm-set-mark)
+(global-set-key (kbd "C-x r C-x")   'rm-exchange-point-and-mark)
+(global-set-key (kbd "C-x r C-w")   'rm-kill-region)
+(global-set-key (kbd "C-x r M-w")   'rm-kill-ring-save)</p>
+<p>;;;;;;;;;
+;; sql ;;
+;;;;;;;;;
+(add-hook 'sql-mode-hook
+           (lambda ()
+             (font-lock-add-keywords nil my-extra-keywords)))</p>
+<p>;;;;;;;;;;;;;;
+;; Org mode ;;
+;;;;;;;;;;;;;;
+(load-file "~/.emacs.d/org-mode.el")</p>
+<p>;;;;;;;;;;;;;;;;;;;;
+;; remember notes ;;
+;;;;;;;;;;;;;;;;;;;;
+(add-to-list 'load-path "~/.emacs.d/elisp/remember-el")</p>
+<p>;; (require 'remember-autoloads)
+(autoload 'remember "remember" nil t)
+(setq remember-data-file "~/.notes.txt")
+(global-set-key (kbd "C-c r") 'remember)</p>
+<p>(defun wicked/remember-review-file ()
+  "Open `remember-data-file'."
+  (interactive)
+  (find-file-other-window remember-data-file))
+(global-set-key (kbd "C-c r") 'wicked/remember-review-file)</p>
+<p>;;;;;;;;;;;;;;;
+;; yasnippet ;;
+;;;;;;;;;;;;;;;
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/snippets/")</p>
+<p>;;;;;;;;;;;;;;;;
+;; javascript ;;
+;;;;;;;;;;;;;;;;
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist
+             '("\.js$" . js2-mode))</p>
+<p>(add-to-list 'auto-mode-alist
+             '("\.dot$" . graphviz-dot-mode))</p>
+<p>;;;;;;;;;;;
+;; dired ;;
+;;;;;;;;;;;
+(require 'dired-x)
+(require 'dired-single) ;; http://www.northbound-train.com/emacs/dired-single.el
+(defun my-dired-init ()
+  "Bunch of stuff to run for dired, either immediately or when it's
+         loaded."
+  ;; <add other stuff here>
+  (define-key dired-mode-map [return] 'dired-single-buffer)
+  (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
+  (define-key dired-mode-map "^"
     (function
-     (lambda nil (interactive) (dired-single-buffer &quot;..&quot;)))))
-
-;; if dired&#39;s already loaded, then the keymap will be bound
-(if (boundp &#39;dired-mode-map)
-    ;; we&#39;re good to go; just add our bindings
+     (lambda nil (interactive) (dired-single-buffer "..")))))</p>
+<p>;; if dired's already loaded, then the keymap will be bound
+(if (boundp 'dired-mode-map)
+    ;; we're good to go; just add our bindings
     (my-dired-init)
-  ;; it&#39;s not loaded yet, so add our bindings to the load-hook
-  (add-hook &#39;dired-load-hook &#39;my-dired-init))
-
-(setq dired-omit-files-p t)
+  ;; it's not loaded yet, so add our bindings to the load-hook
+  (add-hook 'dired-load-hook 'my-dired-init))</p>
+<p>(setq dired-omit-files-p t)
 (setq-default dired-omit-files-p t) ; this is buffer-local variable
 (setq dired-omit-files
-      (concat dired-omit-files &quot;*\.tsv|\\|^\\..+$&quot;))
-
-;;;;;;;;;;
+      (concat dired-omit-files "*.tsv|\|^\..+$"))</p>
+<p>;;;;;;;;;;
 ;; yaml ;;
 ;;;;;;;;;;
-(require &#39;yaml-mode)
-(add-to-list &#39;auto-mode-alist &#39;(&quot;\\.yml$&quot; . yaml-mode))
-(add-to-list &#39;auto-mode-alist &#39;(&quot;\\.yaml$&quot; . yaml-mode))
-
-;;;;;;;;;;;;;;;;
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\.yaml$" . yaml-mode))</p>
+<p>;;;;;;;;;;;;;;;;
 ;; multi-term ;;
 ;;;;;;;;;;;;;;;;
-(autoload &#39;multi-term &quot;multi-term&quot; nil t)
-(autoload &#39;multi-term-next &quot;multi-term&quot; nil t)
-
-(setq multi-term-program &quot;/bin/bash&quot;)   ;; use bash
-;; (setq multi-term-program &quot;/bin/zsh&quot;) ;; or use zsh...
-
-;; only needed if you use autopair
-;; (add-hook &#39;term-mode-hook
-;;   #&#39;(lambda () (setq autopair-dont-activate t)))
-
-(global-set-key (kbd &quot;C-c t&quot;) &#39;multi-term-next)
-(global-set-key (kbd &quot;C-c T&quot;) &#39;multi-term) ;; create a new one
-
-;; use Control+g fot goto-line
-(global-set-key <span class="cp">[</span><span class="p">(</span><span class="nx">control</span> <span class="nx">g</span><span class="p">)</span><span class="cp">]</span> &#39;goto-line)
-
-;;;;;;;;;;;;
+(autoload 'multi-term "multi-term" nil t)
+(autoload 'multi-term-next "multi-term" nil t)</p>
+<p>(setq multi-term-program "/bin/bash")   ;; use bash
+;; (setq multi-term-program "/bin/zsh") ;; or use zsh...</p>
+<p>;; only needed if you use autopair
+;; (add-hook 'term-mode-hook
+;;   #'(lambda () (setq autopair-dont-activate t)))</p>
+<p>(global-set-key (kbd "C-c t") 'multi-term-next)
+(global-set-key (kbd "C-c T") 'multi-term) ;; create a new one</p>
+<p>;; use Control+g fot goto-line
+(global-set-key [(control g)] 'goto-line)</p>
+<p>;;;;;;;;;;;;
 ;; Python ;;
-;;;;;;;;;;;;
-
-(setq py-python-command &quot;/usr/bin/python&quot;)
-
-(setq auto-mode-alist (cons &#39;(&quot;\\.py$&quot; . python-mode) auto-mode-alist))
-(setq interpreter-mode-alist (cons &#39;(&quot;python&quot; . python-mode)
+;;;;;;;;;;;;</p>
+<p>(setq py-python-command "/usr/bin/python")</p>
+<p>(setq auto-mode-alist (cons '("\.py$" . python-mode) auto-mode-alist))
+(setq interpreter-mode-alist (cons '("python" . python-mode)
                                    interpreter-mode-alist))
-(autoload &#39;python-mode &quot;python-mode&quot; &quot;Python editing mode.&quot; t)
-
-;; show pydoc
+(autoload 'python-mode "python-mode" "Python editing mode." t)</p>
+<p>;; show pydoc
 ;; http://www.emacswiki.org/cgi-bin/wiki/PythonMode
 (defun my-python-documentation (w)
-  &quot;Launch PyDOC on the Word at Point&quot;
+  "Launch PyDOC on the Word at Point"
   (interactive
-   (list (let* ((word (thing-at-point &#39;word))
+   (list (let<em> ((word (thing-at-point 'word))
                 (input (read-string
-                        (format &quot;pydoc entry%s: &quot;
-                                (if (not word) &quot;&quot; (format &quot; (default %s)&quot; word))))))
-           (if (string= input &quot;&quot;)
-               (if (not word) (error &quot;No pydoc args given&quot;)
+                        (format "pydoc entry%s: "
+                                (if (not word) "" (format " (default %s)" word))))))
+           (if (string= input "")
+               (if (not word) (error "No pydoc args given")
                  word) ;sinon word
              input)))) ;sinon input
-  (shell-command (concat py-python-command &quot; -c \&quot;from pydoc import help;help(\&#39;&quot; w &quot;\&#39;)\&quot;&quot;) &quot;*PYDOCS*&quot;)
-  (view-buffer-other-window &quot;*PYDOCS*&quot; t &#39;kill-buffer-and-window))
-
-;;to show the pydoc help on the word at point
-(add-hook &#39;python-mode-hook
+  (shell-command (concat py-python-command " -c \"from pydoc import help;help(\'" w "\')\"") "</em>PYDOCS<em>")
+  (view-buffer-other-window "</em>PYDOCS*" t 'kill-buffer-and-window))</p>
+<p>;;to show the pydoc help on the word at point
+(add-hook 'python-mode-hook
           (function (lambda ()
-                      (local-set-key <span class="cp">[</span><span class="p">(</span><span class="nx">control</span> <span class="nx">f1</span><span class="p">)</span><span class="cp">]</span> &#39;my-python-documentation)
-                      )))
-
-;;para indentar o completar con tab
-(add-hook &#39;python-mode-hook
+                      (local-set-key [(control f1)] 'my-python-documentation)
+                      )))</p>
+<p>;;para indentar o completar con tab
+(add-hook 'python-mode-hook
           (function (lambda ()
-                      (local-set-key (kbd &quot;<span class="nt">&lt;tab&gt;</span>&quot;) &#39;indent-or-complete)
+                      (local-set-key (kbd "<tab>") 'indent-or-complete)
                       )))
-(add-hook &#39;python-mode-hook
+(add-hook 'python-mode-hook
           (function (lambda ()
-                      (local-set-key (kbd &quot;C-x #&quot;) &#39;comment-or-uncomment-region)
-                      )))
-
-;;pdb setup, note the python version
-(setq pdb-path &#39;/usr/bin/pdb
+                      (local-set-key (kbd "C-x #") 'comment-or-uncomment-region)
+                      )))</p>
+<p>;;pdb setup, note the python version
+(setq pdb-path '/usr/bin/pdb
       gud-pdb-command-name (symbol-name pdb-path))
 (defadvice pdb (before gud-query-cmdline activate)
-  &quot;Provide a better default command line when called interactively.&quot;
+  "Provide a better default command line when called interactively."
   (interactive
    (list (gud-query-cmdline pdb-path
-                            (file-name-nondirectory buffer-file-name)))))
-
-;; para usar pdb con F8
-(add-hook &#39;python-mode-hook
+                            (file-name-nondirectory buffer-file-name)))))</p>
+<p>;; para usar pdb con F8
+(add-hook 'python-mode-hook
           (function (lambda ()
-                      (local-set-key (kbd &quot;<span class="nt">&lt;f8&gt;</span>&quot;) &#39;pdb)
+                      (local-set-key (kbd "<f8>") 'pdb)
                       )))
 ;; para usar pydoc
-(add-hook &#39;python-mode-hook
-          &#39;(lambda () (eldoc-mode 1)) t)
-
-;;show tab in python mode
-(add-hook &#39;python-mode-hook
+(add-hook 'python-mode-hook
+          '(lambda () (eldoc-mode 1)) t)</p>
+<p>;;show tab in python mode
+(add-hook 'python-mode-hook
           (lambda ()
-            (font-lock-add-keywords nil my-extra-keywords)))
-
-;; para mostrar el trailing whitespace
-(add-hook &#39;python-mode-hook
+            (font-lock-add-keywords nil my-extra-keywords)))</p>
+<p>;; para mostrar el trailing whitespace
+(add-hook 'python-mode-hook
           (lambda ()
-            (setq show-trailing-whitespace t)))
-
-;; usar pylint
-(when (load &quot;flymake&quot; t)
+            (setq show-trailing-whitespace t)))</p>
+<p>;; usar pylint
+(when (load "flymake" t)
   (defun flymake-pylint-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       &#39;flymake-create-temp-inplace))
+                       'flymake-create-temp-inplace))
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
-      (list &quot;epylint&quot; (list local-file))))
-
-  (add-to-list &#39;flymake-allowed-file-name-masks
-               &#39;(&quot;\\.py\\&#39;&quot; flymake-pylint-init)))
-
-;; (require &#39;pymacs)
-;; (require &#39;pycomplete)
-;; (autoload &#39;pymacs-load &quot;ropemacs&quot; &quot;rope-&quot;)
-;; (autoload &#39;pymacs-load &quot;pymacs&quot; nil t)
-;; (autoload &#39;pymacs-eval &quot;pymacs&quot; nil t)
-;; (autoload &#39;pymacs-apply &quot;pymacs&quot;)
-;; (autoload &#39;pymacs-call &quot;pymacs&quot;)
-
-;;(rope-init)
-
-;; para autocompletar los cierres de parentesis o de string
-;;(add-hook &#39;python-mode-hook
+      (list "epylint" (list local-file))))</p>
+<p>(add-to-list 'flymake-allowed-file-name-masks
+               '("\.py\'" flymake-pylint-init)))</p>
+<p>;; (require 'pymacs)
+;; (require 'pycomplete)
+;; (autoload 'pymacs-load "ropemacs" "rope-")
+;; (autoload 'pymacs-load "pymacs" nil t)
+;; (autoload 'pymacs-eval "pymacs" nil t)
+;; (autoload 'pymacs-apply "pymacs")
+;; (autoload 'pymacs-call "pymacs")</p>
+<p>;;(rope-init)</p>
+<p>;; para autocompletar los cierres de parentesis o de string
+;;(add-hook 'python-mode-hook
 ;;    (lambda ()
-;;      (define-key python-mode-map &quot;\&quot;&quot; &#39;electric-pair)
-;;      (define-key python-mode-map &quot;\&#39;&quot; &#39;electric-pair)
-;;      (define-key python-mode-map &quot;(&quot; &#39;electric-pair)
-;;      (define-key python-mode-map &quot;<span class="cp">[</span><span class="s2">&quot; &#39;electric-pair)</span>
-<span class="s2">;;      (define-key python-mode-map &quot;</span><span class="p">{</span><span class="s2">&quot; &#39;electric-pair)))</span>
-
-<span class="s2">;;(defun electric-pair ()</span>
-<span class="s2">;;  &quot;</span><span class="nb">Insert</span> <span class="nx">character</span> <span class="kt">pair</span> <span class="nx">without</span> <span class="nx">sournding</span> <span class="nx">spaces</span><span class="s2">&quot;</span>
-<span class="s2">;;  (interactive)</span>
-<span class="s2">;;  (let (parens-require-spaces)</span>
-<span class="s2">;;    (insert-pair)))</span>
-
-<span class="s2">;;;;;;;;;;</span>
-<span class="s2">;; djcb ;;</span>
-<span class="s2">;;;;;;;;;;</span>
-<span class="s2">(defun djcb-opacity-modify (&amp;optional dec)</span>
-<span class="s2">  &quot;</span><span class="nx">modify</span> <span class="nx">the</span> <span class="nx">transparency</span> <span class="nx">of</span> <span class="nx">the</span> <span class="nx">emacs</span> <span class="nx">frame</span><span class="p">;</span> <span class="k">if</span> <span class="nx">DEC</span> <span class="nx">is</span> <span class="nb">t</span><span class="p">,</span>
-    <span class="nx">decrease</span> <span class="nx">the</span> <span class="nx">transparency</span><span class="p">,</span> <span class="nx">otherwise</span> <span class="nx">increase</span> <span class="n">it</span> <span class="k">in</span> <span class="mi">10</span><span class="o">%-</span><span class="nx">steps</span><span class="s2">&quot;</span>
-<span class="s2">  (let* ((alpha-or-nil (frame-parameter nil &#39;alpha)) ; nil before setting</span>
-<span class="s2">         (oldalpha (if alpha-or-nil alpha-or-nil 100))</span>
-<span class="s2">         (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))</span>
-<span class="s2">    (when (and (&gt;= newalpha frame-alpha-lower-limit) (&lt;= newalpha 100))</span>
-<span class="s2">      (modify-frame-parameters nil (list (cons &#39;alpha newalpha))))))</span>
-
-<span class="s2">;; C-8 will increase opacity (== decrease transparency)</span>
-<span class="s2">;; C-9 will decrease opacity (== increase transparency</span>
-<span class="s2">;; C-0 will returns the state to normal</span>
-<span class="s2">(global-set-key (kbd &quot;</span><span class="nx">C</span><span class="o">-</span><span class="mi">8</span><span class="s2">&quot;) &#39;(lambda()(interactive)(djcb-opacity-modify)))</span>
-<span class="s2">(global-set-key (kbd &quot;</span><span class="nx">C</span><span class="o">-</span><span class="mi">9</span><span class="s2">&quot;) &#39;(lambda()(interactive)(djcb-opacity-modify t)))</span>
-<span class="s2">(global-set-key (kbd &quot;</span><span class="nx">C</span><span class="o">-</span><span class="mi">0</span><span class="s2">&quot;) &#39;(lambda()(interactive)</span>
-<span class="s2">                               (modify-frame-parameters nil `((alpha . 100)))))</span>
-
-<span class="s2">;;;;;;;;;;;;;;;;;;;;;;</span>
-<span class="s2">;; Quit this buffer ;;</span>
-<span class="s2">;;;;;;;;;;;;;;;;;;;;;;</span>
-<span class="s2">(defun quit-this-buffer ()</span>
-<span class="s2">  &quot;</span><span class="nx">Exit</span> <span class="nx">current</span> <span class="nx">buffer</span> <span class="k">by</span> <span class="nx">selecting</span> <span class="nx">some</span> <span class="nx">other</span> <span class="nx">buffer.</span><span class="s2">&quot;</span>
-<span class="s2">  (interactive)</span>
-<span class="s2">  (switch-to-buffer (prog1 (other-buffer (current-buffer))</span>
-<span class="s2">              (bury-buffer (current-buffer)))))</span>
-<span class="s2">(global-set-key &quot;</span><span class="o">\</span><span class="nx">C</span><span class="na">-cq</span><span class="s2">&quot; &#39;quit-this-buffer)</span>
-
-<span class="s2">;;-&gt; backspace on a selected region -&gt; deletion</span>
-<span class="s2">(delete-selection-mode t)</span>
-
-<span class="s2">;;scroll line per line (1 line instead of 3)</span>
-<span class="s2">(setq scroll-step 1)</span>
-
-<span class="s2">;;display line and column number in toolbar</span>
-<span class="s2">(setq line-number-mode t)</span>
-<span class="s2">(setq column-number-mode t)</span>
-
-<span class="s2">;;show_paren mode</span>
-<span class="s2">(show-paren-mode t)</span>
-
-<span class="s2">;; display clock</span>
-<span class="s2">(display-time)</span>
-
-<span class="s2">;; Use visible beel instead of beep</span>
-<span class="s2">(setq visible-bell &#39;t)</span>
-
-<span class="s2">;;(dysplay question in &#39;y/n&#39; instead of &#39;yes/no&#39;)</span>
-<span class="s2">(fset &#39;yes-or-no-p &#39;y-or-n-p)</span>
-
-<span class="s2">;; Save all my backup files in a specific directory</span>
-<span class="s2">;(defun make-backup-file-name (file)</span>
-<span class="s2">;  (concat &quot;</span><span class="err">~</span><span class="p">/</span><span class="nx">.autosave</span><span class="o">/</span><span class="s2">&quot; (file-name-nondirectory file)))</span>
-<span class="s2">(setq backup-directory-alist</span>
-<span class="s2">      `((&quot;</span><span class="nx">.</span><span class="o">*</span><span class="s2">&quot; . ,temporary-file-directory)))</span>
-<span class="s2">(setq auto-save-file-name-transforms</span>
-<span class="s2">      `((&quot;</span><span class="nx">.</span><span class="o">*</span><span class="s2">&quot; ,temporary-file-directory t)))</span>
-<span class="s2">(windmove-default-keybindings)</span>
-
-<span class="s2">(setq tramp-default-method &quot;</span><span class="nx">ssh</span><span class="s2">&quot;)</span>
-
-<span class="s2">(put &#39;upcase-region &#39;disabled nil)</span>
-<span class="s2">(put &#39;downcase-region &#39;disabled nil)</span>
-
-<span class="s2">;;; Prevent Extraneous Tabs</span>
-<span class="s2">(setq-default indent-tabs-mode nil)</span>
-</pre></div>
-
-
+;;      (define-key python-mode-map "\"" 'electric-pair)
+;;      (define-key python-mode-map "\'" 'electric-pair)
+;;      (define-key python-mode-map "(" 'electric-pair)
+;;      (define-key python-mode-map "[" 'electric-pair)
+;;      (define-key python-mode-map "{" 'electric-pair)))</p>
+<p>;;(defun electric-pair ()
+;;  "Insert character pair without sournding spaces"
+;;  (interactive)
+;;  (let (parens-require-spaces)
+;;    (insert-pair)))</p>
+<p>;;;;;;;;;;
+;; djcb ;;
+;;;;;;;;;;
+(defun djcb-opacity-modify (&amp;optional dec)
+  "modify the transparency of the emacs frame; if DEC is t,
+    decrease the transparency, otherwise increase it in 10%-steps"
+  (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
+         (oldalpha (if alpha-or-nil alpha-or-nil 100))
+         (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
+    (when (and (&gt;= newalpha frame-alpha-lower-limit) (&lt;= newalpha 100))
+      (modify-frame-parameters nil (list (cons 'alpha newalpha))))))</p>
+<p>;; C-8 will increase opacity (== decrease transparency)
+;; C-9 will decrease opacity (== increase transparency
+;; C-0 will returns the state to normal
+(global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify)))
+(global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify t)))
+(global-set-key (kbd "C-0") '(lambda()(interactive)
+                               (modify-frame-parameters nil `((alpha . 100)))))</p>
+<p>;;;;;;;;;;;;;;;;;;;;;;
+;; Quit this buffer ;;
+;;;;;;;;;;;;;;;;;;;;;;
+(defun quit-this-buffer ()
+  "Exit current buffer by selecting some other buffer."
+  (interactive)
+  (switch-to-buffer (prog1 (other-buffer (current-buffer))
+              (bury-buffer (current-buffer)))))
+(global-set-key "\C-cq" 'quit-this-buffer)</p>
+<p>;;-&gt; backspace on a selected region -&gt; deletion
+(delete-selection-mode t)</p>
+<p>;;scroll line per line (1 line instead of 3)
+(setq scroll-step 1)</p>
+<p>;;display line and column number in toolbar
+(setq line-number-mode t)
+(setq column-number-mode t)</p>
+<p>;;show_paren mode
+(show-paren-mode t)</p>
+<p>;; display clock
+(display-time)</p>
+<p>;; Use visible beel instead of beep
+(setq visible-bell 't)</p>
+<p>;;(dysplay question in 'y/n' instead of 'yes/no')
+(fset 'yes-or-no-p 'y-or-n-p)</p>
+<p>;; Save all my backup files in a specific directory
+;(defun make-backup-file-name (file)
+;  (concat "~/.autosave/" (file-name-nondirectory file)))
+(setq backup-directory-alist
+      <code>((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms</code>((".*" ,temporary-file-directory t)))
+(windmove-default-keybindings)</p>
+<p>(setq tramp-default-method "ssh")</p>
+<p>(put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)</p>
+<p>;;; Prevent Extraneous Tabs
+(setq-default indent-tabs-mode nil)
+```</p>
 <ul>
 <li>Basic Configuration</li>
 </ul>
-<div class="highlight"><pre><span class="p">;;</span> <span class="n">to</span> <span class="n">debug</span> <span class="n">the</span> <span class="p">.</span><span class="n">emacs</span> <span class="n">file</span>
-<span class="p">(</span><span class="n">setq</span> <span class="n">debug</span><span class="o">-</span><span class="n">on</span><span class="o">-</span><span class="n">error</span> <span class="n">nil</span><span class="p">)</span>
-
-<span class="p">;;</span> <span class="n">setup</span> <span class="n">the</span> <span class="k">default</span> <span class="n">mode</span> <span class="n">to</span> <span class="n">use</span>
-<span class="p">;;</span><span class="n">Text</span> <span class="n">mode</span> <span class="n">is</span> <span class="n">happier</span> <span class="n">than</span> <span class="n">Fundamental</span> <span class="n">mode</span> <span class="p">;</span><span class="o">-</span><span class="p">)</span>
-<span class="p">(</span><span class="n">setq</span> <span class="k">default</span><span class="o">-</span><span class="n">major</span><span class="o">-</span><span class="n">mode</span> <span class="err">&#39;</span><span class="n">text</span><span class="o">-</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="p">;;</span> <span class="n">define</span> <span class="n">the</span> <span class="n">mail</span> <span class="n">and</span> <span class="nf">name</span>
-<span class="p">(</span><span class="n">setq</span> <span class="n">user</span><span class="o">-</span><span class="n">mail</span><span class="o">-</span><span class="n">address</span> <span class="s">&quot;foobar@example.com&quot;</span><span class="p">)</span>
-<span class="p">(</span><span class="n">setq</span> <span class="n">user</span><span class="o">-</span><span class="n">full</span><span class="o">-</span><span class="n">name</span> <span class="s">&quot;Foo Bar&quot;</span><span class="p">)</span>
-
-<span class="p">;;</span> <span class="n">define</span> <span class="n">the</span> <span class="n">ispell</span> <span class="n">dictionary</span> <span class="n">to</span> <span class="nf">use</span>
-<span class="p">(</span><span class="n">setq</span> <span class="n">ispell</span><span class="o">-</span><span class="n">dictionary</span> <span class="s">&quot;en&quot;</span><span class="p">)</span>
-
-<span class="p">;;</span> <span class="n">setup</span> <span class="n">the</span> <span class="n">tab</span> <span class="n">to</span> <span class="mi">4</span> <span class="n">spaces</span> <span class="nf">width</span>
-<span class="p">(</span><span class="n">setq</span> <span class="n">tab</span><span class="o">-</span><span class="n">width</span> <span class="mi">4</span><span class="p">)</span>
-
-<span class="p">(</span><span class="n">tool</span><span class="o">-</span><span class="n">bar</span><span class="o">-</span><span class="n">mode</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">;;</span> <span class="n">turn</span> <span class="n">off</span> <span class="nf">toolbar</span>
-<span class="p">(</span><span class="n">scroll</span><span class="o">-</span><span class="n">bar</span><span class="o">-</span><span class="n">mode</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">;;</span> <span class="n">turn</span> <span class="n">off</span> <span class="n">scrollbar</span>
-
-<span class="p">;;</span> <span class="n">color</span><span class="o">-</span><span class="n">theme</span>
-<span class="p">;;</span> <span class="n">http</span><span class="o">:</span><span class="c1">//www.emacswiki.org/emacs/ColorTheme</span>
-<span class="p">;;</span> <span class="n">http</span><span class="o">:</span><span class="c1">//www.nongnu.org/color-theme</span>
-<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">load</span><span class="o">-</span><span class="n">path</span> <span class="s">&quot;~/.emacs.d/elisp/color-theme/&quot;</span><span class="p">)</span>
-<span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">color</span><span class="o">-</span><span class="n">theme</span><span class="p">)</span>
-<span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">color</span><span class="o">-</span><span class="n">theme</span><span class="o">-</span><span class="n">arjen</span><span class="p">)</span>
-<span class="p">(</span><span class="n">color</span><span class="o">-</span><span class="n">theme</span><span class="o">-</span><span class="n">arjen</span><span class="p">)</span>
-
-<span class="p">;;</span> <span class="n">http</span><span class="o">:</span><span class="c1">//www.emacswiki.org/emacs/SwBuff</span>
-<span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">swbuff</span><span class="p">)</span>
-<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">[(</span><span class="n">control</span> <span class="n">tab</span><span class="p">)]</span>       <span class="err">&#39;</span><span class="n">swbuff</span><span class="o">-</span><span class="k">switch</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">next</span><span class="o">-</span><span class="n">buffer</span><span class="p">)</span>
-<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">(</span><span class="n">kbd</span> <span class="s">&quot;&lt;C-S-iso-lefttab&gt;&quot;</span><span class="p">)</span> <span class="err">&#39;</span><span class="n">swbuff</span><span class="o">-</span><span class="k">switch</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">previous</span><span class="o">-</span><span class="n">buffer</span><span class="p">)</span>
-
-<span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">whitespace</span><span class="p">)</span>
-<span class="p">(</span><span class="n">setq</span> <span class="n">whitespace</span><span class="o">-</span><span class="n">style</span> <span class="err">&#39;</span><span class="p">(</span><span class="n">face</span> <span class="n">empty</span> <span class="n">tabs</span> <span class="n">lines</span><span class="o">-</span><span class="n">tail</span> <span class="n">trailing</span><span class="p">))</span>
-<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">hook</span> <span class="err">&#39;</span><span class="n">python</span><span class="o">-</span><span class="n">mode</span><span class="o">-</span><span class="n">hook</span> <span class="err">&#39;</span><span class="n">whitespace</span><span class="o">-</span><span class="n">mode</span><span class="p">)</span>
-
-<span class="p">;;</span> <span class="n">Show</span> <span class="nf">tabs</span>
-<span class="p">(</span><span class="n">defface</span> <span class="n">extra</span><span class="o">-</span><span class="n">whitespace</span><span class="o">-</span><span class="n">face</span>
-  <span class="err">&#39;</span><span class="p">((</span><span class="n">t</span> <span class="p">(</span><span class="o">:</span><span class="n">background</span> <span class="s">&quot;dim gray&quot;</span><span class="p">)))</span>
-  <span class="s">&quot;Used for tabs and such.&quot;</span><span class="p">)</span>
-<span class="p">(</span><span class="n">defvar</span> <span class="n">my</span><span class="o">-</span><span class="n">extra</span><span class="o">-</span><span class="n">keywords</span>
-  <span class="err">&#39;</span><span class="p">((</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">&quot;</span> <span class="p">.</span> <span class="err">&#39;</span><span class="n">extra</span><span class="o">-</span><span class="n">whitespace</span><span class="o">-</span><span class="n">face</span><span class="p">)))</span>
-
-<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">hook</span> <span class="err">&#39;</span><span class="n">text</span><span class="o">-</span><span class="n">mode</span><span class="o">-</span><span class="n">hook</span>
-          <span class="p">(</span><span class="n">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="n">font</span><span class="o">-</span><span class="n">lock</span><span class="o">-</span><span class="n">add</span><span class="o">-</span><span class="n">keywords</span> <span class="n">nil</span> <span class="n">my</span><span class="o">-</span><span class="n">extra</span><span class="o">-</span><span class="n">keywords</span><span class="p">)))</span>
-
-<span class="p">;;</span> <span class="n">http</span><span class="o">:</span><span class="c1">//www.emacswiki.org/emacs/RectangleMark</span>
-<span class="p">(</span><span class="n">require</span> <span class="err">&#39;</span><span class="n">rect</span><span class="o">-</span><span class="n">mark</span><span class="p">)</span>
-<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">(</span><span class="n">kbd</span> <span class="s">&quot;C-x r C-SPC&quot;</span><span class="p">)</span> <span class="err">&#39;</span><span class="n">rm</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">mark</span><span class="p">)</span>
-<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">(</span><span class="n">kbd</span> <span class="s">&quot;C-x r C-x&quot;</span><span class="p">)</span>   <span class="err">&#39;</span><span class="n">rm</span><span class="o">-</span><span class="n">exchange</span><span class="o">-</span><span class="n">point</span><span class="o">-</span><span class="n">and</span><span class="o">-</span><span class="n">mark</span><span class="p">)</span>
-<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">(</span><span class="n">kbd</span> <span class="s">&quot;C-x r C-w&quot;</span><span class="p">)</span>   <span class="err">&#39;</span><span class="n">rm</span><span class="o">-</span><span class="n">kill</span><span class="o">-</span><span class="n">region</span><span class="p">)</span>
-<span class="p">(</span><span class="n">global</span><span class="o">-</span><span class="n">set</span><span class="o">-</span><span class="n">key</span> <span class="p">(</span><span class="n">kbd</span> <span class="s">&quot;C-x r M-w&quot;</span><span class="p">)</span>   <span class="err">&#39;</span><span class="n">rm</span><span class="o">-</span><span class="n">kill</span><span class="o">-</span><span class="n">ring</span><span class="o">-</span><span class="n">save</span><span class="p">)</span>
-</pre></div>
-
-
+<p>```
+;; to debug the .emacs file
+(setq debug-on-error nil)</p>
+<p>;; setup the default mode to use
+;;Text mode is happier than Fundamental mode ;-)
+(setq default-major-mode 'text-mode)</p>
+<p>;; define the mail and name
+(setq user-mail-address "foobar@example.com")
+(setq user-full-name "Foo Bar")</p>
+<p>;; define the ispell dictionary to use
+(setq ispell-dictionary "en")</p>
+<p>;; setup the tab to 4 spaces width
+(setq tab-width 4)</p>
+<p>(tool-bar-mode -1) ;; turn off toolbar
+(scroll-bar-mode -1) ;; turn off scrollbar</p>
+<p>;; color-theme
+;; http://www.emacswiki.org/emacs/ColorTheme
+;; http://www.nongnu.org/color-theme
+(add-to-list 'load-path "~/.emacs.d/elisp/color-theme/")
+(require 'color-theme)
+(require 'color-theme-arjen)
+(color-theme-arjen)</p>
+<p>;; http://www.emacswiki.org/emacs/SwBuff
+(require 'swbuff)
+(global-set-key [(control tab)]       'swbuff-switch-to-next-buffer)
+(global-set-key (kbd "<C-S-iso-lefttab>") 'swbuff-switch-to-previous-buffer)</p>
+<p>(require 'whitespace)
+(setq whitespace-style '(face empty tabs lines-tail trailing))
+(add-hook 'python-mode-hook 'whitespace-mode)</p>
+<p>;; Show tabs
+(defface extra-whitespace-face
+  '((t (:background "dim gray")))
+  "Used for tabs and such.")
+(defvar my-extra-keywords
+  '(("\t" . 'extra-whitespace-face)))</p>
+<p>(add-hook 'text-mode-hook
+          (lambda () (font-lock-add-keywords nil my-extra-keywords)))</p>
+<p>;; http://www.emacswiki.org/emacs/RectangleMark
+(require 'rect-mark)
+(global-set-key (kbd "C-x r C-SPC") 'rm-set-mark)
+(global-set-key (kbd "C-x r C-x")   'rm-exchange-point-and-mark)
+(global-set-key (kbd "C-x r C-w")   'rm-kill-region)
+(global-set-key (kbd "C-x r M-w")   'rm-kill-ring-save)
+```</p>
 <ul>
 <li>Python</li>
 </ul>
-<div class="highlight"><pre><span class="p">;;;;;;;;;;;;</span>
-<span class="p">;;</span> <span class="nx">Python</span> <span class="p">;;</span>
-<span class="p">;;;;;;;;;;;;</span>
-
-<span class="p">(</span><span class="nx">setq</span> <span class="nx">py</span><span class="na">-python-command</span> <span class="s2">&quot;/usr/bin/python&quot;</span><span class="p">)</span>
-
-<span class="p">(</span><span class="nx">setq</span> <span class="nx">auto</span><span class="na">-mode-alist</span> <span class="p">(</span><span class="nx">cons</span> <span class="s1">&#39;(&quot;</span><span class="se">\\</span><span class="s1">.py$&quot; . python-mode) auto-mode-alist))</span>
-<span class="s1">(setq interpreter-mode-alist (cons &#39;</span><span class="p">(</span><span class="s2">&quot;python&quot;</span> <span class="nx">.</span> <span class="nx">python</span><span class="na">-mode</span><span class="p">)</span>
-                                   <span class="nx">interpreter</span><span class="na">-mode-alist</span><span class="p">))</span>
-<span class="p">(</span><span class="nx">autoload</span> <span class="s1">&#39;python-mode &quot;python-mode&quot; &quot;Python editing mode.&quot; t)</span>
-
-<span class="s1">;; show pydoc</span>
-<span class="s1">;; http://www.emacswiki.org/cgi-bin/wiki/PythonMode</span>
-<span class="s1">(defun my-python-documentation (w)</span>
-<span class="s1">  &quot;Launch PyDOC on the Word at Point&quot;</span>
-<span class="s1">  (interactive</span>
-<span class="s1">   (list (let* ((word (thing-at-point &#39;</span><span class="nx">word</span><span class="p">))</span>
-                <span class="p">(</span><span class="nb">input</span> <span class="p">(</span><span class="nb">read</span><span class="na">-string</span>
-                        <span class="p">(</span><span class="nb">format</span> <span class="s2">&quot;pydoc entry%s: &quot;</span>
-                                <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nx">word</span><span class="p">)</span> <span class="s2">&quot;&quot;</span> <span class="p">(</span><span class="nb">format</span> <span class="s2">&quot; (default %s)&quot;</span> <span class="nx">word</span><span class="p">))))))</span>
-           <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="kt">string</span><span class="o">=</span> <span class="nb">input</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-               <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="nx">word</span><span class="p">)</span> <span class="p">(</span><span class="nb">error</span> <span class="s2">&quot;No pydoc args given&quot;</span><span class="p">)</span>
-                 <span class="nx">word</span><span class="p">)</span> <span class="p">;</span><span class="nx">sinon</span> <span class="nx">word</span>
-             <span class="nb">input</span><span class="p">))))</span> <span class="p">;</span><span class="nx">sinon</span> <span class="nb">input</span>
-  <span class="p">(</span><span class="nx">shell</span><span class="na">-command</span> <span class="p">(</span><span class="nx">concat</span> <span class="nx">py</span><span class="na">-python-command</span> <span class="s2">&quot; -c </span><span class="se">\&quot;</span><span class="s2">from pydoc import help;help(</span><span class="se">\&#39;</span><span class="s2">&quot;</span> <span class="nx">w</span> <span class="s2">&quot;</span><span class="se">\&#39;</span><span class="s2">)</span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">)</span> <span class="s2">&quot;*PYDOCS*&quot;</span><span class="p">)</span>
-  <span class="p">(</span><span class="nx">view</span><span class="na">-buffer-other-window</span> <span class="s2">&quot;*PYDOCS*&quot;</span> <span class="nb">t</span> <span class="s1">&#39;kill-buffer-and-window))</span>
-
-<span class="s1">;;to show the pydoc help on the word at point</span>
-<span class="s1">(add-hook &#39;</span><span class="nx">python</span><span class="na">-mode-hook</span>
-          <span class="p">(</span><span class="nx">function</span> <span class="p">(</span><span class="nx">lambda</span> <span class="p">()</span>
-                      <span class="p">(</span><span class="kd">local</span><span class="na">-set-key</span> <span class="err">[</span><span class="p">(</span><span class="nx">control</span> <span class="nx">f1</span><span class="p">)</span><span class="cp">]</span> &#39;my-python-documentation)
-                      )))
-
-;;para indentar o completar con tab
-(add-hook &#39;python-mode-hook
+<p>```
+;;;;;;;;;;;;
+;; Python ;;
+;;;;;;;;;;;;</p>
+<p>(setq py-python-command "/usr/bin/python")</p>
+<p>(setq auto-mode-alist (cons '("\.py$" . python-mode) auto-mode-alist))
+(setq interpreter-mode-alist (cons '("python" . python-mode)
+                                   interpreter-mode-alist))
+(autoload 'python-mode "python-mode" "Python editing mode." t)</p>
+<p>;; show pydoc
+;; http://www.emacswiki.org/cgi-bin/wiki/PythonMode
+(defun my-python-documentation (w)
+  "Launch PyDOC on the Word at Point"
+  (interactive
+   (list (let<em> ((word (thing-at-point 'word))
+                (input (read-string
+                        (format "pydoc entry%s: "
+                                (if (not word) "" (format " (default %s)" word))))))
+           (if (string= input "")
+               (if (not word) (error "No pydoc args given")
+                 word) ;sinon word
+             input)))) ;sinon input
+  (shell-command (concat py-python-command " -c \"from pydoc import help;help(\'" w "\')\"") "</em>PYDOCS<em>")
+  (view-buffer-other-window "</em>PYDOCS*" t 'kill-buffer-and-window))</p>
+<p>;;to show the pydoc help on the word at point
+(add-hook 'python-mode-hook
           (function (lambda ()
-                      (local-set-key (kbd &quot;<span class="nt">&lt;tab&gt;</span>&quot;) &#39;indent-or-complete)
-                      )))
-(add-hook &#39;python-mode-hook
+                      (local-set-key [(control f1)] 'my-python-documentation)
+                      )))</p>
+<p>;;para indentar o completar con tab
+(add-hook 'python-mode-hook
           (function (lambda ()
-                      (local-set-key (kbd &quot;C-x #&quot;) &#39;comment-or-uncomment-region)
+                      (local-set-key (kbd "<tab>") 'indent-or-complete)
                       )))
-
-;;pdb setup, note the python version
-(setq pdb-path &#39;/usr/bin/pdb
+(add-hook 'python-mode-hook
+          (function (lambda ()
+                      (local-set-key (kbd "C-x #") 'comment-or-uncomment-region)
+                      )))</p>
+<p>;;pdb setup, note the python version
+(setq pdb-path '/usr/bin/pdb
       gud-pdb-command-name (symbol-name pdb-path))
 (defadvice pdb (before gud-query-cmdline activate)
-  &quot;Provide a better default command line when called interactively.&quot;
+  "Provide a better default command line when called interactively."
   (interactive
    (list (gud-query-cmdline pdb-path
-                            (file-name-nondirectory buffer-file-name)))))
-
-;; para usar pdb con F8
-(add-hook &#39;python-mode-hook
+                            (file-name-nondirectory buffer-file-name)))))</p>
+<p>;; para usar pdb con F8
+(add-hook 'python-mode-hook
           (function (lambda ()
-                      (local-set-key (kbd &quot;<span class="nt">&lt;f8&gt;</span>&quot;) &#39;pdb)
+                      (local-set-key (kbd "<f8>") 'pdb)
                       )))
 ;; para usar pydoc
-(add-hook &#39;python-mode-hook
-          &#39;(lambda () (eldoc-mode 1)) t)
-
-;;show tab in python mode
-(add-hook &#39;python-mode-hook
+(add-hook 'python-mode-hook
+          '(lambda () (eldoc-mode 1)) t)</p>
+<p>;;show tab in python mode
+(add-hook 'python-mode-hook
           (lambda ()
-            (font-lock-add-keywords nil my-extra-keywords)))
-
-;; para mostrar el trailing whitespace
-(add-hook &#39;python-mode-hook
+            (font-lock-add-keywords nil my-extra-keywords)))</p>
+<p>;; para mostrar el trailing whitespace
+(add-hook 'python-mode-hook
           (lambda ()
-            (setq show-trailing-whitespace t)))
-
-;; usar pylint
-(when (load &quot;flymake&quot; t)
+            (setq show-trailing-whitespace t)))</p>
+<p>;; usar pylint
+(when (load "flymake" t)
   (defun flymake-pylint-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       &#39;flymake-create-temp-inplace))
+                       'flymake-create-temp-inplace))
            (local-file (file-relative-name
                         temp-file
                         (file-name-directory buffer-file-name))))
-      (list &quot;epylint&quot; (list local-file))))
-
-  (add-to-list &#39;flymake-allowed-file-name-masks
-               &#39;(&quot;\\.py\\&#39;&quot; flymake-pylint-init)))
-
-;; (require &#39;pymacs)
-;; (require &#39;pycomplete)
-;; (autoload &#39;pymacs-load &quot;ropemacs&quot; &quot;rope-&quot;)
-;; (autoload &#39;pymacs-load &quot;pymacs&quot; nil t)
-;; (autoload &#39;pymacs-eval &quot;pymacs&quot; nil t)
-;; (autoload &#39;pymacs-apply &quot;pymacs&quot;)
-;; (autoload &#39;pymacs-call &quot;pymacs&quot;)
-
-;;(rope-init)
-
-;; para autocompletar los cierres de parentesis o de string
-;;(add-hook &#39;python-mode-hook
+      (list "epylint" (list local-file))))</p>
+<p>(add-to-list 'flymake-allowed-file-name-masks
+               '("\.py\'" flymake-pylint-init)))</p>
+<p>;; (require 'pymacs)
+;; (require 'pycomplete)
+;; (autoload 'pymacs-load "ropemacs" "rope-")
+;; (autoload 'pymacs-load "pymacs" nil t)
+;; (autoload 'pymacs-eval "pymacs" nil t)
+;; (autoload 'pymacs-apply "pymacs")
+;; (autoload 'pymacs-call "pymacs")</p>
+<p>;;(rope-init)</p>
+<p>;; para autocompletar los cierres de parentesis o de string
+;;(add-hook 'python-mode-hook
 ;;    (lambda ()
-;;      (define-key python-mode-map &quot;\&quot;&quot; &#39;electric-pair)
-;;      (define-key python-mode-map &quot;\&#39;&quot; &#39;electric-pair)
-;;      (define-key python-mode-map &quot;(&quot; &#39;electric-pair)
-;;      (define-key python-mode-map &quot;<span class="cp">[</span><span class="s2">&quot; &#39;electric-pair)</span>
-<span class="s2">;;      (define-key python-mode-map &quot;</span><span class="p">{</span><span class="s2">&quot; &#39;electric-pair)))</span>
-
-<span class="s2">;;(defun electric-pair ()</span>
-<span class="s2">;;  &quot;</span><span class="nb">Insert</span> <span class="nx">character</span> <span class="kt">pair</span> <span class="nx">without</span> <span class="nx">sournding</span> <span class="nx">spaces</span><span class="s2">&quot;</span>
-<span class="s2">;;  (interactive)</span>
-<span class="s2">;;  (let (parens-require-spaces)</span>
-<span class="s2">;;    (insert-pair)))</span>
-</pre></div>
+;;      (define-key python-mode-map "\"" 'electric-pair)
+;;      (define-key python-mode-map "\'" 'electric-pair)
+;;      (define-key python-mode-map "(" 'electric-pair)
+;;      (define-key python-mode-map "[" 'electric-pair)
+;;      (define-key python-mode-map "{" 'electric-pair)))</p>
+<p>;;(defun electric-pair ()
+;;  "Insert character pair without sournding spaces"
+;;  (interactive)
+;;  (let (parens-require-spaces)
+;;    (insert-pair)))
+```</p>
   </div>
   <div class="pull-right">
     <a href="https://twitter.com/share?text=.emacs&url=http%3A//tty.cl/emacs.html&via=gnusis" type="button" class="btn btn-info">

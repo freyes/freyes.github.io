@@ -1,44 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/vcs.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2012-12-03T17:42:08-03:00</updated><entry><title>Mercurial</title><link href="http://tty.cl/mercurial.html" rel="alternate"></link><updated>2012-12-03T17:42:08-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2012-12-03:mercurial.html</id><summary type="html">&lt;p&gt;This is my mercurial configuration (~/.hgrc)&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="k"&gt;[ui]&lt;/span&gt;
-&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Foo Bar &amp;lt;foobar@example.com&amp;gt;&lt;/span&gt;
-&lt;span class="na"&gt;merge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;emacs&lt;/span&gt;
-
-&lt;span class="k"&gt;[extensions]&lt;/span&gt;
-&lt;span class="na"&gt;pager&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
-&lt;span class="na"&gt;rebase&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 
-&lt;span class="na"&gt;churn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
-&lt;span class="na"&gt;hgshelve&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;~/.hg.d/hgshelve.py&lt;/span&gt;
-&lt;span class="na"&gt;keyword&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
-&lt;span class="na"&gt;fetch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
-&lt;span class="na"&gt;activity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;~/.hg.d/hgactivity/activity.py&lt;/span&gt;
-&lt;span class="na"&gt;mq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
-&lt;span class="na"&gt;hg_histedit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;~/.hg.d/hg_histedit.py&lt;/span&gt;
-&lt;span class="na"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
-
-&lt;span class="k"&gt;[diff]&lt;/span&gt;
-&lt;span class="na"&gt;git&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;on&lt;/span&gt;
-
-&lt;span class="k"&gt;[pager]&lt;/span&gt;
-&lt;span class="na"&gt;pager&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;LESS=&amp;#39;FSRX&amp;#39; less&lt;/span&gt;
-&lt;span class="na"&gt;attend&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;glog&lt;/span&gt;
-
-&lt;span class="k"&gt;[keywordmaps]&lt;/span&gt;
-&lt;span class="na"&gt;Author&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{author|user}&lt;/span&gt;
-&lt;span class="na"&gt;Date&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{date|utcdate}&lt;/span&gt;
-&lt;span class="na"&gt;Header&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{file},v {node|short} {date|utcdate} {author|user}&lt;/span&gt;
-&lt;span class="na"&gt;Id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{file|basename},v {node|short} {date|utcdate} {author|user}&lt;/span&gt;
-&lt;span class="na"&gt;RCSFile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{file|basename},v&lt;/span&gt;
-&lt;span class="na"&gt;RCSfile&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{file|basename},v&lt;/span&gt;
-&lt;span class="na"&gt;Revision&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{node|short}&lt;/span&gt;
-&lt;span class="na"&gt;Source&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;{root}/{file},v&lt;/span&gt;
-
-&lt;span class="k"&gt;[web]&lt;/span&gt;
-&lt;span class="na"&gt;cacerts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/etc/ssl/certs/ca-certificates.crt&lt;/span&gt;
-
-&lt;span class="k"&gt;[alias]&lt;/span&gt;
-&lt;span class="na"&gt;sst&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;!hg status $($HG root) $HG_ARGS&lt;/span&gt;
-
-&lt;span class="k"&gt;[merge-tools]&lt;/span&gt;
-&lt;span class="na"&gt;emacs.args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;-q --eval &amp;quot;(ediff-merge-with-ancestor \&amp;quot;$local\&amp;quot; \&amp;quot;$other\&amp;quot; \&amp;quot;$base\&amp;quot; nil \&amp;quot;$output\&amp;quot;)&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="mercurial"></category><category term="vcs"></category></entry></feed>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/vcs.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2012-12-03T17:42:08-03:00</updated><entry><title>Mercurial</title><link href="http://tty.cl/mercurial.html" rel="alternate"></link><updated>2012-12-03T17:42:08-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2012-12-03:mercurial.html</id><summary type="html">&lt;p&gt;This is my mercurial configuration (~/.hgrc)
+```
+[ui]
+username = Foo Bar &lt;a href="&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#116;&amp;#111;&amp;#58;&amp;#102;&amp;#111;&amp;#111;&amp;#98;&amp;#97;&amp;#114;&amp;#64;&amp;#101;&amp;#120;&amp;#97;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#46;&amp;#99;&amp;#111;&amp;#109;"&gt;&amp;#102;&amp;#111;&amp;#111;&amp;#98;&amp;#97;&amp;#114;&amp;#64;&amp;#101;&amp;#120;&amp;#97;&amp;#109;&amp;#112;&amp;#108;&amp;#101;&amp;#46;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;
+merge = emacs&lt;/p&gt;
+&lt;p&gt;[extensions]
+pager =
+rebase = 
+churn =
+hgshelve = ~/.hg.d/hgshelve.py
+keyword =
+fetch =
+activity=~/.hg.d/hgactivity/activity.py
+mq =
+hg_histedit=~/.hg.d/hg_histedit.py
+color =&lt;/p&gt;
+&lt;p&gt;[diff]
+git = on&lt;/p&gt;
+&lt;p&gt;[pager]
+pager = LESS='FSRX' less
+attend = glog&lt;/p&gt;
+&lt;p&gt;[keywordmaps]
+Author = {author|user}
+Date = {date|utcdate}
+Header = {file},v {node|short} {date|utcdate} {author|user}
+Id = {file|basename},v {node|short} {date|utcdate} {author|user}
+RCSFile = {file|basename},v
+RCSfile = {file|basename},v
+Revision = {node|short}
+Source = {root}/{file},v&lt;/p&gt;
+&lt;p&gt;[web]
+cacerts = /etc/ssl/certs/ca-certificates.crt&lt;/p&gt;
+&lt;p&gt;[alias]
+sst = !hg status $($HG root) $HG_ARGS&lt;/p&gt;
+&lt;p&gt;[merge-tools]
+emacs.args = -q --eval "(ediff-merge-with-ancestor \"$local\" \"$other\" \"$base\" nil \"$output\")"
+```&lt;/p&gt;</summary><category term="mercurial"></category><category term="vcs"></category></entry></feed>

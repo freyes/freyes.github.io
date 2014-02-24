@@ -6,6 +6,7 @@
         <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Full Atom Feed" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
         <link href="/theme/css/style.css" rel="stylesheet">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
@@ -38,20 +39,6 @@
 
 <div class="content content-list">
   <ol class="article-list">
-    <li class="article clearfix bradius6">
-      <h2 class="page-title">
-        <a href="http://tty.cl/open-source-project-development-tools-part-1.html" rel="bookmark" title="Permalink to Open Source Project Development Tools: part 1">Open Source Project Development Tools: part 1</a>
-      </h2>
-      <div class="page-subtitle">
-        <abbr class="published" title="2014-01-27T00:00:00"> Mon 27 January 2014 </abbr>
-<address class="vcard author">By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
-      <div class="article-summary">
-        <p>This is a series of article to explain the tools I choose to use when I start a new project.</p>
-<h1>Version Control System</h1>
-<p>I've used for professional development Subversion (svn), Mercurial (hg) and Git,
-I've reached a decent proficiency with all of them, and I have to say ...</p>
-      </div>
-    </li>
     <li class="article clearfix bradius6">
       <h2 class="page-title">
         <a href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="bookmark" title="Permalink to Deploying a Python WSGI app with Vagrant and Puppet">Deploying a Python WSGI app with Vagrant and Puppet</a>
@@ -94,19 +81,17 @@ sucks.</p>
 <address class="vcard author">By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
       <div class="article-summary">
         <p>I hope you enjoy disecting my emacs config :D</p>
-<div class="highlight"><pre><span class="p">;;</span> <span class="k">to</span> <span class="nb">debug</span> <span class="nx">the</span> <span class="bp">.</span><span class="nx">emacs</span> <span class="nb">file</span>
-<span class="p">(</span><span class="nx">setq</span> <span class="nb">debug</span><span class="na">-on-error</span> <span class="nx">nil</span><span class="p">)</span>
-
-<span class="p">;;</span> <span class="nx">setup</span> <span class="nx">the</span> <span class="nb">default</span> <span class="nb">mode</span> <span class="k">to</span> <span class="nx">use</span>
-<span class="p">;;</span><span class="nx">Text</span> <span class="nb">mode</span> <span class="nx">is</span> <span class="nx">happier</span> <span class="nx">than</span> <span class="nx">Fundamental</span> <span class="nb">mode</span> <span class="p">;</span><span class="o">-</span><span class="p">)</span>
-<span class="p">(</span><span class="nx">setq</span> <span class="nb">default</span><span class="na">-major-mode</span> <span class="s1">&#39;text-mode)</span>
-
-<span class="s1">;; define the mail and name</span>
-<span class="s1">(setq user-mail-address &quot;your@mail.com&quot;)</span>
-<span class="s1">(setq user-full-name &quot;Your Name&quot;)</span>
-
-<span class="s1">;;;;;;;;;;;;,;</span>
-<span class="s1">;; UI ...</span></pre></div>
+<p>```elisp
+;; to debug the .emacs file
+(setq debug-on-error nil)</p>
+<p>;; setup the default mode to use
+;;Text mode is happier than Fundamental mode ;-)
+(setq default-major-mode 'text-mode)</p>
+<p>;; define the mail and name
+(setq user-mail-address "your@mail.com")
+(setq user-full-name "Your Name")</p>
+<p>;;;;;;;;;;;;,;
+;; UI setup ...</p>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -122,10 +107,12 @@ sucks.</p>
 <li>erc-cmd-NP function send the current track being played to the current chat buffer (channel or private)</li>
 <li>The connect-* functions provide a quick access to the defined IRC server.</li>
 </ul>
-<div class="highlight"><pre><span class="p">;;</span>
-<span class="p">;;</span> <span class="n">erc</span><span class="p">.</span><span class="n">el</span>
-<span class="p">;;</span> <span class="n">Login</span> <span class="o">:</span> <span class="o">&lt;</span><span class="n">freyes</span><span class="err">@</span><span class="n">wampa</span><span class="o">&gt;</span>
-<span class="p">;;</span> <span class="n">Started</span> <span class="n">on</span>  <span class="n">Mon</span> <span class="n">Aug</span> <span class="mi">30</span> <span class="mi">23</span><span class="o">:</span><span class="mo">04</span><span class="o">:</span><span class="mi">16</span> <span class="mi">2010</span> <span class="n">Felipe</span> <span class="n">Reyes ...</span></pre></div>
+<p>```elisp
+;;
+;; erc.el
+;; Login : <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#102;&#114;&#101;&#121;&#101;&#115;&#64;&#119;&#97;&#109;&#112;&#97;">&#102;&#114;&#101;&#121;&#101;&#115;&#64;&#119;&#97;&#109;&#112;&#97;</a>
+;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes
+;; $Id ...</p>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -140,7 +127,8 @@ sucks.</p>
 <p>The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. </p>
 <h2>Example</h2>
 <p>Here it is an example of how a presentation file should look like</p>
-<div class="highlight"><pre><span class="cp">#+TITLE:     Org Mode and Beamer ...</span></pre></div>
+<p>```</p>
+<h1>+TITLE:     Org Mode and Beamer ...</h1>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -173,23 +161,20 @@ section (I don't want to do a simply copy-paste ...</p>
 <ul>
 <li>Check if your system has i386 arch support enabled</li>
 </ul>
-<div class="highlight"><pre><span class="err">$</span> <span class="n">dpkg</span> <span class="o">--</span><span class="n">print</span><span class="o">-</span><span class="n">foreign</span><span class="o">-</span><span class="n">architectures</span>
-<span class="n">i386</span>
-</pre></div>
-
-
+<p><code>$ dpkg --print-foreign-architectures
+i386</code></p>
 <ul>
 <li>If you don't have i386 support enable it with the following commands:</li>
 </ul>
-<div class="highlight"><pre><span class="c"># dpkg --add-architecture i386</span>
-<span class="c"># apt-get update</span>
-</pre></div>
-
-
+<p>```</p>
+<h1>dpkg --add-architecture i386</h1>
+<h1>apt-get update</h1>
+<p>```</p>
 <ul>
 <li>Then install the skype's dependencies with the following command:</li>
 </ul>
-<div class="highlight"><pre><span class="cp"># apt-get ...</span></pre></div>
+<p>```</p>
+<h1>apt-get install libqtgui4 ...</h1>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -201,22 +186,19 @@ section (I don't want to do a simply copy-paste ...</p>
 <address class="vcard author">By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
       <div class="article-summary">
         <h2>Simple Swap Function</h2>
-<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">){</span>
-  <span class="o">*</span><span class="n">a</span><span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="o">+*</span><span class="n">b</span><span class="p">;</span>
-  <span class="o">*</span><span class="n">b</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
-  <span class="o">*</span><span class="n">a</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;before: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-  <span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
-
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;after: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a ...</span></pre></div>
+<p>```C</p>
+<h1>include <stdio.h></h1>
+<p>inline void swap(int <em>a, int </em>b){
+  <em>a= </em>a+<em>b;
+  </em>b=<em>a-</em>b;
+  <em>a=</em>a-*b;
+}</p>
+<p>int main() {
+  int a = 1;
+  int b = 2;</p>
+<p>printf("before: a: %d - b: %d\n", a, b);
+  swap(&amp;a, &amp;b);</p>
+<p>printf("after: a: %d - b: %d\n", a, b ...</p>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -242,28 +224,25 @@ section (I don't want to do a simply copy-paste ...</p>
 <address class="vcard author">By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
       <div class="article-summary">
         <h2>Property</h2>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">Property</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">,</span> <span class="n">fdel</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
-    <span class="n">fdoc</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">__doc__</span>
-    <span class="k">return</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">,</span> <span class="n">fdel</span><span class="p">,</span> <span class="n">fdoc</span><span class="p">)</span>
-</pre></div>
-
-
+<p><code>python
+def Property(f):
+    fget, fset, fdel = f()
+    fdoc = f.__doc__
+    return property(fget, fset, fdel, fdoc)</code></p>
 <h3>Usage Example</h3>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">TtyExample</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<p>```python
+class TtyExample (object):</p>
+<div class="codehilite"><pre><span class="n">def</span> <span class="n">__init__</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">:</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">None</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="err">@</span><span class="n">Property</span>
+<span class="n">def</span> <span class="n">name</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">:</span>
+    <span class="s">&quot;The name&quot;</span>
+    <span class="n">def</span> <span class="n">fget</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_name</span>
 
-    <span class="nd">@Property</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-        <span class="s">&quot;The name&quot;</span>
-        <span class="k">def</span> <span class="nf">fget</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
-
-        <span class="k">def</span> <span class="nf">fset</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">isinstance</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="n">value ...</span></pre></div>
+    <span class="n">def</span> <span class="n">fset</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span><span class="o">:</span>
+        <span class="n">assert</span> <span class="n">isinstance</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">basestring ...</span></pre></div>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -274,31 +253,29 @@ section (I don't want to do a simply copy-paste ...</p>
         <abbr class="published" title="2012-12-03T17:42:08"> Mon 03 December 2012 </abbr>
 <address class="vcard author">By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
       <div class="article-summary">
-        <p>This is my mercurial configuration (~/.hgrc)</p>
-<div class="highlight"><pre><span class="k">[ui]</span>
-<span class="na">username</span> <span class="o">=</span> <span class="s">Foo Bar &lt;foobar@example.com&gt;</span>
-<span class="na">merge</span> <span class="o">=</span> <span class="s">emacs</span>
-
-<span class="k">[extensions]</span>
-<span class="na">pager</span> <span class="o">=</span>
-<span class="na">rebase</span> <span class="o">=</span> 
-<span class="na">churn</span> <span class="o">=</span>
-<span class="na">hgshelve</span> <span class="o">=</span> <span class="s">~/.hg.d/hgshelve.py</span>
-<span class="na">keyword</span> <span class="o">=</span>
-<span class="na">fetch</span> <span class="o">=</span>
-<span class="na">activity</span><span class="o">=</span><span class="s">~/.hg.d/hgactivity/activity.py</span>
-<span class="na">mq</span> <span class="o">=</span>
-<span class="na">hg_histedit</span><span class="o">=</span><span class="s">~/.hg.d/hg_histedit.py</span>
-<span class="na">color</span> <span class="o">=</span>
-
-<span class="k">[diff]</span>
-<span class="na">git</span> <span class="o">=</span> <span class="s">on</span>
-
-<span class="k">[pager]</span>
-<span class="na">pager</span> <span class="o">=</span> <span class="s">LESS=&#39;FSRX&#39; less</span>
-<span class="na">attend</span> <span class="o">=</span> <span class="s">glog</span>
-
-<span class="k">[keywordmaps ...</span></pre></div>
+        <p>This is my mercurial configuration (~/.hgrc)
+```
+[ui]
+username = Foo Bar <a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#102;&#111;&#111;&#98;&#97;&#114;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;">&#102;&#111;&#111;&#98;&#97;&#114;&#64;&#101;&#120;&#97;&#109;&#112;&#108;&#101;&#46;&#99;&#111;&#109;</a>
+merge = emacs</p>
+<p>[extensions]
+pager =
+rebase = 
+churn =
+hgshelve = ~/.hg.d/hgshelve.py
+keyword =
+fetch =
+activity=~/.hg.d/hgactivity/activity.py
+mq =
+hg_histedit=~/.hg.d/hg_histedit.py
+color =</p>
+<p>[diff]
+git = on</p>
+<p>[pager]
+pager = LESS='FSRX' less
+attend = glog</p>
+<p>[keywordmaps]
+Author = {author|user ...</p>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -329,7 +306,7 @@ default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).</p>
 <p><img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg" /></p>
 <p>To install it you just must do the follow:</p>
-<div class="highlight"><pre><span class="n">aptitude</span> <span class="n">install ...</span></pre></div>
+<p><code>aptitude install ...</code></p>
       </div>
     </li>
     <li class="article clearfix bradius6">

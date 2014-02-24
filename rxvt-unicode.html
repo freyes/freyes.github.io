@@ -15,6 +15,7 @@
 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
         <link href="/theme/css/style.css" rel="stylesheet">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
@@ -65,42 +66,31 @@ default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).</p>
 <p><img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg" /></p>
 <p>To install it you just must do the follow:</p>
-<div class="highlight"><pre><span class="n">aptitude</span> <span class="n">install</span> <span class="n">rxvt</span><span class="o">-</span><span class="n">unicode</span>
-</pre></div>
-
-
+<p><code>aptitude install rxvt-unicode</code></p>
 <p>If you want to use it as your default x-terminal-emulator you have to
 set the proper alternative like this</p>
-<div class="highlight"><pre><span class="n">update</span><span class="o">-</span><span class="n">alternatives</span> <span class="o">--</span><span class="n">set</span> <span class="n">x</span><span class="o">-</span><span class="n">terminal</span><span class="o">-</span><span class="n">emulator</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">urxvt</span>
-</pre></div>
-
-
+<p><code>update-alternatives --set x-terminal-emulator /usr/bin/urxvt</code></p>
 <p>The configuration must go on your ~/.Xdefaults file, here is my configuration</p>
-<div class="highlight"><pre><span class="n">URxvt</span><span class="p">.</span><span class="n">foreground</span><span class="o">:</span> <span class="n">grey90</span>
-<span class="n">URxvt</span><span class="p">.</span><span class="n">cursorColor</span><span class="o">:</span> <span class="err">#</span><span class="mf">729f</span><span class="n">cf</span>
-<span class="n">URxvt</span><span class="p">.</span><span class="n">font</span><span class="o">:</span> <span class="o">-</span><span class="n">xos4</span><span class="o">-</span><span class="n">terminus</span><span class="o">-</span><span class="n">medium</span><span class="o">-</span><span class="n">r</span><span class="o">-</span><span class="n">normal</span><span class="o">--</span><span class="mi">14</span><span class="o">-</span><span class="mi">140</span><span class="o">-</span><span class="mi">72</span><span class="o">-</span><span class="mi">72</span><span class="o">-</span><span class="n">c</span><span class="o">-</span><span class="mi">80</span><span class="o">-</span><span class="n">iso8859</span><span class="o">-</span><span class="mi">15</span>
-<span class="n">URxvt</span><span class="p">.</span><span class="n">scrollBar</span><span class="o">:</span> <span class="n">False</span>
-<span class="n">URxvt</span><span class="p">.</span><span class="n">shading</span><span class="o">:</span> <span class="mi">50</span>
-<span class="n">URxvt</span><span class="p">.</span><span class="n">transparent</span><span class="o">:</span> <span class="n">True</span>
-<span class="n">URxvt</span><span class="p">.</span><span class="n">fade</span><span class="o">:</span> <span class="mi">80</span>
-<span class="n">URxvt</span><span class="p">.</span><span class="n">fadeColor</span><span class="o">:</span> <span class="err">#</span><span class="n">e9b96e</span>
-<span class="n">URxvt</span><span class="p">.</span><span class="n">tintColor</span><span class="o">:</span> <span class="err">#</span><span class="mi">5</span><span class="n">c5c5c</span>
-<span class="n">URxvt</span><span class="o">*</span><span class="n">urgentOnBell</span><span class="o">:</span> <span class="nb">true</span>
-<span class="n">URxvt</span><span class="o">*</span><span class="n">urllauncher</span><span class="o">:</span> <span class="n">iceweasel</span>
-<span class="n">URxvt</span><span class="o">*</span><span class="n">matcher</span><span class="p">.</span><span class="n">button</span><span class="o">:</span>        <span class="mi">3</span>
-<span class="n">URxvt</span><span class="o">*</span><span class="n">depth</span><span class="o">:</span> <span class="mi">24</span>
-<span class="n">URxvt</span><span class="o">*</span><span class="n">background</span><span class="o">:</span> <span class="n">rgba</span><span class="o">:</span><span class="mo">0000</span><span class="o">/</span><span class="mo">0000</span><span class="o">/</span><span class="mo">0000</span><span class="o">/</span><span class="n">dddd</span>
-</pre></div>
-
-
+<p><code>URxvt.foreground: grey90
+URxvt.cursorColor: #729fcf
+URxvt.font: -xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-15
+URxvt.scrollBar: False
+URxvt.shading: 50
+URxvt.transparent: True
+URxvt.fade: 80
+URxvt.fadeColor: #e9b96e
+URxvt.tintColor: #5c5c5c
+URxvt*urgentOnBell: true
+URxvt*urllauncher: iceweasel
+URxvt*matcher.button:        3
+URxvt*depth: 24
+URxvt*background: rgba:0000/0000/0000/dddd</code></p>
 <p>Once you put the configuration you can reload it using this</p>
-<div class="highlight"><pre><span class="n">xrdb</span> <span class="o">-</span><span class="n">merge</span> <span class="o">~/</span><span class="p">.</span><span class="n">Xdefaults</span>
-</pre></div>
-
-
+<p><code>shell
+xrdb -merge ~/.Xdefaults</code></p>
 <p>Remember to install the terminus fonts if you want to use my configuration</p>
-<div class="highlight"><pre><span class="n">aptitude</span> <span class="n">install</span> <span class="n">xfonts</span><span class="o">-</span><span class="n">terminus</span> <span class="n">xfonts</span><span class="o">-</span><span class="n">terminus</span><span class="o">-</span><span class="n">dos</span> <span class="n">xfonts</span><span class="o">-</span><span class="n">terminus</span><span class="o">-</span><span class="n">oblique</span>
-</pre></div>
+<p><code>shell
+aptitude install xfonts-terminus xfonts-terminus-dos xfonts-terminus-oblique</code></p>
   </div>
   <div class="pull-right">
     <a href="https://twitter.com/share?text=rxvt-unicode&url=http%3A//tty.cl/rxvt-unicode.html&via=gnusis" type="button" class="btn btn-info">

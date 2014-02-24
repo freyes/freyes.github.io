@@ -7,6 +7,7 @@
         <link href="http://tty.cl//feeds/snippets.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Categories Atom Feed" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
         <link href="/theme/css/style.css" rel="stylesheet">
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 </head>
@@ -48,22 +49,19 @@
 <address class="vcard author">By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
       <div class="article-summary">
         <h2>Simple Swap Function</h2>
-<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-
-<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">){</span>
-  <span class="o">*</span><span class="n">a</span><span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="o">+*</span><span class="n">b</span><span class="p">;</span>
-  <span class="o">*</span><span class="n">b</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
-  <span class="o">*</span><span class="n">a</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;before: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-  <span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
-
-  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;after: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a ...</span></pre></div>
+<p>```C</p>
+<h1>include <stdio.h></h1>
+<p>inline void swap(int <em>a, int </em>b){
+  <em>a= </em>a+<em>b;
+  </em>b=<em>a-</em>b;
+  <em>a=</em>a-*b;
+}</p>
+<p>int main() {
+  int a = 1;
+  int b = 2;</p>
+<p>printf("before: a: %d - b: %d\n", a, b);
+  swap(&amp;a, &amp;b);</p>
+<p>printf("after: a: %d - b: %d\n", a, b ...</p>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -75,28 +73,25 @@
 <address class="vcard author">By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
       <div class="article-summary">
         <h2>Property</h2>
-<div class="highlight"><pre><span class="k">def</span> <span class="nf">Property</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-    <span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">,</span> <span class="n">fdel</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
-    <span class="n">fdoc</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">__doc__</span>
-    <span class="k">return</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">,</span> <span class="n">fdel</span><span class="p">,</span> <span class="n">fdoc</span><span class="p">)</span>
-</pre></div>
-
-
+<p><code>python
+def Property(f):
+    fget, fset, fdel = f()
+    fdoc = f.__doc__
+    return property(fget, fset, fdel, fdoc)</code></p>
 <h3>Usage Example</h3>
-<div class="highlight"><pre><span class="k">class</span> <span class="nc">TtyExample</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<p>```python
+class TtyExample (object):</p>
+<div class="codehilite"><pre><span class="n">def</span> <span class="n">__init__</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">:</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">None</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="bp">None</span>
+<span class="err">@</span><span class="n">Property</span>
+<span class="n">def</span> <span class="n">name</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">:</span>
+    <span class="s">&quot;The name&quot;</span>
+    <span class="n">def</span> <span class="n">fget</span> <span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">_name</span>
 
-    <span class="nd">@Property</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-        <span class="s">&quot;The name&quot;</span>
-        <span class="k">def</span> <span class="nf">fget</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
-
-        <span class="k">def</span> <span class="nf">fset</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-            <span class="k">assert</span> <span class="nb">isinstance</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="n">value ...</span></pre></div>
+    <span class="n">def</span> <span class="n">fset</span> <span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span><span class="o">:</span>
+        <span class="n">assert</span> <span class="n">isinstance</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">basestring ...</span></pre></div>
       </div>
     </li>
   </ol>
