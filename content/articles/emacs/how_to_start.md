@@ -70,9 +70,9 @@ anti-alias and multi-tty.
 To use emacs22 you can just use the debian official archive and
 execute
 
-```
+<pre>
 apt-get install emacs22
-```
+</pre>
 
 But if you want to use the emacs cvs there is a repository maintained
 by Romain Francoise of the package emacs-snapshot which is a binary
@@ -80,9 +80,9 @@ package of the cvs code (this is the one that I use). To use this repo
 you must the following to you source.list (to obtain more details
 visit the webpage of the repo)
 
-```
+<pre>
 deb http://emacs.naquadah.org/ unstable/
-```
+</pre>
 
 Then just install the emacs-snapshot package.
 
@@ -124,33 +124,31 @@ The transient mark mode highlights the selected region of text, by
 defaults this is disabled so I recommend you enable it with pasting
 the following in your .emacs
 
-```
-(transient-mark-mode 1)
-```
+    :::lisp
+    (transient-mark-mode 1)
+
 
 Fill you name and email to let the modes that need that information
 could use, this is done with the following snippet of code
 
-```
-(setq user-mail-address "homer@example.com")
-(setq user-full-name "Homer J. Simpsons")
-```
+    :::lisp
+    (setq user-mail-address "homer@example.com")
+    (setq user-full-name "Homer J. Simpsons")
 
 If you like to use Ctrl+g to jump to a line number then you should add
 the following code
 
-```
-(global-set-key [(control g)] 'goto-line)
-```
+    :::lisp
+    (global-set-key [(control g)] 'goto-line)
+
 
 One of the sweetest feature that must have a text editor is syntax
 highlight, well emacs has this, but disabled by default, with the
 following code you will have it enabled always
 
-```
-(require 'font-lock)
-(global-font-lock-mode t)
-```
+    :::lisp
+    (require 'font-lock)
+    (global-font-lock-mode t)
 
 I think that this is enough for this entry, the next entries probably
 will be more fun to write and read, because i will start talking about
@@ -159,57 +157,56 @@ C mode.
 
 ## Emacswiki
 
-  [Emacswiki](http://www.emacswiki.org/) is probably the best source to find emacs-specific tip-n-tricks
+[Emacswiki](http://www.emacswiki.org/) is probably the best source to find emacs-specific tip-n-tricks
 
 ## Initial Configuration
 
 Suggested initial configuration:
 
-```elisp
-;; to debug the .emacs file
-(setq debug-on-error nil)
-(setq visible-bell nil)
-
-;; setup the default mode to use
-;;Text mode is happier than Fundamental mode ;-)
-(setq default-major-mode 'text-mode)
-
-;; define the mail and name
-(setq user-mail-address "foo@example.com")
-(setq user-full-name "Foo Bar")
-
-;; be nice with X clipboard
-(setq x-select-enable-clipboard t)
-
-;; use Control+g fot goto-line
-(global-set-key [(control g)] 'goto-line)
-
-;; enable menubar and tool bar
-(menu-bar-mode 1)
-(tool-bar-mode 1)
-
-;; turn on font-lock mode
-(global-font-lock-mode t)
-(require 'font-lock) ; enable syntax highlighting
-
-;; simple cut, copy, paste
-(global-set-key [f2] 'clipboard-kill-region)
-(global-set-key [f3] 'clipboard-kill-ring-save)
-(global-set-key [f4] 'clipboard-yank)
-
-(global-set-key [end] 'end-of-line)
-(global-set-key [home] 'beginning-of-line)
-
-;;touche del et suppr
-(global-set-key [delete] 'delete-char)
-
-;;(dysplay question in 'y/n' instead of 'yes/no')
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; tramp let you open remote files over ssh
-(require 'tramp)
-(setq tramp-default-method "ssh")
-
-;;; Prevent Extraneous Tabs
-(setq-default indent-tabs-mode nil)
-```
+    :::lisp
+    ;; to debug the .emacs file
+    (setq debug-on-error nil)
+    (setq visible-bell nil)
+    
+    ;; setup the default mode to use
+    ;;Text mode is happier than Fundamental mode ;-)
+    (setq default-major-mode 'text-mode)
+    
+    ;; define the mail and name
+    (setq user-mail-address "foo@example.com")
+    (setq user-full-name "Foo Bar")
+    
+    ;; be nice with X clipboard
+    (setq x-select-enable-clipboard t)
+    
+    ;; use Control+g fot goto-line
+    (global-set-key [(control g)] 'goto-line)
+    
+    ;; enable menubar and tool bar
+    (menu-bar-mode 1)
+    (tool-bar-mode 1)
+    
+    ;; turn on font-lock mode
+    (global-font-lock-mode t)
+    (require 'font-lock) ; enable syntax highlighting
+    
+    ;; simple cut, copy, paste
+    (global-set-key [f2] 'clipboard-kill-region)
+    (global-set-key [f3] 'clipboard-kill-ring-save)
+    (global-set-key [f4] 'clipboard-yank)
+    
+    (global-set-key [end] 'end-of-line)
+    (global-set-key [home] 'beginning-of-line)
+    
+    ;;touche del et suppr
+    (global-set-key [delete] 'delete-char)
+    
+    ;;(dysplay question in 'y/n' instead of 'yes/no')
+    (fset 'yes-or-no-p 'y-or-n-p)
+    
+    ;; tramp let you open remote files over ssh
+    (require 'tramp)
+    (setq tramp-default-method "ssh")
+    
+    ;;; Prevent Extraneous Tabs
+    (setq-default indent-tabs-mode nil)
