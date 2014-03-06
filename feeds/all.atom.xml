@@ -878,7 +878,7 @@ C mode.&lt;/p&gt;
 &lt;li&gt;erc-cmd-NP function send the current track being played to the current chat buffer (channel or private)&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The connect-* functions provide a quick access to the defined IRC server.&lt;/p&gt;
-&lt;p&gt;:::elisp
+&lt;p&gt;:::lisp
 ;;
 ;; erc.el
 ;; Login : &lt;a href="&amp;#109;&amp;#97;&amp;#105;&amp;#108;&amp;#116;&amp;#111;&amp;#58;&amp;#102;&amp;#114;&amp;#101;&amp;#121;&amp;#101;&amp;#115;&amp;#64;&amp;#119;&amp;#97;&amp;#109;&amp;#112;&amp;#97;"&gt;&amp;#102;&amp;#114;&amp;#101;&amp;#121;&amp;#101;&amp;#115;&amp;#64;&amp;#119;&amp;#97;&amp;#109;&amp;#112;&amp;#97;&lt;/a&gt;
