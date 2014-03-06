@@ -659,49 +659,48 @@ C mode.&lt;/p&gt;
 &lt;p&gt;The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. &lt;/p&gt;
 &lt;h2&gt;Example&lt;/h2&gt;
 &lt;p&gt;Here it is an example of how a presentation file should look like&lt;/p&gt;
-&lt;p&gt;```&lt;/p&gt;
-&lt;h1&gt;+TITLE:     Org Mode and Beamer&lt;/h1&gt;
-&lt;h1&gt;+AUTHOR:    Felipe Reyes&lt;/h1&gt;
-&lt;h1&gt;+EMAIL:     freyes@tty.cl&lt;/h1&gt;
-&lt;h1&gt;+DATE:      2011-08-25 Tue&lt;/h1&gt;
-&lt;h1&gt;+DESCRIPTION:&lt;/h1&gt;
-&lt;h1&gt;+KEYWORDS:  org-mode, beamer, tutorial&lt;/h1&gt;
-&lt;h1&gt;+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t &amp;lt;:t&lt;/h1&gt;
-&lt;h1&gt;+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc&lt;/h1&gt;
-&lt;h1&gt;+INFOJS_OPT: view:nil toc:nil ltoc:nil mouse:underline buttons:0 path:http://orgmode.org/org-info.js&lt;/h1&gt;
-&lt;h1&gt;+EXPORT_SELECT_TAGS: export&lt;/h1&gt;
-&lt;h1&gt;+EXPORT_EXCLUDE_TAGS: noexport&lt;/h1&gt;
-&lt;h1&gt;+LINK_UP:&lt;/h1&gt;
-&lt;h1&gt;+LINK_HOME:&lt;/h1&gt;
-&lt;h1&gt;+LaTeX_CLASS: beamer&lt;/h1&gt;
-&lt;h1&gt;+BEAMER_HEADER_EXTRA: \usetheme{Madrid}\usecolortheme{default}&lt;/h1&gt;
-&lt;h1&gt;+MACRO: BEAMERMODE presentation&lt;/h1&gt;
-&lt;h1&gt;+MACRO: BEAMERINSTITUTE tty.cl&lt;/h1&gt;
-&lt;h1&gt;+BEAMER_FRAME_LEVEL: 2&lt;/h1&gt;
-&lt;h1&gt;+STARTUP: beamer&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;Org Mode and Beamer
-** Overview&lt;/li&gt;
-&lt;li&gt;This is a bullet list&lt;ul&gt;
-&lt;li&gt;nested items&lt;/li&gt;
-&lt;li&gt;more items&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Resume the top level list
-&lt;strong&gt; Numbered List
-   1) one
-   2) two
-   3) three
-&lt;/strong&gt; Source Code Example&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h1&gt;+BEGIN_LaTeX&lt;/h1&gt;
-&lt;p&gt;\begin{lstlisting}[language=python]
-import os&lt;/p&gt;
-&lt;p&gt;def my_fun(path="."):
-    print os.listdir(path)
-\end{lstlisting}&lt;/p&gt;
-&lt;h1&gt;+END_LaTeX&lt;/h1&gt;
-&lt;p&gt;```&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#+TITLE:     Org Mode and Beamer&lt;/span&gt;
+&lt;span class="cp"&gt;#+AUTHOR:    Felipe Reyes&lt;/span&gt;
+&lt;span class="cp"&gt;#+EMAIL:     freyes@tty.cl&lt;/span&gt;
+&lt;span class="cp"&gt;#+DATE:      2011-08-25 Tue&lt;/span&gt;
+&lt;span class="cp"&gt;#+DESCRIPTION:&lt;/span&gt;
+&lt;span class="cp"&gt;#+KEYWORDS:  org-mode, beamer, tutorial&lt;/span&gt;
+&lt;span class="cp"&gt;#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t &amp;lt;:t&lt;/span&gt;
+&lt;span class="cp"&gt;#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc&lt;/span&gt;
+&lt;span class="cp"&gt;#+INFOJS_OPT: view:nil toc:nil ltoc:nil mouse:underline buttons:0 path:http:&lt;/span&gt;&lt;span class="c1"&gt;//orgmode.org/org-info.js&lt;/span&gt;
+&lt;span class="cp"&gt;#+EXPORT_SELECT_TAGS: export&lt;/span&gt;
+&lt;span class="cp"&gt;#+EXPORT_EXCLUDE_TAGS: noexport&lt;/span&gt;
+&lt;span class="cp"&gt;#+LINK_UP:   &lt;/span&gt;
+&lt;span class="cp"&gt;#+LINK_HOME: &lt;/span&gt;
+&lt;span class="cp"&gt;#+LaTeX_CLASS: beamer&lt;/span&gt;
+&lt;span class="cp"&gt;#+BEAMER_HEADER_EXTRA: \usetheme{Madrid}\usecolortheme{default}&lt;/span&gt;
+&lt;span class="cp"&gt;#+MACRO: BEAMERMODE presentation&lt;/span&gt;
+&lt;span class="cp"&gt;#+MACRO: BEAMERINSTITUTE tty.cl&lt;/span&gt;
+&lt;span class="cp"&gt;#+BEAMER_FRAME_LEVEL: 2&lt;/span&gt;
+&lt;span class="cp"&gt;#+STARTUP: beamer&lt;/span&gt;
+
+&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Org&lt;/span&gt; &lt;span class="n"&gt;Mode&lt;/span&gt; &lt;span class="n"&gt;and&lt;/span&gt; &lt;span class="n"&gt;Beamer&lt;/span&gt;
+&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;Overview&lt;/span&gt;
+   &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;This&lt;/span&gt; &lt;span class="n"&gt;is&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;bullet&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+     &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;nested&lt;/span&gt; &lt;span class="n"&gt;items&lt;/span&gt;
+     &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;more&lt;/span&gt; &lt;span class="n"&gt;items&lt;/span&gt;
+   &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Resume&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;top&lt;/span&gt; &lt;span class="n"&gt;level&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;Numbered&lt;/span&gt; &lt;span class="n"&gt;List&lt;/span&gt;
+   &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;one&lt;/span&gt;
+   &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;two&lt;/span&gt;
+   &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;three&lt;/span&gt;
+&lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;Source&lt;/span&gt; &lt;span class="n"&gt;Code&lt;/span&gt; &lt;span class="n"&gt;Example&lt;/span&gt;
+&lt;span class="cp"&gt;#+BEGIN_LaTeX&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;lstlisting&lt;/span&gt;&lt;span class="p"&gt;}[&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;import&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;
+
+&lt;span class="n"&gt;def&lt;/span&gt; &lt;span class="n"&gt;my_fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;print&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;lstlisting&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="cp"&gt;#+END_LaTeX&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;Let's review it by section&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;First you just need to set the basic information about your presentation (title, author, email, date, description and keywords)&lt;/li&gt;
@@ -713,65 +712,66 @@ import os&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;You can open the file [[file:org-mode.beamer.presentation.org]] in emacs and use the shortcut &lt;code&gt;C-c C-e p&lt;/code&gt; to generate a pdf of the presentation. The produced pdf can be downloaded [[file:org-mode.beamer.presentation.pdf][here]]&lt;/p&gt;
 &lt;h2&gt;Setup&lt;/h2&gt;
-&lt;p&gt;Execute the following command in Debian or Ubuntu
-&lt;code&gt;sudo apt-get install texlive-extra-utils \
+&lt;p&gt;Execute the following command in Debian or Ubuntu&lt;/p&gt;
+&lt;pre&gt;
+sudo apt-get install texlive-extra-utils \
     texlive-binaries \
     latex-beamer \
-    texlive-latex-extra&lt;/code&gt;&lt;/p&gt;
+    texlive-latex-extra
+&lt;/pre&gt;
+
 &lt;p&gt;Add the following to your &lt;em&gt;.emacs&lt;/em&gt; file:&lt;/p&gt;
-&lt;p&gt;```elisp
-;; beamer
-;; #+LaTeX_CLASS: beamer in org files
-(unless (boundp 'org-export-latex-classes)
-  (setq org-export-latex-classes nil))
-(add-to-list 'org-export-latex-classes
-  ;; beamer class, for presentations
-  '("beamer"
-     "\documentclass[11pt]{beamer}\n
-      \mode&amp;lt;{{{beamermode}}}&amp;gt;\n
-      \beamertemplateballitem\n
-      \setbeameroption{show notes}
-      \usepackage[utf8]{inputenc}\n
-      \usepackage[T1]{fontenc}\n
-      \usepackage{hyperref}\n
-      \usepackage{color}
-      \usepackage{listings}
-      \lstset{numbers=none,language=[ISO]C++,tabsize=4,
-  frame=single,
-  basicstyle=\small,
-  showspaces=false,showstringspaces=false,
-  showtabs=false,
-  keywordstyle=\color{blue}\bfseries,
-  commentstyle=\color{red},
-  }\n
-      \usepackage{verbatim}\n
-      \institute{{{{beamerinstitute}}}}\n        &lt;br /&gt;
-       \subject{{{{beamersubject}}}}\n"&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;section{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;section*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;beamer&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="err"&gt;#&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="n"&gt;LaTeX_CLASS&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;beamer&lt;/span&gt; &lt;span class="n"&gt;in&lt;/span&gt; &lt;span class="n"&gt;org&lt;/span&gt; &lt;span class="n"&gt;files&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;unless&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;boundp&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;latex&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;classes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;latex&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;classes&lt;/span&gt; &lt;span class="n"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;latex&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;classes&lt;/span&gt;
+  &lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;beamer&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;presentations&lt;/span&gt;
+  &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;beamer&amp;quot;&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;documentclass[11pt]{beamer}&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="p"&gt;{{{&lt;/span&gt;&lt;span class="n"&gt;beamermode&lt;/span&gt;&lt;span class="p"&gt;}}}&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;beamertemplateballitem&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;setbeameroption&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt; &lt;span class="n"&gt;notes&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;usepackage&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;utf8&lt;/span&gt;&lt;span class="p"&gt;]{&lt;/span&gt;&lt;span class="n"&gt;inputenc&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;usepackage&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;T1&lt;/span&gt;&lt;span class="p"&gt;]{&lt;/span&gt;&lt;span class="n"&gt;fontenc&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;usepackage&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;hyperref&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;usepackage&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;usepackage&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;listings&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;lstset&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;numbers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;none&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;ISO&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="n"&gt;C&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;tabsize&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;frame&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;single&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;basicstyle&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;small&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;showspaces&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="n"&gt;showstringspaces&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;showtabs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;keywordstyle&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;blue&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;bfseries&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+  &lt;span class="n"&gt;commentstyle&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;red&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;
+  &lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;usepackage&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;verbatim&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;institute&lt;/span&gt;&lt;span class="p"&gt;{{{{&lt;/span&gt;&lt;span class="n"&gt;beamerinstitute&lt;/span&gt;&lt;span class="p"&gt;}}}}&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;          
+       &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;subject&lt;/span&gt;&lt;span class="p"&gt;{{{{&lt;/span&gt;&lt;span class="n"&gt;beamersubject&lt;/span&gt;&lt;span class="p"&gt;}}}}&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;
 
- &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;begin{frame}[fragile]&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;frametitle{%s}&amp;quot;&lt;/span&gt;
-   &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;end{frame}&amp;quot;&lt;/span&gt;
-   &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;begin{frame}[fragile]&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;frametitle{%s}&amp;quot;&lt;/span&gt;
-   &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;end{frame}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;section{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;section*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;begin{frame}[fragile]&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;frametitle{%s}&amp;quot;&lt;/span&gt;
+       &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;end{frame}&amp;quot;&lt;/span&gt;
+       &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;begin{frame}[fragile]&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;frametitle{%s}&amp;quot;&lt;/span&gt;
+       &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;end{frame}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;letter&lt;/span&gt; &lt;span class="n"&gt;class&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;formal&lt;/span&gt; &lt;span class="n"&gt;letters&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;latex&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;classes&lt;/span&gt;
+  &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;letter&amp;quot;&lt;/span&gt;
+     &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;documentclass[11pt]{letter}&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;usepackage&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;utf8&lt;/span&gt;&lt;span class="p"&gt;]{&lt;/span&gt;&lt;span class="n"&gt;inputenc&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;usepackage&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;T1&lt;/span&gt;&lt;span class="p"&gt;]{&lt;/span&gt;&lt;span class="n"&gt;fontenc&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;
+      &lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="n"&gt;usepackage&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;color&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;
+
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;section{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;section*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subsection{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subsection*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subsubsection{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subsubsection*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;paragraph{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;paragraph*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subparagraph{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subparagraph*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;;; letter class, for formal letters
-(add-to-list 'org-export-latex-classes
-  '("letter"
-     "\documentclass[11pt]{letter}\n
-      \usepackage[utf8]{inputenc}\n
-      \usepackage[T1]{fontenc}\n
-      \usepackage{color}"&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;section{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;section*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
- &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subsection{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subsection*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
- &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subsubsection{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subsubsection*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
- &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;paragraph{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;paragraph*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
- &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subparagraph{%s}&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s"&gt;subparagraph*{%s}&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;```&lt;/p&gt;
 &lt;h2&gt;Links&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://bitbucket.org/rivanvx/beamer/wiki/Home"&gt;Beamer development repo&lt;/a&gt;&lt;/li&gt;
