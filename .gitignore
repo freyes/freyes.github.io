@@ -3,3 +3,4 @@
 output/
 pelican.pid
 srv.pid
+cache/
