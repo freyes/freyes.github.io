@@ -49,7 +49,7 @@
     </a>
   </h1>
   <div class="page-subtitle">
-    <abbr class="published" title="2013-12-02T00:00:00">
+    <abbr class="published" title="2013-12-02T00:00:00-03:00">
       Mon 02 December 2013
     </abbr>
     <address class="vcard author">
@@ -61,45 +61,45 @@
 <p>The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. </p>
 <h2>Example</h2>
 <p>Here it is an example of how a presentation file should look like</p>
-<div class="codehilite"><pre><span class="cp">#+TITLE:     Org Mode and Beamer</span>
-<span class="cp">#+AUTHOR:    Felipe Reyes</span>
-<span class="cp">#+EMAIL:     freyes@tty.cl</span>
-<span class="cp">#+DATE:      2011-08-25 Tue</span>
-<span class="cp">#+DESCRIPTION:</span>
-<span class="cp">#+KEYWORDS:  org-mode, beamer, tutorial</span>
-<span class="cp">#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t &lt;:t</span>
-<span class="cp">#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc</span>
-<span class="cp">#+INFOJS_OPT: view:nil toc:nil ltoc:nil mouse:underline buttons:0 path:http:</span><span class="c1">//orgmode.org/org-info.js</span>
-<span class="cp">#+EXPORT_SELECT_TAGS: export</span>
-<span class="cp">#+EXPORT_EXCLUDE_TAGS: noexport</span>
-<span class="cp">#+LINK_UP:   </span>
-<span class="cp">#+LINK_HOME: </span>
-<span class="cp">#+LaTeX_CLASS: beamer</span>
-<span class="cp">#+BEAMER_HEADER_EXTRA: \usetheme{Madrid}\usecolortheme{default}</span>
-<span class="cp">#+MACRO: BEAMERMODE presentation</span>
-<span class="cp">#+MACRO: BEAMERINSTITUTE tty.cl</span>
-<span class="cp">#+BEAMER_FRAME_LEVEL: 2</span>
-<span class="cp">#+STARTUP: beamer</span>
+<div class="codehilite"><pre><span class="c">#+TITLE:     Org Mode and Beamer</span>
+<span class="c">#+AUTHOR:    Felipe Reyes</span>
+<span class="c">#+EMAIL:     freyes@tty.cl</span>
+<span class="c">#+DATE:      2011-08-25 Tue</span>
+<span class="c">#+DESCRIPTION:</span>
+<span class="c">#+KEYWORDS:  org-mode, beamer, tutorial</span>
+<span class="c">#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t &lt;:t</span>
+<span class="c">#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc</span>
+<span class="c">#+INFOJS_OPT: view:nil toc:nil ltoc:nil mouse:underline buttons:0 path:http://orgmode.org/org-info.js</span>
+<span class="c">#+EXPORT_SELECT_TAGS: export</span>
+<span class="c">#+EXPORT_EXCLUDE_TAGS: noexport</span>
+<span class="c">#+LINK_UP:   </span>
+<span class="c">#+LINK_HOME: </span>
+<span class="c">#+LaTeX_CLASS: beamer</span>
+<span class="c">#+BEAMER_HEADER_EXTRA: \usetheme{Madrid}\usecolortheme{default}</span>
+<span class="c">#+MACRO: BEAMERMODE presentation</span>
+<span class="c">#+MACRO: BEAMERINSTITUTE tty.cl</span>
+<span class="c">#+BEAMER_FRAME_LEVEL: 2</span>
+<span class="c">#+STARTUP: beamer</span>
 
-<span class="o">*</span> <span class="n">Org</span> <span class="n">Mode</span> <span class="n">and</span> <span class="n">Beamer</span>
+<span class="o">*</span> <span class="n">Org</span> <span class="n">Mode</span> <span class="ow">and</span> <span class="n">Beamer</span>
 <span class="o">**</span> <span class="n">Overview</span>
-   <span class="o">-</span> <span class="n">This</span> <span class="n">is</span> <span class="n">a</span> <span class="n">bullet</span> <span class="n">list</span>
+   <span class="o">-</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">bullet</span> <span class="nb">list</span>
      <span class="o">-</span> <span class="n">nested</span> <span class="n">items</span>
      <span class="o">-</span> <span class="n">more</span> <span class="n">items</span>
-   <span class="o">-</span> <span class="n">Resume</span> <span class="n">the</span> <span class="n">top</span> <span class="n">level</span> <span class="n">list</span>
+   <span class="o">-</span> <span class="n">Resume</span> <span class="n">the</span> <span class="n">top</span> <span class="n">level</span> <span class="nb">list</span>
 <span class="o">**</span> <span class="n">Numbered</span> <span class="n">List</span>
    <span class="mi">1</span><span class="p">)</span> <span class="n">one</span>
    <span class="mi">2</span><span class="p">)</span> <span class="n">two</span>
    <span class="mi">3</span><span class="p">)</span> <span class="n">three</span>
 <span class="o">**</span> <span class="n">Source</span> <span class="n">Code</span> <span class="n">Example</span>
-<span class="cp">#+BEGIN_LaTeX</span>
-<span class="err">\</span><span class="n">begin</span><span class="p">{</span><span class="n">lstlisting</span><span class="p">}[</span><span class="n">language</span><span class="o">=</span><span class="n">python</span><span class="p">]</span>
-<span class="n">import</span> <span class="n">os</span>
+<span class="c">#+BEGIN_LaTeX</span>
+\<span class="n">begin</span><span class="p">{</span><span class="n">lstlisting</span><span class="p">}[</span><span class="n">language</span><span class="o">=</span><span class="n">python</span><span class="p">]</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
-<span class="n">def</span> <span class="n">my_fun</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;.&quot;</span><span class="p">)</span><span class="o">:</span>
-    <span class="n">print</span> <span class="n">os</span><span class="p">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-<span class="err">\</span><span class="n">end</span><span class="p">{</span><span class="n">lstlisting</span><span class="p">}</span>
-<span class="cp">#+END_LaTeX</span>
+<span class="k">def</span> <span class="nf">my_fun</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;.&quot;</span><span class="p">):</span>
+    <span class="k">print</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+\<span class="n">end</span><span class="p">{</span><span class="n">lstlisting</span><span class="p">}</span>
+<span class="c">#+END_LaTeX</span>
 </pre></div>
 
 
@@ -123,54 +123,54 @@ sudo apt-get install texlive-extra-utils \
 </pre>
 
 <p>Add the following to your <em>.emacs</em> file:</p>
-<div class="codehilite"><pre><span class="p">;;</span> <span class="n">beamer</span>
-<span class="p">;;</span> <span class="err">#</span><span class="o">+</span><span class="n">LaTeX_CLASS</span><span class="o">:</span> <span class="n">beamer</span> <span class="n">in</span> <span class="n">org</span> <span class="n">files</span>
-<span class="p">(</span><span class="n">unless</span> <span class="p">(</span><span class="n">boundp</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">-</span><span class="n">export</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">classes</span><span class="p">)</span>
-  <span class="p">(</span><span class="n">setq</span> <span class="n">org</span><span class="o">-</span><span class="n">export</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">classes</span> <span class="n">nil</span><span class="p">))</span>
-<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">-</span><span class="n">export</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">classes</span>
-  <span class="p">;;</span> <span class="n">beamer</span> <span class="n">class</span><span class="p">,</span> <span class="k">for</span> <span class="n">presentations</span>
-  <span class="err">&#39;</span><span class="p">(</span><span class="s">&quot;beamer&quot;</span>
-     <span class="s">&quot;</span><span class="se">\\</span><span class="s">documentclass[11pt]{beamer}</span><span class="se">\n</span>
-      <span class="err">\\</span><span class="n">mode</span><span class="o">&lt;</span><span class="p">{{{</span><span class="n">beamermode</span><span class="p">}}}</span><span class="o">&gt;</span><span class="err">\</span><span class="n">n</span>
-      <span class="err">\\</span><span class="n">beamertemplateballitem</span><span class="err">\</span><span class="n">n</span>
-      <span class="err">\\</span><span class="n">setbeameroption</span><span class="p">{</span><span class="n">show</span> <span class="n">notes</span><span class="p">}</span>
-      <span class="err">\\</span><span class="n">usepackage</span><span class="p">[</span><span class="n">utf8</span><span class="p">]{</span><span class="n">inputenc</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
-      <span class="err">\\</span><span class="n">usepackage</span><span class="p">[</span><span class="n">T1</span><span class="p">]{</span><span class="n">fontenc</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
-      <span class="err">\\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">hyperref</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
-      <span class="err">\\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">color</span><span class="p">}</span>
-      <span class="err">\\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">listings</span><span class="p">}</span>
-      <span class="err">\\</span><span class="n">lstset</span><span class="p">{</span><span class="n">numbers</span><span class="o">=</span><span class="n">none</span><span class="p">,</span><span class="n">language</span><span class="o">=</span><span class="p">[</span><span class="n">ISO</span><span class="p">]</span><span class="n">C</span><span class="o">++</span><span class="p">,</span><span class="n">tabsize</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-  <span class="n">frame</span><span class="o">=</span><span class="n">single</span><span class="p">,</span>
-  <span class="n">basicstyle</span><span class="o">=</span><span class="err">\\</span><span class="n">small</span><span class="p">,</span>
-  <span class="n">showspaces</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span><span class="n">showstringspaces</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span>
-  <span class="n">showtabs</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span>
-  <span class="n">keywordstyle</span><span class="o">=</span><span class="err">\\</span><span class="n">color</span><span class="p">{</span><span class="n">blue</span><span class="p">}</span><span class="err">\\</span><span class="n">bfseries</span><span class="p">,</span>
-  <span class="n">commentstyle</span><span class="o">=</span><span class="err">\\</span><span class="n">color</span><span class="p">{</span><span class="n">red</span><span class="p">},</span>
-  <span class="p">}</span><span class="err">\</span><span class="n">n</span>
-      <span class="err">\\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">verbatim</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
-      <span class="err">\\</span><span class="n">institute</span><span class="p">{{{{</span><span class="n">beamerinstitute</span><span class="p">}}}}</span><span class="err">\</span><span class="n">n</span>          
-       <span class="err">\\</span><span class="n">subject</span><span class="p">{{{{</span><span class="n">beamersubject</span><span class="p">}}}}</span><span class="err">\</span><span class="n">n</span><span class="s">&quot;</span>
+<div class="codehilite"><pre><span class="c1">;; beamer</span>
+<span class="c1">;; #+LaTeX_CLASS: beamer in org files</span>
+<span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">boundp</span> <span class="ss">&#39;org-export-latex-classes</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">org-export-latex-classes</span> <span class="no">nil</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-export-latex-classes</span>
+  <span class="c1">;; beamer class, for presentations</span>
+  <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;beamer&quot;</span>
+     <span class="s">&quot;\\documentclass[11pt]{beamer}\n</span>
+<span class="s">      \\mode&lt;{{{beamermode}}}&gt;\n</span>
+<span class="s">      \\beamertemplateballitem\n</span>
+<span class="s">      \\setbeameroption{show notes}</span>
+<span class="s">      \\usepackage[utf8]{inputenc}\n</span>
+<span class="s">      \\usepackage[T1]{fontenc}\n</span>
+<span class="s">      \\usepackage{hyperref}\n</span>
+<span class="s">      \\usepackage{color}</span>
+<span class="s">      \\usepackage{listings}</span>
+<span class="s">      \\lstset{numbers=none,language=[ISO]C++,tabsize=4,</span>
+<span class="s">  frame=single,</span>
+<span class="s">  basicstyle=\\small,</span>
+<span class="s">  showspaces=false,showstringspaces=false,</span>
+<span class="s">  showtabs=false,</span>
+<span class="s">  keywordstyle=\\color{blue}\\bfseries,</span>
+<span class="s">  commentstyle=\\color{red},</span>
+<span class="s">  }\n</span>
+<span class="s">      \\usepackage{verbatim}\n</span>
+<span class="s">      \\institute{{{{beamerinstitute}}}}\n          </span>
+<span class="s">       \\subject{{{{beamersubject}}}}\n&quot;</span>
 
-     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">section{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">section*{%s}&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="s">&quot;\\section{%s}&quot;</span> <span class="o">.</span> <span class="s">&quot;\\section*{%s}&quot;</span><span class="p">)</span>
 
-     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">begin{frame}[fragile]</span><span class="se">\\</span><span class="s">frametitle{%s}&quot;</span>
-       <span class="s">&quot;</span><span class="se">\\</span><span class="s">end{frame}&quot;</span>
-       <span class="s">&quot;</span><span class="se">\\</span><span class="s">begin{frame}[fragile]</span><span class="se">\\</span><span class="s">frametitle{%s}&quot;</span>
-       <span class="s">&quot;</span><span class="se">\\</span><span class="s">end{frame}&quot;</span><span class="p">)))</span>
+     <span class="p">(</span><span class="s">&quot;\\begin{frame}[fragile]\\frametitle{%s}&quot;</span>
+       <span class="s">&quot;\\end{frame}&quot;</span>
+       <span class="s">&quot;\\begin{frame}[fragile]\\frametitle{%s}&quot;</span>
+       <span class="s">&quot;\\end{frame}&quot;</span><span class="p">)))</span>
 
-<span class="p">;;</span> <span class="n">letter</span> <span class="n">class</span><span class="p">,</span> <span class="k">for</span> <span class="n">formal</span> <span class="n">letters</span>
-<span class="p">(</span><span class="n">add</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">list</span> <span class="err">&#39;</span><span class="n">org</span><span class="o">-</span><span class="n">export</span><span class="o">-</span><span class="n">latex</span><span class="o">-</span><span class="n">classes</span>
-  <span class="err">&#39;</span><span class="p">(</span><span class="s">&quot;letter&quot;</span>
-     <span class="s">&quot;</span><span class="se">\\</span><span class="s">documentclass[11pt]{letter}</span><span class="se">\n</span>
-      <span class="err">\\</span><span class="n">usepackage</span><span class="p">[</span><span class="n">utf8</span><span class="p">]{</span><span class="n">inputenc</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
-      <span class="err">\\</span><span class="n">usepackage</span><span class="p">[</span><span class="n">T1</span><span class="p">]{</span><span class="n">fontenc</span><span class="p">}</span><span class="err">\</span><span class="n">n</span>
-      <span class="err">\\</span><span class="n">usepackage</span><span class="p">{</span><span class="n">color</span><span class="p">}</span><span class="s">&quot;</span>
+<span class="c1">;; letter class, for formal letters</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;org-export-latex-classes</span>
+  <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;letter&quot;</span>
+     <span class="s">&quot;\\documentclass[11pt]{letter}\n</span>
+<span class="s">      \\usepackage[utf8]{inputenc}\n</span>
+<span class="s">      \\usepackage[T1]{fontenc}\n</span>
+<span class="s">      \\usepackage{color}&quot;</span>
 
-     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">section{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">section*{%s}&quot;</span><span class="p">)</span>
-     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">subsection{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">subsection*{%s}&quot;</span><span class="p">)</span>
-     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">subsubsection{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">subsubsection*{%s}&quot;</span><span class="p">)</span>
-     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">paragraph{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">paragraph*{%s}&quot;</span><span class="p">)</span>
-     <span class="p">(</span><span class="s">&quot;</span><span class="se">\\</span><span class="s">subparagraph{%s}&quot;</span> <span class="p">.</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">subparagraph*{%s}&quot;</span><span class="p">)))</span>
+     <span class="p">(</span><span class="s">&quot;\\section{%s}&quot;</span> <span class="o">.</span> <span class="s">&quot;\\section*{%s}&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="s">&quot;\\subsection{%s}&quot;</span> <span class="o">.</span> <span class="s">&quot;\\subsection*{%s}&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="s">&quot;\\subsubsection{%s}&quot;</span> <span class="o">.</span> <span class="s">&quot;\\subsubsection*{%s}&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="s">&quot;\\paragraph{%s}&quot;</span> <span class="o">.</span> <span class="s">&quot;\\paragraph*{%s}&quot;</span><span class="p">)</span>
+     <span class="p">(</span><span class="s">&quot;\\subparagraph{%s}&quot;</span> <span class="o">.</span> <span class="s">&quot;\\subparagraph*{%s}&quot;</span><span class="p">)))</span>
 </pre></div>
 
 

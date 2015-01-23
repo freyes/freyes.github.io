@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/all.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2015-01-23T00:00:00-03:00</updated><entry><title>Multiple Local Environments with Juju</title><link href="http://tty.cl/multiple-local-environments-with-juju.html" rel="alternate"></link><updated>2015-01-23T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2015-01-23:multiple-local-environments-with-juju.html</id><summary type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png" /&gt;&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TTY.cl</title><link>http://tty.cl/</link><description>Random thoughts and knowledge</description><atom:link href="http://tty.cl//feeds/felipe-reyes.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 23 Jan 2015 00:00:00 -0300</lastBuildDate><item><title>Multiple Local Environments with Juju</title><link>http://tty.cl/multiple-local-environments-with-juju.html</link><description>&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://juju.ubuntu.com/"&gt;Juju&lt;/a&gt; has the ability to use lxc or kvm to deploy
 services, this is done by the
 &lt;a href="https://juju.ubuntu.com/docs/config-local.html"&gt;local provider&lt;/a&gt;, but
@@ -28,7 +28,7 @@ found how to do it :)&lt;/p&gt;
 
 &lt;p&gt;That is the relevant portion of my &lt;code&gt;~/.juju/environments.yaml&lt;/code&gt;, I use one environment with &lt;code&gt;kvm&lt;/code&gt; and the other one with &lt;code&gt;lxc&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;If you're curious, the trick is to change the &lt;code&gt;state-port&lt;/code&gt; and &lt;code&gt;api-port&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I hope this helps you.&lt;/p&gt;</summary><category term="juju"></category></entry><entry><title>Deploy a Python WSGI app with a Celery worker in Heroku</title><link href="http://tty.cl/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html" rel="alternate"></link><updated>2014-02-24T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-02-24:deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html</id><summary type="html">&lt;p&gt;This article explains how to deploy a WSGI python web app + a
+&lt;p&gt;I hope this helps you.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Fri, 23 Jan 2015 00:00:00 -0300</pubDate><guid>tag:tty.cl,2015-01-23:multiple-local-environments-with-juju.html</guid><category>juju</category></item><item><title>Deploy a Python WSGI app with a Celery worker in Heroku</title><link>http://tty.cl/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html</link><description>&lt;p&gt;This article explains how to deploy a WSGI python web app + a
 &lt;a href="http://www.celeryproject.org"&gt;celery&lt;/a&gt; worker.&lt;/p&gt;
 &lt;p&gt;A recommended reading before moving forward with Heroku is
 &lt;a href="https://devcenter.heroku.com/articles/process-model"&gt;The Process Model&lt;/a&gt;.&lt;/p&gt;
@@ -274,7 +274,7 @@ Installed 0 object(s) from 0 fixture(s)
 &lt;p&gt;We have the app running and a celery worker, now it's moment to assign a
 decent domain and other minor settings, heroku provides an option called
 &lt;a href="https://devcenter.heroku.com/articles/production-check"&gt;Production Check&lt;/a&gt;,
-you should use it before going live with your site.&lt;/p&gt;</summary><category term="development"></category></entry><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+you should use it before going live with your site.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Mon, 24 Feb 2014 00:00:00 -0300</pubDate><guid>tag:tty.cl,2014-02-24:deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html</guid><category>development</category></item><item><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link>http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</link><description>&lt;p&gt;These days the tendency among software companies is to have everything under
 version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
 &lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
 development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
@@ -289,7 +289,7 @@ repositories for the latest information about how they work.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/freyes/vagrant-puppet-example"&gt;Vagrant and Puppet recipes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/freyes/flask-hello-world"&gt;Flask hello world&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry><entry><title>How to start with Emacs</title><link href="http://tty.cl/how-to-start-with-emacs.html" rel="alternate"></link><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Wed, 22 Jan 2014 00:00:00 -0300</pubDate><guid>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</guid><category>python</category><category>vagrant</category><category>puppet</category><category>wsgi</category></item><item><title>How to start with Emacs</title><link>http://tty.cl/how-to-start-with-emacs.html</link><description>&lt;h2&gt;Part 0&lt;/h2&gt;
 &lt;p&gt;Before I could really be productive with emacs, I failed a couple of
 times, because I knew that emacs were powerful, but the default
 configuration shows you a simple text editor that look awful, without
@@ -473,7 +473,7 @@ C mode.&lt;/p&gt;
 
 &lt;span class="c1"&gt;;;; Prevent Extraneous Tabs&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;setq-default&lt;/span&gt; &lt;span class="nv"&gt;indent-tabs-mode&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>.emacs</title><link href="http://tty.cl/emacs.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Tue, 03 Dec 2013 00:00:00 -0300</pubDate><guid>tag:tty.cl,2013-12-03:how-to-start-with-emacs.html</guid></item><item><title>.emacs</title><link>http://tty.cl/emacs.html</link><description>&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
 &lt;p&gt;```elisp
 ;; to debug the .emacs file
 (setq debug-on-error nil)&lt;/p&gt;
@@ -902,7 +902,7 @@ C mode.&lt;/p&gt;
 ;;  (interactive)
 ;;  (let (parens-require-spaces)
 ;;    (insert-pair)))
-```&lt;/p&gt;</summary></entry><entry><title>erc</title><link href="http://tty.cl/erc.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
+```&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Mon, 02 Dec 2013 00:00:00 -0300</pubDate><guid>tag:tty.cl,2013-12-02:emacs.html</guid></item><item><title>erc</title><link>http://tty.cl/erc.html</link><description>&lt;p&gt;This is my configuration for erc&lt;/p&gt;
 &lt;p&gt;erc-cmd-NP function send the current track being played to the current chat buffer (channel or private).&lt;/p&gt;
 &lt;p&gt;The connect- functions provide a quick access to the defined IRC server.&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
@@ -945,7 +945,7 @@ C mode.&lt;/p&gt;
    &lt;span class="ss"&gt;:full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Felipe Reyes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;erc-auto-query&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;frame&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Org-mode and Beamer</title><link href="http://tty.cl/org-mode-and-beamer.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Mon, 02 Dec 2013 00:00:00 -0300</pubDate><guid>tag:tty.cl,2013-12-02:erc.html</guid></item><item><title>Org-mode and Beamer</title><link>http://tty.cl/org-mode-and-beamer.html</link><description>&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. &lt;/p&gt;
 &lt;h2&gt;Example&lt;/h2&gt;
 &lt;p&gt;Here it is an example of how a presentation file should look like&lt;/p&gt;
@@ -1068,7 +1068,7 @@ sudo apt-get install texlive-extra-utils \
 &lt;li&gt;&lt;a href="http://orgmode.org/worg/org-tutorials/org-beamer/tutorial.html"&gt;Worg beamer tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://orgmode.org/manual/Beamer-class-export.html"&gt;org-mode beamer&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://emacs-fu.blogspot.com/2009/10/writing-presentations-with-org-mode-and.html"&gt;emacs-fu: writing presentations with org-mode and beamer&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Postgresql Tips n' Tricks</title><link href="http://tty.cl/postgresql-tips-n-tricks.html" rel="alternate"></link><updated>2013-11-22T15:23:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-11-22:postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Mon, 02 Dec 2013 00:00:00 -0300</pubDate><guid>tag:tty.cl,2013-12-02:org-mode-and-beamer.html</guid></item><item><title>Postgresql Tips n' Tricks</title><link>http://tty.cl/postgresql-tips-n-tricks.html</link><description>&lt;ul class="simple"&gt;
 &lt;li&gt;pg_stat_activity&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;pg_stat_activity&lt;/a&gt;
@@ -1147,7 +1147,7 @@ section (I don't want to do a simply copy-paste, so see the official documentati
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="postgresql"></category><category term="tips"></category></entry><entry><title>Skype in GNU/Debian AMD64</title><link href="http://tty.cl/skype-in-gnudebian-amd64.html" rel="alternate"></link><updated>2013-02-18T04:59:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-02-18:skype-in-gnudebian-amd64.html</id><summary type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
+</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Fri, 22 Nov 2013 15:23:00 -0300</pubDate><guid>tag:tty.cl,2013-11-22:postgresql-tips-n-tricks.html</guid><category>postgresql</category><category>tips</category></item><item><title>Skype in GNU/Debian AMD64</title><link>http://tty.cl/skype-in-gnudebian-amd64.html</link><description>&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Check if your system has i386 arch support enabled&lt;/li&gt;
 &lt;/ul&gt;
@@ -1188,7 +1188,7 @@ i386&lt;/code&gt;&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;```&lt;/p&gt;
 &lt;h1&gt;dpkg -i skype-debian_4.1.0.20-1_i386.deb&lt;/h1&gt;
-&lt;p&gt;```&lt;/p&gt;</summary><category term="debian"></category><category term="skype"></category><category term="tips"></category></entry><entry><title>C Snippets</title><link href="http://tty.cl/c-snippets.html" rel="alternate"></link><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:c-snippets.html</id><summary type="html">&lt;h2&gt;Simple Swap Function&lt;/h2&gt;
+&lt;p&gt;```&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Mon, 18 Feb 2013 04:59:00 -0300</pubDate><guid>tag:tty.cl,2013-02-18:skype-in-gnudebian-amd64.html</guid><category>debian</category><category>skype</category><category>tips</category></item><item><title>C Snippets</title><link>http://tty.cl/c-snippets.html</link><description>&lt;h2&gt;Simple Swap Function&lt;/h2&gt;
 &lt;p&gt;```C&lt;/p&gt;
 &lt;h1&gt;include &lt;stdio.h&gt;&lt;/h1&gt;
 &lt;p&gt;inline void swap(int &lt;em&gt;a, int &lt;/em&gt;b){
@@ -1207,10 +1207,10 @@ i386&lt;/code&gt;&lt;/p&gt;
 ```&lt;/p&gt;
 &lt;p&gt;Expected output:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;before: a: 1 - b: 2
-after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs Tips</title><link href="http://tty.cl/emacs-tips.html" rel="alternate"></link><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:emacs-tips.html</id><summary type="html">&lt;ul&gt;
+after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Tue, 01 Jan 2013 00:00:00 -0300</pubDate><guid>tag:tty.cl,2013-01-01:c-snippets.html</guid></item><item><title>Emacs Tips</title><link>http://tty.cl/emacs-tips.html</link><description>&lt;ul&gt;
 &lt;li&gt;If you start emacs with "emacs -q" and the problem goes away, the problem is on your end: check your .emacs. &lt;/li&gt;
 &lt;li&gt;If "emacs -q" has problems and "emacs -Q" does not, it's caused by your distro or local admin.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Python Snippets</title><link href="http://tty.cl/python-snippets.html" rel="alternate"></link><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:python-snippets.html</id><summary type="html">&lt;h2&gt;Property&lt;/h2&gt;
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Tue, 01 Jan 2013 00:00:00 -0300</pubDate><guid>tag:tty.cl,2013-01-01:emacs-tips.html</guid></item><item><title>Python Snippets</title><link>http://tty.cl/python-snippets.html</link><description>&lt;h2&gt;Property&lt;/h2&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;Property&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;fget&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fdel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="n"&gt;fdoc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__doc__&lt;/span&gt;
@@ -1439,7 +1439,7 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Original snippet available at http://snippets.dzone.com/posts/show/757&lt;/p&gt;</summary><category term="python"></category><category term="snippets"></category></entry><entry><title>Mercurial</title><link href="http://tty.cl/mercurial.html" rel="alternate"></link><updated>2012-12-03T17:42:08-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2012-12-03:mercurial.html</id><summary type="html">&lt;p&gt;This is my mercurial configuration (~/.hgrc)&lt;/p&gt;
+&lt;p&gt;Original snippet available at http://snippets.dzone.com/posts/show/757&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Tue, 01 Jan 2013 00:00:00 -0300</pubDate><guid>tag:tty.cl,2013-01-01:python-snippets.html</guid><category>python</category><category>snippets</category></item><item><title>Mercurial</title><link>http://tty.cl/mercurial.html</link><description>&lt;p&gt;This is my mercurial configuration (~/.hgrc)&lt;/p&gt;
 &lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="k"&gt;[ui]&lt;/span&gt;
 &lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Foo Bar &amp;lt;foobar@example.com&amp;gt;&lt;/span&gt;
 &lt;span class="na"&gt;merge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;emacs&lt;/span&gt;
@@ -1481,92 +1481,7 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
 
 &lt;span class="k"&gt;[merge-tools]&lt;/span&gt;
 &lt;span class="na"&gt;emacs.args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;-q --eval &amp;quot;(ediff-merge-with-ancestor \&amp;quot;$local\&amp;quot; \&amp;quot;$other\&amp;quot; \&amp;quot;$base\&amp;quot; nil \&amp;quot;$output\&amp;quot;)&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="mercurial"></category><category term="vcs"></category></entry><entry><title>MySQL and the Key Cache Buffer</title><link href="http://tty.cl/mysql-and-the-key-cache-buffer.html" rel="alternate"></link><updated>2011-12-18T00:00:00-03:00</updated><author><name>Jonathan Gonzalez</name></author><id>tag:tty.cl,2011-12-18:mysql-and-the-key-cache-buffer.html</id><summary type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
-&lt;p&gt;It's always important to recognize why this happened, well, here in my
-work a few weeks ago I set up a &lt;a href="http://code.google.com/p/mysql-cacti-templates/"&gt;few new templates&lt;/a&gt; for our &lt;a href="http://www.cacti.net/"&gt;Cacti&lt;/a&gt;, among
-many useful templates it comes with some very handy templates for
-&lt;a href="http://www.mysql.com"&gt;MySQL&lt;/a&gt;, it comes with a pretty useful template called 'MyISAM Key Cache'
-and we noticed that it was full!! so my boss ask me to figure out and
-read about this topic and many others that aren't the main topic
-of this article&lt;/p&gt;
-&lt;h1&gt;Find out your current configuration&lt;/h1&gt;
-&lt;p&gt;Since you may not have cacti installed you may need to know what do
-you have and how it's working now.&lt;/p&gt;
-&lt;p&gt;First the value of your 'key buffer size':&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sql
-show variables like 'key%';&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;This will show at least, two good things that may be useful for you,
-'key buffer size', yes the size of our key buffer! and
-'key cache block size' useful to end our tiny article&lt;/p&gt;
-&lt;p&gt;Well, now we have to know how the key buffer its used:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sql
-show status like 'Key%';&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;All the rows returned from this command are useful! I'll use and
-example of one of our servers:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;mysql&amp;gt; show status like 'Key%';
-+------------------------+-----------+
-| Variable_name          | Value     |
-+------------------------+-----------+
-| Key_blocks_not_flushed | 0         |
-| Key_blocks_unused      | 240934    |
-| Key_blocks_used        | 97093     |
-| Key_read_requests      | 211305615 |
-| Key_reads              | 321341    |
-| Key_write_requests     | 9268658   |
-| Key_writes             | 397761    |
-+------------------------+-----------+
-7 rows in set (0.00 sec)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;We now have all the data we need to evaluate  our current situation.&lt;/p&gt;
-&lt;h1&gt;Use the collected data&lt;/h1&gt;
-&lt;p&gt;We will suppose that the value of 'key buffer size' it's '402653184'
-the first things we need to know it's that this value it's in bytes so
-if you prefer to manage it in megabytes you need to do the
-transformation:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;(402653184/1024)/1024 = 384&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;We have a Key cache buffer of 384MB which looks like a lot of space,
-but how much of that space it's currently used? well, you will have to
-do simple calculation:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;key_buffer_usage = ( Key_blocks_unused * key_cache_block_size ) / key_buffer_size ) * 100&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;So with our collected that we will suppose that the value of
-'key cache block size' it's 1024 which it's the default value.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;( (240934 * 1024) / 402653184 ) * 100 = 61.2&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;So, we have about 61.2 percent of our buffer used, ok this seems to be
-right, but there's another data we may find useful! look this extract
-from the &lt;a href="http://dev.mysql.com/doc/"&gt;MySQL Documentation&lt;/a&gt;:&lt;/p&gt;
-&lt;p&gt;"The Key reads/Key read requests ratio should normally be less than
-0.01."&lt;/p&gt;
-&lt;p&gt;Ok, what the heck this guys mean by that? Well, let's try our maths to
-calculate our ratio!&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;key_reads_ratio =  ( Key_reads / Key_read_requests ) * 100&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;And with our data it will be something like:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;( 321341 / 211305615 ) * 100 = 0.152074046&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;So, we have a ratio of about 0.15, this doesn't seem a lot to me, but
-according to the documentation it's a lot, well, according to the
-maths with less key_reads(keys passed to the 'key buffer') and lots of
-'key read requests' our 'key reads ratio' should be lower.&lt;/p&gt;
-&lt;h1&gt;Test and not necessarily a fix!&lt;/h1&gt;
-&lt;p&gt;OK, so you may want to take a look inside your my.cnf, but come on you
-can't restart your database right?&lt;/p&gt;
-&lt;p&gt;Well, if you access your database as 'root' user you can start to
-throw a few commands to set these values!&lt;/p&gt;
-&lt;p&gt;Let's say we want to set up our key buffer, we should do this:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sql
-set global key_buffer_size=512*1024*1024;&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;Thus, we will set our key_buffer to 512M and our system will have a
-lot of more key cached and our ratio will go down! awesome right? but
-wait, there's a tricks an some cautions you may want to take!&lt;/p&gt;
-&lt;p&gt;First, if your database it's on production, when you set the value
-your cached keys will be lost, thus, the load of your system will
-increase significantly so, do this carefully!&lt;/p&gt;
-&lt;p&gt;Second, you have to wait a lot to calculate, at first, your
-key_reads_ratio will not reflect your situation so wait a bit, well,
-if you have a lot of users for your database and queries obviously you
-will have to wait less.&lt;/p&gt;
-&lt;h1&gt;Other Stuffs? no, just the end&lt;/h1&gt;
-&lt;p&gt;Well, I'll still working with some &lt;a href="http://www.mysql.com]"&gt;MySQL&lt;/a&gt; optimization things, so, I'll
-probably upload more things related to this kind of optimizations.&lt;/p&gt;
-&lt;p&gt;Remember, creating graphs of your system will always help you to
-diagnostic your system =)&lt;/p&gt;</summary><category term="mysql"></category><category term="tuning"></category><category term="database"></category><category term="cache"></category></entry><entry><title>rxvt-unicode</title><link href="http://tty.cl/rxvt-unicode.html" rel="alternate"></link><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2011-06-11:rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Mon, 03 Dec 2012 17:42:08 -0300</pubDate><guid>tag:tty.cl,2012-12-03:mercurial.html</guid><category>mercurial</category><category>vcs</category></item><item><title>rxvt-unicode</title><link>http://tty.cl/rxvt-unicode.html</link><description>&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
 default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
 &lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg" /&gt;&lt;/p&gt;
@@ -1595,7 +1510,7 @@ URxvt*background: rgba:0000/0000/0000/dddd&lt;/code&gt;&lt;/p&gt;
 xrdb -merge ~/.Xdefaults&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;Remember to install the terminus fonts if you want to use my configuration&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;shell
-aptitude install xfonts-terminus xfonts-terminus-dos xfonts-terminus-oblique&lt;/code&gt;&lt;/p&gt;</summary><category term="debian"></category><category term="linux"></category><category term="tips"></category><category term="rxvt"></category></entry><entry><title>About Me</title><link href="http://tty.cl/about-me.html" rel="alternate"></link><updated>2010-10-10T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2010-10-10:about-me.html</id><summary type="html">&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
+aptitude install xfonts-terminus xfonts-terminus-dos xfonts-terminus-oblique&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Sat, 11 Jun 2011 23:10:00 -0400</pubDate><guid>tag:tty.cl,2011-06-11:rxvt-unicode.html</guid><category>debian</category><category>linux</category><category>tips</category><category>rxvt</category></item><item><title>About Me</title><link>http://tty.cl/about-me.html</link><description>&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
 developer (or at least I try)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.flickr.com/photos/freyes"&gt;Flickr&lt;/a&gt;&lt;/li&gt;
@@ -1674,4 +1589,4 @@ and &lt;a href="https://github.com/openstack-infra/jenkins-job-builder/"&gt;jenk
 &lt;li&gt;Databases: &lt;a href="http://www.mysql.org"&gt;MySQL&lt;/a&gt;, &lt;a href="http://www.postgresql.org"&gt;PostgreSQL&lt;/a&gt;, &lt;a href="http://www.oracle.com"&gt;Oracle&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.rabbitmq.com"&gt;RabbitMQ&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://celeryproject.org/"&gt;Celery&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;/ul&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Felipe Reyes</dc:creator><pubDate>Sun, 10 Oct 2010 00:00:00 -0400</pubDate><guid>tag:tty.cl,2010-10-10:about-me.html</guid></item></channel></rss>

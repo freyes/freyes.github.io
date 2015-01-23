@@ -49,7 +49,7 @@
     </a>
   </h1>
   <div class="page-subtitle">
-    <abbr class="published" title="2013-12-02T00:00:00">
+    <abbr class="published" title="2013-12-02T00:00:00-03:00">
       Mon 02 December 2013
     </abbr>
     <address class="vcard author">
@@ -60,46 +60,46 @@
     <p>This is my configuration for erc</p>
 <p>erc-cmd-NP function send the current track being played to the current chat buffer (channel or private).</p>
 <p>The connect- functions provide a quick access to the defined IRC server.</p>
-<div class="codehilite"><pre><span class="p">;;</span>
-<span class="p">;;</span> <span class="n">erc</span><span class="p">.</span><span class="n">el</span>
-<span class="p">;;</span> <span class="n">Login</span> <span class="o">:</span> <span class="o">&lt;</span><span class="n">freyes</span><span class="err">@</span><span class="n">wampa</span><span class="o">&gt;</span>
-<span class="p">;;</span> <span class="n">Started</span> <span class="n">on</span>  <span class="n">Mon</span> <span class="n">Aug</span> <span class="mi">30</span> <span class="mi">23</span><span class="o">:</span><span class="mo">04</span><span class="o">:</span><span class="mi">16</span> <span class="mi">2010</span> <span class="n">Felipe</span> <span class="n">Reyes</span>
-<span class="p">;;</span> <span class="err">$</span><span class="n">Id</span><span class="err">$</span>
-<span class="p">;;</span> 
-<span class="p">(</span><span class="n">defun</span> <span class="n">erc</span><span class="o">-</span><span class="n">cmd</span><span class="o">-</span><span class="n">NP</span> <span class="p">(</span><span class="o">&amp;</span><span class="n">rest</span> <span class="n">ignore</span><span class="p">)</span>
+<div class="codehilite"><pre><span class="c1">;;</span>
+<span class="c1">;; erc.el</span>
+<span class="c1">;; Login : &lt;freyes@wampa&gt;</span>
+<span class="c1">;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes</span>
+<span class="c1">;; $Id$</span>
+<span class="c1">;; </span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">erc-cmd-NP</span> <span class="p">(</span><span class="k">&amp;rest</span> <span class="k">ignore</span><span class="p">)</span>
   <span class="s">&quot;Display the current EMMS track to the current ERC buffer.&quot;</span>
-  <span class="p">(</span><span class="n">let</span> <span class="p">((</span><span class="n">string</span> <span class="p">(</span><span class="n">emms</span><span class="o">-</span><span class="n">show</span><span class="p">)))</span>
-    <span class="p">(</span><span class="k">if</span> <span class="n">string</span>
-        <span class="p">(</span><span class="n">erc</span><span class="o">-</span><span class="n">send</span><span class="o">-</span><span class="n">message</span> <span class="n">string</span><span class="p">)</span>
-      <span class="p">(</span><span class="n">message</span> <span class="s">&quot;Nothing is playing!&quot;</span><span class="p">))))</span>
-<span class="p">(</span><span class="n">defun</span> <span class="n">connect</span><span class="o">-</span><span class="n">freenode</span> <span class="p">()</span>
-  <span class="p">(</span><span class="n">interactive</span><span class="p">)</span>
-  <span class="p">(</span><span class="n">erc</span>
-   <span class="o">:</span><span class="n">server</span> <span class="s">&quot;irc.freenode.net&quot;</span>
-   <span class="o">:</span><span class="n">port</span> <span class="mi">6667</span>
-   <span class="o">:</span><span class="n">nick</span> <span class="s">&quot;freyes&quot;</span>
-   <span class="o">:</span><span class="n">password</span> <span class="s">&quot;XXXXXX&quot;</span>
-   <span class="o">:</span><span class="n">full</span><span class="o">-</span><span class="n">name</span> <span class="s">&quot;Felipe Reyes&quot;</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nb">string</span> <span class="p">(</span><span class="nv">emms-show</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">if</span> <span class="nb">string</span>
+        <span class="p">(</span><span class="nv">erc-send-message</span> <span class="nb">string</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Nothing is playing!&quot;</span><span class="p">))))</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">connect-freenode</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">erc</span>
+   <span class="ss">:server</span> <span class="s">&quot;irc.freenode.net&quot;</span>
+   <span class="ss">:port</span> <span class="mi">6667</span>
+   <span class="ss">:nick</span> <span class="s">&quot;freyes&quot;</span>
+   <span class="ss">:password</span> <span class="s">&quot;XXXXXX&quot;</span>
+   <span class="ss">:full-name</span> <span class="s">&quot;Felipe Reyes&quot;</span><span class="p">))</span>
 
-<span class="p">(</span><span class="n">defun</span> <span class="n">connect</span><span class="o">-</span><span class="n">gnome</span> <span class="p">()</span>
-  <span class="p">(</span><span class="n">interactive</span><span class="p">)</span>
-  <span class="p">(</span><span class="n">erc</span>
-   <span class="o">:</span><span class="n">server</span> <span class="s">&quot;irc.gnome.org&quot;</span>
-   <span class="o">:</span><span class="n">port</span> <span class="mi">6667</span>
-   <span class="o">:</span><span class="n">nick</span> <span class="s">&quot;freyes&quot;</span>
-   <span class="o">:</span><span class="n">password</span> <span class="s">&quot;XXXXX&quot;</span>
-   <span class="o">:</span><span class="n">full</span><span class="o">-</span><span class="n">name</span> <span class="s">&quot;Felipe Reyes&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">connect-gnome</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">erc</span>
+   <span class="ss">:server</span> <span class="s">&quot;irc.gnome.org&quot;</span>
+   <span class="ss">:port</span> <span class="mi">6667</span>
+   <span class="ss">:nick</span> <span class="s">&quot;freyes&quot;</span>
+   <span class="ss">:password</span> <span class="s">&quot;XXXXX&quot;</span>
+   <span class="ss">:full-name</span> <span class="s">&quot;Felipe Reyes&quot;</span><span class="p">))</span>
 
-<span class="p">(</span><span class="n">defun</span> <span class="n">connect</span><span class="o">-</span><span class="n">oftc</span> <span class="p">()</span>
-  <span class="p">(</span><span class="n">interactive</span><span class="p">)</span>
-  <span class="p">(</span><span class="n">erc</span>
-   <span class="o">:</span><span class="n">server</span> <span class="s">&quot;irc.oftc.net&quot;</span>
-   <span class="o">:</span><span class="n">port</span> <span class="mi">6667</span>
-   <span class="o">:</span><span class="n">nick</span> <span class="s">&quot;freyes&quot;</span>
-   <span class="o">:</span><span class="n">password</span> <span class="s">&quot;XXXXXX&quot;</span>
-   <span class="o">:</span><span class="n">full</span><span class="o">-</span><span class="n">name</span> <span class="s">&quot;Felipe Reyes&quot;</span><span class="p">))</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">connect-oftc</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">erc</span>
+   <span class="ss">:server</span> <span class="s">&quot;irc.oftc.net&quot;</span>
+   <span class="ss">:port</span> <span class="mi">6667</span>
+   <span class="ss">:nick</span> <span class="s">&quot;freyes&quot;</span>
+   <span class="ss">:password</span> <span class="s">&quot;XXXXXX&quot;</span>
+   <span class="ss">:full-name</span> <span class="s">&quot;Felipe Reyes&quot;</span><span class="p">))</span>
 
-<span class="p">(</span><span class="n">setq</span> <span class="n">erc</span><span class="o">-</span><span class="k">auto</span><span class="o">-</span><span class="n">query</span> <span class="err">&#39;</span><span class="n">frame</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">erc-auto-query</span> <span class="ss">&#39;frame</span><span class="p">)</span>
 </pre></div>
   </div>
   <div class="pull-right">

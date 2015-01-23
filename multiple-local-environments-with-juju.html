@@ -8,10 +8,7 @@
 
 
 
-    <meta name="tags" contents="python" />
-    <meta name="tags" contents="vagrant" />
-    <meta name="tags" contents="puppet" />
-    <meta name="tags" contents="wsgi" />
+    <meta name="tags" contents="juju" />
 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
@@ -47,39 +44,53 @@
 <a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
 <div class="content brarius6">
   <h1 class="page-title">
-    <a href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="bookmark"
-       title="Permalink to Deploying a Python WSGI app with Vagrant and Puppet">
-      Deploying a Python WSGI app with Vagrant and Puppet
+    <a href="http://tty.cl/multiple-local-environments-with-juju.html" rel="bookmark"
+       title="Permalink to Multiple Local Environments with Juju">
+      Multiple Local Environments with Juju
     </a>
   </h1>
   <div class="page-subtitle">
-    <abbr class="published" title="2014-01-22T00:00:00-03:00">
-      Wed 22 January 2014
+    <abbr class="published" title="2015-01-23T00:00:00-03:00">
+      Fri 23 January 2015
     </abbr>
     <address class="vcard author">
       By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a>
     </address>
   </div>
   <div class="content-body">
-    <p>These days the tendency among software companies is to have everything under
-version control systems (i.e. <a href="http://git-scm.com/">Git</a>,
-<a href="http://mercurial.selenic.com/">Mercurial</a>), all these is part of two software
-development strategies: <a href="http://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a>
-and <a href="http://en.wikipedia.org/wiki/Continuous_delivery">continuous delivery</a>.
-To read more about them I recommend you to read <a href="http://www.amazon.com/Continuous-Integration-Improving-Software-Reducing/dp/0321336380/ref=sr_1_1?ie=UTF8&amp;qid=1390443569&amp;sr=8-1&amp;keywords=continuous+integration">"Continuous Integration: Improving Software Quality and Reducing Risk"</a>
-and <a href="http://www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912/ref=sr_1_3?ie=UTF8&amp;qid=1390443569&amp;sr=8-3&amp;keywords=continuous+integration">"Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation"</a></p>
-<p>So I took <a href="http://www.vagrantup.com/">Vagrant</a> to provision the machines that
-will run my <a href="https://github.com/freyes/flask-hello-world">example webapp</a>, and
-<a href="http://puppetlabs.com">Puppet</a> will take care of configuring my system.</p>
-<p>My recipes are in continuous development, so you should refer to the git
-repositories for the latest information about how they work.</p>
-<ul>
-<li><a href="https://github.com/freyes/vagrant-puppet-example">Vagrant and Puppet recipes</a></li>
-<li><a href="https://github.com/freyes/flask-hello-world">Flask hello world</a></li>
-</ul>
+    <p><img alt="juju man" src="/images/JuJu-man.png" /></p>
+<p><a href="https://juju.ubuntu.com/">Juju</a> has the ability to use lxc or kvm to deploy
+services, this is done by the
+<a href="https://juju.ubuntu.com/docs/config-local.html">local provider</a>, but
+sometimes during development you may want to have one environment up-n-running
+all the time for testing and you may need another one to run
+<a href="https://juju.ubuntu.com/docs/tools-amulet.html">amulet</a> tests, well at the
+beginning this wasn't obvious to me that this could be achieved, but then I
+found how to do it :)</p>
+<p>Here is how you can have two different environments:</p>
+<div class="codehilite"><pre><span class="n">environments</span><span class="o">:</span>
+  <span class="n">local</span><span class="o">:</span>
+    <span class="n">type</span><span class="o">:</span> <span class="n">local</span>
+    <span class="k">default</span><span class="o">-</span><span class="n">series</span><span class="o">:</span> <span class="n">trusty</span>
+    <span class="n">lxc</span><span class="o">-</span><span class="n">clone</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="n">container</span><span class="o">:</span> <span class="n">kvm</span>
+    <span class="n">network</span><span class="o">-</span><span class="n">bridge</span><span class="o">:</span> <span class="n">br0</span>
+  <span class="n">lxc</span><span class="o">:</span>
+    <span class="n">type</span><span class="o">:</span> <span class="n">local</span>
+    <span class="k">default</span><span class="o">-</span><span class="n">series</span><span class="o">:</span> <span class="n">trusty</span>
+    <span class="n">lxc</span><span class="o">-</span><span class="n">clone</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="n">network</span><span class="o">-</span><span class="n">bridge</span><span class="o">:</span> <span class="n">lxcbr0</span>
+    <span class="n">state</span><span class="o">-</span><span class="n">port</span><span class="o">:</span> <span class="mi">37018</span>
+    <span class="n">api</span><span class="o">-</span><span class="n">port</span><span class="o">:</span> <span class="mi">17071</span>
+</pre></div>
+
+
+<p>That is the relevant portion of my <code>~/.juju/environments.yaml</code>, I use one environment with <code>kvm</code> and the other one with <code>lxc</code>.</p>
+<p>If you're curious, the trick is to change the <code>state-port</code> and <code>api-port</code>.</p>
+<p>I hope this helps you.</p>
   </div>
   <div class="pull-right">
-    <a href="https://twitter.com/share?text=Deploying a Python WSGI app with Vagrant and Puppet&url=http%3A//tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html&via=gnusis" type="button" class="btn btn-info">
+    <a href="https://twitter.com/share?text=Multiple Local Environments with Juju&url=http%3A//tty.cl/multiple-local-environments-with-juju.html&via=gnusis" type="button" class="btn btn-info">
       <i class="fa fa-twitter-square"></i> Tweet</a>
   </div>
 </div>
