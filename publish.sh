@@ -1,7 +1,6 @@
 #!/bin/bash
-
-source /usr/local/bin/virtualenvwrapper.sh
-workon peli
+set -ex
+workon pelican
 pelican -s pelicanconf.py -o output/
 pushd output
 git add .
