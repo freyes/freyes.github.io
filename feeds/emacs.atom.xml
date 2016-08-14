@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/emacs.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2013-12-03T00:00:00-03:00</updated><entry><title>How to start with Emacs</title><link href="http://tty.cl/how-to-start-with-emacs.html" rel="alternate"></link><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/emacs.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2013-12-03T00:00:00-03:00</updated><entry><title>How to start with Emacs</title><link href="http://tty.cl/how-to-start-with-emacs.html" rel="alternate"></link><published>2013-12-03T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
 &lt;p&gt;Before I could really be productive with emacs, I failed a couple of
 times, because I knew that emacs were powerful, but the default
 configuration shows you a simple text editor that look awful, without
@@ -25,7 +25,7 @@ to the entry.&lt;/p&gt;
 series of post, because there is a lot different flavors of emacs, for
 example XEmacs, Aquamacs, and others.&lt;/p&gt;
 &lt;p&gt;The GNU Emacs website says:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;GNU Emacs is an extensible, customizable text editor—and more. At
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;GNU Emacs is an extensible, customizable text editor—and more. At
 its core is an interpreter for Emacs Lisp, a dialect of the Lisp
 programming language with extensions to support text editing.
 &lt;/pre&gt;&lt;/div&gt;
@@ -104,27 +104,27 @@ config file, like the transient-mark-mode&lt;/p&gt;
 &lt;p&gt;The transient mark mode highlights the selected region of text, by
 defaults this is disabled so I recommend you enable it with pasting
 the following in your .emacs&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;transient-mark-mode&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;transient-mark-mode&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Fill you name and email to let the modes that need that information
 could use, this is done with the following snippet of code&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;homer@example.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;homer@example.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Homer J. Simpsons&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;If you like to use Ctrl+g to jump to a line number then you should add
 the following code&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="nv"&gt;[&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;control&lt;/span&gt; &lt;span class="nv"&gt;g&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;goto-line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="nv"&gt;[&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;control&lt;/span&gt; &lt;span class="nv"&gt;g&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;goto-line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;One of the sweetest feature that must have a text editor is syntax
 highlight, well emacs has this, but disabled by default, with the
 following code you will have it enabled always&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;font-lock&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;font-lock&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-font-lock-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -137,7 +137,7 @@ C mode.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.emacswiki.org/"&gt;Emacswiki&lt;/a&gt; is probably the best source to find emacs-specific tip-n-tricks&lt;/p&gt;
 &lt;h2&gt;Initial Configuration&lt;/h2&gt;
 &lt;p&gt;Suggested initial configuration:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;debug-on-error&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;visible-bell&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -183,7 +183,7 @@ C mode.&lt;/p&gt;
 
 &lt;span class="c1"&gt;;;; Prevent Extraneous Tabs&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;setq-default&lt;/span&gt; &lt;span class="nv"&gt;indent-tabs-mode&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>.emacs</title><link href="http://tty.cl/emacs.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>.emacs</title><link href="http://tty.cl/emacs.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
 &lt;p&gt;```elisp
 ;; to debug the .emacs file
 (setq debug-on-error nil)&lt;/p&gt;
@@ -612,10 +612,10 @@ C mode.&lt;/p&gt;
 ;;  (interactive)
 ;;  (let (parens-require-spaces)
 ;;    (insert-pair)))
-```&lt;/p&gt;</summary></entry><entry><title>erc</title><link href="http://tty.cl/erc.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
+```&lt;/p&gt;</summary></entry><entry><title>erc</title><link href="http://tty.cl/erc.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
 &lt;p&gt;erc-cmd-NP function send the current track being played to the current chat buffer (channel or private).&lt;/p&gt;
 &lt;p&gt;The connect- functions provide a quick access to the defined IRC server.&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
 &lt;span class="c1"&gt;;; erc.el&lt;/span&gt;
 &lt;span class="c1"&gt;;; Login : &amp;lt;freyes@wampa&amp;gt;&lt;/span&gt;
 &lt;span class="c1"&gt;;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes&lt;/span&gt;
@@ -655,29 +655,29 @@ C mode.&lt;/p&gt;
    &lt;span class="ss"&gt;:full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Felipe Reyes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;erc-auto-query&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;frame&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Org-mode and Beamer</title><link href="http://tty.cl/org-mode-and-beamer.html" rel="alternate"></link><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Org-mode and Beamer</title><link href="http://tty.cl/org-mode-and-beamer.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. &lt;/p&gt;
 &lt;h2&gt;Example&lt;/h2&gt;
 &lt;p&gt;Here it is an example of how a presentation file should look like&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c"&gt;#+TITLE:     Org Mode and Beamer&lt;/span&gt;
-&lt;span class="c"&gt;#+AUTHOR:    Felipe Reyes&lt;/span&gt;
-&lt;span class="c"&gt;#+EMAIL:     freyes@tty.cl&lt;/span&gt;
-&lt;span class="c"&gt;#+DATE:      2011-08-25 Tue&lt;/span&gt;
-&lt;span class="c"&gt;#+DESCRIPTION:&lt;/span&gt;
-&lt;span class="c"&gt;#+KEYWORDS:  org-mode, beamer, tutorial&lt;/span&gt;
-&lt;span class="c"&gt;#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t &amp;lt;:t&lt;/span&gt;
-&lt;span class="c"&gt;#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc&lt;/span&gt;
-&lt;span class="c"&gt;#+INFOJS_OPT: view:nil toc:nil ltoc:nil mouse:underline buttons:0 path:http://orgmode.org/org-info.js&lt;/span&gt;
-&lt;span class="c"&gt;#+EXPORT_SELECT_TAGS: export&lt;/span&gt;
-&lt;span class="c"&gt;#+EXPORT_EXCLUDE_TAGS: noexport&lt;/span&gt;
-&lt;span class="c"&gt;#+LINK_UP:   &lt;/span&gt;
-&lt;span class="c"&gt;#+LINK_HOME: &lt;/span&gt;
-&lt;span class="c"&gt;#+LaTeX_CLASS: beamer&lt;/span&gt;
-&lt;span class="c"&gt;#+BEAMER_HEADER_EXTRA: \usetheme{Madrid}\usecolortheme{default}&lt;/span&gt;
-&lt;span class="c"&gt;#+MACRO: BEAMERMODE presentation&lt;/span&gt;
-&lt;span class="c"&gt;#+MACRO: BEAMERINSTITUTE tty.cl&lt;/span&gt;
-&lt;span class="c"&gt;#+BEAMER_FRAME_LEVEL: 2&lt;/span&gt;
-&lt;span class="c"&gt;#+STARTUP: beamer&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#+TITLE:     Org Mode and Beamer&lt;/span&gt;
+&lt;span class="c1"&gt;#+AUTHOR:    Felipe Reyes&lt;/span&gt;
+&lt;span class="c1"&gt;#+EMAIL:     freyes@tty.cl&lt;/span&gt;
+&lt;span class="c1"&gt;#+DATE:      2011-08-25 Tue&lt;/span&gt;
+&lt;span class="c1"&gt;#+DESCRIPTION:&lt;/span&gt;
+&lt;span class="c1"&gt;#+KEYWORDS:  org-mode, beamer, tutorial&lt;/span&gt;
+&lt;span class="c1"&gt;#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t &amp;lt;:t&lt;/span&gt;
+&lt;span class="c1"&gt;#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc&lt;/span&gt;
+&lt;span class="c1"&gt;#+INFOJS_OPT: view:nil toc:nil ltoc:nil mouse:underline buttons:0 path:http://orgmode.org/org-info.js&lt;/span&gt;
+&lt;span class="c1"&gt;#+EXPORT_SELECT_TAGS: export&lt;/span&gt;
+&lt;span class="c1"&gt;#+EXPORT_EXCLUDE_TAGS: noexport&lt;/span&gt;
+&lt;span class="c1"&gt;#+LINK_UP:   &lt;/span&gt;
+&lt;span class="c1"&gt;#+LINK_HOME: &lt;/span&gt;
+&lt;span class="c1"&gt;#+LaTeX_CLASS: beamer&lt;/span&gt;
+&lt;span class="c1"&gt;#+BEAMER_HEADER_EXTRA: \usetheme{Madrid}\usecolortheme{default}&lt;/span&gt;
+&lt;span class="c1"&gt;#+MACRO: BEAMERMODE presentation&lt;/span&gt;
+&lt;span class="c1"&gt;#+MACRO: BEAMERINSTITUTE tty.cl&lt;/span&gt;
+&lt;span class="c1"&gt;#+BEAMER_FRAME_LEVEL: 2&lt;/span&gt;
+&lt;span class="c1"&gt;#+STARTUP: beamer&lt;/span&gt;
 
 &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;Org&lt;/span&gt; &lt;span class="n"&gt;Mode&lt;/span&gt; &lt;span class="ow"&gt;and&lt;/span&gt; &lt;span class="n"&gt;Beamer&lt;/span&gt;
 &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;Overview&lt;/span&gt;
@@ -690,14 +690,14 @@ C mode.&lt;/p&gt;
    &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;two&lt;/span&gt;
    &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;three&lt;/span&gt;
 &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;Source&lt;/span&gt; &lt;span class="n"&gt;Code&lt;/span&gt; &lt;span class="n"&gt;Example&lt;/span&gt;
-&lt;span class="c"&gt;#+BEGIN_LaTeX&lt;/span&gt;
+&lt;span class="c1"&gt;#+BEGIN_LaTeX&lt;/span&gt;
 \&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;lstlisting&lt;/span&gt;&lt;span class="p"&gt;}[&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 \&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;lstlisting&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
-&lt;span class="c"&gt;#+END_LaTeX&lt;/span&gt;
+&lt;span class="c1"&gt;#+END_LaTeX&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -721,7 +721,7 @@ sudo apt-get install texlive-extra-utils \
 &lt;/pre&gt;
 
 &lt;p&gt;Add the following to your &lt;em&gt;.emacs&lt;/em&gt; file:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="c1"&gt;;; beamer&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; beamer&lt;/span&gt;
 &lt;span class="c1"&gt;;; #+LaTeX_CLASS: beamer in org files&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;unless&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;boundp&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;org-export-latex-classes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;org-export-latex-classes&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -778,7 +778,7 @@ sudo apt-get install texlive-extra-utils \
 &lt;li&gt;&lt;a href="http://orgmode.org/worg/org-tutorials/org-beamer/tutorial.html"&gt;Worg beamer tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://orgmode.org/manual/Beamer-class-export.html"&gt;org-mode beamer&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://emacs-fu.blogspot.com/2009/10/writing-presentations-with-org-mode-and.html"&gt;emacs-fu: writing presentations with org-mode and beamer&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Emacs Tips</title><link href="http://tty.cl/emacs-tips.html" rel="alternate"></link><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:emacs-tips.html</id><summary type="html">&lt;ul&gt;
+&lt;/ul&gt;</summary></entry><entry><title>Emacs Tips</title><link href="http://tty.cl/emacs-tips.html" rel="alternate"></link><published>2013-01-01T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:emacs-tips.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;If you start emacs with "emacs -q" and the problem goes away, the problem is on your end: check your .emacs. &lt;/li&gt;
 &lt;li&gt;If "emacs -q" has problems and "emacs -Q" does not, it's caused by your distro or local admin.&lt;/li&gt;
 &lt;/ul&gt;</summary></entry></feed>

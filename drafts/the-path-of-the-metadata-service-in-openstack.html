@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-        <title>TTY.cl</title>
+          <title>TTY.cl</title>
         <meta charset="utf-8" />
         <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Full Atom Feed" />
+        <link href="http://tty.cl//feeds/openstack.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Categories Atom Feed" />
+
+
+
+    <meta name="tags" contents="openstack" />
+    <meta name="tags" contents="neutron" />
+    <meta name="tags" contents="nova" />
+
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
         <link href="/theme/css/pygment.css" rel="stylesheet">
@@ -36,44 +44,39 @@
     <div class="container">
       <p class="socialconnect">
 <a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
-<h1>Archives for TTY.cl</h1>
-
-<dl>
-    <dt>Sun 14 August 2016</dt>
-    <dd><a href="http://tty.cl/lynx-accept-cookies-always.html">Lynx: accept cookies always</a></dd>
-    <dt>Fri 23 January 2015</dt>
-    <dd><a href="http://tty.cl/multiple-local-environments-with-juju.html">Multiple Local Environments with Juju</a></dd>
-    <dt>Mon 24 February 2014</dt>
-    <dd><a href="http://tty.cl/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html">Deploy a Python WSGI app with a Celery worker in Heroku</a></dd>
-    <dt>Wed 22 January 2014</dt>
-    <dd><a href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html">Deploying a Python WSGI app with Vagrant and Puppet</a></dd>
-    <dt>Tue 03 December 2013</dt>
-    <dd><a href="http://tty.cl/how-to-start-with-emacs.html">How to start with Emacs</a></dd>
-    <dt>Mon 02 December 2013</dt>
-    <dd><a href="http://tty.cl/emacs.html">.emacs</a></dd>
-    <dt>Mon 02 December 2013</dt>
-    <dd><a href="http://tty.cl/erc.html">erc</a></dd>
-    <dt>Mon 02 December 2013</dt>
-    <dd><a href="http://tty.cl/org-mode-and-beamer.html">Org-mode and Beamer</a></dd>
-    <dt>Fri 22 November 2013</dt>
-    <dd><a href="http://tty.cl/postgresql-tips-n-tricks.html">Postgresql Tips n' Tricks</a></dd>
-    <dt>Mon 18 February 2013</dt>
-    <dd><a href="http://tty.cl/skype-in-gnudebian-amd64.html">Skype in GNU/Debian AMD64</a></dd>
-    <dt>Tue 01 January 2013</dt>
-    <dd><a href="http://tty.cl/c-snippets.html">C Snippets</a></dd>
-    <dt>Tue 01 January 2013</dt>
-    <dd><a href="http://tty.cl/emacs-tips.html">Emacs Tips</a></dd>
-    <dt>Tue 01 January 2013</dt>
-    <dd><a href="http://tty.cl/python-snippets.html">Python Snippets</a></dd>
-    <dt>Mon 03 December 2012</dt>
-    <dd><a href="http://tty.cl/mercurial.html">Mercurial</a></dd>
-    <dt>Sun 18 December 2011</dt>
-    <dd><a href="http://tty.cl/mysql-and-the-key-cache-buffer.html">MySQL and the Key Cache Buffer</a></dd>
-    <dt>Sat 11 June 2011</dt>
-    <dd><a href="http://tty.cl/rxvt-unicode.html">rxvt-unicode</a></dd>
-    <dt>Sun 10 October 2010</dt>
-    <dd><a href="http://tty.cl/about-me.html">About Me</a></dd>
-</dl>
+<div class="content brarius6">
+  <h1 class="page-title">
+    <a href="http://tty.cl/drafts/the-path-of-the-metadata-service-in-openstack.html" rel="bookmark"
+       title="Permalink to The path of the metadata service in OpenStack">
+      The path of the metadata service in OpenStack
+    </a>
+  </h1>
+  <div class="page-subtitle">
+    <abbr class="published" title="2016-01-01T00:00:00-03:00">
+      Fri 01 January 2016
+    </abbr>
+    <address class="vcard author">
+      By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a>
+    </address>
+  </div>
+  <div class="content-body">
+    <p>The intention of this article is to explain how the metadata service works
+from an operator point of view, what you should be watching while you're
+troubleshooting or what kind of things you could be considering as 'normal'.</p>
+<h1>Scenario</h1>
+<ul>
+<li>This is an environment using Neutron (nova-network is not in the picture)</li>
+<li>Neutron is configured to use openvswitch</li>
+<li>This applies to Juno, but as far as I know, Icehouse is not different.</li>
+</ul>
+<h1>What is the metadata service?</h1>
+<p>Le</p>
+  </div>
+  <div class="pull-right">
+    <a href="https://twitter.com/share?text=The path of the metadata service in OpenStack&url=http%3A//tty.cl/drafts/the-path-of-the-metadata-service-in-openstack.html&via=gnusis" type="button" class="btn btn-info">
+      <i class="fa fa-twitter-square"></i> Tweet</a>
+  </div>
+</div>
 
     </div>
   </div>

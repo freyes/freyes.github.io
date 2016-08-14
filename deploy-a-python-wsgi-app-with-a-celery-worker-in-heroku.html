@@ -226,19 +226,19 @@ Use `heroku addons:docs cloudamqp` to view documentation.
 <h1>Adjusting Settings</h1>
 <p>Heroku passes to your app environment variables with the configuration, this a common practice in the PaaS ecosystem, so you need to modify your app to read config values from it.</p>
 <p>Here are examples to setup Celery and Django:</p>
-<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">os</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">dj_database_url</span>
 
-<span class="n">DEFAULT_AMQP</span> <span class="o">=</span> <span class="s">&quot;amqp://guest:guest@localhost//&quot;</span>
-<span class="n">DEFAULT_DB</span> <span class="o">=</span> <span class="s">&quot;postgres://localhost&quot;</span>
-<span class="n">db_url</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;DATABASE_URL&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DB</span><span class="p">)</span>
+<span class="n">DEFAULT_AMQP</span> <span class="o">=</span> <span class="s2">&quot;amqp://guest:guest@localhost//&quot;</span>
+<span class="n">DEFAULT_DB</span> <span class="o">=</span> <span class="s2">&quot;postgres://localhost&quot;</span>
+<span class="n">db_url</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;DATABASE_URL&quot;</span><span class="p">,</span> <span class="n">DEFAULT_DB</span><span class="p">)</span>
 
-<span class="c"># Django settings</span>
-<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span><span class="s">&quot;default&quot;</span><span class="p">:</span> <span class="n">dj_database_url</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">DEFAULT_DB</span><span class="p">)}</span>
+<span class="c1"># Django settings</span>
+<span class="n">DATABASES</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="n">dj_database_url</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="n">DEFAULT_DB</span><span class="p">)}</span>
 
-<span class="c"># Celery app configuration</span>
-<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s">&quot;tasks&quot;</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">db_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s">&quot;postgres://&quot;</span><span class="p">,</span> <span class="s">&quot;db+postgresql://&quot;</span><span class="p">),</span>
-             <span class="n">broker</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;CLOUDAMQP_URL&quot;</span><span class="p">,</span> <span class="n">DEFAULT_AMQP</span><span class="p">))</span>
+<span class="c1"># Celery app configuration</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s2">&quot;tasks&quot;</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="n">db_url</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;postgres://&quot;</span><span class="p">,</span> <span class="s2">&quot;db+postgresql://&quot;</span><span class="p">),</span>
+             <span class="n">broker</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;CLOUDAMQP_URL&quot;</span><span class="p">,</span> <span class="n">DEFAULT_AMQP</span><span class="p">))</span>
 <span class="n">app</span><span class="o">.</span><span class="n">BROKER_POOL_LIMIT</span> <span class="o">=</span> <span class="mi">1</span>
 </pre></div>
 

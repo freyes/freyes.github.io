@@ -4,12 +4,13 @@
           <title>TTY.cl</title>
         <meta charset="utf-8" />
         <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Full Atom Feed" />
-        <link href="http://tty.cl//feeds/postgresql.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Categories Atom Feed" />
+        <link href="http://tty.cl//feeds/openstack.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Categories Atom Feed" />
 
 
 
-    <meta name="tags" contents="postgresql" />
-    <meta name="tags" contents="tips" />
+    <meta name="tags" contents="openstack" />
+    <meta name="tags" contents="cinder" />
+    <meta name="tags" contents="ceph" />
 
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
@@ -45,103 +46,43 @@
 <a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
 <div class="content brarius6">
   <h1 class="page-title">
-    <a href="http://tty.cl/postgresql-tips-n-tricks.html" rel="bookmark"
-       title="Permalink to Postgresql Tips n' Tricks">
-      Postgresql Tips n' Tricks
+    <a href="http://tty.cl/drafts/openstack-cinder-and-ceph-snapshots-and-volumes.html" rel="bookmark"
+       title="Permalink to OpenStack Cinder and Ceph: snapshots and volumes">
+      OpenStack Cinder and Ceph: snapshots and volumes
     </a>
   </h1>
   <div class="page-subtitle">
-    <abbr class="published" title="2013-11-22T15:23:00-03:00">
-      Fri 22 November 2013
+    <abbr class="published" title="2015-04-02T00:00:00-03:00">
+      Thu 02 April 2015
     </abbr>
     <address class="vcard author">
       By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a>
     </address>
   </div>
   <div class="content-body">
-    <ul class="simple">
-<li>pg_stat_activity</li>
-</ul>
-<p><a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html">pg_stat_activity</a>
-is a view that belongs to the postgresql catalog, it helps you to view the
-status of the queries that are in execution, the explanation of each column
-can be found in the postgresql manual <a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html">The Statistics Collector</a>
-section (I don't want to do a simply copy-paste, so see the official documentation).</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="30%" />
-<col width="49%" />
-<col width="21%" />
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Column</th>
-<th class="head">Type</th>
-<th class="head">Modifiers</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr><td>datid</td>
-<td>oid</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>datname</td>
-<td>name</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>procpid</td>
-<td>integer</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>usesysid</td>
-<td>oid</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>usename</td>
-<td>name</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>current_query</td>
-<td>text</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>waiting</td>
-<td>boolean</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>xact_start</td>
-<td>timestamp with time zone</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>query_start</td>
-<td>timestamp with time zone</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>backend_start</td>
-<td>timestamp with time zone</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>client_addr</td>
-<td>inet</td>
-<td>&nbsp;</td>
-</tr>
-<tr><td>client_port</td>
-<td>integer</td>
-<td>&nbsp;</td>
-</tr>
-</tbody>
-</table>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">pg_stat_activity</span><span class="p">;</span>
-</pre></div>
-<ul>
-<li><p class="first">If you want to view the queries that are stuck (usually due to a lock or simply waiting for I/O) you can execute the following query:</p>
-<div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">pg_stat_activity</span> <span class="k">WHERE</span> <span class="n">waiting</span> <span class="o">=</span> <span class="k">TRUE</span><span class="p">;</span>
-</pre></div>
-</li>
-</ul>
-
+    <p>When you want to deploy OpenStack you have to make a lot of decisions, like
+what networking gear you are gonna use, what hypervisor and so on, when it
+gets to 'what cinder backend' a common decision is to use
+<a href="http://ceph.com/">Ceph</a>, but how cinder uses ceph?, here I'm trying to
+provide some answers and solutions to known quirks.</p>
+<h1>Volumes</h1>
+<p>Each "cinder volume" maps to a
+<a href="http://ceph.com/docs/master/rbd/rados-rbd-cmds/">"ceph image"</a> inside of a
+<a href="http://ceph.com/docs/master/rados/operations/pools/">"ceph pool"</a>, the ceph
+pool used by cinder is defined in /etc/cinder/cinder.conf configuration key
+<code>rbd_pool</code>, if you're using juju to deploy your cloud then this is set to <code>cinder-ceph</code></p>
+<p>In the ceph world is all about how to optimize disk space usage, so every time
+a user creates a snapshot, which is a cheap operation in ceph, a reference to
+that point in time is created, this is read-only and at the beginning it won't
+be using disk space, but as the volume snapshoted starts to change, then the
+snapshot starts using space on disk.</p>
+<p>Another operation after you created a snapshot is create a new cinder volume
+using as source (or based on) a snapshot, at this point ceph will create a
+copy-on-write image, so if the user creates a volume but it's not used, then
+actual disk space used is minimum.</p>
   </div>
   <div class="pull-right">
-    <a href="https://twitter.com/share?text=Postgresql Tips n' Tricks&url=http%3A//tty.cl/postgresql-tips-n-tricks.html&via=gnusis" type="button" class="btn btn-info">
+    <a href="https://twitter.com/share?text=OpenStack Cinder and Ceph: snapshots and volumes&url=http%3A//tty.cl/drafts/openstack-cinder-and-ceph-snapshots-and-volumes.html&via=gnusis" type="button" class="btn btn-info">
       <i class="fa fa-twitter-square"></i> Tweet</a>
   </div>
 </div>

@@ -61,25 +61,25 @@
 <p>The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. </p>
 <h2>Example</h2>
 <p>Here it is an example of how a presentation file should look like</p>
-<div class="codehilite"><pre><span class="c">#+TITLE:     Org Mode and Beamer</span>
-<span class="c">#+AUTHOR:    Felipe Reyes</span>
-<span class="c">#+EMAIL:     freyes@tty.cl</span>
-<span class="c">#+DATE:      2011-08-25 Tue</span>
-<span class="c">#+DESCRIPTION:</span>
-<span class="c">#+KEYWORDS:  org-mode, beamer, tutorial</span>
-<span class="c">#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t &lt;:t</span>
-<span class="c">#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc</span>
-<span class="c">#+INFOJS_OPT: view:nil toc:nil ltoc:nil mouse:underline buttons:0 path:http://orgmode.org/org-info.js</span>
-<span class="c">#+EXPORT_SELECT_TAGS: export</span>
-<span class="c">#+EXPORT_EXCLUDE_TAGS: noexport</span>
-<span class="c">#+LINK_UP:   </span>
-<span class="c">#+LINK_HOME: </span>
-<span class="c">#+LaTeX_CLASS: beamer</span>
-<span class="c">#+BEAMER_HEADER_EXTRA: \usetheme{Madrid}\usecolortheme{default}</span>
-<span class="c">#+MACRO: BEAMERMODE presentation</span>
-<span class="c">#+MACRO: BEAMERINSTITUTE tty.cl</span>
-<span class="c">#+BEAMER_FRAME_LEVEL: 2</span>
-<span class="c">#+STARTUP: beamer</span>
+<div class="codehilite"><pre><span></span><span class="c1">#+TITLE:     Org Mode and Beamer</span>
+<span class="c1">#+AUTHOR:    Felipe Reyes</span>
+<span class="c1">#+EMAIL:     freyes@tty.cl</span>
+<span class="c1">#+DATE:      2011-08-25 Tue</span>
+<span class="c1">#+DESCRIPTION:</span>
+<span class="c1">#+KEYWORDS:  org-mode, beamer, tutorial</span>
+<span class="c1">#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t &lt;:t</span>
+<span class="c1">#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc</span>
+<span class="c1">#+INFOJS_OPT: view:nil toc:nil ltoc:nil mouse:underline buttons:0 path:http://orgmode.org/org-info.js</span>
+<span class="c1">#+EXPORT_SELECT_TAGS: export</span>
+<span class="c1">#+EXPORT_EXCLUDE_TAGS: noexport</span>
+<span class="c1">#+LINK_UP:   </span>
+<span class="c1">#+LINK_HOME: </span>
+<span class="c1">#+LaTeX_CLASS: beamer</span>
+<span class="c1">#+BEAMER_HEADER_EXTRA: \usetheme{Madrid}\usecolortheme{default}</span>
+<span class="c1">#+MACRO: BEAMERMODE presentation</span>
+<span class="c1">#+MACRO: BEAMERINSTITUTE tty.cl</span>
+<span class="c1">#+BEAMER_FRAME_LEVEL: 2</span>
+<span class="c1">#+STARTUP: beamer</span>
 
 <span class="o">*</span> <span class="n">Org</span> <span class="n">Mode</span> <span class="ow">and</span> <span class="n">Beamer</span>
 <span class="o">**</span> <span class="n">Overview</span>
@@ -92,14 +92,14 @@
    <span class="mi">2</span><span class="p">)</span> <span class="n">two</span>
    <span class="mi">3</span><span class="p">)</span> <span class="n">three</span>
 <span class="o">**</span> <span class="n">Source</span> <span class="n">Code</span> <span class="n">Example</span>
-<span class="c">#+BEGIN_LaTeX</span>
+<span class="c1">#+BEGIN_LaTeX</span>
 \<span class="n">begin</span><span class="p">{</span><span class="n">lstlisting</span><span class="p">}[</span><span class="n">language</span><span class="o">=</span><span class="n">python</span><span class="p">]</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="k">def</span> <span class="nf">my_fun</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s">&quot;.&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">my_fun</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
     <span class="k">print</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 \<span class="n">end</span><span class="p">{</span><span class="n">lstlisting</span><span class="p">}</span>
-<span class="c">#+END_LaTeX</span>
+<span class="c1">#+END_LaTeX</span>
 </pre></div>
 
 
@@ -123,7 +123,7 @@ sudo apt-get install texlive-extra-utils \
 </pre>
 
 <p>Add the following to your <em>.emacs</em> file:</p>
-<div class="codehilite"><pre><span class="c1">;; beamer</span>
+<div class="codehilite"><pre><span></span><span class="c1">;; beamer</span>
 <span class="c1">;; #+LaTeX_CLASS: beamer in org files</span>
 <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">boundp</span> <span class="ss">&#39;org-export-latex-classes</span><span class="p">)</span>
   <span class="p">(</span><span class="k">setq</span> <span class="nv">org-export-latex-classes</span> <span class="no">nil</span><span class="p">))</span>

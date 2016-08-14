@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/articles.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2015-01-23T00:00:00-03:00</updated><entry><title>Multiple Local Environments with Juju</title><link href="http://tty.cl/multiple-local-environments-with-juju.html" rel="alternate"></link><updated>2015-01-23T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2015-01-23:multiple-local-environments-with-juju.html</id><summary type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png" /&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/articles.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2016-08-14T00:00:00-04:00</updated><entry><title>Lynx: accept cookies always</title><link href="http://tty.cl/lynx-accept-cookies-always.html" rel="alternate"></link><published>2016-08-14T00:00:00-04:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2016-08-14:lynx-accept-cookies-always.html</id><summary type="html">&lt;p&gt;From time to time I need to use &lt;a href="https://packages.ubuntu.com/lynx"&gt;lynx&lt;/a&gt; (or
+any other text based browser like &lt;a href="https://packages.ubuntu.com/links"&gt;links&lt;/a&gt;),
+for some reason my fingers usually type &lt;code&gt;lynx&lt;/code&gt;, but having to accept cookies
+every time a new domain tries to send it to me it's annoying, so here is how
+you configure it to always accept them.&lt;/p&gt;
+&lt;p&gt;Add this to your &lt;code&gt;~/.bashrc&lt;/code&gt; file:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;LYNX_CFG=~/.lynx.cfg
+export LYNX_CFG
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then in &lt;code&gt;~/.lynx.cfg&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;INCLUDE:/etc/lynx-cur/lynx.cfg
+FORCE_SSL_COOKIES_SECURE:TRUE
+SET_COOKIES:TRUE
+ACCEPT_ALL_COOKIES:TRUE
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And voila!&lt;/p&gt;</summary></entry><entry><title>Multiple Local Environments with Juju</title><link href="http://tty.cl/multiple-local-environments-with-juju.html" rel="alternate"></link><published>2015-01-23T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2015-01-23:multiple-local-environments-with-juju.html</id><summary type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png" /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://juju.ubuntu.com/"&gt;Juju&lt;/a&gt; has the ability to use lxc or kvm to deploy
 services, this is done by the
 &lt;a href="https://juju.ubuntu.com/docs/config-local.html"&gt;local provider&lt;/a&gt;, but
@@ -9,7 +28,7 @@ all the time for testing and you may need another one to run
 beginning this wasn't obvious to me that this could be achieved, but then I
 found how to do it :)&lt;/p&gt;
 &lt;p&gt;Here is how you can have two different environments:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="n"&gt;environments&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;environments&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
   &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt;
     &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;series&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;trusty&lt;/span&gt;
@@ -28,7 +47,7 @@ found how to do it :)&lt;/p&gt;
 
 &lt;p&gt;That is the relevant portion of my &lt;code&gt;~/.juju/environments.yaml&lt;/code&gt;, I use one environment with &lt;code&gt;kvm&lt;/code&gt; and the other one with &lt;code&gt;lxc&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;If you're curious, the trick is to change the &lt;code&gt;state-port&lt;/code&gt; and &lt;code&gt;api-port&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I hope this helps you.&lt;/p&gt;</summary><category term="juju"></category></entry><entry><title>Deploy a Python WSGI app with a Celery worker in Heroku</title><link href="http://tty.cl/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html" rel="alternate"></link><updated>2014-02-24T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-02-24:deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html</id><summary type="html">&lt;p&gt;This article explains how to deploy a WSGI python web app + a
+&lt;p&gt;I hope this helps you.&lt;/p&gt;</summary><category term="juju"></category></entry><entry><title>Deploy a Python WSGI app with a Celery worker in Heroku</title><link href="http://tty.cl/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html" rel="alternate"></link><published>2014-02-24T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-02-24:deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html</id><summary type="html">&lt;p&gt;This article explains how to deploy a WSGI python web app + a
 &lt;a href="http://www.celeryproject.org"&gt;celery&lt;/a&gt; worker.&lt;/p&gt;
 &lt;p&gt;A recommended reading before moving forward with Heroku is
 &lt;a href="https://devcenter.heroku.com/articles/process-model"&gt;The Process Model&lt;/a&gt;.&lt;/p&gt;
@@ -168,19 +187,19 @@ Use `heroku addons:docs cloudamqp` to view documentation.
 &lt;h1&gt;Adjusting Settings&lt;/h1&gt;
 &lt;p&gt;Heroku passes to your app environment variables with the configuration, this a common practice in the PaaS ecosystem, so you need to modify your app to read config values from it.&lt;/p&gt;
 &lt;p&gt;Here are examples to setup Celery and Django:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;dj_database_url&lt;/span&gt;
 
-&lt;span class="n"&gt;DEFAULT_AMQP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;amqp://guest:guest@localhost//&amp;quot;&lt;/span&gt;
-&lt;span class="n"&gt;DEFAULT_DB&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;postgres://localhost&amp;quot;&lt;/span&gt;
-&lt;span class="n"&gt;db_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;DATABASE_URL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DEFAULT_DB&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;DEFAULT_AMQP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;amqp://guest:guest@localhost//&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;DEFAULT_DB&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;postgres://localhost&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;db_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;DATABASE_URL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DEFAULT_DB&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
-&lt;span class="c"&gt;# Django settings&lt;/span&gt;
-&lt;span class="n"&gt;DATABASES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dj_database_url&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;DEFAULT_DB&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+&lt;span class="c1"&gt;# Django settings&lt;/span&gt;
+&lt;span class="n"&gt;DATABASES&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;default&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;dj_database_url&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;DEFAULT_DB&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
 
-&lt;span class="c"&gt;# Celery app configuration&lt;/span&gt;
-&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Celery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;tasks&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;backend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;db_url&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;postgres://&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;db+postgresql://&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
-             &lt;span class="n"&gt;broker&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;CLOUDAMQP_URL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DEFAULT_AMQP&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="c1"&gt;# Celery app configuration&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Celery&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tasks&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;backend&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;db_url&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;replace&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;postgres://&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;db+postgresql://&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+             &lt;span class="n"&gt;broker&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;CLOUDAMQP_URL&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;DEFAULT_AMQP&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;BROKER_POOL_LIMIT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -274,7 +293,7 @@ Installed 0 object(s) from 0 fixture(s)
 &lt;p&gt;We have the app running and a celery worker, now it's moment to assign a
 decent domain and other minor settings, heroku provides an option called
 &lt;a href="https://devcenter.heroku.com/articles/production-check"&gt;Production Check&lt;/a&gt;,
-you should use it before going live with your site.&lt;/p&gt;</summary><category term="development"></category></entry><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+you should use it before going live with your site.&lt;/p&gt;</summary><category term="development"></category></entry><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><published>2014-01-22T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
 version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
 &lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
 development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
@@ -289,7 +308,7 @@ repositories for the latest information about how they work.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/freyes/vagrant-puppet-example"&gt;Vagrant and Puppet recipes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/freyes/flask-hello-world"&gt;Flask hello world&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry><entry><title>MySQL and the Key Cache Buffer</title><link href="http://tty.cl/mysql-and-the-key-cache-buffer.html" rel="alternate"></link><updated>2011-12-18T00:00:00-03:00</updated><author><name>Jonathan Gonzalez</name></author><id>tag:tty.cl,2011-12-18:mysql-and-the-key-cache-buffer.html</id><summary type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
+&lt;/ul&gt;</summary><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry><entry><title>MySQL and the Key Cache Buffer</title><link href="http://tty.cl/mysql-and-the-key-cache-buffer.html" rel="alternate"></link><published>2011-12-18T00:00:00-03:00</published><author><name>Jonathan Gonzalez</name></author><id>tag:tty.cl,2011-12-18:mysql-and-the-key-cache-buffer.html</id><summary type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
 &lt;p&gt;It's always important to recognize why this happened, well, here in my
 work a few weeks ago I set up a &lt;a href="http://code.google.com/p/mysql-cacti-templates/"&gt;few new templates&lt;/a&gt; for our &lt;a href="http://www.cacti.net/"&gt;Cacti&lt;/a&gt;, among
 many useful templates it comes with some very handy templates for

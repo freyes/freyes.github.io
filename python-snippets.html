@@ -60,7 +60,7 @@
   </div>
   <div class="content-body">
     <h2>Property</h2>
-<div class="codehilite"><pre><span class="k">def</span> <span class="nf">Property</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><span class="k">def</span> <span class="nf">Property</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
     <span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">,</span> <span class="n">fdel</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
     <span class="n">fdoc</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">__doc__</span>
     <span class="k">return</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">,</span> <span class="n">fdel</span><span class="p">,</span> <span class="n">fdoc</span><span class="p">)</span>
@@ -68,31 +68,31 @@
 
 
 <h3>Usage Example</h3>
-<div class="codehilite"><pre><span class="k">class</span> <span class="nc">TtyExample</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="codehilite"><pre><span></span><span class="k">class</span> <span class="nc">TtyExample</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
     <span class="k">def</span> <span class="nf">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="bp">None</span>
 
     <span class="nd">@Property</span>
     <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-        <span class="s">&quot;The name&quot;</span>
+        <span class="s2">&quot;The name&quot;</span>
         <span class="k">def</span> <span class="nf">fget</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
         <span class="k">def</span> <span class="nf">fset</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
             <span class="k">assert</span> <span class="nb">isinstance</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">basestring</span><span class="p">)</span>
-            <span class="k">assert</span> <span class="n">value</span> <span class="o">!=</span> <span class="s">&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;Name cannot be empty&#39;</span>
+            <span class="k">assert</span> <span class="n">value</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;Name cannot be empty&#39;</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">value</span>
 
         <span class="k">def</span> <span class="nf">fdel</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-            <span class="k">print</span> <span class="s">&quot;Hey! don&#39;t delete me please :\ &quot;</span>
+            <span class="k">print</span> <span class="s2">&quot;Hey! don&#39;t delete me please :\ &quot;</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">TtyExample</span><span class="p">()</span>
-    <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;foobar&#39;</span>
+    <span class="n">a</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;foobar&#39;</span>
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+        <span class="n">a</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="k">pass</span>
 
@@ -106,10 +106,10 @@
 
 
 <h2>Get my IP address</h2>
-<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">socket</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">socket</span>
 
 <span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_DGRAM</span><span class="p">)</span>
-<span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s">&quot;tty.cl&quot;</span><span class="p">,</span><span class="mi">80</span><span class="p">))</span>
+<span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="s2">&quot;tty.cl&quot;</span><span class="p">,</span><span class="mi">80</span><span class="p">))</span>
 <span class="k">print</span> <span class="n">s</span><span class="o">.</span><span class="n">getsockname</span><span class="p">()</span>
 </pre></div>
 
@@ -124,7 +124,7 @@
 </pre>
 
 <h2>Get variables</h2>
-<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">sys</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">import</span> <span class="nn">traceback</span>
 <span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
 
@@ -153,25 +153,25 @@
         <span class="n">stack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">f_back</span>
     <span class="n">stack</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-    <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Locals by frame, innermost last</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+    <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Locals by frame, innermost last</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">stack</span><span class="p">:</span>
-        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;Frame </span><span class="si">%s</span><span class="s"> in </span><span class="si">%s</span><span class="s"> at line </span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="p">,</span>
+        <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Frame </span><span class="si">%s</span><span class="s2"> in </span><span class="si">%s</span><span class="s2"> at line </span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="p">,</span>
                                                       <span class="n">frame</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_filename</span><span class="p">,</span>
                                                       <span class="n">frame</span><span class="o">.</span><span class="n">f_lineno</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">frame</span><span class="o">.</span><span class="n">f_locals</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="si">%20s</span><span class="s"> = &quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
-            <span class="c">#We have to be careful not to cause a new error in our error</span>
-            <span class="c">#printer! Calling str() on an unknown object could cause an</span>
-            <span class="c">#error we don&#39;t want.</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="si">%20s</span><span class="s2"> = &quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">)</span>
+            <span class="c1">#We have to be careful not to cause a new error in our error</span>
+            <span class="c1">#printer! Calling str() on an unknown object could cause an</span>
+            <span class="c1">#error we don&#39;t want.</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">value</span><span class="p">)</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">value</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s">&quot;&lt;ERROR WHILE PRINTING VALUE&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">)</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;&lt;ERROR WHILE PRINTING VALUE&gt;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="p">:::</span><span class="n">python</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="k">class</span> <span class="nc">SMSHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Handler</span><span class="p">):</span> <span class="c"># Inherit from logging.Handler</span>
+<span class="k">class</span> <span class="nc">SMSHandler</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Handler</span><span class="p">):</span> <span class="c1"># Inherit from logging.Handler</span>
     <span class="k">def</span> <span class="nf">emit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
         <span class="k">print</span> <span class="n">record</span>
         <span class="kn">import</span> <span class="nn">pdb</span>
@@ -179,36 +179,36 @@
 
 <span class="kn">import</span> <span class="nn">logging.handlers</span>
 
-<span class="c"># Create a logging object (after configuring logging)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">&quot;as&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+<span class="c1"># Create a logging object (after configuring logging)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;as&quot;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
 
-<span class="c"># A little trickery because, at least for me, directly creating</span>
-<span class="c"># an SMSHandler object didn&#39;t work</span>
+<span class="c1"># A little trickery because, at least for me, directly creating</span>
+<span class="c1"># an SMSHandler object didn&#39;t work</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">SMSHandler</span> <span class="o">=</span> <span class="n">SMSHandler</span>
 
-<span class="c"># create the handler object</span>
+<span class="c1"># create the handler object</span>
 <span class="n">testHandler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">handlers</span><span class="o">.</span><span class="n">SMSHandler</span><span class="p">()</span>
-<span class="c"># Configure the handler to only send SMS for critical errors</span>
+<span class="c1"># Configure the handler to only send SMS for critical errors</span>
 <span class="n">testHandler</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">)</span>
 
-<span class="c"># and finally we add the handler to the logging object</span>
+<span class="c1"># and finally we add the handler to the logging object</span>
 <span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">testHandler</span><span class="p">)</span>
 
-<span class="c"># And finally a test</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;Test 1&#39;</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&#39;Test 2&#39;</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&#39;Test 3&#39;</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s">&#39;Test 4&#39;</span><span class="p">)</span>
-<span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s">&#39;Test 5&#39;</span><span class="p">)</span>
+<span class="c1"># And finally a test</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Test 1&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;Test 2&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s1">&#39;Test 3&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Test 4&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s1">&#39;Test 5&#39;</span><span class="p">)</span>
 </pre></div>
 
 
 <h2>json encoder/decoder</h2>
-<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">json</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">datetime</span>
 
-<span class="n">DATETIME_FORMAT</span> <span class="o">=</span> <span class="s">&quot;%Y-%m-</span><span class="si">%d</span><span class="s"> %H:%M:%S&quot;</span>
+<span class="n">DATETIME_FORMAT</span> <span class="o">=</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span>
 
 <span class="k">class</span> <span class="nc">JSONEncoder</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">JSONEncoder</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
@@ -236,17 +236,17 @@
 
         <span class="k">return</span> <span class="n">obj</span>
 
-<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&quot;__main__&quot;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">encoder</span> <span class="o">=</span> <span class="n">JSONEncoder</span><span class="p">()</span>
-    <span class="k">print</span> <span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s">&quot;date&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()})</span>
+    <span class="k">print</span> <span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()})</span>
 
     <span class="n">decoder</span> <span class="o">=</span> <span class="n">JSONDecoder</span><span class="p">()</span>
-    <span class="k">print</span> <span class="n">decoder</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s">&quot;date&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()}))</span>
+    <span class="k">print</span> <span class="n">decoder</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">encoder</span><span class="o">.</span><span class="n">encode</span><span class="p">({</span><span class="s2">&quot;date&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()}))</span>
 </pre></div>
 
 
 <h2>sendmail</h2>
-<div class="codehilite"><pre><span class="kn">import</span> <span class="nn">smtplib</span>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="nn">smtplib</span>
 <span class="kn">from</span> <span class="nn">email.MIMEMultipart</span> <span class="kn">import</span> <span class="n">MIMEMultipart</span>
 <span class="kn">from</span> <span class="nn">email.MIMEBase</span> <span class="kn">import</span> <span class="n">MIMEBase</span>
 <span class="kn">from</span> <span class="nn">email.MIMEText</span> <span class="kn">import</span> <span class="n">MIMEText</span>
@@ -254,24 +254,24 @@
 <span class="kn">from</span> <span class="nn">email</span> <span class="kn">import</span> <span class="n">Encoders</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="k">def</span> <span class="nf">sendMail</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="p">[],</span><span class="n">server</span><span class="o">=</span><span class="s">&quot;localhost&quot;</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">sendMail</span><span class="p">(</span><span class="n">to</span><span class="p">,</span> <span class="n">subject</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="p">[],</span><span class="n">server</span><span class="o">=</span><span class="s2">&quot;localhost&quot;</span><span class="p">):</span>
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">to</span><span class="p">)</span><span class="o">==</span><span class="nb">list</span>
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">files</span><span class="p">)</span><span class="o">==</span><span class="nb">list</span>
-    <span class="n">fro</span> <span class="o">=</span> <span class="s">&quot;Expediteur &lt;expediteur@mail.com&gt;&quot;</span>
+    <span class="n">fro</span> <span class="o">=</span> <span class="s2">&quot;Expediteur &lt;expediteur@mail.com&gt;&quot;</span>
 
     <span class="n">msg</span> <span class="o">=</span> <span class="n">MIMEMultipart</span><span class="p">()</span>
-    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;From&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fro</span>
-    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;To&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">COMMASPACE</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
-    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">formatdate</span><span class="p">(</span><span class="n">localtime</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-    <span class="n">msg</span><span class="p">[</span><span class="s">&#39;Subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subject</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;From&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fro</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;To&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">COMMASPACE</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">to</span><span class="p">)</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">formatdate</span><span class="p">(</span><span class="n">localtime</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">msg</span><span class="p">[</span><span class="s1">&#39;Subject&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">subject</span>
 
     <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span> <span class="n">MIMEText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="p">)</span>
 
     <span class="k">for</span> <span class="nb">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
-        <span class="n">part</span> <span class="o">=</span> <span class="n">MIMEBase</span><span class="p">(</span><span class="s">&#39;application&#39;</span><span class="p">,</span> <span class="s">&quot;octet-stream&quot;</span><span class="p">)</span>
-        <span class="n">part</span><span class="o">.</span><span class="n">set_payload</span><span class="p">(</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span><span class="s">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="p">)</span>
+        <span class="n">part</span> <span class="o">=</span> <span class="n">MIMEBase</span><span class="p">(</span><span class="s1">&#39;application&#39;</span><span class="p">,</span> <span class="s2">&quot;octet-stream&quot;</span><span class="p">)</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">set_payload</span><span class="p">(</span> <span class="nb">open</span><span class="p">(</span><span class="nb">file</span><span class="p">,</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="p">)</span>
         <span class="n">Encoders</span><span class="o">.</span><span class="n">encode_base64</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
-        <span class="n">part</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s">&#39;Content-Disposition&#39;</span><span class="p">,</span> <span class="s">&#39;attachment; filename=&quot;</span><span class="si">%s</span><span class="s">&quot;&#39;</span>
+        <span class="n">part</span><span class="o">.</span><span class="n">add_header</span><span class="p">(</span><span class="s1">&#39;Content-Disposition&#39;</span><span class="p">,</span> <span class="s1">&#39;attachment; filename=&quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span>
                        <span class="o">%</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="nb">file</span><span class="p">))</span>
         <span class="n">msg</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">part</span><span class="p">)</span>
 
@@ -281,9 +281,9 @@
 
 
 <span class="n">sendMail</span><span class="p">(</span>
-        <span class="p">[</span><span class="s">&quot;destination@dest.kio&quot;</span><span class="p">],</span>
-        <span class="s">&quot;hello&quot;</span><span class="p">,</span><span class="s">&quot;cheers&quot;</span><span class="p">,</span>
-        <span class="p">[</span><span class="s">&quot;photo.jpg&quot;</span><span class="p">,</span><span class="s">&quot;memo.sxw&quot;</span><span class="p">]</span>
+        <span class="p">[</span><span class="s2">&quot;destination@dest.kio&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;hello&quot;</span><span class="p">,</span><span class="s2">&quot;cheers&quot;</span><span class="p">,</span>
+        <span class="p">[</span><span class="s2">&quot;photo.jpg&quot;</span><span class="p">,</span><span class="s2">&quot;memo.sxw&quot;</span><span class="p">]</span>
     <span class="p">)</span>
 </pre></div>
 
