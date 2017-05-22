@@ -16,6 +16,7 @@ DEFAULT_LANG = u'en'
 FEED_DOMAIN = "http://tty.cl/"
 FEED_ALL_ATOM = "feeds/all.atom.xml"
 CATEGORY_FEED_ATOM = "feeds/%s.atom.xml"
+TAG_FEED_ATOM = "feeds/tags/%s.atom.xml"
 TRANSLATION_FEED_ATOM = None
 
 # Blogroll
