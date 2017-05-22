@@ -18,6 +18,7 @@ code {
     background:none;
     font-size:.8em;
     color: #1A7CA5;
+    white-space: pre;
 }
 
 ol,ul {
@@ -74,7 +75,7 @@ ol,ul {
 }
 
 .container {
-    max-width:808px;
+    max-width:90%;
 }
 
 .img-left,.img-right {
