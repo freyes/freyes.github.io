@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/postgresql.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2013-11-22T15:23:00-03:00</updated><entry><title>Postgresql Tips n' Tricks</title><link href="http://tty.cl/postgresql-tips-n-tricks.html" rel="alternate"></link><published>2013-11-22T15:23:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-11-22:postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - Postgresql</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/postgresql.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2013-11-22T15:23:00-03:00</updated><entry><title>Postgresql Tips n' Tricks</title><link href="http://tty.cl/postgresql-tips-n-tricks.html" rel="alternate"></link><published>2013-11-22T15:23:00-03:00</published><updated>2013-11-22T15:23:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-11-22:/postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;li&gt;pg_stat_activity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;pg_stat_activity&lt;/a&gt;
+is a view that belongs to the postgresql catalog, it helps you to view the
+status of the queries that are in execution, the explanation of each column
+can be found in the postgresql manual &lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;The Statistics Collector&lt;/a&gt;
+section (I don't want to do a simply copy-paste, so …&lt;/p&gt;</summary><content type="html">&lt;ul class="simple"&gt;
 &lt;li&gt;pg_stat_activity&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;pg_stat_activity&lt;/a&gt;
@@ -78,4 +85,4 @@ section (I don't want to do a simply copy-paste, so see the official documentati
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="postgresql"></category><category term="tips"></category></entry></feed>
+</content><category term="postgresql"></category><category term="tips"></category></entry></feed>

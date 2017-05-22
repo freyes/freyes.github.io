@@ -30,8 +30,6 @@
         <div id="top-nav-list" class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">
 
-                <li><a href="http://tty.cl/pages/about.html">About</a></li>
-                <li><a href="http://tty.cl/pages/contact.html">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -58,29 +56,39 @@
   </div>
   <div class="content-body">
     <h2>Simple Swap Function</h2>
-<p>```C</p>
-<h1>include <stdio.h></h1>
-<p>inline void swap(int <em>a, int </em>b){
-  <em>a= </em>a+<em>b;
-  </em>b=<em>a-</em>b;
-  <em>a=</em>a-*b;
-}</p>
-<p>int main() {
-  int a = 1;
-  int b = 2;</p>
-<p>printf("before: a: %d - b: %d\n", a, b);
-  swap(&amp;a, &amp;b);</p>
-<p>printf("after: a: %d - b: %d\n", a, b);
-  return 0;
-}
-```</p>
+<div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp"></span>
+
+<span class="kr">inline</span> <span class="kt">void</span> <span class="nf">swap</span><span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">b</span><span class="p">){</span>
+  <span class="o">*</span><span class="n">a</span><span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="o">+*</span><span class="n">b</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">b</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
+  <span class="o">*</span><span class="n">a</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;before: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+
+  <span class="n">printf</span><span class="p">(</span><span class="s">&quot;after: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+
 <p>Expected output:</p>
-<p><code>before: a: 1 - b: 2
-after: a: 2 - b: 1</code></p>
+<div class="highlight"><pre><span></span><span class="n">before</span><span class="o">:</span> <span class="n">a</span><span class="o">:</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">b</span><span class="o">:</span> <span class="mi">2</span>
+<span class="n">after</span><span class="o">:</span> <span class="n">a</span><span class="o">:</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">b</span><span class="o">:</span> <span class="mi">1</span>
+</pre></div>
   </div>
-  <div class="pull-right">
-    <a href="https://twitter.com/share?text=C Snippets&url=http%3A//tty.cl/c-snippets.html&via=gnusis" type="button" class="btn btn-info">
-      <i class="fa fa-twitter-square"></i> Tweet</a>
+  <div class="row">
+      <div class="span6">      </div>
+      <div class="span6">
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text=C Snippets&url=http%3A//tty.cl/c-snippets.html&via=gnusis" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+      </div>
   </div>
 </div>
 

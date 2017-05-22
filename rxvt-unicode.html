@@ -34,8 +34,6 @@
         <div id="top-nav-list" class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">
 
-                <li><a href="http://tty.cl/pages/about.html">About</a></li>
-                <li><a href="http://tty.cl/pages/contact.html">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -64,14 +62,20 @@
     <p>The Rxvt terminal is a really good terminal emulator, actually it has been my
 default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).</p>
-<p><img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg" /></p>
+<p><img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg"></p>
 <p>To install it you just must do the follow:</p>
-<p><code>aptitude install rxvt-unicode</code></p>
+<div class="highlight"><pre><span></span>aptitude install rxvt-unicode
+</pre></div>
+
+
 <p>If you want to use it as your default x-terminal-emulator you have to
 set the proper alternative like this</p>
-<p><code>update-alternatives --set x-terminal-emulator /usr/bin/urxvt</code></p>
+<div class="highlight"><pre><span></span>update-alternatives --set x-terminal-emulator /usr/bin/urxvt
+</pre></div>
+
+
 <p>The configuration must go on your ~/.Xdefaults file, here is my configuration</p>
-<p><code>URxvt.foreground: grey90
+<div class="highlight"><pre><span></span>URxvt.foreground: grey90
 URxvt.cursorColor: #729fcf
 URxvt.font: -xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-15
 URxvt.scrollBar: False
@@ -84,17 +88,26 @@ URxvt*urgentOnBell: true
 URxvt*urllauncher: iceweasel
 URxvt*matcher.button:        3
 URxvt*depth: 24
-URxvt*background: rgba:0000/0000/0000/dddd</code></p>
+URxvt*background: rgba:0000/0000/0000/dddd
+</pre></div>
+
+
 <p>Once you put the configuration you can reload it using this</p>
-<p><code>shell
-xrdb -merge ~/.Xdefaults</code></p>
+<div class="highlight"><pre><span></span>xrdb -merge ~/.Xdefaults
+</pre></div>
+
+
 <p>Remember to install the terminus fonts if you want to use my configuration</p>
-<p><code>shell
-aptitude install xfonts-terminus xfonts-terminus-dos xfonts-terminus-oblique</code></p>
+<div class="highlight"><pre><span></span>aptitude install xfonts-terminus xfonts-terminus-dos xfonts-terminus-oblique
+</pre></div>
   </div>
-  <div class="pull-right">
-    <a href="https://twitter.com/share?text=rxvt-unicode&url=http%3A//tty.cl/rxvt-unicode.html&via=gnusis" type="button" class="btn btn-info">
-      <i class="fa fa-twitter-square"></i> Tweet</a>
+  <div class="row">
+      <div class="span6">          <a href="tag/debian.html"><span class="label label-default">debian</span></a>          <a href="tag/linux.html"><span class="label label-default">linux</span></a>          <a href="tag/tips.html"><span class="label label-default">tips</span></a>          <a href="tag/rxvt.html"><span class="label label-default">rxvt</span></a>      </div>
+      <div class="span6">
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text=rxvt-unicode&url=http%3A//tty.cl/rxvt-unicode.html&via=gnusis" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+      </div>
   </div>
 </div>
 

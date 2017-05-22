@@ -26,8 +26,6 @@
         <div id="top-nav-list" class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">
 
-                <li><a href="http://tty.cl/pages/about.html">About</a></li>
-                <li><a href="http://tty.cl/pages/contact.html">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -52,20 +50,24 @@
 <ul>
 <li>Check if your system has i386 arch support enabled</li>
 </ul>
-<p><code>$ dpkg --print-foreign-architectures
-i386</code></p>
+<div class="highlight"><pre><span></span>$ dpkg --print-foreign-architectures
+i386
+</pre></div>
+
+
 <ul>
 <li>If you don't have i386 support enable it with the following commands:</li>
 </ul>
-<p>```</p>
-<h1>dpkg --add-architecture i386</h1>
-<h1>apt-get update</h1>
-<p>```</p>
+<div class="highlight"><pre><span></span># dpkg --add-architecture i386
+# apt-get update
+</pre></div>
+
+
 <ul>
 <li>Then install the skype's dependencies with the following command:</li>
 </ul>
-<p>```</p>
-<h1>apt-get install libqtgui4 ...</h1>
+<div class="highlight"><pre><span></span># apt-get install libqtgui4:i386 \
+      libqtwebkit4 …</pre></div>
       </div>
     </li>
   </ol>

@@ -30,8 +30,6 @@
         <div id="top-nav-list" class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">
 
-                <li><a href="http://tty.cl/pages/about.html">About</a></li>
-                <li><a href="http://tty.cl/pages/contact.html">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -61,7 +59,7 @@
 <p>The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. </p>
 <h2>Example</h2>
 <p>Here it is an example of how a presentation file should look like</p>
-<div class="codehilite"><pre><span></span><span class="c1">#+TITLE:     Org Mode and Beamer</span>
+<div class="highlight"><pre><span></span><span class="c1">#+TITLE:     Org Mode and Beamer</span>
 <span class="c1">#+AUTHOR:    Felipe Reyes</span>
 <span class="c1">#+EMAIL:     freyes@tty.cl</span>
 <span class="c1">#+DATE:      2011-08-25 Tue</span>
@@ -123,7 +121,7 @@ sudo apt-get install texlive-extra-utils \
 </pre>
 
 <p>Add the following to your <em>.emacs</em> file:</p>
-<div class="codehilite"><pre><span></span><span class="c1">;; beamer</span>
+<div class="highlight"><pre><span></span><span class="c1">;; beamer</span>
 <span class="c1">;; #+LaTeX_CLASS: beamer in org files</span>
 <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">boundp</span> <span class="ss">&#39;org-export-latex-classes</span><span class="p">)</span>
   <span class="p">(</span><span class="k">setq</span> <span class="nv">org-export-latex-classes</span> <span class="no">nil</span><span class="p">))</span>
@@ -182,9 +180,13 @@ sudo apt-get install texlive-extra-utils \
 <li><a href="http://emacs-fu.blogspot.com/2009/10/writing-presentations-with-org-mode-and.html">emacs-fu: writing presentations with org-mode and beamer</a></li>
 </ul>
   </div>
-  <div class="pull-right">
-    <a href="https://twitter.com/share?text=Org-mode and Beamer&url=http%3A//tty.cl/org-mode-and-beamer.html&via=gnusis" type="button" class="btn btn-info">
-      <i class="fa fa-twitter-square"></i> Tweet</a>
+  <div class="row">
+      <div class="span6">      </div>
+      <div class="span6">
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text=Org-mode and Beamer&url=http%3A//tty.cl/org-mode-and-beamer.html&via=gnusis" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+      </div>
   </div>
 </div>
 

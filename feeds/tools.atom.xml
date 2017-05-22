@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/tools.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2011-06-11T23:10:00-04:00</updated><entry><title>rxvt-unicode</title><link href="http://tty.cl/rxvt-unicode.html" rel="alternate"></link><published>2011-06-11T23:10:00-04:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2011-06-11:rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - Tools</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/tools.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2011-06-11T23:10:00-04:00</updated><entry><title>rxvt-unicode</title><link href="http://tty.cl/rxvt-unicode.html" rel="alternate"></link><published>2011-06-11T23:10:00-04:00</published><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2011-06-11:/rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
 default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;aptitude install rxvt-unicode&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aptitude install rxvt-unicode …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+default terminal since at least 4 years ago. I started using it after getting
+ tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aptitude install rxvt-unicode
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;If you want to use it as your default x-terminal-emulator you have to
 set the proper alternative like this&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;update-alternatives --set x-terminal-emulator /usr/bin/urxvt&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;update-alternatives --set x-terminal-emulator /usr/bin/urxvt
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;The configuration must go on your ~/.Xdefaults file, here is my configuration&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;URxvt.foreground: grey90
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;URxvt.foreground: grey90
 URxvt.cursorColor: #729fcf
 URxvt.font: -xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-15
 URxvt.scrollBar: False
@@ -22,10 +33,15 @@ URxvt*urgentOnBell: true
 URxvt*urllauncher: iceweasel
 URxvt*matcher.button:        3
 URxvt*depth: 24
-URxvt*background: rgba:0000/0000/0000/dddd&lt;/code&gt;&lt;/p&gt;
+URxvt*background: rgba:0000/0000/0000/dddd
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;Once you put the configuration you can reload it using this&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;shell
-xrdb -merge ~/.Xdefaults&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xrdb -merge ~/.Xdefaults
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;Remember to install the terminus fonts if you want to use my configuration&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;shell
-aptitude install xfonts-terminus xfonts-terminus-dos xfonts-terminus-oblique&lt;/code&gt;&lt;/p&gt;</summary><category term="debian"></category><category term="linux"></category><category term="tips"></category><category term="rxvt"></category></entry></feed>
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aptitude install xfonts-terminus xfonts-terminus-dos xfonts-terminus-oblique
+&lt;/pre&gt;&lt;/div&gt;</content><category term="debian"></category><category term="linux"></category><category term="tips"></category><category term="rxvt"></category></entry></feed>

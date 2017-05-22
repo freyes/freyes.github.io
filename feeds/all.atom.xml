@@ -1,24 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/all.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2016-08-14T00:00:00-04:00</updated><entry><title>Lynx: accept cookies always</title><link href="http://tty.cl/lynx-accept-cookies-always.html" rel="alternate"></link><published>2016-08-14T00:00:00-04:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2016-08-14:lynx-accept-cookies-always.html</id><summary type="html">&lt;p&gt;From time to time I need to use &lt;a href="https://packages.ubuntu.com/lynx"&gt;lynx&lt;/a&gt; (or
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/all.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2017-05-21T00:00:00-04:00</updated><entry><title>Add remote lxd server as a cloud in Juju (2.x)</title><link href="http://tty.cl/add-remote-lxd-server-as-a-cloud-in-juju-2x.html" rel="alternate"></link><published>2017-05-21T00:00:00-04:00</published><updated>2017-05-21T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2017-05-21:/add-remote-lxd-server-as-a-cloud-in-juju-2x.html</id><summary type="html">&lt;p&gt;&lt;a href="https://jujucharms.com/"&gt;Juju 2.x&lt;/a&gt; have the ability to add
+&lt;a href="https://linuxcontainers.org/lxd/"&gt;LXD&lt;/a&gt; as &lt;a href="https://jujucharms.com/docs/stable/clouds-LXD"&gt;a
+provisioner&lt;/a&gt;, by default it can
+easily use a local lxd (&lt;code&gt;juju bootstrap lxd&lt;/code&gt;), but how could we use a remote
+lxd?, the following instructions will guide you to achieve this:&lt;/p&gt;
+&lt;p&gt;SSH into the remote server (e.g. &lt;code&gt;192.168 …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://jujucharms.com/"&gt;Juju 2.x&lt;/a&gt; have the ability to add
+&lt;a href="https://linuxcontainers.org/lxd/"&gt;LXD&lt;/a&gt; as &lt;a href="https://jujucharms.com/docs/stable/clouds-LXD"&gt;a
+provisioner&lt;/a&gt;, by default it can
+easily use a local lxd (&lt;code&gt;juju bootstrap lxd&lt;/code&gt;), but how could we use a remote
+lxd?, the following instructions will guide you to achieve this:&lt;/p&gt;
+&lt;p&gt;SSH into the remote server (e.g. &lt;code&gt;192.168.10.2&lt;/code&gt;) and configure lxd to accept
+incoming connections and set a password.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(192.168.10.2)$ lxc config set core.https_address &amp;quot;[::]&amp;quot;
+(192.168.10.2)$ lxc config set core.trust_password some-secret-string
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now in the machine where juju commands will be ran (A.K.A. juju client) add the
+remote lxd daemon, this is done to easily get the server's certificate.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ lxc remote add 192.168.10.2 --accept-certificate --password=some-secret-string
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create a yaml configuration file that will be used by juju to add the cloud,
+this is how it should look like.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# file: some-remote.yaml&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;clouds&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;type&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;lxd&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;auth-types&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;interactive&lt;/span&gt;&lt;span class="p p-Indicator"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;certificate&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;regions&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+      &lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="l l-Scalar l-Scalar-Plain"&gt;endpoint&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;192.168.10.2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add the cloud definition to juju:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju add-cloud some-remote some-remote.yaml
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create the credentials.yaml file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# file: credentials.yaml&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;auth-type&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;certificate&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;client-cert&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;-----BEGIN CERTIFICATE-----&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.crt&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;-----END CERTIFICATE-----&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;client-key&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;-----BEGIN RSA PRIVATE KEY-----&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.key&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;-----END RSA PRIVATE KEY-----&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;server-cert&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;-----BEGIN CERTIFICATE-----&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.crt&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;-----END CERTIFICATE-----&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add the credentials to juju:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju add-credential some-remote -f credentials.yaml
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Verify the cloud was added correctly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju clouds
+Cloud           Regions  Default          Type            Description
+aws                  14  us-east-1        ec2             Amazon Web Services
+aws-china             1  cn-north-1       ec2             Amazon China
+aws-gov               1  us-gov-west-1    ec2             Amazon (USA Government)
+azure                24  centralus        azure           Microsoft Azure
+azure-china           2  chinaeast        azure           Microsoft Azure China
+cloudsigma            5  hnl              cloudsigma      CloudSigma Cloud
+google                7  us-east1         gce             Google Cloud Platform
+joyent                6  eu-ams-1         joyent          Joyent Cloud
+oracle-compute        5  uscom-central-1  oracle-compute  Oracle Cloud
+rackspace             6  dfw              rackspace       Rackspace Cloud
+localhost             1  localhost        lxd             LXD Container Hypervisor
+some-remote           1  some-remote      lxd             LXD Container Hypervisor
+
+Try &amp;#39;list-regions &amp;lt;cloud&amp;gt;&amp;#39; to see available regions.
+&amp;#39;show-cloud &amp;lt;cloud&amp;gt;&amp;#39; or &amp;#39;regions --format yaml &amp;lt;cloud&amp;gt;&amp;#39; can be used to see region endpoints.
+&amp;#39;add-cloud&amp;#39; can add private clouds or private infrastructure.
+Update the known public clouds with &amp;#39;update-clouds&amp;#39;.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Bootstrap a new controller using the added cloud provider&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju bootstrap some-remote
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once the bootstrap is done, verify the controller was correctly spun in the
+remote lxd daemon:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ lxc list 192.168.10.2:
++---------------+---------+--------------------------------+------+------------+-----------+
+|     NAME      |  STATE  |              IPV4              | IPV6 |    TYPE    | SNAPSHOTS |
++---------------+---------+--------------------------------+------+------------+-----------+
+| juju-ec8b3d-0 | RUNNING | 192.168.10.42 (eth0)           |      | PERSISTENT | 0         |
++---------------+---------+--------------------------------+------+------------+-----------+
+(juju-client)$ juju status -m controller
+Model       Controller   Cloud/Region             Version
+controller  snowspeeder  snowspeeder/snowspeeder  2.1.2
+
+App  Version  Status  Scale  Charm  Store  Rev  OS  Notes
+
+Unit  Workload  Agent  Machine  Public address  Ports  Message
+
+Machine  State    DNS            Inst id        Series  AZ  Message
+0        started  192.168.10.42  juju-ec8b3d-0  xenial      Running
+&lt;/pre&gt;&lt;/div&gt;</content><category term="juju"></category><category term="lxd"></category><category term="ubuntu"></category></entry><entry><title>Lynx: accept cookies always</title><link href="http://tty.cl/lynx-accept-cookies-always.html" rel="alternate"></link><published>2016-08-14T00:00:00-04:00</published><updated>2016-08-14T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2016-08-14:/lynx-accept-cookies-always.html</id><summary type="html">&lt;p&gt;From time to time I need to use &lt;a href="https://packages.ubuntu.com/lynx"&gt;lynx&lt;/a&gt; (or
+any other text based browser like &lt;a href="https://packages.ubuntu.com/links"&gt;links&lt;/a&gt;),
+for some reason my fingers usually type &lt;code&gt;lynx&lt;/code&gt;, but having to accept cookies
+every time a new domain tries to send it to me it's annoying, so here is how
+you configure it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;From time to time I need to use &lt;a href="https://packages.ubuntu.com/lynx"&gt;lynx&lt;/a&gt; (or
 any other text based browser like &lt;a href="https://packages.ubuntu.com/links"&gt;links&lt;/a&gt;),
 for some reason my fingers usually type &lt;code&gt;lynx&lt;/code&gt;, but having to accept cookies
 every time a new domain tries to send it to me it's annoying, so here is how
 you configure it to always accept them.&lt;/p&gt;
 &lt;p&gt;Add this to your &lt;code&gt;~/.bashrc&lt;/code&gt; file:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;LYNX_CFG=~/.lynx.cfg
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;LYNX_CFG=~/.lynx.cfg
 export LYNX_CFG
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Then in &lt;code&gt;~/.lynx.cfg&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;INCLUDE:/etc/lynx-cur/lynx.cfg
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;INCLUDE:/etc/lynx-cur/lynx.cfg
 FORCE_SSL_COOKIES_SECURE:TRUE
 SET_COOKIES:TRUE
 ACCEPT_ALL_COOKIES:TRUE
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;And voila!&lt;/p&gt;</summary></entry><entry><title>Multiple Local Environments with Juju</title><link href="http://tty.cl/multiple-local-environments-with-juju.html" rel="alternate"></link><published>2015-01-23T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2015-01-23:multiple-local-environments-with-juju.html</id><summary type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png" /&gt;&lt;/p&gt;
+&lt;p&gt;And voila!&lt;/p&gt;</content></entry><entry><title>Multiple Local Environments with Juju</title><link href="http://tty.cl/multiple-local-environments-with-juju.html" rel="alternate"></link><published>2015-01-23T00:00:00-03:00</published><updated>2015-01-23T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2015-01-23:/multiple-local-environments-with-juju.html</id><summary type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://juju.ubuntu.com/"&gt;Juju&lt;/a&gt; has the ability to use lxc or kvm to deploy
+services, this is done by the
+&lt;a href="https://juju.ubuntu.com/docs/config-local.html"&gt;local provider&lt;/a&gt;, but
+sometimes during development you may want to have one environment up-n-running
+all the time for testing and you may need another one to run
+&lt;a href="https://juju.ubuntu.com/docs/tools-amulet.html"&gt;amulet&lt;/a&gt; tests, well at the
+beginning …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://juju.ubuntu.com/"&gt;Juju&lt;/a&gt; has the ability to use lxc or kvm to deploy
 services, this is done by the
 &lt;a href="https://juju.ubuntu.com/docs/config-local.html"&gt;local provider&lt;/a&gt;, but
@@ -28,7 +157,7 @@ all the time for testing and you may need another one to run
 beginning this wasn't obvious to me that this could be achieved, but then I
 found how to do it :)&lt;/p&gt;
 &lt;p&gt;Here is how you can have two different environments:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;environments&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;environments&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
   &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt;
     &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;series&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;trusty&lt;/span&gt;
@@ -47,11 +176,19 @@ found how to do it :)&lt;/p&gt;
 
 &lt;p&gt;That is the relevant portion of my &lt;code&gt;~/.juju/environments.yaml&lt;/code&gt;, I use one environment with &lt;code&gt;kvm&lt;/code&gt; and the other one with &lt;code&gt;lxc&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;If you're curious, the trick is to change the &lt;code&gt;state-port&lt;/code&gt; and &lt;code&gt;api-port&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I hope this helps you.&lt;/p&gt;</summary><category term="juju"></category></entry><entry><title>Deploy a Python WSGI app with a Celery worker in Heroku</title><link href="http://tty.cl/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html" rel="alternate"></link><published>2014-02-24T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-02-24:deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html</id><summary type="html">&lt;p&gt;This article explains how to deploy a WSGI python web app + a
+&lt;p&gt;I hope this helps you.&lt;/p&gt;</content><category term="juju"></category></entry><entry><title>Deploy a Python WSGI app with a Celery worker in Heroku</title><link href="http://tty.cl/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html" rel="alternate"></link><published>2014-02-24T00:00:00-03:00</published><updated>2014-02-24T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-02-24:/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html</id><summary type="html">&lt;p&gt;This article explains how to deploy a WSGI python web app + a
 &lt;a href="http://www.celeryproject.org"&gt;celery&lt;/a&gt; worker.&lt;/p&gt;
 &lt;p&gt;A recommended reading before moving forward with Heroku is
 &lt;a href="https://devcenter.heroku.com/articles/process-model"&gt;The Process Model&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Jimsy" src="/images/jimsy.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Jimsy" src="/images/jimsy.png"&gt;&lt;/p&gt;
+&lt;h1&gt;The Application&lt;/h1&gt;
+&lt;p&gt;The application that we are going to deploy to heroku has the following components:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WSGI App, it can be a &lt;a href="https://www.djangoproject.com/"&gt;Django&lt;/a&gt; or …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;This article explains how to deploy a WSGI python web app + a
+&lt;a href="http://www.celeryproject.org"&gt;celery&lt;/a&gt; worker.&lt;/p&gt;
+&lt;p&gt;A recommended reading before moving forward with Heroku is
+&lt;a href="https://devcenter.heroku.com/articles/process-model"&gt;The Process Model&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Jimsy" src="/images/jimsy.png"&gt;&lt;/p&gt;
 &lt;h1&gt;The Application&lt;/h1&gt;
 &lt;p&gt;The application that we are going to deploy to heroku has the following components:&lt;/p&gt;
 &lt;ul&gt;
@@ -187,7 +324,7 @@ Use `heroku addons:docs cloudamqp` to view documentation.
 &lt;h1&gt;Adjusting Settings&lt;/h1&gt;
 &lt;p&gt;Heroku passes to your app environment variables with the configuration, this a common practice in the PaaS ecosystem, so you need to modify your app to read config values from it.&lt;/p&gt;
 &lt;p&gt;Here are examples to setup Celery and Django:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;dj_database_url&lt;/span&gt;
 
 &lt;span class="n"&gt;DEFAULT_AMQP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;amqp://guest:guest@localhost//&amp;quot;&lt;/span&gt;
@@ -293,7 +430,12 @@ Installed 0 object(s) from 0 fixture(s)
 &lt;p&gt;We have the app running and a celery worker, now it's moment to assign a
 decent domain and other minor settings, heroku provides an option called
 &lt;a href="https://devcenter.heroku.com/articles/production-check"&gt;Production Check&lt;/a&gt;,
-you should use it before going live with your site.&lt;/p&gt;</summary><category term="development"></category></entry><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><published>2014-01-22T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+you should use it before going live with your site.&lt;/p&gt;</content><category term="development"></category></entry><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><published>2014-01-22T00:00:00-03:00</published><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
+&lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
+development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
+and &lt;a href="http://en.wikipedia.org/wiki/Continuous_delivery"&gt;continuous delivery&lt;/a&gt;.
+To read more about them I recommend you to read &lt;a href="http://www.amazon.com/Continuous-Integration-Improving-Software-Reducing/dp/0321336380/ref=sr_1_1?ie=UTF8&amp;amp;qid=1390443569&amp;amp;sr=8-1&amp;amp;keywords=continuous+integration"&gt;"Continuous Integration: Improving Software Quality and Reducing …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
 version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
 &lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
 development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
@@ -308,7 +450,13 @@ repositories for the latest information about how they work.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/freyes/vagrant-puppet-example"&gt;Vagrant and Puppet recipes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/freyes/flask-hello-world"&gt;Flask hello world&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry><entry><title>How to start with Emacs</title><link href="http://tty.cl/how-to-start-with-emacs.html" rel="alternate"></link><published>2013-12-03T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
+&lt;/ul&gt;</content><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry><entry><title>How to start with Emacs</title><link href="http://tty.cl/how-to-start-with-emacs.html" rel="alternate"></link><published>2013-12-03T00:00:00-03:00</published><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-03:/how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
+&lt;p&gt;Before I could really be productive with emacs, I failed a couple of
+times, because I knew that emacs were powerful, but the default
+configuration shows you a simple text editor that look awful, without
+syntax highlight, without anti-alias, a color schema that really
+sucks.&lt;/p&gt;
+&lt;p&gt;In GNU/Linux …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
 &lt;p&gt;Before I could really be productive with emacs, I failed a couple of
 times, because I knew that emacs were powerful, but the default
 configuration shows you a simple text editor that look awful, without
@@ -334,7 +482,7 @@ to the entry.&lt;/p&gt;
 series of post, because there is a lot different flavors of emacs, for
 example XEmacs, Aquamacs, and others.&lt;/p&gt;
 &lt;p&gt;The GNU Emacs website says:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;GNU Emacs is an extensible, customizable text editor—and more. At
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;GNU Emacs is an extensible, customizable text editor—and more. At
 its core is an interpreter for Emacs Lisp, a dialect of the Lisp
 programming language with extensions to support text editing.
 &lt;/pre&gt;&lt;/div&gt;
@@ -413,27 +561,27 @@ config file, like the transient-mark-mode&lt;/p&gt;
 &lt;p&gt;The transient mark mode highlights the selected region of text, by
 defaults this is disabled so I recommend you enable it with pasting
 the following in your .emacs&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;transient-mark-mode&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;transient-mark-mode&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Fill you name and email to let the modes that need that information
 could use, this is done with the following snippet of code&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;homer@example.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;homer@example.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Homer J. Simpsons&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;If you like to use Ctrl+g to jump to a line number then you should add
 the following code&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="nv"&gt;[&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;control&lt;/span&gt; &lt;span class="nv"&gt;g&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;goto-line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="nv"&gt;[&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;control&lt;/span&gt; &lt;span class="nv"&gt;g&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;goto-line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;One of the sweetest feature that must have a text editor is syntax
 highlight, well emacs has this, but disabled by default, with the
 following code you will have it enabled always&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;font-lock&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;font-lock&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-font-lock-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -446,7 +594,7 @@ C mode.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.emacswiki.org/"&gt;Emacswiki&lt;/a&gt; is probably the best source to find emacs-specific tip-n-tricks&lt;/p&gt;
 &lt;h2&gt;Initial Configuration&lt;/h2&gt;
 &lt;p&gt;Suggested initial configuration:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;debug-on-error&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;visible-bell&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -492,439 +640,547 @@ C mode.&lt;/p&gt;
 
 &lt;span class="c1"&gt;;;; Prevent Extraneous Tabs&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;setq-default&lt;/span&gt; &lt;span class="nv"&gt;indent-tabs-mode&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>.emacs</title><link href="http://tty.cl/emacs.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
-&lt;p&gt;```elisp
-;; to debug the .emacs file
-(setq debug-on-error nil)&lt;/p&gt;
-&lt;p&gt;;; setup the default mode to use
-;;Text mode is happier than Fundamental mode ;-)
-(setq default-major-mode 'text-mode)&lt;/p&gt;
-&lt;p&gt;;; define the mail and name
-(setq user-mail-address "your@mail.com")
-(setq user-full-name "Your Name")&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;,;
-;; UI setup ;;
-;;;;;;;;;;;;;;
-(require 'swbuff)
-(require 'linum)
-;; setup the tab to 4 spaces width
-(setq tab-width 4)&lt;/p&gt;
-&lt;p&gt;(if (eq window-system 'x)
-    (set-face-attribute 'default nil :font "Consolas-10"))
-;; avoid minimize on C-z, but only in X
-(if (eq window-system 'x)
-    (global-set-key [C-z] nil))&lt;/p&gt;
-&lt;p&gt;;; setup default font for mac
-(if (eq system-type 'darwin)
-    (set-face-attribute 'default nil :font "Consolas-14"))&lt;/p&gt;
-&lt;p&gt;(tool-bar-mode -1) ;; turn off toolbar
-(scroll-bar-mode -1) ;; turn off scrollbar&lt;/p&gt;
-&lt;p&gt;;; Show tabs
-(defface extra-whitespace-face
-  '((t (:background "dim gray")))
-  "Used for tabs and such.")
-(defvar my-extra-keywords
-  '(("\t" . 'extra-whitespace-face)))&lt;/p&gt;
-&lt;p&gt;;; color-theme
-(add-to-list 'load-path "~/.emacs.d/elisp/color-theme/")
-(require 'color-theme)
-;; (require 'color-theme-tango)
-;; (color-theme-tango)&lt;/p&gt;
-&lt;p&gt;(require 'color-theme-arjen)
-(color-theme-arjen)&lt;/p&gt;
-&lt;p&gt;(iswitchb-mode 1)
-(global-set-key (kbd "&lt;C-tag&gt;")           'swbuff-switch-to-next-buffer)
-(global-set-key (kbd "&lt;C-S-iso-lefttab&gt;") 'swbuff-switch-to-previous-buffer)&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;
-;; Text ;;
-;;;;;;;;;;
-(add-hook 'text-mode-hook
-          (lambda () (font-lock-add-keywords nil my-extra-keywords)))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;
-;; rect-mark ;;
-;;;;;;;;;;;;;;;
-(require 'rect-mark)
-(global-set-key (kbd "C-x r C-SPC") 'rm-set-mark)
-(global-set-key (kbd "C-x r C-x")   'rm-exchange-point-and-mark)
-(global-set-key (kbd "C-x r C-w")   'rm-kill-region)
-(global-set-key (kbd "C-x r M-w")   'rm-kill-ring-save)&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;
-;; sql ;;
-;;;;;;;;;
-(add-hook 'sql-mode-hook
-           (lambda ()
-             (font-lock-add-keywords nil my-extra-keywords)))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;
-;; Org mode ;;
-;;;;;;;;;;;;;;
-(load-file "~/.emacs.d/org-mode.el")&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;;;;;;
-;; remember notes ;;
-;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/elisp/remember-el")&lt;/p&gt;
-&lt;p&gt;;; (require 'remember-autoloads)
-(autoload 'remember "remember" nil t)
-(setq remember-data-file "~/.notes.txt")
-(global-set-key (kbd "C-c r") 'remember)&lt;/p&gt;
-&lt;p&gt;(defun wicked/remember-review-file ()
-  "Open `remember-data-file'."
-  (interactive)
-  (find-file-other-window remember-data-file))
-(global-set-key (kbd "C-c r") 'wicked/remember-review-file)&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;
-;; yasnippet ;;
-;;;;;;;;;;;;;;;
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/snippets/")&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;;
-;; javascript ;;
-;;;;;;;;;;;;;;;;
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist
-             '("\.js$" . js2-mode))&lt;/p&gt;
-&lt;p&gt;(add-to-list 'auto-mode-alist
-             '("\.dot$" . graphviz-dot-mode))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;
-;; dired ;;
-;;;;;;;;;;;
-(require 'dired-x)
-(require 'dired-single) ;; http://www.northbound-train.com/emacs/dired-single.el
-(defun my-dired-init ()
-  "Bunch of stuff to run for dired, either immediately or when it's
-         loaded."
-  ;; &lt;add other stuff here&gt;
-  (define-key dired-mode-map [return] 'dired-single-buffer)
-  (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
-  (define-key dired-mode-map "^"
-    (function
-     (lambda nil (interactive) (dired-single-buffer "..")))))&lt;/p&gt;
-&lt;p&gt;;; if dired's already loaded, then the keymap will be bound
-(if (boundp 'dired-mode-map)
-    ;; we're good to go; just add our bindings
-    (my-dired-init)
-  ;; it's not loaded yet, so add our bindings to the load-hook
-  (add-hook 'dired-load-hook 'my-dired-init))&lt;/p&gt;
-&lt;p&gt;(setq dired-omit-files-p t)
-(setq-default dired-omit-files-p t) ; this is buffer-local variable
-(setq dired-omit-files
-      (concat dired-omit-files "*.tsv|\|^\..+$"))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;
-;; yaml ;;
-;;;;;;;;;;
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\.yml$" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\.yaml$" . yaml-mode))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;;
-;; multi-term ;;
-;;;;;;;;;;;;;;;;
-(autoload 'multi-term "multi-term" nil t)
-(autoload 'multi-term-next "multi-term" nil t)&lt;/p&gt;
-&lt;p&gt;(setq multi-term-program "/bin/bash")   ;; use bash
-;; (setq multi-term-program "/bin/zsh") ;; or use zsh...&lt;/p&gt;
-&lt;p&gt;;; only needed if you use autopair
-;; (add-hook 'term-mode-hook
-;;   #'(lambda () (setq autopair-dont-activate t)))&lt;/p&gt;
-&lt;p&gt;(global-set-key (kbd "C-c t") 'multi-term-next)
-(global-set-key (kbd "C-c T") 'multi-term) ;; create a new one&lt;/p&gt;
-&lt;p&gt;;; use Control+g fot goto-line
-(global-set-key [(control g)] 'goto-line)&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;
-;; Python ;;
-;;;;;;;;;;;;&lt;/p&gt;
-&lt;p&gt;(setq py-python-command "/usr/bin/python")&lt;/p&gt;
-&lt;p&gt;(setq auto-mode-alist (cons '("\.py$" . python-mode) auto-mode-alist))
-(setq interpreter-mode-alist (cons '("python" . python-mode)
-                                   interpreter-mode-alist))
-(autoload 'python-mode "python-mode" "Python editing mode." t)&lt;/p&gt;
-&lt;p&gt;;; show pydoc
-;; http://www.emacswiki.org/cgi-bin/wiki/PythonMode
-(defun my-python-documentation (w)
-  "Launch PyDOC on the Word at Point"
-  (interactive
-   (list (let&lt;em&gt; ((word (thing-at-point 'word))
-                (input (read-string
-                        (format "pydoc entry%s: "
-                                (if (not word) "" (format " (default %s)" word))))))
-           (if (string= input "")
-               (if (not word) (error "No pydoc args given")
-                 word) ;sinon word
-             input)))) ;sinon input
-  (shell-command (concat py-python-command " -c \"from pydoc import help;help(\'" w "\')\"") "&lt;/em&gt;PYDOCS&lt;em&gt;")
-  (view-buffer-other-window "&lt;/em&gt;PYDOCS*" t 'kill-buffer-and-window))&lt;/p&gt;
-&lt;p&gt;;;to show the pydoc help on the word at point
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key [(control f1)] 'my-python-documentation)
-                      )))&lt;/p&gt;
-&lt;p&gt;;;para indentar o completar con tab
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "&lt;tab&gt;") 'indent-or-complete)
-                      )))
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "C-x #") 'comment-or-uncomment-region)
-                      )))&lt;/p&gt;
-&lt;p&gt;;;pdb setup, note the python version
-(setq pdb-path '/usr/bin/pdb
-      gud-pdb-command-name (symbol-name pdb-path))
-(defadvice pdb (before gud-query-cmdline activate)
-  "Provide a better default command line when called interactively."
-  (interactive
-   (list (gud-query-cmdline pdb-path
-                            (file-name-nondirectory buffer-file-name)))))&lt;/p&gt;
-&lt;p&gt;;; para usar pdb con F8
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "&lt;f8&gt;") 'pdb)
-                      )))
-;; para usar pydoc
-(add-hook 'python-mode-hook
-          '(lambda () (eldoc-mode 1)) t)&lt;/p&gt;
-&lt;p&gt;;;show tab in python mode
-(add-hook 'python-mode-hook
-          (lambda ()
-            (font-lock-add-keywords nil my-extra-keywords)))&lt;/p&gt;
-&lt;p&gt;;; para mostrar el trailing whitespace
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace t)))&lt;/p&gt;
-&lt;p&gt;;; usar pylint
-(when (load "flymake" t)
-  (defun flymake-pylint-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "epylint" (list local-file))))&lt;/p&gt;
-&lt;p&gt;(add-to-list 'flymake-allowed-file-name-masks
-               '("\.py\'" flymake-pylint-init)))&lt;/p&gt;
-&lt;p&gt;;; (require 'pymacs)
-;; (require 'pycomplete)
-;; (autoload 'pymacs-load "ropemacs" "rope-")
-;; (autoload 'pymacs-load "pymacs" nil t)
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")&lt;/p&gt;
-&lt;p&gt;;;(rope-init)&lt;/p&gt;
-&lt;p&gt;;; para autocompletar los cierres de parentesis o de string
-;;(add-hook 'python-mode-hook
-;;    (lambda ()
-;;      (define-key python-mode-map "\"" 'electric-pair)
-;;      (define-key python-mode-map "\'" 'electric-pair)
-;;      (define-key python-mode-map "(" 'electric-pair)
-;;      (define-key python-mode-map "[" 'electric-pair)
-;;      (define-key python-mode-map "{" 'electric-pair)))&lt;/p&gt;
-&lt;p&gt;;;(defun electric-pair ()
-;;  "Insert character pair without sournding spaces"
-;;  (interactive)
-;;  (let (parens-require-spaces)
-;;    (insert-pair)))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;
-;; djcb ;;
-;;;;;;;;;;
-(defun djcb-opacity-modify (&amp;amp;optional dec)
-  "modify the transparency of the emacs frame; if DEC is t,
-    decrease the transparency, otherwise increase it in 10%-steps"
-  (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
-         (oldalpha (if alpha-or-nil alpha-or-nil 100))
-         (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
-    (when (and (&amp;gt;= newalpha frame-alpha-lower-limit) (&amp;lt;= newalpha 100))
-      (modify-frame-parameters nil (list (cons 'alpha newalpha))))))&lt;/p&gt;
-&lt;p&gt;;; C-8 will increase opacity (== decrease transparency)
-;; C-9 will decrease opacity (== increase transparency
-;; C-0 will returns the state to normal
-(global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify)))
-(global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify t)))
-(global-set-key (kbd "C-0") '(lambda()(interactive)
-                               (modify-frame-parameters nil `((alpha . 100)))))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;;;;;;;;
-;; Quit this buffer ;;
-;;;;;;;;;;;;;;;;;;;;;;
-(defun quit-this-buffer ()
-  "Exit current buffer by selecting some other buffer."
-  (interactive)
-  (switch-to-buffer (prog1 (other-buffer (current-buffer))
-              (bury-buffer (current-buffer)))))
-(global-set-key "\C-cq" 'quit-this-buffer)&lt;/p&gt;
-&lt;p&gt;;;-&amp;gt; backspace on a selected region -&amp;gt; deletion
-(delete-selection-mode t)&lt;/p&gt;
-&lt;p&gt;;;scroll line per line (1 line instead of 3)
-(setq scroll-step 1)&lt;/p&gt;
-&lt;p&gt;;;display line and column number in toolbar
-(setq line-number-mode t)
-(setq column-number-mode t)&lt;/p&gt;
-&lt;p&gt;;;show_paren mode
-(show-paren-mode t)&lt;/p&gt;
-&lt;p&gt;;; display clock
-(display-time)&lt;/p&gt;
-&lt;p&gt;;; Use visible beel instead of beep
-(setq visible-bell 't)&lt;/p&gt;
-&lt;p&gt;;;(dysplay question in 'y/n' instead of 'yes/no')
-(fset 'yes-or-no-p 'y-or-n-p)&lt;/p&gt;
-&lt;p&gt;;; Save all my backup files in a specific directory
-;(defun make-backup-file-name (file)
-;  (concat "~/.autosave/" (file-name-nondirectory file)))
-(setq backup-directory-alist
-      &lt;code&gt;((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms&lt;/code&gt;((".*" ,temporary-file-directory t)))
-(windmove-default-keybindings)&lt;/p&gt;
-&lt;p&gt;(setq tramp-default-method "ssh")&lt;/p&gt;
-&lt;p&gt;(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)&lt;/p&gt;
-&lt;p&gt;;;; Prevent Extraneous Tabs
-(setq-default indent-tabs-mode nil)
-```&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>.emacs</title><link href="http://tty.cl/emacs.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;debug-on-error&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; setup the default mode to use&lt;/span&gt;
+&lt;span class="c1"&gt;;;Text mode is happier than Fundamental mode ;-)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;default-major-mode&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;text-mode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; define the mail and name&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;your@mail.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nf"&gt;user-full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Your Name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;,;&lt;/span&gt;
+&lt;span class="c1"&gt;;; UI setup ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;debug-on-error&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; setup the default mode to use&lt;/span&gt;
+&lt;span class="c1"&gt;;;Text mode is happier than Fundamental mode ;-)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;default-major-mode&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;text-mode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; define the mail and name&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;your@mail.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nf"&gt;user-full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Your Name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;,;&lt;/span&gt;
+&lt;span class="c1"&gt;;; UI setup ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;swbuff&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;linum&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;;; setup the tab to 4 spaces width&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;tab-width&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;eq&lt;/span&gt; &lt;span class="nf"&gt;window-system&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;set-face-attribute&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;default&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="nb"&gt;:font&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Consolas-10&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="c1"&gt;;; avoid minimize on C-z, but only in X&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;eq&lt;/span&gt; &lt;span class="nf"&gt;window-system&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;C-z&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; setup default font for mac&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;eq&lt;/span&gt; &lt;span class="nv"&gt;system-type&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;darwin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;set-face-attribute&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;default&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="nb"&gt;:font&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Consolas-14&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;tool-bar-mode&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;;; turn off toolbar&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;scroll-bar-mode&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;;; turn off scrollbar&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; Show tabs&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defface&lt;/span&gt; &lt;span class="nv"&gt;extra-whitespace-face&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="no"&gt;t&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;:background&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;dim gray&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Used for tabs and such.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;defvar&lt;/span&gt; &lt;span class="nv"&gt;my-extra-keywords&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\t&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;extra-whitespace-face&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; color-theme&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;load-path&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/.emacs.d/elisp/color-theme/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;color-theme&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (require &amp;#39;color-theme-tango)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (color-theme-tango)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;color-theme-arjen&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;color-theme-arjen&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;iswitchb-mode&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;C-tag&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;           &lt;span class="ss"&gt;&amp;#39;swbuff-switch-to-next-buffer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;C-S-iso-lefttab&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;swbuff-switch-to-previous-buffer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; Text ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;text-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;font-lock-add-keywords&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="nv"&gt;my-extra-keywords&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; rect-mark ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;rect-mark&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-x r C-SPC&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;rm-set-mark&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-x r C-x&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="ss"&gt;&amp;#39;rm-exchange-point-and-mark&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-x r C-w&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="ss"&gt;&amp;#39;rm-kill-region&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-x r M-w&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="ss"&gt;&amp;#39;rm-kill-ring-save&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; sql ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;sql-mode-hook&lt;/span&gt;
+           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+             &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;font-lock-add-keywords&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="nv"&gt;my-extra-keywords&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; Org mode ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;load-file&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/.emacs.d/org-mode.el&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; remember notes ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;load-path&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/.emacs.d/elisp/remember-el&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; (require &amp;#39;remember-autoloads)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;autoload&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;remember&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;remember&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;remember-data-file&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/.notes.txt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-c r&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;remember&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;wicked/remember-review-file&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Open &lt;/span&gt;&lt;span class="ss"&gt;`remember-data-file&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;.&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;find-file-other-window&lt;/span&gt; &lt;span class="nv"&gt;remember-data-file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-c r&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;wicked/remember-review-file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; yasnippet ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;yasnippet&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;yas/initialize&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;yas/load-directory&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/.emacs.d/snippets/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; javascript ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;autoload&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;js2-mode&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;js2-mode&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;auto-mode-alist&lt;/span&gt;
+             &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.js$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;js2-mode&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;auto-mode-alist&lt;/span&gt;
+             &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.dot$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;graphviz-dot-mode&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; dired ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-single&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;;; http://www.northbound-train.com/emacs/dired-single.el&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;my-dired-init&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Bunch of stuff to run for dired, either immediately or when it&amp;#39;s&lt;/span&gt;
+&lt;span class="s"&gt;         loaded.&amp;quot;&lt;/span&gt;
+  &lt;span class="c1"&gt;;; &amp;lt;add other stuff here&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;define-key&lt;/span&gt; &lt;span class="nv"&gt;dired-mode-map&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;return&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-single-buffer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;define-key&lt;/span&gt; &lt;span class="nv"&gt;dired-mode-map&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;mouse-1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-single-buffer-mouse&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;define-key&lt;/span&gt; &lt;span class="nv"&gt;dired-mode-map&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;^&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;dired-single-buffer&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;..&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; if dired&amp;#39;s already loaded, then the keymap will be bound&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;boundp&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-mode-map&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;;; we&amp;#39;re good to go; just add our bindings&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;my-dired-init&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="c1"&gt;;; it&amp;#39;s not loaded yet, so add our bindings to the load-hook&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-load-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;my-dired-init&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;dired-omit-files-p&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq-default&lt;/span&gt; &lt;span class="nv"&gt;dired-omit-files-p&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;; this is buffer-local variable&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;dired-omit-files&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;concat&lt;/span&gt; &lt;span class="nv"&gt;dired-omit-files&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*\.tsv|\\|^\\..+$&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; yaml ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;yaml-mode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;auto-mode-alist&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.yml$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;yaml-mode&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;auto-mode-alist&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.yaml$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;yaml-mode&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; multi-term ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;autoload&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;multi-term&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;multi-term&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;autoload&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;multi-term-next&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;multi-term&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;multi-term-program&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/bin/bash&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;;; use bash&lt;/span&gt;
+&lt;span class="c1"&gt;;; (setq multi-term-program &amp;quot;/bin/zsh&amp;quot;) ;; or use zsh...&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; only needed if you use autopair&lt;/span&gt;
+&lt;span class="c1"&gt;;; (add-hook &amp;#39;term-mode-hook&lt;/span&gt;
+&lt;span class="c1"&gt;;;   #&amp;#39;(lambda () (setq autopair-dont-activate t)))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-c t&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;multi-term-next&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-c T&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;multi-term&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;;; create a new one&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; use Control+g fot goto-line&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nv"&gt;control&lt;/span&gt; &lt;span class="nv"&gt;g&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;goto-line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; Python ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;py-python-command&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/usr/bin/python&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;auto-mode-alist&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cons&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.py$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;python-mode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;auto-mode-alist&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;interpreter-mode-alist&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cons&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;python&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;python-mode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                                   &lt;span class="nv"&gt;interpreter-mode-alist&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;autoload&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;python-mode&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Python editing mode.&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; show pydoc&lt;/span&gt;
+&lt;span class="c1"&gt;;; http://www.emacswiki.org/cgi-bin/wiki/PythonMode&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;my-python-documentation&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;w&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Launch PyDOC on the Word at Point&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;list&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let*&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;word&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;thing-at-point&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;word&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;input&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read-string&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;format&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;pydoc entry%s: &amp;quot;&lt;/span&gt;
+                                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;format&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; (default %s)&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;word&lt;/span&gt;&lt;span class="p"&gt;))))))&lt;/span&gt;
+           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;string=&lt;/span&gt; &lt;span class="nv"&gt;input&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+               &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ne"&gt;error&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;No pydoc args given&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                 &lt;span class="nv"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;;sinon word&lt;/span&gt;
+             &lt;span class="nv"&gt;input&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt; &lt;span class="c1"&gt;;sinon input&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;shell-command&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;concat&lt;/span&gt; &lt;span class="nv"&gt;py-python-command&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; -c \&amp;quot;from pydoc import help;help(\&amp;#39;&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;w&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\&amp;#39;)\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*PYDOCS*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;view-buffer-other-window&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*PYDOCS*&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;kill-buffer-and-window&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;to show the pydoc help on the word at point&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;local-set-key&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nv"&gt;control&lt;/span&gt; &lt;span class="nv"&gt;f1&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;my-python-documentation&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;para indentar o completar con tab&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;local-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;tab&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;indent-or-complete&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;local-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-x #&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;comment-or-uncomment-region&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;pdb setup, note the python version&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;pdb-path&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;/usr/bin/pdb&lt;/span&gt;
+      &lt;span class="nv"&gt;gud-pdb-command-name&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;symbol-name&lt;/span&gt; &lt;span class="nv"&gt;pdb-path&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defadvice&lt;/span&gt; &lt;span class="nv"&gt;pdb&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;before&lt;/span&gt; &lt;span class="nv"&gt;gud-query-cmdline&lt;/span&gt; &lt;span class="nv"&gt;activate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Provide a better default command line when called interactively.&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;list&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;gud-query-cmdline&lt;/span&gt; &lt;span class="nv"&gt;pdb-path&lt;/span&gt;
+                            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;file-name-nondirectory&lt;/span&gt; &lt;span class="nf"&gt;buffer-file-name&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; para usar pdb con F8&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;local-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;f8&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;pdb&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="c1"&gt;;; para usar pydoc&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;eldoc-mode&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;show tab in python mode&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;font-lock-add-keywords&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="nv"&gt;my-extra-keywords&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; para mostrar el trailing whitespace&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;show-trailing-whitespace&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; usar pylint&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;load&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;flymake&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;flymake-pylint-init&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let*&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;temp-file&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;flymake-init-create-temp-buffer-copy&lt;/span&gt;
+                       &lt;span class="ss"&gt;&amp;#39;flymake-create-temp-inplace&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;local-file&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;file-relative-name&lt;/span&gt;
+                        &lt;span class="nv"&gt;temp-file&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;file-name-directory&lt;/span&gt; &lt;span class="nf"&gt;buffer-file-name&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;list&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;epylint&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;list&lt;/span&gt; &lt;span class="nv"&gt;local-file&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;flymake-allowed-file-name-masks&lt;/span&gt;
+               &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.py\\&amp;#39;&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;flymake-pylint-init&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; (require &amp;#39;pymacs)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (require &amp;#39;pycomplete)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (autoload &amp;#39;pymacs-load &amp;quot;ropemacs&amp;quot; &amp;quot;rope-&amp;quot;)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (autoload &amp;#39;pymacs-load &amp;quot;pymacs&amp;quot; nil t)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (autoload &amp;#39;pymacs-eval &amp;quot;pymacs&amp;quot; nil t)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (autoload &amp;#39;pymacs-apply &amp;quot;pymacs&amp;quot;)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (autoload &amp;#39;pymacs-call &amp;quot;pymacs&amp;quot;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;(rope-init)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; para autocompletar los cierres de parentesis o de string&lt;/span&gt;
+&lt;span class="c1"&gt;;;(add-hook &amp;#39;python-mode-hook&lt;/span&gt;
+&lt;span class="c1"&gt;;;    (lambda ()&lt;/span&gt;
+&lt;span class="c1"&gt;;;      (define-key python-mode-map &amp;quot;\&amp;quot;&amp;quot; &amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="c1"&gt;;;      (define-key python-mode-map &amp;quot;\&amp;#39;&amp;quot; &amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="c1"&gt;;;      (define-key python-mode-map &amp;quot;(&amp;quot; &amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="c1"&gt;;;      (define-key python-mode-map &amp;quot;[&amp;quot; &amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="c1"&gt;;;      (define-key python-mode-map &amp;quot;{&amp;quot; &amp;#39;electric-pair)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;(defun electric-pair ()&lt;/span&gt;
+&lt;span class="c1"&gt;;;  &amp;quot;Insert character pair without sournding spaces&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;;;  (interactive)&lt;/span&gt;
+&lt;span class="c1"&gt;;;  (let (parens-require-spaces)&lt;/span&gt;
+&lt;span class="c1"&gt;;;    (insert-pair)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; djcb ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;djcb-opacity-modify&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;&amp;amp;optional&lt;/span&gt; &lt;span class="nv"&gt;dec&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;modify the transparency of the emacs frame; if DEC is t,&lt;/span&gt;
+&lt;span class="s"&gt;    decrease the transparency, otherwise increase it in 10%-steps&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let*&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;alpha-or-nil&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;frame-parameter&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;alpha&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;; nil before setting&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;oldalpha&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;alpha-or-nil&lt;/span&gt; &lt;span class="nv"&gt;alpha-or-nil&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;newalpha&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;dec&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;oldalpha&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;oldalpha&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="nv"&gt;newalpha&lt;/span&gt; &lt;span class="nv"&gt;frame-alpha-lower-limit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="nv"&gt;newalpha&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;modify-frame-parameters&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;list&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cons&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;alpha&lt;/span&gt; &lt;span class="nv"&gt;newalpha&lt;/span&gt;&lt;span class="p"&gt;))))))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; C-8 will increase opacity (== decrease transparency)&lt;/span&gt;
+&lt;span class="c1"&gt;;; C-9 will decrease opacity (== increase transparency&lt;/span&gt;
+&lt;span class="c1"&gt;;; C-0 will returns the state to normal&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="nv"&gt;djcb-opacity-modify&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-9&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="nv"&gt;djcb-opacity-modify&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                               &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;modify-frame-parameters&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;alpha&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; Quit this buffer ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;quit-this-buffer&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Exit current buffer by selecting some other buffer.&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;switch-to-buffer&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;prog1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;other-buffer&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;current-buffer&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+              &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;bury-buffer&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;current-buffer&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\C-cq&amp;quot;&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;quit-this-buffer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;-&amp;gt; backspace on a selected region -&amp;gt; deletion&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;delete-selection-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;scroll line per line (1 line instead of 3)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;scroll-step&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;display line and column number in toolbar&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;line-number-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;column-number-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;show_paren mode&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;show-paren-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; display clock&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;display-time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; Use visible beel instead of beep&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;visible-bell&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;(dysplay question in &amp;#39;y/n&amp;#39; instead of &amp;#39;yes/no&amp;#39;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fset&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;yes-or-no-p&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;y-or-n-p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; Save all my backup files in a specific directory&lt;/span&gt;
+&lt;span class="c1"&gt;;(defun make-backup-file-name (file)&lt;/span&gt;
+&lt;span class="c1"&gt;;  (concat &amp;quot;~/.autosave/&amp;quot; (file-name-nondirectory file)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;backup-directory-alist&lt;/span&gt;
+      &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.*&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;temporary-file-directory&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;auto-save-file-name-transforms&lt;/span&gt;
+      &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.*&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;temporary-file-directory&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;windmove-default-keybindings&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;tramp-default-method&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;ssh&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;put&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;upcase-region&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;disabled&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;put&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;downcase-region&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;disabled&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;; Prevent Extraneous Tabs&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq-default&lt;/span&gt; &lt;span class="nv"&gt;indent-tabs-mode&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;ul&gt;
 &lt;li&gt;Basic Configuration&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;```
-;; to debug the .emacs file
-(setq debug-on-error nil)&lt;/p&gt;
-&lt;p&gt;;; setup the default mode to use
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;;; to debug the .emacs file
+(setq debug-on-error nil)
+
+;; setup the default mode to use
 ;;Text mode is happier than Fundamental mode ;-)
-(setq default-major-mode 'text-mode)&lt;/p&gt;
-&lt;p&gt;;; define the mail and name
-(setq user-mail-address "foobar@example.com")
-(setq user-full-name "Foo Bar")&lt;/p&gt;
-&lt;p&gt;;; define the ispell dictionary to use
-(setq ispell-dictionary "en")&lt;/p&gt;
-&lt;p&gt;;; setup the tab to 4 spaces width
-(setq tab-width 4)&lt;/p&gt;
-&lt;p&gt;(tool-bar-mode -1) ;; turn off toolbar
-(scroll-bar-mode -1) ;; turn off scrollbar&lt;/p&gt;
-&lt;p&gt;;; color-theme
+(setq default-major-mode &amp;#39;text-mode)
+
+;; define the mail and name
+(setq user-mail-address &amp;quot;foobar@example.com&amp;quot;)
+(setq user-full-name &amp;quot;Foo Bar&amp;quot;)
+
+;; define the ispell dictionary to use
+(setq ispell-dictionary &amp;quot;en&amp;quot;)
+
+;; setup the tab to 4 spaces width
+(setq tab-width 4)
+
+(tool-bar-mode -1) ;; turn off toolbar
+(scroll-bar-mode -1) ;; turn off scrollbar
+
+;; color-theme
 ;; http://www.emacswiki.org/emacs/ColorTheme
 ;; http://www.nongnu.org/color-theme
-(add-to-list 'load-path "~/.emacs.d/elisp/color-theme/")
-(require 'color-theme)
-(require 'color-theme-arjen)
-(color-theme-arjen)&lt;/p&gt;
-&lt;p&gt;;; http://www.emacswiki.org/emacs/SwBuff
-(require 'swbuff)
-(global-set-key [(control tab)]       'swbuff-switch-to-next-buffer)
-(global-set-key (kbd "&lt;C-S-iso-lefttab&gt;") 'swbuff-switch-to-previous-buffer)&lt;/p&gt;
-&lt;p&gt;(require 'whitespace)
-(setq whitespace-style '(face empty tabs lines-tail trailing))
-(add-hook 'python-mode-hook 'whitespace-mode)&lt;/p&gt;
-&lt;p&gt;;; Show tabs
+(add-to-list &amp;#39;load-path &amp;quot;~/.emacs.d/elisp/color-theme/&amp;quot;)
+(require &amp;#39;color-theme)
+(require &amp;#39;color-theme-arjen)
+(color-theme-arjen)
+
+;; http://www.emacswiki.org/emacs/SwBuff
+(require &amp;#39;swbuff)
+(global-set-key [(control tab)]       &amp;#39;swbuff-switch-to-next-buffer)
+(global-set-key (kbd &amp;quot;&amp;lt;C-S-iso-lefttab&amp;gt;&amp;quot;) &amp;#39;swbuff-switch-to-previous-buffer)
+
+(require &amp;#39;whitespace)
+(setq whitespace-style &amp;#39;(face empty tabs lines-tail trailing))
+(add-hook &amp;#39;python-mode-hook &amp;#39;whitespace-mode)
+
+;; Show tabs
 (defface extra-whitespace-face
-  '((t (:background "dim gray")))
-  "Used for tabs and such.")
+  &amp;#39;((t (:background &amp;quot;dim gray&amp;quot;)))
+  &amp;quot;Used for tabs and such.&amp;quot;)
 (defvar my-extra-keywords
-  '(("\t" . 'extra-whitespace-face)))&lt;/p&gt;
-&lt;p&gt;(add-hook 'text-mode-hook
-          (lambda () (font-lock-add-keywords nil my-extra-keywords)))&lt;/p&gt;
-&lt;p&gt;;; http://www.emacswiki.org/emacs/RectangleMark
-(require 'rect-mark)
-(global-set-key (kbd "C-x r C-SPC") 'rm-set-mark)
-(global-set-key (kbd "C-x r C-x")   'rm-exchange-point-and-mark)
-(global-set-key (kbd "C-x r C-w")   'rm-kill-region)
-(global-set-key (kbd "C-x r M-w")   'rm-kill-ring-save)
-```&lt;/p&gt;
+  &amp;#39;((&amp;quot;\t&amp;quot; . &amp;#39;extra-whitespace-face)))
+
+(add-hook &amp;#39;text-mode-hook
+          (lambda () (font-lock-add-keywords nil my-extra-keywords)))
+
+;; http://www.emacswiki.org/emacs/RectangleMark
+(require &amp;#39;rect-mark)
+(global-set-key (kbd &amp;quot;C-x r C-SPC&amp;quot;) &amp;#39;rm-set-mark)
+(global-set-key (kbd &amp;quot;C-x r C-x&amp;quot;)   &amp;#39;rm-exchange-point-and-mark)
+(global-set-key (kbd &amp;quot;C-x r C-w&amp;quot;)   &amp;#39;rm-kill-region)
+(global-set-key (kbd &amp;quot;C-x r M-w&amp;quot;)   &amp;#39;rm-kill-ring-save)
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;ul&gt;
 &lt;li&gt;Python&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;```
-;;;;;;;;;;;;
-;; Python ;;
-;;;;;;;;;;;;&lt;/p&gt;
-&lt;p&gt;(setq py-python-command "/usr/bin/python")&lt;/p&gt;
-&lt;p&gt;(setq auto-mode-alist (cons '("\.py$" . python-mode) auto-mode-alist))
-(setq interpreter-mode-alist (cons '("python" . python-mode)
-                                   interpreter-mode-alist))
-(autoload 'python-mode "python-mode" "Python editing mode." t)&lt;/p&gt;
-&lt;p&gt;;; show pydoc
-;; http://www.emacswiki.org/cgi-bin/wiki/PythonMode
-(defun my-python-documentation (w)
-  "Launch PyDOC on the Word at Point"
-  (interactive
-   (list (let&lt;em&gt; ((word (thing-at-point 'word))
-                (input (read-string
-                        (format "pydoc entry%s: "
-                                (if (not word) "" (format " (default %s)" word))))))
-           (if (string= input "")
-               (if (not word) (error "No pydoc args given")
-                 word) ;sinon word
-             input)))) ;sinon input
-  (shell-command (concat py-python-command " -c \"from pydoc import help;help(\'" w "\')\"") "&lt;/em&gt;PYDOCS&lt;em&gt;")
-  (view-buffer-other-window "&lt;/em&gt;PYDOCS*" t 'kill-buffer-and-window))&lt;/p&gt;
-&lt;p&gt;;;to show the pydoc help on the word at point
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key [(control f1)] 'my-python-documentation)
-                      )))&lt;/p&gt;
-&lt;p&gt;;;para indentar o completar con tab
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "&lt;tab&gt;") 'indent-or-complete)
-                      )))
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "C-x #") 'comment-or-uncomment-region)
-                      )))&lt;/p&gt;
-&lt;p&gt;;;pdb setup, note the python version
-(setq pdb-path '/usr/bin/pdb
-      gud-pdb-command-name (symbol-name pdb-path))
-(defadvice pdb (before gud-query-cmdline activate)
-  "Provide a better default command line when called interactively."
-  (interactive
-   (list (gud-query-cmdline pdb-path
-                            (file-name-nondirectory buffer-file-name)))))&lt;/p&gt;
-&lt;p&gt;;; para usar pdb con F8
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "&lt;f8&gt;") 'pdb)
-                      )))
-;; para usar pydoc
-(add-hook 'python-mode-hook
-          '(lambda () (eldoc-mode 1)) t)&lt;/p&gt;
-&lt;p&gt;;;show tab in python mode
-(add-hook 'python-mode-hook
-          (lambda ()
-            (font-lock-add-keywords nil my-extra-keywords)))&lt;/p&gt;
-&lt;p&gt;;; para mostrar el trailing whitespace
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace t)))&lt;/p&gt;
-&lt;p&gt;;; usar pylint
-(when (load "flymake" t)
-  (defun flymake-pylint-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "epylint" (list local-file))))&lt;/p&gt;
-&lt;p&gt;(add-to-list 'flymake-allowed-file-name-masks
-               '("\.py\'" flymake-pylint-init)))&lt;/p&gt;
-&lt;p&gt;;; (require 'pymacs)
-;; (require 'pycomplete)
-;; (autoload 'pymacs-load "ropemacs" "rope-")
-;; (autoload 'pymacs-load "pymacs" nil t)
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")&lt;/p&gt;
-&lt;p&gt;;;(rope-init)&lt;/p&gt;
-&lt;p&gt;;; para autocompletar los cierres de parentesis o de string
-;;(add-hook 'python-mode-hook
-;;    (lambda ()
-;;      (define-key python-mode-map "\"" 'electric-pair)
-;;      (define-key python-mode-map "\'" 'electric-pair)
-;;      (define-key python-mode-map "(" 'electric-pair)
-;;      (define-key python-mode-map "[" 'electric-pair)
-;;      (define-key python-mode-map "{" 'electric-pair)))&lt;/p&gt;
-&lt;p&gt;;;(defun electric-pair ()
-;;  "Insert character pair without sournding spaces"
-;;  (interactive)
-;;  (let (parens-require-spaces)
-;;    (insert-pair)))
-```&lt;/p&gt;</summary></entry><entry><title>erc</title><link href="http://tty.cl/erc.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;Python&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;span class="p"&gt;;;;;;;;;;;;;&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/usr/bin/python&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;auto&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;alist&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cons&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;(&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;.py$&amp;quot; . python-mode) auto-mode-alist))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;interpreter&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;alist&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cons&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;(&amp;quot;python&amp;quot; . python-mode)&lt;/span&gt;
+                                   &lt;span class="n"&gt;interpreter&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;alist&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode &amp;quot;python-mode&amp;quot; &amp;quot;Python editing mode.&amp;quot; t)&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;show&lt;/span&gt; &lt;span class="n"&gt;pydoc&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;emacswiki&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cgi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;wiki&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;PythonMode&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;defun&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;documentation&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="s2"&gt;&amp;quot;Launch PyDOC on the Word at Point&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;interactive&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;thing&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;at&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;point&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;word))&lt;/span&gt;
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;input&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;pydoc entry&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;: &amp;quot;&lt;/span&gt;
+                                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; (default &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;)&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;))))))&lt;/span&gt;
+           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+               &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;No pydoc args given&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                 &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;sinon&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;
+             &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;sinon&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;concat&lt;/span&gt; &lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; -c &lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;from pydoc import help;help(&lt;/span&gt;&lt;span class="se"&gt;\&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;)&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;*PYDOCS*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;window&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;*PYDOCS*&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kill-buffer-and-window))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;show&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;pydoc&lt;/span&gt; &lt;span class="n"&gt;help&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="n"&gt;at&lt;/span&gt; &lt;span class="n"&gt;point&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;control&lt;/span&gt; &lt;span class="n"&gt;f1&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;my-python-documentation)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt;&lt;span class="n"&gt;para&lt;/span&gt; &lt;span class="n"&gt;indentar&lt;/span&gt; &lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;completar&lt;/span&gt; &lt;span class="n"&gt;con&lt;/span&gt; &lt;span class="n"&gt;tab&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kbd&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;tab&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;indent-or-complete)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kbd&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;C-x #&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;comment-or-uncomment-region)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt;&lt;span class="n"&gt;pdb&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;note&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;pdb&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/usr/bin/pdb&lt;/span&gt;
+      &lt;span class="n"&gt;gud&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pdb&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;symbol&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="n"&gt;pdb&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;defadvice&lt;/span&gt; &lt;span class="n"&gt;pdb&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="n"&gt;gud&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt; &lt;span class="n"&gt;activate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="s2"&gt;&amp;quot;Provide a better default command line when called interactively.&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;interactive&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gud&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt; &lt;span class="n"&gt;pdb&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;
+                            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;nondirectory&lt;/span&gt; &lt;span class="nb"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;para&lt;/span&gt; &lt;span class="n"&gt;usar&lt;/span&gt; &lt;span class="n"&gt;pdb&lt;/span&gt; &lt;span class="n"&gt;con&lt;/span&gt; &lt;span class="n"&gt;F8&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kbd&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;f8&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pdb)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;para&lt;/span&gt; &lt;span class="n"&gt;usar&lt;/span&gt; &lt;span class="n"&gt;pydoc&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="s1"&gt;&amp;#39;(lambda () (eldoc-mode 1)) t)&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt; &lt;span class="n"&gt;tab&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;mode&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;font&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lock&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;keywords&lt;/span&gt; &lt;span class="n"&gt;nil&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;extra&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;keywords&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;para&lt;/span&gt; &lt;span class="n"&gt;mostrar&lt;/span&gt; &lt;span class="n"&gt;el&lt;/span&gt; &lt;span class="n"&gt;trailing&lt;/span&gt; &lt;span class="n"&gt;whitespace&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;trailing&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;whitespace&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;usar&lt;/span&gt; &lt;span class="n"&gt;pylint&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;flymake&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;defun&lt;/span&gt; &lt;span class="n"&gt;flymake&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pylint&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;flymake&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;
+                       &lt;span class="s1"&gt;&amp;#39;flymake-create-temp-inplace))&lt;/span&gt;
+           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;relative&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+                        &lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;directory&lt;/span&gt; &lt;span class="nb"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;epylint&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;flymake-allowed-file-name-masks&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;(&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;.py&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; flymake-pylint-init)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pycomplete)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs-load &amp;quot;ropemacs&amp;quot; &amp;quot;rope-&amp;quot;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs-load &amp;quot;pymacs&amp;quot; nil t)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs-eval &amp;quot;pymacs&amp;quot; nil t)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs-apply &amp;quot;pymacs&amp;quot;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs-call &amp;quot;pymacs&amp;quot;)&lt;/span&gt;
+
+&lt;span class="p"&gt;;;(&lt;/span&gt;&lt;span class="n"&gt;rope&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;para&lt;/span&gt; &lt;span class="n"&gt;autocompletar&lt;/span&gt; &lt;span class="n"&gt;los&lt;/span&gt; &lt;span class="n"&gt;cierres&lt;/span&gt; &lt;span class="n"&gt;de&lt;/span&gt; &lt;span class="n"&gt;parentesis&lt;/span&gt; &lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;de&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;
+&lt;span class="p"&gt;;;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;(&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;[&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;{&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electric-pair)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;(&lt;/span&gt;&lt;span class="n"&gt;defun&lt;/span&gt; &lt;span class="n"&gt;electric&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pair&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;  &lt;span class="s2"&gt;&amp;quot;Insert character pair without sournding spaces&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;parens&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;require&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;spaces&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>erc</title><link href="http://tty.cl/erc.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
 &lt;p&gt;erc-cmd-NP function send the current track being played to the current chat buffer (channel or private).&lt;/p&gt;
 &lt;p&gt;The connect- functions provide a quick access to the defined IRC server.&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; erc.el&lt;/span&gt;
+&lt;span class="c1"&gt;;; Login : &amp;lt;freyes@wampa&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
+&lt;p&gt;erc-cmd-NP function send the current track being played to the current chat buffer (channel or private).&lt;/p&gt;
+&lt;p&gt;The connect- functions provide a quick access to the defined IRC server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
 &lt;span class="c1"&gt;;; erc.el&lt;/span&gt;
 &lt;span class="c1"&gt;;; Login : &amp;lt;freyes@wampa&amp;gt;&lt;/span&gt;
 &lt;span class="c1"&gt;;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes&lt;/span&gt;
@@ -964,11 +1220,15 @@ C mode.&lt;/p&gt;
    &lt;span class="ss"&gt;:full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Felipe Reyes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;erc-auto-query&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;frame&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Org-mode and Beamer</title><link href="http://tty.cl/org-mode-and-beamer.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>Org-mode and Beamer</title><link href="http://tty.cl/org-mode-and-beamer.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. &lt;/p&gt;
 &lt;h2&gt;Example&lt;/h2&gt;
 &lt;p&gt;Here it is an example of how a presentation file should look like&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#+TITLE:     Org Mode and Beamer&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#+TITLE:     Org Mode and Beamer …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. &lt;/p&gt;
+&lt;h2&gt;Example&lt;/h2&gt;
+&lt;p&gt;Here it is an example of how a presentation file should look like&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#+TITLE:     Org Mode and Beamer&lt;/span&gt;
 &lt;span class="c1"&gt;#+AUTHOR:    Felipe Reyes&lt;/span&gt;
 &lt;span class="c1"&gt;#+EMAIL:     freyes@tty.cl&lt;/span&gt;
 &lt;span class="c1"&gt;#+DATE:      2011-08-25 Tue&lt;/span&gt;
@@ -1030,7 +1290,7 @@ sudo apt-get install texlive-extra-utils \
 &lt;/pre&gt;
 
 &lt;p&gt;Add the following to your &lt;em&gt;.emacs&lt;/em&gt; file:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; beamer&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; beamer&lt;/span&gt;
 &lt;span class="c1"&gt;;; #+LaTeX_CLASS: beamer in org files&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;unless&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;boundp&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;org-export-latex-classes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;org-export-latex-classes&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -1087,7 +1347,14 @@ sudo apt-get install texlive-extra-utils \
 &lt;li&gt;&lt;a href="http://orgmode.org/worg/org-tutorials/org-beamer/tutorial.html"&gt;Worg beamer tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://orgmode.org/manual/Beamer-class-export.html"&gt;org-mode beamer&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://emacs-fu.blogspot.com/2009/10/writing-presentations-with-org-mode-and.html"&gt;emacs-fu: writing presentations with org-mode and beamer&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Postgresql Tips n' Tricks</title><link href="http://tty.cl/postgresql-tips-n-tricks.html" rel="alternate"></link><published>2013-11-22T15:23:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-11-22:postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;/ul&gt;</content></entry><entry><title>Postgresql Tips n' Tricks</title><link href="http://tty.cl/postgresql-tips-n-tricks.html" rel="alternate"></link><published>2013-11-22T15:23:00-03:00</published><updated>2013-11-22T15:23:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-11-22:/postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;li&gt;pg_stat_activity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;pg_stat_activity&lt;/a&gt;
+is a view that belongs to the postgresql catalog, it helps you to view the
+status of the queries that are in execution, the explanation of each column
+can be found in the postgresql manual &lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;The Statistics Collector&lt;/a&gt;
+section (I don't want to do a simply copy-paste, so …&lt;/p&gt;</summary><content type="html">&lt;ul class="simple"&gt;
 &lt;li&gt;pg_stat_activity&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;pg_stat_activity&lt;/a&gt;
@@ -1166,81 +1433,150 @@ section (I don't want to do a simply copy-paste, so see the official documentati
 &lt;/pre&gt;&lt;/div&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-</summary><category term="postgresql"></category><category term="tips"></category></entry><entry><title>Skype in GNU/Debian AMD64</title><link href="http://tty.cl/skype-in-gnudebian-amd64.html" rel="alternate"></link><published>2013-02-18T04:59:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-02-18:skype-in-gnudebian-amd64.html</id><summary type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
+</content><category term="postgresql"></category><category term="tips"></category></entry><entry><title>Skype in GNU/Debian AMD64</title><link href="http://tty.cl/skype-in-gnudebian-amd64.html" rel="alternate"></link><published>2013-02-18T04:59:00-03:00</published><updated>2013-02-18T04:59:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-02-18:/skype-in-gnudebian-amd64.html</id><summary type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Check if your system has i386 arch support enabled&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;code&gt;$ dpkg --print-foreign-architectures
-i386&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;If you don't have i386 support enable it with the following commands:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;```&lt;/p&gt;
-&lt;h1&gt;dpkg --add-architecture i386&lt;/h1&gt;
-&lt;h1&gt;apt-get update&lt;/h1&gt;
-&lt;p&gt;```&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Then install the skype's dependencies with the following command:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;```&lt;/p&gt;
-&lt;h1&gt;apt-get install libqtgui4:i386 \&lt;/h1&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;  libqtwebkit4:i386 \
-  libqt4-network:i386 \
-  libqtcore4:i386 \
-  libxss1:i386 \
-  lib32stdc++6 \
-  libxv1:i386 \
-  libasound2:i386 \
-  libqt4-dbus:i386 \
-  libssl1.0.0:i386 \
-  libasound2-plugins:i386 \
-  libqt4-xml \
-  libqtcore4 \
-  libqtdbus4 \
-  qdbus
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg --print-foreign-architectures
+i386
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;If you don't have i386 support enable it with the following commands:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dpkg --add-architecture i386
+# apt-get update
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Then install the skype's dependencies with the following command:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# apt-get install libqtgui4:i386 \
+      libqtwebkit4 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Check if your system has i386 arch support enabled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg --print-foreign-architectures
+i386
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;If you don't have i386 support enable it with the following commands:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dpkg --add-architecture i386
+# apt-get update
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Then install the skype's dependencies with the following command:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# apt-get install libqtgui4:i386 \
+      libqtwebkit4:i386 \
+      libqt4-network:i386 \
+      libqtcore4:i386 \
+      libxss1:i386 \
+      lib32stdc++6 \
+      libxv1:i386 \
+      libasound2:i386 \
+      libqt4-dbus:i386 \
+      libssl1.0.0:i386 \
+      libasound2-plugins:i386 \
+      libqt4-xml \
+      libqtcore4 \
+      libqtdbus4 \
+      qdbus
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;ul&gt;
 &lt;li&gt;And then you are ready to install skype&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;```&lt;/p&gt;
-&lt;h1&gt;dpkg -i skype-debian_4.1.0.20-1_i386.deb&lt;/h1&gt;
-&lt;p&gt;```&lt;/p&gt;</summary><category term="debian"></category><category term="skype"></category><category term="tips"></category></entry><entry><title>C Snippets</title><link href="http://tty.cl/c-snippets.html" rel="alternate"></link><published>2013-01-01T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:c-snippets.html</id><summary type="html">&lt;h2&gt;Simple Swap Function&lt;/h2&gt;
-&lt;p&gt;```C&lt;/p&gt;
-&lt;h1&gt;include &lt;stdio.h&gt;&lt;/h1&gt;
-&lt;p&gt;inline void swap(int &lt;em&gt;a, int &lt;/em&gt;b){
-  &lt;em&gt;a= &lt;/em&gt;a+&lt;em&gt;b;
-  &lt;/em&gt;b=&lt;em&gt;a-&lt;/em&gt;b;
-  &lt;em&gt;a=&lt;/em&gt;a-*b;
-}&lt;/p&gt;
-&lt;p&gt;int main() {
-  int a = 1;
-  int b = 2;&lt;/p&gt;
-&lt;p&gt;printf("before: a: %d - b: %d\n", a, b);
-  swap(&amp;amp;a, &amp;amp;b);&lt;/p&gt;
-&lt;p&gt;printf("after: a: %d - b: %d\n", a, b);
-  return 0;
-}
-```&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dpkg -i skype-debian_4.1.0.20-1_i386.deb
+&lt;/pre&gt;&lt;/div&gt;</content><category term="debian"></category><category term="skype"></category><category term="tips"></category></entry><entry><title>C Snippets</title><link href="http://tty.cl/c-snippets.html" rel="alternate"></link><published>2013-01-01T00:00:00-03:00</published><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:/c-snippets.html</id><summary type="html">&lt;h2&gt;Simple Swap Function&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+
+&lt;span class="kr"&gt;inline&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;+*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;=*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;-*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;-*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;before: a: %d - b: %d&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;after: a: %d - b: %d&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;Simple Swap Function&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;&lt;/span&gt;
+
+&lt;span class="kr"&gt;inline&lt;/span&gt; &lt;span class="kt"&gt;void&lt;/span&gt; &lt;span class="nf"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;+*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;=*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;-*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;=*&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;-*&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+  &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+  &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;before: a: %d - b: %d&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="n"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+
+  &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;after: a: %d - b: %d&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+  &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;Expected output:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;before: a: 1 - b: 2
-after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs Tips</title><link href="http://tty.cl/emacs-tips.html" rel="alternate"></link><published>2013-01-01T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:emacs-tips.html</id><summary type="html">&lt;ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;before&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;
+&lt;span class="n"&gt;after&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>Emacs Tips</title><link href="http://tty.cl/emacs-tips.html" rel="alternate"></link><published>2013-01-01T00:00:00-03:00</published><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:/emacs-tips.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;If you start emacs with "emacs -q" and the problem goes away, the problem is on your end: check your .emacs. &lt;/li&gt;
 &lt;li&gt;If "emacs -q" has problems and "emacs -Q" does not, it's caused by your distro or local admin.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Python Snippets</title><link href="http://tty.cl/python-snippets.html" rel="alternate"></link><published>2013-01-01T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:python-snippets.html</id><summary type="html">&lt;h2&gt;Property&lt;/h2&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;Property&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;li&gt;If you start emacs with "emacs -q" and the problem goes away, the problem is on your end: check your .emacs. &lt;/li&gt;
+&lt;li&gt;If "emacs -q" has problems and "emacs -Q" does not, it's caused by your distro or local admin.&lt;/li&gt;
+&lt;/ul&gt;</content></entry><entry><title>Python Snippets</title><link href="http://tty.cl/python-snippets.html" rel="alternate"></link><published>2013-01-01T00:00:00-03:00</published><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:/python-snippets.html</id><summary type="html">&lt;h2&gt;Property&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;Property&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;fget&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fdel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
-    &lt;span class="n"&gt;fdoc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__doc__&lt;/span&gt;
+    &lt;span class="n"&gt;fdoc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;
     &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;property&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fget&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fdel&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fdoc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;h3&gt;Usage Example&lt;/h3&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;TtyExample&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;TtyExample&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
 
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
+
+    &lt;span class="nd"&gt;@Property&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;name&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;The name&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fget&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_name&lt;/span&gt;
+
+        &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fset&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+            &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="nb"&gt;isinstance&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;value&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="nb"&gt;basestring&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;value …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;Property&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;Property&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;fget&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fdel&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;fdoc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="vm"&gt;__doc__&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;property&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fget&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fset&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fdel&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;fdoc&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;Usage Example&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;TtyExample&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
         &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;
 
     &lt;span class="nd"&gt;@Property&lt;/span&gt;
@@ -1258,7 +1594,7 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
         &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;fdel&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
             &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Hey! don&amp;#39;t delete me please :\ &amp;quot;&lt;/span&gt;
 
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;TtyExample&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;foobar&amp;#39;&lt;/span&gt;
     &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -1276,7 +1612,7 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
 
 
 &lt;h2&gt;Get my IP address&lt;/h2&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;socket&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;socket&lt;/span&gt;
 
 &lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;AF_INET&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;socket&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SOCK_DGRAM&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;connect&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tty.cl&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;80&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -1294,7 +1630,7 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
 &lt;/pre&gt;
 
 &lt;h2&gt;Get variables&lt;/h2&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;traceback&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;StringIO&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;StringIO&lt;/span&gt;
 
@@ -1375,7 +1711,7 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
 
 
 &lt;h2&gt;json encoder/decoder&lt;/h2&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt;
 
 &lt;span class="n"&gt;DATETIME_FORMAT&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;%Y-%m-&lt;/span&gt;&lt;span class="si"&gt;%d&lt;/span&gt;&lt;span class="s2"&gt; %H:%M:%S&amp;quot;&lt;/span&gt;
@@ -1389,8 +1725,8 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
 
 
 &lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;JSONDecoder&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;JSONDecoder&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
-        &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;JSONDecoder&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;JSONDecoder&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
                                   &lt;span class="n"&gt;object_hook&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;object_hook&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="n"&gt;kwargs&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;object_hook&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -1406,7 +1742,7 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
 
         &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;obj&lt;/span&gt;
 
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;encoder&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;JSONEncoder&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
     &lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;encoder&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;encode&lt;/span&gt;&lt;span class="p"&gt;({&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;date&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()})&lt;/span&gt;
 
@@ -1416,7 +1752,7 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
 
 
 &lt;h2&gt;sendmail&lt;/h2&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;smtplib&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;smtplib&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;email.MIMEMultipart&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MIMEMultipart&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;email.MIMEBase&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MIMEBase&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;email.MIMEText&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;MIMEText&lt;/span&gt;
@@ -1458,8 +1794,32 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;Original snippet available at http://snippets.dzone.com/posts/show/757&lt;/p&gt;</summary><category term="python"></category><category term="snippets"></category></entry><entry><title>Mercurial</title><link href="http://tty.cl/mercurial.html" rel="alternate"></link><published>2012-12-03T17:42:08-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2012-12-03:mercurial.html</id><summary type="html">&lt;p&gt;This is my mercurial configuration (~/.hgrc)&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[ui]&lt;/span&gt;
+&lt;p&gt;Original snippet available at http://snippets.dzone.com/posts/show/757&lt;/p&gt;</content><category term="python"></category><category term="snippets"></category></entry><entry><title>Mercurial</title><link href="http://tty.cl/mercurial.html" rel="alternate"></link><published>2012-12-03T17:42:08-03:00</published><updated>2012-12-03T17:42:08-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2012-12-03:/mercurial.html</id><summary type="html">&lt;p&gt;This is my mercurial configuration (~/.hgrc)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[ui]&lt;/span&gt;
+&lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Foo Bar &amp;lt;foobar@example.com&amp;gt;&lt;/span&gt;
+&lt;span class="na"&gt;merge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;emacs&lt;/span&gt;
+
+&lt;span class="k"&gt;[extensions]&lt;/span&gt;
+&lt;span class="na"&gt;pager&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;rebase&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; 
+&lt;span class="na"&gt;churn&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;hgshelve&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;~/.hg.d/hgshelve.py&lt;/span&gt;
+&lt;span class="na"&gt;keyword&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;fetch&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;activity&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;~/.hg.d/hgactivity/activity.py&lt;/span&gt;
+&lt;span class="na"&gt;mq&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+&lt;span class="na"&gt;hg_histedit&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s"&gt;~/.hg.d/hg_histedit.py&lt;/span&gt;
+&lt;span class="na"&gt;color&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;
+
+&lt;span class="k"&gt;[diff]&lt;/span&gt;
+&lt;span class="na"&gt;git&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;on&lt;/span&gt;
+
+&lt;span class="k"&gt;[pager]&lt;/span&gt;
+&lt;span class="na"&gt;pager&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;LESS=&amp;#39;FSRX&amp;#39; less&lt;/span&gt;
+&lt;span class="na"&gt;attend&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;glog&lt;/span&gt;
+
+&lt;span class="k"&gt;[keywordmaps …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;This is my mercurial configuration (~/.hgrc)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[ui]&lt;/span&gt;
 &lt;span class="na"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;Foo Bar &amp;lt;foobar@example.com&amp;gt;&lt;/span&gt;
 &lt;span class="na"&gt;merge&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;emacs&lt;/span&gt;
 
@@ -1500,7 +1860,11 @@ after: a: 2 - b: 1&lt;/code&gt;&lt;/p&gt;</summary></entry><entry><title>Emacs T
 
 &lt;span class="k"&gt;[merge-tools]&lt;/span&gt;
 &lt;span class="na"&gt;emacs.args&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;-q --eval &amp;quot;(ediff-merge-with-ancestor \&amp;quot;$local\&amp;quot; \&amp;quot;$other\&amp;quot; \&amp;quot;$base\&amp;quot; nil \&amp;quot;$output\&amp;quot;)&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary><category term="mercurial"></category><category term="vcs"></category></entry><entry><title>MySQL and the Key Cache Buffer</title><link href="http://tty.cl/mysql-and-the-key-cache-buffer.html" rel="alternate"></link><published>2011-12-18T00:00:00-03:00</published><author><name>Jonathan Gonzalez</name></author><id>tag:tty.cl,2011-12-18:mysql-and-the-key-cache-buffer.html</id><summary type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="mercurial"></category><category term="vcs"></category></entry><entry><title>MySQL and the Key Cache Buffer</title><link href="http://tty.cl/mysql-and-the-key-cache-buffer.html" rel="alternate"></link><published>2011-12-18T00:00:00-03:00</published><updated>2011-12-18T00:00:00-03:00</updated><author><name>Jonathan Gonzalez</name></author><id>tag:tty.cl,2011-12-18:/mysql-and-the-key-cache-buffer.html</id><summary type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
+&lt;p&gt;It's always important to recognize why this happened, well, here in my
+work a few weeks ago I set up a &lt;a href="http://code.google.com/p/mysql-cacti-templates/"&gt;few new templates&lt;/a&gt; for our &lt;a href="http://www.cacti.net/"&gt;Cacti&lt;/a&gt;, among
+many useful templates it comes with some very handy templates for
+&lt;a href="http://www.mysql.com"&gt;MySQL&lt;/a&gt;, it comes with a pretty useful …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
 &lt;p&gt;It's always important to recognize why this happened, well, here in my
 work a few weeks ago I set up a &lt;a href="http://code.google.com/p/mysql-cacti-templates/"&gt;few new templates&lt;/a&gt; for our &lt;a href="http://www.cacti.net/"&gt;Cacti&lt;/a&gt;, among
 many useful templates it comes with some very handy templates for
@@ -1512,17 +1876,21 @@ of this article&lt;/p&gt;
 &lt;p&gt;Since you may not have cacti installed you may need to know what do
 you have and how it's working now.&lt;/p&gt;
 &lt;p&gt;First the value of your 'key buffer size':&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sql
-show variables like 'key%';&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="n"&gt;variables&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;key%&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;This will show at least, two good things that may be useful for you,
 'key buffer size', yes the size of our key buffer! and
 'key cache block size' useful to end our tiny article&lt;/p&gt;
 &lt;p&gt;Well, now we have to know how the key buffer its used:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sql
-show status like 'Key%';&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Key%&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;All the rows returned from this command are useful! I'll use and
 example of one of our servers:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;mysql&amp;gt; show status like 'Key%';
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mysql&amp;gt; show status like &amp;#39;Key%&amp;#39;;
 +------------------------+-----------+
 | Variable_name          | Value     |
 +------------------------+-----------+
@@ -1534,7 +1902,10 @@ example of one of our servers:&lt;/p&gt;
 | Key_write_requests     | 9268658   |
 | Key_writes             | 397761    |
 +------------------------+-----------+
-7 rows in set (0.00 sec)&lt;/code&gt;&lt;/p&gt;
+7 rows in set (0.00 sec)
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;We now have all the data we need to evaluate  our current situation.&lt;/p&gt;
 &lt;h1&gt;Use the collected data&lt;/h1&gt;
 &lt;p&gt;We will suppose that the value of 'key buffer size' it's '402653184'
@@ -1545,10 +1916,16 @@ transformation:&lt;/p&gt;
 &lt;p&gt;We have a Key cache buffer of 384MB which looks like a lot of space,
 but how much of that space it's currently used? well, you will have to
 do simple calculation:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;key_buffer_usage = ( Key_blocks_unused * key_cache_block_size ) / key_buffer_size ) * 100&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;key_buffer_usage = ( Key_blocks_unused * key_cache_block_size ) / key_buffer_size ) * 100
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;So with our collected that we will suppose that the value of
 'key cache block size' it's 1024 which it's the default value.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;( (240934 * 1024) / 402653184 ) * 100 = 61.2&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;( (240934 * 1024) / 402653184 ) * 100 = 61.2
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;So, we have about 61.2 percent of our buffer used, ok this seems to be
 right, but there's another data we may find useful! look this extract
 from the &lt;a href="http://dev.mysql.com/doc/"&gt;MySQL Documentation&lt;/a&gt;:&lt;/p&gt;
@@ -1556,7 +1933,10 @@ from the &lt;a href="http://dev.mysql.com/doc/"&gt;MySQL Documentation&lt;/a&gt;
 0.01."&lt;/p&gt;
 &lt;p&gt;Ok, what the heck this guys mean by that? Well, let's try our maths to
 calculate our ratio!&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;key_reads_ratio =  ( Key_reads / Key_read_requests ) * 100&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;key_reads_ratio =  ( Key_reads / Key_read_requests ) * 100
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;And with our data it will be something like:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;( 321341 / 211305615 ) * 100 = 0.152074046&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;So, we have a ratio of about 0.15, this doesn't seem a lot to me, but
@@ -1569,8 +1949,10 @@ can't restart your database right?&lt;/p&gt;
 &lt;p&gt;Well, if you access your database as 'root' user you can start to
 throw a few commands to set these values!&lt;/p&gt;
 &lt;p&gt;Let's say we want to set up our key buffer, we should do this:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sql
-set global key_buffer_size=512*1024*1024;&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="k"&gt;global&lt;/span&gt; &lt;span class="n"&gt;key_buffer_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;Thus, we will set our key_buffer to 512M and our system will have a
 lot of more key cached and our ratio will go down! awesome right? but
 wait, there's a tricks an some cautions you may want to take!&lt;/p&gt;
@@ -1585,17 +1967,28 @@ will have to wait less.&lt;/p&gt;
 &lt;p&gt;Well, I'll still working with some &lt;a href="http://www.mysql.com]"&gt;MySQL&lt;/a&gt; optimization things, so, I'll
 probably upload more things related to this kind of optimizations.&lt;/p&gt;
 &lt;p&gt;Remember, creating graphs of your system will always help you to
-diagnostic your system =)&lt;/p&gt;</summary><category term="mysql"></category><category term="tuning"></category><category term="database"></category><category term="cache"></category></entry><entry><title>rxvt-unicode</title><link href="http://tty.cl/rxvt-unicode.html" rel="alternate"></link><published>2011-06-11T23:10:00-04:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2011-06-11:rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+diagnostic your system =)&lt;/p&gt;</content><category term="mysql"></category><category term="tuning"></category><category term="database"></category><category term="cache"></category></entry><entry><title>rxvt-unicode</title><link href="http://tty.cl/rxvt-unicode.html" rel="alternate"></link><published>2011-06-11T23:10:00-04:00</published><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2011-06-11:/rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
 default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;aptitude install rxvt-unicode&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aptitude install rxvt-unicode …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+default terminal since at least 4 years ago. I started using it after getting
+ tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aptitude install rxvt-unicode
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;If you want to use it as your default x-terminal-emulator you have to
 set the proper alternative like this&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;update-alternatives --set x-terminal-emulator /usr/bin/urxvt&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;update-alternatives --set x-terminal-emulator /usr/bin/urxvt
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;The configuration must go on your ~/.Xdefaults file, here is my configuration&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;URxvt.foreground: grey90
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;URxvt.foreground: grey90
 URxvt.cursorColor: #729fcf
 URxvt.font: -xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-15
 URxvt.scrollBar: False
@@ -1608,20 +2001,40 @@ URxvt*urgentOnBell: true
 URxvt*urllauncher: iceweasel
 URxvt*matcher.button:        3
 URxvt*depth: 24
-URxvt*background: rgba:0000/0000/0000/dddd&lt;/code&gt;&lt;/p&gt;
+URxvt*background: rgba:0000/0000/0000/dddd
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;Once you put the configuration you can reload it using this&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;shell
-xrdb -merge ~/.Xdefaults&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xrdb -merge ~/.Xdefaults
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;Remember to install the terminus fonts if you want to use my configuration&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;shell
-aptitude install xfonts-terminus xfonts-terminus-dos xfonts-terminus-oblique&lt;/code&gt;&lt;/p&gt;</summary><category term="debian"></category><category term="linux"></category><category term="tips"></category><category term="rxvt"></category></entry><entry><title>About Me</title><link href="http://tty.cl/about-me.html" rel="alternate"></link><published>2010-10-10T00:00:00-04:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2010-10-10:about-me.html</id><summary type="html">&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aptitude install xfonts-terminus xfonts-terminus-dos xfonts-terminus-oblique
+&lt;/pre&gt;&lt;/div&gt;</content><category term="debian"></category><category term="linux"></category><category term="tips"></category><category term="rxvt"></category></entry><entry><title>About Me</title><link href="http://tty.cl/about-me.html" rel="alternate"></link><published>2010-10-10T00:00:00-04:00</published><updated>2010-10-10T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2010-10-10:/about-me.html</id><summary type="html">&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
 developer (or at least I try)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.flickr.com/photos/freyes"&gt;Flickr&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.linkedin.com/in/freyesas"&gt;Linkedin&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.ohloh.net/accounts/freyes"&gt;Ohloh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt="Yeah, that's me." src="/images/freyes.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Yeah, that's me." src="/images/freyes.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.fsf.org/register_form?referrer=9394"&gt;&lt;img src="/images/freyes-fsf-member.png" alt="[FSF Associate Member]" width="88" height="31" /&gt;&lt;/a&gt; Proud FSF associate member :)&lt;/p&gt;
+&lt;h2&gt;GNU/Linux Distributions Used&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;RedHat (6.0, 6.2, 7.3)&lt;/li&gt;
+&lt;li&gt;Slackware (unknown version)&lt;/li&gt;
+&lt;li&gt;Suse (unknown version)&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.debian.org"&gt;Debian&lt;/a&gt; &lt;a href="http://www.debian.org/releases/woody/"&gt;Woody&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/sarge"&gt;Sarge&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/etch/"&gt;Etch&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/lenny/"&gt;Lenny&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/squeeze"&gt;Squeeze&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/unstable"&gt;Sid&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.ubuntu.com"&gt;Ubuntu&lt;/a&gt; (4.10 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
+developer (or at least I try)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.flickr.com/photos/freyes"&gt;Flickr&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.linkedin.com/in/freyesas"&gt;Linkedin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.ohloh.net/accounts/freyes"&gt;Ohloh&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="Yeah, that's me." src="/images/freyes.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.fsf.org/register_form?referrer=9394"&gt;&lt;img src="/images/freyes-fsf-member.png" alt="[FSF Associate Member]" width="88" height="31" /&gt;&lt;/a&gt; Proud FSF associate member :)&lt;/p&gt;
 &lt;h2&gt;GNU/Linux Distributions Used&lt;/h2&gt;
 &lt;ul&gt;
@@ -1693,4 +2106,4 @@ and &lt;a href="https://github.com/openstack-infra/jenkins-job-builder/"&gt;jenk
 &lt;li&gt;Databases: &lt;a href="http://www.mysql.org"&gt;MySQL&lt;/a&gt;, &lt;a href="http://www.postgresql.org"&gt;PostgreSQL&lt;/a&gt;, &lt;a href="http://www.oracle.com"&gt;Oracle&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.rabbitmq.com"&gt;RabbitMQ&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://celeryproject.org/"&gt;Celery&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;/ul&gt;</content></entry></feed>

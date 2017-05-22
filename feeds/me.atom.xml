@@ -1,12 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/me.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2010-10-10T00:00:00-04:00</updated><entry><title>About Me</title><link href="http://tty.cl/about-me.html" rel="alternate"></link><published>2010-10-10T00:00:00-04:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2010-10-10:about-me.html</id><summary type="html">&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - Me</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/me.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2010-10-10T00:00:00-04:00</updated><entry><title>About Me</title><link href="http://tty.cl/about-me.html" rel="alternate"></link><published>2010-10-10T00:00:00-04:00</published><updated>2010-10-10T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2010-10-10:/about-me.html</id><summary type="html">&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
 developer (or at least I try)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.flickr.com/photos/freyes"&gt;Flickr&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.linkedin.com/in/freyesas"&gt;Linkedin&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://www.ohloh.net/accounts/freyes"&gt;Ohloh&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img alt="Yeah, that's me." src="/images/freyes.jpg" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Yeah, that's me." src="/images/freyes.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.fsf.org/register_form?referrer=9394"&gt;&lt;img src="/images/freyes-fsf-member.png" alt="[FSF Associate Member]" width="88" height="31" /&gt;&lt;/a&gt; Proud FSF associate member :)&lt;/p&gt;
+&lt;h2&gt;GNU/Linux Distributions Used&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;RedHat (6.0, 6.2, 7.3)&lt;/li&gt;
+&lt;li&gt;Slackware (unknown version)&lt;/li&gt;
+&lt;li&gt;Suse (unknown version)&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.debian.org"&gt;Debian&lt;/a&gt; &lt;a href="http://www.debian.org/releases/woody/"&gt;Woody&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/sarge"&gt;Sarge&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/etch/"&gt;Etch&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/lenny/"&gt;Lenny&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/squeeze"&gt;Squeeze&lt;/a&gt;, &lt;a href="http://www.debian.org/releases/unstable"&gt;Sid&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.ubuntu.com"&gt;Ubuntu&lt;/a&gt; (4.10 …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;A Software Engineer, Debian enthusiast, free and open source software
+developer (or at least I try)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.flickr.com/photos/freyes"&gt;Flickr&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.linkedin.com/in/freyesas"&gt;Linkedin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.ohloh.net/accounts/freyes"&gt;Ohloh&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt="Yeah, that's me." src="/images/freyes.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.fsf.org/register_form?referrer=9394"&gt;&lt;img src="/images/freyes-fsf-member.png" alt="[FSF Associate Member]" width="88" height="31" /&gt;&lt;/a&gt; Proud FSF associate member :)&lt;/p&gt;
 &lt;h2&gt;GNU/Linux Distributions Used&lt;/h2&gt;
 &lt;ul&gt;
@@ -78,4 +93,4 @@ and &lt;a href="https://github.com/openstack-infra/jenkins-job-builder/"&gt;jenk
 &lt;li&gt;Databases: &lt;a href="http://www.mysql.org"&gt;MySQL&lt;/a&gt;, &lt;a href="http://www.postgresql.org"&gt;PostgreSQL&lt;/a&gt;, &lt;a href="http://www.oracle.com"&gt;Oracle&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://www.rabbitmq.com"&gt;RabbitMQ&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://celeryproject.org/"&gt;Celery&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;/ul&gt;</content></entry></feed>

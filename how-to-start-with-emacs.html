@@ -30,8 +30,6 @@
         <div id="top-nav-list" class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">
 
-                <li><a href="http://tty.cl/pages/about.html">About</a></li>
-                <li><a href="http://tty.cl/pages/contact.html">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -83,7 +81,7 @@ to the entry.</p>
 series of post, because there is a lot different flavors of emacs, for
 example XEmacs, Aquamacs, and others.</p>
 <p>The GNU Emacs website says:</p>
-<div class="codehilite"><pre><span></span>GNU Emacs is an extensible, customizable text editor—and more. At
+<div class="highlight"><pre><span></span>GNU Emacs is an extensible, customizable text editor—and more. At
 its core is an interpreter for Emacs Lisp, a dialect of the Lisp
 programming language with extensions to support text editing.
 </pre></div>
@@ -162,27 +160,27 @@ config file, like the transient-mark-mode</p>
 <p>The transient mark mode highlights the selected region of text, by
 defaults this is disabled so I recommend you enable it with pasting
 the following in your .emacs</p>
-<div class="codehilite"><pre><span></span><span class="p">(</span><span class="nv">transient-mark-mode</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nv">transient-mark-mode</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 
 <p>Fill you name and email to let the modes that need that information
 could use, this is done with the following snippet of code</p>
-<div class="codehilite"><pre><span></span><span class="p">(</span><span class="k">setq</span> <span class="nv">user-mail-address</span> <span class="s">&quot;homer@example.com&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="k">setq</span> <span class="nv">user-mail-address</span> <span class="s">&quot;homer@example.com&quot;</span><span class="p">)</span>
 <span class="p">(</span><span class="k">setq</span> <span class="nv">user-full-name</span> <span class="s">&quot;Homer J. Simpsons&quot;</span><span class="p">)</span>
 </pre></div>
 
 
 <p>If you like to use Ctrl+g to jump to a line number then you should add
 the following code</p>
-<div class="codehilite"><pre><span></span><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">g</span><span class="p">)</span><span class="nv">]</span> <span class="ss">&#39;goto-line</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nv">global-set-key</span> <span class="nv">[</span><span class="p">(</span><span class="nv">control</span> <span class="nv">g</span><span class="p">)</span><span class="nv">]</span> <span class="ss">&#39;goto-line</span><span class="p">)</span>
 </pre></div>
 
 
 <p>One of the sweetest feature that must have a text editor is syntax
 highlight, well emacs has this, but disabled by default, with the
 following code you will have it enabled always</p>
-<div class="codehilite"><pre><span></span><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;font-lock</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;font-lock</span><span class="p">)</span>
 <span class="p">(</span><span class="nv">global-font-lock-mode</span> <span class="no">t</span><span class="p">)</span>
 </pre></div>
 
@@ -195,7 +193,7 @@ C mode.</p>
 <p><a href="http://www.emacswiki.org/">Emacswiki</a> is probably the best source to find emacs-specific tip-n-tricks</p>
 <h2>Initial Configuration</h2>
 <p>Suggested initial configuration:</p>
-<div class="codehilite"><pre><span></span><span class="c1">;; to debug the .emacs file</span>
+<div class="highlight"><pre><span></span><span class="c1">;; to debug the .emacs file</span>
 <span class="p">(</span><span class="k">setq</span> <span class="nv">debug-on-error</span> <span class="no">nil</span><span class="p">)</span>
 <span class="p">(</span><span class="k">setq</span> <span class="nv">visible-bell</span> <span class="no">nil</span><span class="p">)</span>
 
@@ -243,9 +241,13 @@ C mode.</p>
 <span class="p">(</span><span class="nv">setq-default</span> <span class="nv">indent-tabs-mode</span> <span class="no">nil</span><span class="p">)</span>
 </pre></div>
   </div>
-  <div class="pull-right">
-    <a href="https://twitter.com/share?text=How to start with Emacs&url=http%3A//tty.cl/how-to-start-with-emacs.html&via=gnusis" type="button" class="btn btn-info">
-      <i class="fa fa-twitter-square"></i> Tweet</a>
+  <div class="row">
+      <div class="span6">      </div>
+      <div class="span6">
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text=How to start with Emacs&url=http%3A//tty.cl/how-to-start-with-emacs.html&via=gnusis" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+      </div>
   </div>
 </div>
 

@@ -33,8 +33,6 @@
         <div id="top-nav-list" class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">
 
-                <li><a href="http://tty.cl/pages/about.html">About</a></li>
-                <li><a href="http://tty.cl/pages/contact.html">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -64,48 +62,53 @@
 <ul>
 <li>Check if your system has i386 arch support enabled</li>
 </ul>
-<p><code>$ dpkg --print-foreign-architectures
-i386</code></p>
-<ul>
-<li>If you don't have i386 support enable it with the following commands:</li>
-</ul>
-<p>```</p>
-<h1>dpkg --add-architecture i386</h1>
-<h1>apt-get update</h1>
-<p>```</p>
-<ul>
-<li>Then install the skype's dependencies with the following command:</li>
-</ul>
-<p>```</p>
-<h1>apt-get install libqtgui4:i386 \</h1>
-<div class="codehilite"><pre><span></span>  libqtwebkit4:i386 \
-  libqt4-network:i386 \
-  libqtcore4:i386 \
-  libxss1:i386 \
-  lib32stdc++6 \
-  libxv1:i386 \
-  libasound2:i386 \
-  libqt4-dbus:i386 \
-  libssl1.0.0:i386 \
-  libasound2-plugins:i386 \
-  libqt4-xml \
-  libqtcore4 \
-  libqtdbus4 \
-  qdbus
+<div class="highlight"><pre><span></span>$ dpkg --print-foreign-architectures
+i386
 </pre></div>
 
 
-<p>```</p>
+<ul>
+<li>If you don't have i386 support enable it with the following commands:</li>
+</ul>
+<div class="highlight"><pre><span></span># dpkg --add-architecture i386
+# apt-get update
+</pre></div>
+
+
+<ul>
+<li>Then install the skype's dependencies with the following command:</li>
+</ul>
+<div class="highlight"><pre><span></span># apt-get install libqtgui4:i386 \
+      libqtwebkit4:i386 \
+      libqt4-network:i386 \
+      libqtcore4:i386 \
+      libxss1:i386 \
+      lib32stdc++6 \
+      libxv1:i386 \
+      libasound2:i386 \
+      libqt4-dbus:i386 \
+      libssl1.0.0:i386 \
+      libasound2-plugins:i386 \
+      libqt4-xml \
+      libqtcore4 \
+      libqtdbus4 \
+      qdbus
+</pre></div>
+
+
 <ul>
 <li>And then you are ready to install skype</li>
 </ul>
-<p>```</p>
-<h1>dpkg -i skype-debian_4.1.0.20-1_i386.deb</h1>
-<p>```</p>
+<div class="highlight"><pre><span></span># dpkg -i skype-debian_4.1.0.20-1_i386.deb
+</pre></div>
   </div>
-  <div class="pull-right">
-    <a href="https://twitter.com/share?text=Skype in GNU/Debian AMD64&url=http%3A//tty.cl/skype-in-gnudebian-amd64.html&via=gnusis" type="button" class="btn btn-info">
-      <i class="fa fa-twitter-square"></i> Tweet</a>
+  <div class="row">
+      <div class="span6">          <a href="tag/debian.html"><span class="label label-default">debian</span></a>          <a href="tag/skype.html"><span class="label label-default">skype</span></a>          <a href="tag/tips.html"><span class="label label-default">tips</span></a>      </div>
+      <div class="span6">
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text=Skype in GNU/Debian AMD64&url=http%3A//tty.cl/skype-in-gnudebian-amd64.html&via=gnusis" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+      </div>
   </div>
 </div>
 

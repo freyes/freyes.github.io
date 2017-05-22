@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>TTY.cl</title>
+        <meta charset="utf-8" />
+        <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Full Atom Feed" />
+        <link href="http://tty.cl//feeds/articles.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Categories Atom Feed" />
+
+
+
+    <meta name="tags" contents="mikrotik" />
+    <meta name="tags" contents="openvpn" />
+    <meta name="tags" contents="networking" />
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
+        <link href="/theme/css/style.css" rel="stylesheet">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+
+<body id="index" class="home">
+  <div id="header-wrapper" class="navbar navbar-fixed-top">
+    <div id="header">
+      <div class="container">
+        <div class="logo navbar-header">
+          <a class="navbar-brand" href="http://tty.cl" title="me">
+            <img class="image" height="38" width="38" src="/theme/images/logo.png" />
+            <span class="name">TTY.cl</span>
+          </a>
+          <p class="subtitle">Random thoughts and knowledge</p>
+        </div>
+        <div id="top-nav-list" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="content-wrapper">
+    <div class="container">
+      <p class="socialconnect">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
+<div class="content brarius6">
+  <h1 class="page-title">
+    <a href="http://tty.cl/drafts/mikrotik-openvpn-setup.html" rel="bookmark"
+       title="Permalink to Mikrotik OpenVPN Setup">
+      Mikrotik OpenVPN Setup
+    </a>
+  </h1>
+  <div class="page-subtitle">
+    <abbr class="published" title="2016-08-14T00:00:00-04:00">
+      Sun 14 August 2016
+    </abbr>
+    <address class="vcard author">
+      By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a>
+    </address>
+  </div>
+  <div class="content-body">
+    <h1>Scenario</h1>
+<ul>
+<li>Site A<ul>
+<li>OpenVPN Server</li>
+<li>LAN: 192.168.88.0/24</li>
+<li>WAN connected to interface ether1-gateway</li>
+</ul>
+</li>
+<li>Site B<ul>
+<li>OpenVpn Client</li>
+<li>LAN: 192.168.20.0/24</li>
+</ul>
+</li>
+<li>Road Warrior (laptop)</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>Nodes connected to any network should be able to connect any other node via
+routes</li>
+</ul>
+<h1>Certificates creation</h1>
+<p>...</p>
+<h1>Server configuration</h1>
+<ol>
+<li>
+<p>Create bridge for the VPN clients</p>
+<p><code>/interface bridge add bridge=vpn-bridge</code></p>
+</li>
+<li>
+<p>Create a pool of IP addresses to be used by the dhcp clients without a
+binding for their account</p>
+<p>```
+/ip pool add name=ovpn ranges=172.20.20.21-172.20.20.99</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span>1. Create the default encryption profile to be used by the server
+
+    ```
+    /ppp profile
+    set *FFFFFFFE \
+  bridge=vpn-bridge \
+  change-tcp-mss=default \
+  local-address=172.20.20.1 \
+  remote-address=ovpn \
+  use-encryption=required
+  ```
+
+1. Create encryption profiles, you have to create 1 profile per client, this
+   is needed to allow set specific IP addresses per client, and once they are
+   connected they can be clearly identified and eventually apply firewall
+   rules in case it&#39;s needed
+
+    ```
+/ppp profile add name=ovpn-siteA \
+    bridge=vpn-bridge \
+    local-address=172.20.20.30 \
+    remote-address=172.20.20.31 \
+    use-encryption=required
+</pre></div>
+
+
+<ol>
+<li>
+<p>Create user, you have to create 1 user per client as the user is related to
+   the encryption profile previously created</p>
+<p><code>/ppp secret add name=siteA password=foobar profile=ovpn-siteA service=ovpn</code></p>
+</li>
+<li>
+<p>Configure the server (encryption methods, certificates, etc)</p>
+<p><code>/interface ovpn-server \
+  set auth=sha1 \
+  certificate=deathstar.crt_0 \
+  cipher=aes256 \
+  default-profile=default \
+  enabled=yes \
+  keepalive-timeout=disabled \
+  require-client-certificate=yes</code></p>
+</li>
+<li>
+<p>Create 1 OpenVPN server binding pero user created. This will create a
+   static interface per user allowing the manipulation of its traffic.</p>
+<p><code>/interface ovpn-server add name=ovpn-siteA user=siteA</code></p>
+</li>
+</ol>
+  </div>
+  <div class="row">
+      <div class="span6">          <a href="tag/mikrotik.html"><span class="label label-default">mikrotik</span></a>          <a href="tag/openvpn.html"><span class="label label-default">openvpn</span></a>          <a href="tag/networking.html"><span class="label label-default">networking</span></a>      </div>
+      <div class="span6">
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text=Mikrotik OpenVPN Setup&url=http%3A//tty.cl/drafts/mikrotik-openvpn-setup.html&via=gnusis" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  <div id="footer-wrapper">
+    <div id="footer" class="container clearfix">
+      <p class="copyrights pull-left">Copyright ©2013 Felipe Reyes. All rights reserved.</p>
+      <p class="socialconnect footer pull-right">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
+    </div>
+  </div>
+</body>
+</html>

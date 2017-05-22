@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/emacs.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2013-12-03T00:00:00-03:00</updated><entry><title>How to start with Emacs</title><link href="http://tty.cl/how-to-start-with-emacs.html" rel="alternate"></link><published>2013-12-03T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-03:how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - emacs</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/emacs.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2013-12-03T00:00:00-03:00</updated><entry><title>How to start with Emacs</title><link href="http://tty.cl/how-to-start-with-emacs.html" rel="alternate"></link><published>2013-12-03T00:00:00-03:00</published><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-03:/how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
+&lt;p&gt;Before I could really be productive with emacs, I failed a couple of
+times, because I knew that emacs were powerful, but the default
+configuration shows you a simple text editor that look awful, without
+syntax highlight, without anti-alias, a color schema that really
+sucks.&lt;/p&gt;
+&lt;p&gt;In GNU/Linux …&lt;/p&gt;</summary><content type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
 &lt;p&gt;Before I could really be productive with emacs, I failed a couple of
 times, because I knew that emacs were powerful, but the default
 configuration shows you a simple text editor that look awful, without
@@ -25,7 +31,7 @@ to the entry.&lt;/p&gt;
 series of post, because there is a lot different flavors of emacs, for
 example XEmacs, Aquamacs, and others.&lt;/p&gt;
 &lt;p&gt;The GNU Emacs website says:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;GNU Emacs is an extensible, customizable text editor—and more. At
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;GNU Emacs is an extensible, customizable text editor—and more. At
 its core is an interpreter for Emacs Lisp, a dialect of the Lisp
 programming language with extensions to support text editing.
 &lt;/pre&gt;&lt;/div&gt;
@@ -104,27 +110,27 @@ config file, like the transient-mark-mode&lt;/p&gt;
 &lt;p&gt;The transient mark mode highlights the selected region of text, by
 defaults this is disabled so I recommend you enable it with pasting
 the following in your .emacs&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;transient-mark-mode&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;transient-mark-mode&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Fill you name and email to let the modes that need that information
 could use, this is done with the following snippet of code&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;homer@example.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;homer@example.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Homer J. Simpsons&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;If you like to use Ctrl+g to jump to a line number then you should add
 the following code&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="nv"&gt;[&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;control&lt;/span&gt; &lt;span class="nv"&gt;g&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;goto-line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="nv"&gt;[&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;control&lt;/span&gt; &lt;span class="nv"&gt;g&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="nv"&gt;]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;goto-line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;One of the sweetest feature that must have a text editor is syntax
 highlight, well emacs has this, but disabled by default, with the
 following code you will have it enabled always&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;font-lock&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;font-lock&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-font-lock-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -137,7 +143,7 @@ C mode.&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://www.emacswiki.org/"&gt;Emacswiki&lt;/a&gt; is probably the best source to find emacs-specific tip-n-tricks&lt;/p&gt;
 &lt;h2&gt;Initial Configuration&lt;/h2&gt;
 &lt;p&gt;Suggested initial configuration:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;debug-on-error&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;visible-bell&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -183,439 +189,547 @@ C mode.&lt;/p&gt;
 
 &lt;span class="c1"&gt;;;; Prevent Extraneous Tabs&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;setq-default&lt;/span&gt; &lt;span class="nv"&gt;indent-tabs-mode&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>.emacs</title><link href="http://tty.cl/emacs.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
-&lt;p&gt;```elisp
-;; to debug the .emacs file
-(setq debug-on-error nil)&lt;/p&gt;
-&lt;p&gt;;; setup the default mode to use
-;;Text mode is happier than Fundamental mode ;-)
-(setq default-major-mode 'text-mode)&lt;/p&gt;
-&lt;p&gt;;; define the mail and name
-(setq user-mail-address "your@mail.com")
-(setq user-full-name "Your Name")&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;,;
-;; UI setup ;;
-;;;;;;;;;;;;;;
-(require 'swbuff)
-(require 'linum)
-;; setup the tab to 4 spaces width
-(setq tab-width 4)&lt;/p&gt;
-&lt;p&gt;(if (eq window-system 'x)
-    (set-face-attribute 'default nil :font "Consolas-10"))
-;; avoid minimize on C-z, but only in X
-(if (eq window-system 'x)
-    (global-set-key [C-z] nil))&lt;/p&gt;
-&lt;p&gt;;; setup default font for mac
-(if (eq system-type 'darwin)
-    (set-face-attribute 'default nil :font "Consolas-14"))&lt;/p&gt;
-&lt;p&gt;(tool-bar-mode -1) ;; turn off toolbar
-(scroll-bar-mode -1) ;; turn off scrollbar&lt;/p&gt;
-&lt;p&gt;;; Show tabs
-(defface extra-whitespace-face
-  '((t (:background "dim gray")))
-  "Used for tabs and such.")
-(defvar my-extra-keywords
-  '(("\t" . 'extra-whitespace-face)))&lt;/p&gt;
-&lt;p&gt;;; color-theme
-(add-to-list 'load-path "~/.emacs.d/elisp/color-theme/")
-(require 'color-theme)
-;; (require 'color-theme-tango)
-;; (color-theme-tango)&lt;/p&gt;
-&lt;p&gt;(require 'color-theme-arjen)
-(color-theme-arjen)&lt;/p&gt;
-&lt;p&gt;(iswitchb-mode 1)
-(global-set-key (kbd "&lt;C-tag&gt;")           'swbuff-switch-to-next-buffer)
-(global-set-key (kbd "&lt;C-S-iso-lefttab&gt;") 'swbuff-switch-to-previous-buffer)&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;
-;; Text ;;
-;;;;;;;;;;
-(add-hook 'text-mode-hook
-          (lambda () (font-lock-add-keywords nil my-extra-keywords)))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;
-;; rect-mark ;;
-;;;;;;;;;;;;;;;
-(require 'rect-mark)
-(global-set-key (kbd "C-x r C-SPC") 'rm-set-mark)
-(global-set-key (kbd "C-x r C-x")   'rm-exchange-point-and-mark)
-(global-set-key (kbd "C-x r C-w")   'rm-kill-region)
-(global-set-key (kbd "C-x r M-w")   'rm-kill-ring-save)&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;
-;; sql ;;
-;;;;;;;;;
-(add-hook 'sql-mode-hook
-           (lambda ()
-             (font-lock-add-keywords nil my-extra-keywords)))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;
-;; Org mode ;;
-;;;;;;;;;;;;;;
-(load-file "~/.emacs.d/org-mode.el")&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;;;;;;
-;; remember notes ;;
-;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/elisp/remember-el")&lt;/p&gt;
-&lt;p&gt;;; (require 'remember-autoloads)
-(autoload 'remember "remember" nil t)
-(setq remember-data-file "~/.notes.txt")
-(global-set-key (kbd "C-c r") 'remember)&lt;/p&gt;
-&lt;p&gt;(defun wicked/remember-review-file ()
-  "Open `remember-data-file'."
-  (interactive)
-  (find-file-other-window remember-data-file))
-(global-set-key (kbd "C-c r") 'wicked/remember-review-file)&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;
-;; yasnippet ;;
-;;;;;;;;;;;;;;;
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/snippets/")&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;;
-;; javascript ;;
-;;;;;;;;;;;;;;;;
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist
-             '("\.js$" . js2-mode))&lt;/p&gt;
-&lt;p&gt;(add-to-list 'auto-mode-alist
-             '("\.dot$" . graphviz-dot-mode))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;
-;; dired ;;
-;;;;;;;;;;;
-(require 'dired-x)
-(require 'dired-single) ;; http://www.northbound-train.com/emacs/dired-single.el
-(defun my-dired-init ()
-  "Bunch of stuff to run for dired, either immediately or when it's
-         loaded."
-  ;; &lt;add other stuff here&gt;
-  (define-key dired-mode-map [return] 'dired-single-buffer)
-  (define-key dired-mode-map [mouse-1] 'dired-single-buffer-mouse)
-  (define-key dired-mode-map "^"
-    (function
-     (lambda nil (interactive) (dired-single-buffer "..")))))&lt;/p&gt;
-&lt;p&gt;;; if dired's already loaded, then the keymap will be bound
-(if (boundp 'dired-mode-map)
-    ;; we're good to go; just add our bindings
-    (my-dired-init)
-  ;; it's not loaded yet, so add our bindings to the load-hook
-  (add-hook 'dired-load-hook 'my-dired-init))&lt;/p&gt;
-&lt;p&gt;(setq dired-omit-files-p t)
-(setq-default dired-omit-files-p t) ; this is buffer-local variable
-(setq dired-omit-files
-      (concat dired-omit-files "*.tsv|\|^\..+$"))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;
-;; yaml ;;
-;;;;;;;;;;
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\.yml$" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\.yaml$" . yaml-mode))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;;
-;; multi-term ;;
-;;;;;;;;;;;;;;;;
-(autoload 'multi-term "multi-term" nil t)
-(autoload 'multi-term-next "multi-term" nil t)&lt;/p&gt;
-&lt;p&gt;(setq multi-term-program "/bin/bash")   ;; use bash
-;; (setq multi-term-program "/bin/zsh") ;; or use zsh...&lt;/p&gt;
-&lt;p&gt;;; only needed if you use autopair
-;; (add-hook 'term-mode-hook
-;;   #'(lambda () (setq autopair-dont-activate t)))&lt;/p&gt;
-&lt;p&gt;(global-set-key (kbd "C-c t") 'multi-term-next)
-(global-set-key (kbd "C-c T") 'multi-term) ;; create a new one&lt;/p&gt;
-&lt;p&gt;;; use Control+g fot goto-line
-(global-set-key [(control g)] 'goto-line)&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;
-;; Python ;;
-;;;;;;;;;;;;&lt;/p&gt;
-&lt;p&gt;(setq py-python-command "/usr/bin/python")&lt;/p&gt;
-&lt;p&gt;(setq auto-mode-alist (cons '("\.py$" . python-mode) auto-mode-alist))
-(setq interpreter-mode-alist (cons '("python" . python-mode)
-                                   interpreter-mode-alist))
-(autoload 'python-mode "python-mode" "Python editing mode." t)&lt;/p&gt;
-&lt;p&gt;;; show pydoc
-;; http://www.emacswiki.org/cgi-bin/wiki/PythonMode
-(defun my-python-documentation (w)
-  "Launch PyDOC on the Word at Point"
-  (interactive
-   (list (let&lt;em&gt; ((word (thing-at-point 'word))
-                (input (read-string
-                        (format "pydoc entry%s: "
-                                (if (not word) "" (format " (default %s)" word))))))
-           (if (string= input "")
-               (if (not word) (error "No pydoc args given")
-                 word) ;sinon word
-             input)))) ;sinon input
-  (shell-command (concat py-python-command " -c \"from pydoc import help;help(\'" w "\')\"") "&lt;/em&gt;PYDOCS&lt;em&gt;")
-  (view-buffer-other-window "&lt;/em&gt;PYDOCS*" t 'kill-buffer-and-window))&lt;/p&gt;
-&lt;p&gt;;;to show the pydoc help on the word at point
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key [(control f1)] 'my-python-documentation)
-                      )))&lt;/p&gt;
-&lt;p&gt;;;para indentar o completar con tab
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "&lt;tab&gt;") 'indent-or-complete)
-                      )))
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "C-x #") 'comment-or-uncomment-region)
-                      )))&lt;/p&gt;
-&lt;p&gt;;;pdb setup, note the python version
-(setq pdb-path '/usr/bin/pdb
-      gud-pdb-command-name (symbol-name pdb-path))
-(defadvice pdb (before gud-query-cmdline activate)
-  "Provide a better default command line when called interactively."
-  (interactive
-   (list (gud-query-cmdline pdb-path
-                            (file-name-nondirectory buffer-file-name)))))&lt;/p&gt;
-&lt;p&gt;;; para usar pdb con F8
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "&lt;f8&gt;") 'pdb)
-                      )))
-;; para usar pydoc
-(add-hook 'python-mode-hook
-          '(lambda () (eldoc-mode 1)) t)&lt;/p&gt;
-&lt;p&gt;;;show tab in python mode
-(add-hook 'python-mode-hook
-          (lambda ()
-            (font-lock-add-keywords nil my-extra-keywords)))&lt;/p&gt;
-&lt;p&gt;;; para mostrar el trailing whitespace
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace t)))&lt;/p&gt;
-&lt;p&gt;;; usar pylint
-(when (load "flymake" t)
-  (defun flymake-pylint-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "epylint" (list local-file))))&lt;/p&gt;
-&lt;p&gt;(add-to-list 'flymake-allowed-file-name-masks
-               '("\.py\'" flymake-pylint-init)))&lt;/p&gt;
-&lt;p&gt;;; (require 'pymacs)
-;; (require 'pycomplete)
-;; (autoload 'pymacs-load "ropemacs" "rope-")
-;; (autoload 'pymacs-load "pymacs" nil t)
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")&lt;/p&gt;
-&lt;p&gt;;;(rope-init)&lt;/p&gt;
-&lt;p&gt;;; para autocompletar los cierres de parentesis o de string
-;;(add-hook 'python-mode-hook
-;;    (lambda ()
-;;      (define-key python-mode-map "\"" 'electric-pair)
-;;      (define-key python-mode-map "\'" 'electric-pair)
-;;      (define-key python-mode-map "(" 'electric-pair)
-;;      (define-key python-mode-map "[" 'electric-pair)
-;;      (define-key python-mode-map "{" 'electric-pair)))&lt;/p&gt;
-&lt;p&gt;;;(defun electric-pair ()
-;;  "Insert character pair without sournding spaces"
-;;  (interactive)
-;;  (let (parens-require-spaces)
-;;    (insert-pair)))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;
-;; djcb ;;
-;;;;;;;;;;
-(defun djcb-opacity-modify (&amp;amp;optional dec)
-  "modify the transparency of the emacs frame; if DEC is t,
-    decrease the transparency, otherwise increase it in 10%-steps"
-  (let* ((alpha-or-nil (frame-parameter nil 'alpha)) ; nil before setting
-         (oldalpha (if alpha-or-nil alpha-or-nil 100))
-         (newalpha (if dec (- oldalpha 10) (+ oldalpha 10))))
-    (when (and (&amp;gt;= newalpha frame-alpha-lower-limit) (&amp;lt;= newalpha 100))
-      (modify-frame-parameters nil (list (cons 'alpha newalpha))))))&lt;/p&gt;
-&lt;p&gt;;; C-8 will increase opacity (== decrease transparency)
-;; C-9 will decrease opacity (== increase transparency
-;; C-0 will returns the state to normal
-(global-set-key (kbd "C-8") '(lambda()(interactive)(djcb-opacity-modify)))
-(global-set-key (kbd "C-9") '(lambda()(interactive)(djcb-opacity-modify t)))
-(global-set-key (kbd "C-0") '(lambda()(interactive)
-                               (modify-frame-parameters nil `((alpha . 100)))))&lt;/p&gt;
-&lt;p&gt;;;;;;;;;;;;;;;;;;;;;;;
-;; Quit this buffer ;;
-;;;;;;;;;;;;;;;;;;;;;;
-(defun quit-this-buffer ()
-  "Exit current buffer by selecting some other buffer."
-  (interactive)
-  (switch-to-buffer (prog1 (other-buffer (current-buffer))
-              (bury-buffer (current-buffer)))))
-(global-set-key "\C-cq" 'quit-this-buffer)&lt;/p&gt;
-&lt;p&gt;;;-&amp;gt; backspace on a selected region -&amp;gt; deletion
-(delete-selection-mode t)&lt;/p&gt;
-&lt;p&gt;;;scroll line per line (1 line instead of 3)
-(setq scroll-step 1)&lt;/p&gt;
-&lt;p&gt;;;display line and column number in toolbar
-(setq line-number-mode t)
-(setq column-number-mode t)&lt;/p&gt;
-&lt;p&gt;;;show_paren mode
-(show-paren-mode t)&lt;/p&gt;
-&lt;p&gt;;; display clock
-(display-time)&lt;/p&gt;
-&lt;p&gt;;; Use visible beel instead of beep
-(setq visible-bell 't)&lt;/p&gt;
-&lt;p&gt;;;(dysplay question in 'y/n' instead of 'yes/no')
-(fset 'yes-or-no-p 'y-or-n-p)&lt;/p&gt;
-&lt;p&gt;;; Save all my backup files in a specific directory
-;(defun make-backup-file-name (file)
-;  (concat "~/.autosave/" (file-name-nondirectory file)))
-(setq backup-directory-alist
-      &lt;code&gt;((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms&lt;/code&gt;((".*" ,temporary-file-directory t)))
-(windmove-default-keybindings)&lt;/p&gt;
-&lt;p&gt;(setq tramp-default-method "ssh")&lt;/p&gt;
-&lt;p&gt;(put 'upcase-region 'disabled nil)
-(put 'downcase-region 'disabled nil)&lt;/p&gt;
-&lt;p&gt;;;; Prevent Extraneous Tabs
-(setq-default indent-tabs-mode nil)
-```&lt;/p&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>.emacs</title><link href="http://tty.cl/emacs.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;debug-on-error&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; setup the default mode to use&lt;/span&gt;
+&lt;span class="c1"&gt;;;Text mode is happier than Fundamental mode ;-)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;default-major-mode&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;text-mode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; define the mail and name&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;your@mail.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nf"&gt;user-full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Your Name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;,;&lt;/span&gt;
+&lt;span class="c1"&gt;;; UI setup ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;debug-on-error&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; setup the default mode to use&lt;/span&gt;
+&lt;span class="c1"&gt;;;Text mode is happier than Fundamental mode ;-)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;default-major-mode&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;text-mode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; define the mail and name&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;user-mail-address&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;your@mail.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nf"&gt;user-full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Your Name&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;,;&lt;/span&gt;
+&lt;span class="c1"&gt;;; UI setup ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;swbuff&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;linum&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;;; setup the tab to 4 spaces width&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;tab-width&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;eq&lt;/span&gt; &lt;span class="nf"&gt;window-system&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;set-face-attribute&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;default&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="nb"&gt;:font&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Consolas-10&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="c1"&gt;;; avoid minimize on C-z, but only in X&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;eq&lt;/span&gt; &lt;span class="nf"&gt;window-system&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;C-z&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; setup default font for mac&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;eq&lt;/span&gt; &lt;span class="nv"&gt;system-type&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;darwin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;set-face-attribute&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;default&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="nb"&gt;:font&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Consolas-14&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;tool-bar-mode&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;;; turn off toolbar&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;scroll-bar-mode&lt;/span&gt; &lt;span class="mi"&gt;-1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;;; turn off scrollbar&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; Show tabs&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defface&lt;/span&gt; &lt;span class="nv"&gt;extra-whitespace-face&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="no"&gt;t&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;:background&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;dim gray&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Used for tabs and such.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;defvar&lt;/span&gt; &lt;span class="nv"&gt;my-extra-keywords&lt;/span&gt;
+  &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\t&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;extra-whitespace-face&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; color-theme&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;load-path&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/.emacs.d/elisp/color-theme/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;color-theme&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (require &amp;#39;color-theme-tango)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (color-theme-tango)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;color-theme-arjen&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;color-theme-arjen&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;iswitchb-mode&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;C-tag&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;           &lt;span class="ss"&gt;&amp;#39;swbuff-switch-to-next-buffer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;C-S-iso-lefttab&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;swbuff-switch-to-previous-buffer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; Text ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;text-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;font-lock-add-keywords&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="nv"&gt;my-extra-keywords&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; rect-mark ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;rect-mark&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-x r C-SPC&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;rm-set-mark&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-x r C-x&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="ss"&gt;&amp;#39;rm-exchange-point-and-mark&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-x r C-w&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="ss"&gt;&amp;#39;rm-kill-region&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-x r M-w&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="ss"&gt;&amp;#39;rm-kill-ring-save&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; sql ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;sql-mode-hook&lt;/span&gt;
+           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+             &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;font-lock-add-keywords&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="nv"&gt;my-extra-keywords&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; Org mode ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;load-file&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/.emacs.d/org-mode.el&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; remember notes ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;load-path&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/.emacs.d/elisp/remember-el&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; (require &amp;#39;remember-autoloads)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;autoload&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;remember&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;remember&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;remember-data-file&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/.notes.txt&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-c r&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;remember&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;wicked/remember-review-file&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Open &lt;/span&gt;&lt;span class="ss"&gt;`remember-data-file&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;.&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;find-file-other-window&lt;/span&gt; &lt;span class="nv"&gt;remember-data-file&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-c r&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;wicked/remember-review-file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; yasnippet ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;yasnippet&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;yas/initialize&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;yas/load-directory&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;~/.emacs.d/snippets/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; javascript ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;autoload&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;js2-mode&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;js2-mode&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;auto-mode-alist&lt;/span&gt;
+             &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.js$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;js2-mode&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;auto-mode-alist&lt;/span&gt;
+             &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.dot$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;graphviz-dot-mode&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; dired ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-x&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-single&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;;; http://www.northbound-train.com/emacs/dired-single.el&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;my-dired-init&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Bunch of stuff to run for dired, either immediately or when it&amp;#39;s&lt;/span&gt;
+&lt;span class="s"&gt;         loaded.&amp;quot;&lt;/span&gt;
+  &lt;span class="c1"&gt;;; &amp;lt;add other stuff here&amp;gt;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;define-key&lt;/span&gt; &lt;span class="nv"&gt;dired-mode-map&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;return&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-single-buffer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;define-key&lt;/span&gt; &lt;span class="nv"&gt;dired-mode-map&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;mouse-1&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-single-buffer-mouse&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;define-key&lt;/span&gt; &lt;span class="nv"&gt;dired-mode-map&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;^&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt;
+     &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;dired-single-buffer&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;..&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; if dired&amp;#39;s already loaded, then the keymap will be bound&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;boundp&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-mode-map&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="c1"&gt;;; we&amp;#39;re good to go; just add our bindings&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;my-dired-init&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="c1"&gt;;; it&amp;#39;s not loaded yet, so add our bindings to the load-hook&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;dired-load-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;my-dired-init&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;dired-omit-files-p&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq-default&lt;/span&gt; &lt;span class="nv"&gt;dired-omit-files-p&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;; this is buffer-local variable&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;dired-omit-files&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;concat&lt;/span&gt; &lt;span class="nv"&gt;dired-omit-files&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*\.tsv|\\|^\\..+$&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; yaml ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;require&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;yaml-mode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;auto-mode-alist&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.yml$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;yaml-mode&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;auto-mode-alist&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.yaml$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;yaml-mode&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; multi-term ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;autoload&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;multi-term&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;multi-term&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;autoload&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;multi-term-next&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;multi-term&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;multi-term-program&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/bin/bash&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;   &lt;span class="c1"&gt;;; use bash&lt;/span&gt;
+&lt;span class="c1"&gt;;; (setq multi-term-program &amp;quot;/bin/zsh&amp;quot;) ;; or use zsh...&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; only needed if you use autopair&lt;/span&gt;
+&lt;span class="c1"&gt;;; (add-hook &amp;#39;term-mode-hook&lt;/span&gt;
+&lt;span class="c1"&gt;;;   #&amp;#39;(lambda () (setq autopair-dont-activate t)))&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-c t&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;multi-term-next&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-c T&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;multi-term&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;;; create a new one&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; use Control+g fot goto-line&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nv"&gt;control&lt;/span&gt; &lt;span class="nv"&gt;g&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;goto-line&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; Python ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;py-python-command&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;/usr/bin/python&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;auto-mode-alist&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cons&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.py$&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;python-mode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="nv"&gt;auto-mode-alist&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;interpreter-mode-alist&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cons&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;python&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="nv"&gt;python-mode&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                                   &lt;span class="nv"&gt;interpreter-mode-alist&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;autoload&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;python-mode&amp;quot;&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Python editing mode.&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; show pydoc&lt;/span&gt;
+&lt;span class="c1"&gt;;; http://www.emacswiki.org/cgi-bin/wiki/PythonMode&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;my-python-documentation&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;w&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Launch PyDOC on the Word at Point&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;list&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let*&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;word&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;thing-at-point&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;word&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;input&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;read-string&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;format&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;pydoc entry%s: &amp;quot;&lt;/span&gt;
+                                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;format&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; (default %s)&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;word&lt;/span&gt;&lt;span class="p"&gt;))))))&lt;/span&gt;
+           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;string=&lt;/span&gt; &lt;span class="nv"&gt;input&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+               &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;not&lt;/span&gt; &lt;span class="nv"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ne"&gt;error&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;No pydoc args given&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                 &lt;span class="nv"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;;sinon word&lt;/span&gt;
+             &lt;span class="nv"&gt;input&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt; &lt;span class="c1"&gt;;sinon input&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;shell-command&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;concat&lt;/span&gt; &lt;span class="nv"&gt;py-python-command&lt;/span&gt; &lt;span class="s"&gt;&amp;quot; -c \&amp;quot;from pydoc import help;help(\&amp;#39;&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;w&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\&amp;#39;)\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*PYDOCS*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;view-buffer-other-window&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;*PYDOCS*&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;kill-buffer-and-window&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;to show the pydoc help on the word at point&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;local-set-key&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="nv"&gt;control&lt;/span&gt; &lt;span class="nv"&gt;f1&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;my-python-documentation&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;para indentar o completar con tab&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;local-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;tab&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;indent-or-complete&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;local-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-x #&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;comment-or-uncomment-region&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;pdb setup, note the python version&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;pdb-path&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;/usr/bin/pdb&lt;/span&gt;
+      &lt;span class="nv"&gt;gud-pdb-command-name&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;symbol-name&lt;/span&gt; &lt;span class="nv"&gt;pdb-path&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defadvice&lt;/span&gt; &lt;span class="nv"&gt;pdb&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;before&lt;/span&gt; &lt;span class="nv"&gt;gud-query-cmdline&lt;/span&gt; &lt;span class="nv"&gt;activate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Provide a better default command line when called interactively.&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;list&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;gud-query-cmdline&lt;/span&gt; &lt;span class="nv"&gt;pdb-path&lt;/span&gt;
+                            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;file-name-nondirectory&lt;/span&gt; &lt;span class="nf"&gt;buffer-file-name&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; para usar pdb con F8&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;local-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;&amp;lt;f8&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;pdb&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="c1"&gt;;; para usar pydoc&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;eldoc-mode&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;show tab in python mode&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;font-lock-add-keywords&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="nv"&gt;my-extra-keywords&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; para mostrar el trailing whitespace&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-hook&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;show-trailing-whitespace&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; usar pylint&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;load&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;flymake&amp;quot;&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;flymake-pylint-init&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let*&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;temp-file&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;flymake-init-create-temp-buffer-copy&lt;/span&gt;
+                       &lt;span class="ss"&gt;&amp;#39;flymake-create-temp-inplace&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;local-file&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;file-relative-name&lt;/span&gt;
+                        &lt;span class="nv"&gt;temp-file&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;file-name-directory&lt;/span&gt; &lt;span class="nf"&gt;buffer-file-name&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;list&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;epylint&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;list&lt;/span&gt; &lt;span class="nv"&gt;local-file&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;add-to-list&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;flymake-allowed-file-name-masks&lt;/span&gt;
+               &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;\\.py\\&amp;#39;&amp;quot;&lt;/span&gt; &lt;span class="nv"&gt;flymake-pylint-init&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; (require &amp;#39;pymacs)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (require &amp;#39;pycomplete)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (autoload &amp;#39;pymacs-load &amp;quot;ropemacs&amp;quot; &amp;quot;rope-&amp;quot;)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (autoload &amp;#39;pymacs-load &amp;quot;pymacs&amp;quot; nil t)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (autoload &amp;#39;pymacs-eval &amp;quot;pymacs&amp;quot; nil t)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (autoload &amp;#39;pymacs-apply &amp;quot;pymacs&amp;quot;)&lt;/span&gt;
+&lt;span class="c1"&gt;;; (autoload &amp;#39;pymacs-call &amp;quot;pymacs&amp;quot;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;(rope-init)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; para autocompletar los cierres de parentesis o de string&lt;/span&gt;
+&lt;span class="c1"&gt;;;(add-hook &amp;#39;python-mode-hook&lt;/span&gt;
+&lt;span class="c1"&gt;;;    (lambda ()&lt;/span&gt;
+&lt;span class="c1"&gt;;;      (define-key python-mode-map &amp;quot;\&amp;quot;&amp;quot; &amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="c1"&gt;;;      (define-key python-mode-map &amp;quot;\&amp;#39;&amp;quot; &amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="c1"&gt;;;      (define-key python-mode-map &amp;quot;(&amp;quot; &amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="c1"&gt;;;      (define-key python-mode-map &amp;quot;[&amp;quot; &amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="c1"&gt;;;      (define-key python-mode-map &amp;quot;{&amp;quot; &amp;#39;electric-pair)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;(defun electric-pair ()&lt;/span&gt;
+&lt;span class="c1"&gt;;;  &amp;quot;Insert character pair without sournding spaces&amp;quot;&lt;/span&gt;
+&lt;span class="c1"&gt;;;  (interactive)&lt;/span&gt;
+&lt;span class="c1"&gt;;;  (let (parens-require-spaces)&lt;/span&gt;
+&lt;span class="c1"&gt;;;    (insert-pair)))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; djcb ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;djcb-opacity-modify&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kp"&gt;&amp;amp;optional&lt;/span&gt; &lt;span class="nv"&gt;dec&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;modify the transparency of the emacs frame; if DEC is t,&lt;/span&gt;
+&lt;span class="s"&gt;    decrease the transparency, otherwise increase it in 10%-steps&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;let*&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;alpha-or-nil&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;frame-parameter&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;alpha&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt; &lt;span class="c1"&gt;; nil before setting&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;oldalpha&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;alpha-or-nil&lt;/span&gt; &lt;span class="nv"&gt;alpha-or-nil&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+         &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;newalpha&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;dec&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;-&lt;/span&gt; &lt;span class="nv"&gt;oldalpha&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;+&lt;/span&gt; &lt;span class="nv"&gt;oldalpha&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;&amp;gt;=&lt;/span&gt; &lt;span class="nv"&gt;newalpha&lt;/span&gt; &lt;span class="nv"&gt;frame-alpha-lower-limit&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;&amp;lt;=&lt;/span&gt; &lt;span class="nv"&gt;newalpha&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;modify-frame-parameters&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;list&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;cons&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;alpha&lt;/span&gt; &lt;span class="nv"&gt;newalpha&lt;/span&gt;&lt;span class="p"&gt;))))))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; C-8 will increase opacity (== decrease transparency)&lt;/span&gt;
+&lt;span class="c1"&gt;;; C-9 will decrease opacity (== increase transparency&lt;/span&gt;
+&lt;span class="c1"&gt;;; C-0 will returns the state to normal&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-8&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="nv"&gt;djcb-opacity-modify&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-9&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)(&lt;/span&gt;&lt;span class="nv"&gt;djcb-opacity-modify&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;kbd&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;C-0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;()(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                               &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;modify-frame-parameters&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt; &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nv"&gt;alpha&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; Quit this buffer ;;&lt;/span&gt;
+&lt;span class="c1"&gt;;;;;;;;;;;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;defun&lt;/span&gt; &lt;span class="nv"&gt;quit-this-buffer&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+  &lt;span class="s"&gt;&amp;quot;Exit current buffer by selecting some other buffer.&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;switch-to-buffer&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;prog1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;other-buffer&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;current-buffer&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+              &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;bury-buffer&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;current-buffer&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;global-set-key&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;\C-cq&amp;quot;&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;quit-this-buffer&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;-&amp;gt; backspace on a selected region -&amp;gt; deletion&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;delete-selection-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;scroll line per line (1 line instead of 3)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;scroll-step&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;display line and column number in toolbar&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;line-number-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;column-number-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;show_paren mode&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;show-paren-mode&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; display clock&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;display-time&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; Use visible beel instead of beep&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;visible-bell&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;(dysplay question in &amp;#39;y/n&amp;#39; instead of &amp;#39;yes/no&amp;#39;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;fset&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;yes-or-no-p&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;y-or-n-p&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;; Save all my backup files in a specific directory&lt;/span&gt;
+&lt;span class="c1"&gt;;(defun make-backup-file-name (file)&lt;/span&gt;
+&lt;span class="c1"&gt;;  (concat &amp;quot;~/.autosave/&amp;quot; (file-name-nondirectory file)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;backup-directory-alist&lt;/span&gt;
+      &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.*&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;.&lt;/span&gt; &lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;temporary-file-directory&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;auto-save-file-name-transforms&lt;/span&gt;
+      &lt;span class="o"&gt;`&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.*&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;,&lt;/span&gt;&lt;span class="nv"&gt;temporary-file-directory&lt;/span&gt; &lt;span class="no"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;windmove-default-keybindings&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;tramp-default-method&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;ssh&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;put&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;upcase-region&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;disabled&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;put&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;downcase-region&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;disabled&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="c1"&gt;;;; Prevent Extraneous Tabs&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq-default&lt;/span&gt; &lt;span class="nv"&gt;indent-tabs-mode&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;ul&gt;
 &lt;li&gt;Basic Configuration&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;```
-;; to debug the .emacs file
-(setq debug-on-error nil)&lt;/p&gt;
-&lt;p&gt;;; setup the default mode to use
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;;; to debug the .emacs file
+(setq debug-on-error nil)
+
+;; setup the default mode to use
 ;;Text mode is happier than Fundamental mode ;-)
-(setq default-major-mode 'text-mode)&lt;/p&gt;
-&lt;p&gt;;; define the mail and name
-(setq user-mail-address "foobar@example.com")
-(setq user-full-name "Foo Bar")&lt;/p&gt;
-&lt;p&gt;;; define the ispell dictionary to use
-(setq ispell-dictionary "en")&lt;/p&gt;
-&lt;p&gt;;; setup the tab to 4 spaces width
-(setq tab-width 4)&lt;/p&gt;
-&lt;p&gt;(tool-bar-mode -1) ;; turn off toolbar
-(scroll-bar-mode -1) ;; turn off scrollbar&lt;/p&gt;
-&lt;p&gt;;; color-theme
+(setq default-major-mode &amp;#39;text-mode)
+
+;; define the mail and name
+(setq user-mail-address &amp;quot;foobar@example.com&amp;quot;)
+(setq user-full-name &amp;quot;Foo Bar&amp;quot;)
+
+;; define the ispell dictionary to use
+(setq ispell-dictionary &amp;quot;en&amp;quot;)
+
+;; setup the tab to 4 spaces width
+(setq tab-width 4)
+
+(tool-bar-mode -1) ;; turn off toolbar
+(scroll-bar-mode -1) ;; turn off scrollbar
+
+;; color-theme
 ;; http://www.emacswiki.org/emacs/ColorTheme
 ;; http://www.nongnu.org/color-theme
-(add-to-list 'load-path "~/.emacs.d/elisp/color-theme/")
-(require 'color-theme)
-(require 'color-theme-arjen)
-(color-theme-arjen)&lt;/p&gt;
-&lt;p&gt;;; http://www.emacswiki.org/emacs/SwBuff
-(require 'swbuff)
-(global-set-key [(control tab)]       'swbuff-switch-to-next-buffer)
-(global-set-key (kbd "&lt;C-S-iso-lefttab&gt;") 'swbuff-switch-to-previous-buffer)&lt;/p&gt;
-&lt;p&gt;(require 'whitespace)
-(setq whitespace-style '(face empty tabs lines-tail trailing))
-(add-hook 'python-mode-hook 'whitespace-mode)&lt;/p&gt;
-&lt;p&gt;;; Show tabs
+(add-to-list &amp;#39;load-path &amp;quot;~/.emacs.d/elisp/color-theme/&amp;quot;)
+(require &amp;#39;color-theme)
+(require &amp;#39;color-theme-arjen)
+(color-theme-arjen)
+
+;; http://www.emacswiki.org/emacs/SwBuff
+(require &amp;#39;swbuff)
+(global-set-key [(control tab)]       &amp;#39;swbuff-switch-to-next-buffer)
+(global-set-key (kbd &amp;quot;&amp;lt;C-S-iso-lefttab&amp;gt;&amp;quot;) &amp;#39;swbuff-switch-to-previous-buffer)
+
+(require &amp;#39;whitespace)
+(setq whitespace-style &amp;#39;(face empty tabs lines-tail trailing))
+(add-hook &amp;#39;python-mode-hook &amp;#39;whitespace-mode)
+
+;; Show tabs
 (defface extra-whitespace-face
-  '((t (:background "dim gray")))
-  "Used for tabs and such.")
+  &amp;#39;((t (:background &amp;quot;dim gray&amp;quot;)))
+  &amp;quot;Used for tabs and such.&amp;quot;)
 (defvar my-extra-keywords
-  '(("\t" . 'extra-whitespace-face)))&lt;/p&gt;
-&lt;p&gt;(add-hook 'text-mode-hook
-          (lambda () (font-lock-add-keywords nil my-extra-keywords)))&lt;/p&gt;
-&lt;p&gt;;; http://www.emacswiki.org/emacs/RectangleMark
-(require 'rect-mark)
-(global-set-key (kbd "C-x r C-SPC") 'rm-set-mark)
-(global-set-key (kbd "C-x r C-x")   'rm-exchange-point-and-mark)
-(global-set-key (kbd "C-x r C-w")   'rm-kill-region)
-(global-set-key (kbd "C-x r M-w")   'rm-kill-ring-save)
-```&lt;/p&gt;
+  &amp;#39;((&amp;quot;\t&amp;quot; . &amp;#39;extra-whitespace-face)))
+
+(add-hook &amp;#39;text-mode-hook
+          (lambda () (font-lock-add-keywords nil my-extra-keywords)))
+
+;; http://www.emacswiki.org/emacs/RectangleMark
+(require &amp;#39;rect-mark)
+(global-set-key (kbd &amp;quot;C-x r C-SPC&amp;quot;) &amp;#39;rm-set-mark)
+(global-set-key (kbd &amp;quot;C-x r C-x&amp;quot;)   &amp;#39;rm-exchange-point-and-mark)
+(global-set-key (kbd &amp;quot;C-x r C-w&amp;quot;)   &amp;#39;rm-kill-region)
+(global-set-key (kbd &amp;quot;C-x r M-w&amp;quot;)   &amp;#39;rm-kill-ring-save)
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;ul&gt;
 &lt;li&gt;Python&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;```
-;;;;;;;;;;;;
-;; Python ;;
-;;;;;;;;;;;;&lt;/p&gt;
-&lt;p&gt;(setq py-python-command "/usr/bin/python")&lt;/p&gt;
-&lt;p&gt;(setq auto-mode-alist (cons '("\.py$" . python-mode) auto-mode-alist))
-(setq interpreter-mode-alist (cons '("python" . python-mode)
-                                   interpreter-mode-alist))
-(autoload 'python-mode "python-mode" "Python editing mode." t)&lt;/p&gt;
-&lt;p&gt;;; show pydoc
-;; http://www.emacswiki.org/cgi-bin/wiki/PythonMode
-(defun my-python-documentation (w)
-  "Launch PyDOC on the Word at Point"
-  (interactive
-   (list (let&lt;em&gt; ((word (thing-at-point 'word))
-                (input (read-string
-                        (format "pydoc entry%s: "
-                                (if (not word) "" (format " (default %s)" word))))))
-           (if (string= input "")
-               (if (not word) (error "No pydoc args given")
-                 word) ;sinon word
-             input)))) ;sinon input
-  (shell-command (concat py-python-command " -c \"from pydoc import help;help(\'" w "\')\"") "&lt;/em&gt;PYDOCS&lt;em&gt;")
-  (view-buffer-other-window "&lt;/em&gt;PYDOCS*" t 'kill-buffer-and-window))&lt;/p&gt;
-&lt;p&gt;;;to show the pydoc help on the word at point
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key [(control f1)] 'my-python-documentation)
-                      )))&lt;/p&gt;
-&lt;p&gt;;;para indentar o completar con tab
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "&lt;tab&gt;") 'indent-or-complete)
-                      )))
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "C-x #") 'comment-or-uncomment-region)
-                      )))&lt;/p&gt;
-&lt;p&gt;;;pdb setup, note the python version
-(setq pdb-path '/usr/bin/pdb
-      gud-pdb-command-name (symbol-name pdb-path))
-(defadvice pdb (before gud-query-cmdline activate)
-  "Provide a better default command line when called interactively."
-  (interactive
-   (list (gud-query-cmdline pdb-path
-                            (file-name-nondirectory buffer-file-name)))))&lt;/p&gt;
-&lt;p&gt;;; para usar pdb con F8
-(add-hook 'python-mode-hook
-          (function (lambda ()
-                      (local-set-key (kbd "&lt;f8&gt;") 'pdb)
-                      )))
-;; para usar pydoc
-(add-hook 'python-mode-hook
-          '(lambda () (eldoc-mode 1)) t)&lt;/p&gt;
-&lt;p&gt;;;show tab in python mode
-(add-hook 'python-mode-hook
-          (lambda ()
-            (font-lock-add-keywords nil my-extra-keywords)))&lt;/p&gt;
-&lt;p&gt;;; para mostrar el trailing whitespace
-(add-hook 'python-mode-hook
-          (lambda ()
-            (setq show-trailing-whitespace t)))&lt;/p&gt;
-&lt;p&gt;;; usar pylint
-(when (load "flymake" t)
-  (defun flymake-pylint-init ()
-    (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                       'flymake-create-temp-inplace))
-           (local-file (file-relative-name
-                        temp-file
-                        (file-name-directory buffer-file-name))))
-      (list "epylint" (list local-file))))&lt;/p&gt;
-&lt;p&gt;(add-to-list 'flymake-allowed-file-name-masks
-               '("\.py\'" flymake-pylint-init)))&lt;/p&gt;
-&lt;p&gt;;; (require 'pymacs)
-;; (require 'pycomplete)
-;; (autoload 'pymacs-load "ropemacs" "rope-")
-;; (autoload 'pymacs-load "pymacs" nil t)
-;; (autoload 'pymacs-eval "pymacs" nil t)
-;; (autoload 'pymacs-apply "pymacs")
-;; (autoload 'pymacs-call "pymacs")&lt;/p&gt;
-&lt;p&gt;;;(rope-init)&lt;/p&gt;
-&lt;p&gt;;; para autocompletar los cierres de parentesis o de string
-;;(add-hook 'python-mode-hook
-;;    (lambda ()
-;;      (define-key python-mode-map "\"" 'electric-pair)
-;;      (define-key python-mode-map "\'" 'electric-pair)
-;;      (define-key python-mode-map "(" 'electric-pair)
-;;      (define-key python-mode-map "[" 'electric-pair)
-;;      (define-key python-mode-map "{" 'electric-pair)))&lt;/p&gt;
-&lt;p&gt;;;(defun electric-pair ()
-;;  "Insert character pair without sournding spaces"
-;;  (interactive)
-;;  (let (parens-require-spaces)
-;;    (insert-pair)))
-```&lt;/p&gt;</summary></entry><entry><title>erc</title><link href="http://tty.cl/erc.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;;;;;;;;;;;;;&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;Python&lt;/span&gt; &lt;span class="p"&gt;;;&lt;/span&gt;
+&lt;span class="p"&gt;;;;;;;;;;;;;&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/usr/bin/python&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;auto&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;alist&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cons&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;(&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;.py$&amp;quot; . python-mode) auto-mode-alist))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;interpreter&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;alist&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;cons&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;(&amp;quot;python&amp;quot; . python-mode)&lt;/span&gt;
+                                   &lt;span class="n"&gt;interpreter&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;alist&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode &amp;quot;python-mode&amp;quot; &amp;quot;Python editing mode.&amp;quot; t)&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;show&lt;/span&gt; &lt;span class="n"&gt;pydoc&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;emacswiki&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cgi&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;bin&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;wiki&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;PythonMode&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;defun&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;documentation&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;w&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="s2"&gt;&amp;quot;Launch PyDOC on the Word at Point&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;interactive&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;thing&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;at&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;point&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;word))&lt;/span&gt;
+                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;input&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;read&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;pydoc entry&lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;: &amp;quot;&lt;/span&gt;
+                                &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; (default &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;)&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;))))))&lt;/span&gt;
+           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;string&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+               &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;No pydoc args given&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+                 &lt;span class="n"&gt;word&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;sinon&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt;
+             &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt; &lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;sinon&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;shell&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;concat&lt;/span&gt; &lt;span class="n"&gt;py&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; -c &lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;from pydoc import help;help(&lt;/span&gt;&lt;span class="se"&gt;\&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;w&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;)&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;*PYDOCS*&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;view&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;other&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;window&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;*PYDOCS*&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;kill-buffer-and-window))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;show&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;pydoc&lt;/span&gt; &lt;span class="n"&gt;help&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;word&lt;/span&gt; &lt;span class="n"&gt;at&lt;/span&gt; &lt;span class="n"&gt;point&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;control&lt;/span&gt; &lt;span class="n"&gt;f1&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;my-python-documentation)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt;&lt;span class="n"&gt;para&lt;/span&gt; &lt;span class="n"&gt;indentar&lt;/span&gt; &lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;completar&lt;/span&gt; &lt;span class="n"&gt;con&lt;/span&gt; &lt;span class="n"&gt;tab&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kbd&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;tab&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;indent-or-complete)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kbd&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;C-x #&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;comment-or-uncomment-region)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt;&lt;span class="n"&gt;pdb&lt;/span&gt; &lt;span class="n"&gt;setup&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;note&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;pdb&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/usr/bin/pdb&lt;/span&gt;
+      &lt;span class="n"&gt;gud&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pdb&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;symbol&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="n"&gt;pdb&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;defadvice&lt;/span&gt; &lt;span class="n"&gt;pdb&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;before&lt;/span&gt; &lt;span class="n"&gt;gud&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt; &lt;span class="n"&gt;activate&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="s2"&gt;&amp;quot;Provide a better default command line when called interactively.&amp;quot;&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;interactive&lt;/span&gt;
+   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;gud&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cmdline&lt;/span&gt; &lt;span class="n"&gt;pdb&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;
+                            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;nondirectory&lt;/span&gt; &lt;span class="nb"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;)))))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;para&lt;/span&gt; &lt;span class="n"&gt;usar&lt;/span&gt; &lt;span class="n"&gt;pdb&lt;/span&gt; &lt;span class="n"&gt;con&lt;/span&gt; &lt;span class="n"&gt;F8&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;function&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+                      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;set&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;kbd&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;f8&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pdb)&lt;/span&gt;
+                      &lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;para&lt;/span&gt; &lt;span class="n"&gt;usar&lt;/span&gt; &lt;span class="n"&gt;pydoc&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="s1"&gt;&amp;#39;(lambda () (eldoc-mode 1)) t)&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt; &lt;span class="n"&gt;tab&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt; &lt;span class="n"&gt;mode&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;font&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lock&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;keywords&lt;/span&gt; &lt;span class="n"&gt;nil&lt;/span&gt; &lt;span class="n"&gt;my&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;extra&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;keywords&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;para&lt;/span&gt; &lt;span class="n"&gt;mostrar&lt;/span&gt; &lt;span class="n"&gt;el&lt;/span&gt; &lt;span class="n"&gt;trailing&lt;/span&gt; &lt;span class="n"&gt;whitespace&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+          &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+            &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;setq&lt;/span&gt; &lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;trailing&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;whitespace&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;usar&lt;/span&gt; &lt;span class="n"&gt;pylint&lt;/span&gt;
+&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;when&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;load&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;flymake&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;defun&lt;/span&gt; &lt;span class="n"&gt;flymake&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pylint&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;let&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;flymake&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;copy&lt;/span&gt;
+                       &lt;span class="s1"&gt;&amp;#39;flymake-create-temp-inplace))&lt;/span&gt;
+           &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;relative&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;
+                        &lt;span class="n"&gt;temp&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;
+                        &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;directory&lt;/span&gt; &lt;span class="nb"&gt;buffer&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;epylint&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;file&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;
+
+  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;list&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;flymake-allowed-file-name-masks&lt;/span&gt;
+               &lt;span class="s1"&gt;&amp;#39;(&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;.py&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot; flymake-pylint-init)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;require&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pycomplete)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs-load &amp;quot;ropemacs&amp;quot; &amp;quot;rope-&amp;quot;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs-load &amp;quot;pymacs&amp;quot; nil t)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs-eval &amp;quot;pymacs&amp;quot; nil t)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs-apply &amp;quot;pymacs&amp;quot;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;autoload&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;pymacs-call &amp;quot;pymacs&amp;quot;)&lt;/span&gt;
+
+&lt;span class="p"&gt;;;(&lt;/span&gt;&lt;span class="n"&gt;rope&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="p"&gt;;;&lt;/span&gt; &lt;span class="n"&gt;para&lt;/span&gt; &lt;span class="n"&gt;autocompletar&lt;/span&gt; &lt;span class="n"&gt;los&lt;/span&gt; &lt;span class="n"&gt;cierres&lt;/span&gt; &lt;span class="n"&gt;de&lt;/span&gt; &lt;span class="n"&gt;parentesis&lt;/span&gt; &lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;de&lt;/span&gt; &lt;span class="n"&gt;string&lt;/span&gt;
+&lt;span class="p"&gt;;;(&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;hook&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;python-mode-hook&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\&amp;quot;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\&amp;#39;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;(&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;[&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electric-pair)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;      &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;define&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;key&lt;/span&gt; &lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;mode&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;map&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;{&amp;quot;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;electric-pair)))&lt;/span&gt;
+
+&lt;span class="p"&gt;;;(&lt;/span&gt;&lt;span class="n"&gt;defun&lt;/span&gt; &lt;span class="n"&gt;electric&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pair&lt;/span&gt; &lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;  &lt;span class="s2"&gt;&amp;quot;Insert character pair without sournding spaces&amp;quot;&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;parens&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;require&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;spaces&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;;;&lt;/span&gt;    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>erc</title><link href="http://tty.cl/erc.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
 &lt;p&gt;erc-cmd-NP function send the current track being played to the current chat buffer (channel or private).&lt;/p&gt;
 &lt;p&gt;The connect- functions provide a quick access to the defined IRC server.&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
+&lt;span class="c1"&gt;;; erc.el&lt;/span&gt;
+&lt;span class="c1"&gt;;; Login : &amp;lt;freyes@wampa&amp;gt;&lt;/span&gt;
+&lt;span class="c1"&gt;;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
+&lt;p&gt;erc-cmd-NP function send the current track being played to the current chat buffer (channel or private).&lt;/p&gt;
+&lt;p&gt;The connect- functions provide a quick access to the defined IRC server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
 &lt;span class="c1"&gt;;; erc.el&lt;/span&gt;
 &lt;span class="c1"&gt;;; Login : &amp;lt;freyes@wampa&amp;gt;&lt;/span&gt;
 &lt;span class="c1"&gt;;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes&lt;/span&gt;
@@ -655,11 +769,15 @@ C mode.&lt;/p&gt;
    &lt;span class="ss"&gt;:full-name&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;Felipe Reyes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;erc-auto-query&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;frame&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;</summary></entry><entry><title>Org-mode and Beamer</title><link href="http://tty.cl/org-mode-and-beamer.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;/pre&gt;&lt;/div&gt;</content></entry><entry><title>Org-mode and Beamer</title><link href="http://tty.cl/org-mode-and-beamer.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. &lt;/p&gt;
 &lt;h2&gt;Example&lt;/h2&gt;
 &lt;p&gt;Here it is an example of how a presentation file should look like&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#+TITLE:     Org Mode and Beamer&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#+TITLE:     Org Mode and Beamer …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;p&gt;The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. &lt;/p&gt;
+&lt;h2&gt;Example&lt;/h2&gt;
+&lt;p&gt;Here it is an example of how a presentation file should look like&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;#+TITLE:     Org Mode and Beamer&lt;/span&gt;
 &lt;span class="c1"&gt;#+AUTHOR:    Felipe Reyes&lt;/span&gt;
 &lt;span class="c1"&gt;#+EMAIL:     freyes@tty.cl&lt;/span&gt;
 &lt;span class="c1"&gt;#+DATE:      2011-08-25 Tue&lt;/span&gt;
@@ -721,7 +839,7 @@ sudo apt-get install texlive-extra-utils \
 &lt;/pre&gt;
 
 &lt;p&gt;Add the following to your &lt;em&gt;.emacs&lt;/em&gt; file:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; beamer&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;;; beamer&lt;/span&gt;
 &lt;span class="c1"&gt;;; #+LaTeX_CLASS: beamer in org files&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;unless&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;boundp&lt;/span&gt; &lt;span class="ss"&gt;&amp;#39;org-export-latex-classes&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
   &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt; &lt;span class="nv"&gt;org-export-latex-classes&lt;/span&gt; &lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -778,7 +896,10 @@ sudo apt-get install texlive-extra-utils \
 &lt;li&gt;&lt;a href="http://orgmode.org/worg/org-tutorials/org-beamer/tutorial.html"&gt;Worg beamer tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://orgmode.org/manual/Beamer-class-export.html"&gt;org-mode beamer&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://emacs-fu.blogspot.com/2009/10/writing-presentations-with-org-mode-and.html"&gt;emacs-fu: writing presentations with org-mode and beamer&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary></entry><entry><title>Emacs Tips</title><link href="http://tty.cl/emacs-tips.html" rel="alternate"></link><published>2013-01-01T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:emacs-tips.html</id><summary type="html">&lt;ul&gt;
+&lt;/ul&gt;</content></entry><entry><title>Emacs Tips</title><link href="http://tty.cl/emacs-tips.html" rel="alternate"></link><published>2013-01-01T00:00:00-03:00</published><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:/emacs-tips.html</id><summary type="html">&lt;ul&gt;
 &lt;li&gt;If you start emacs with "emacs -q" and the problem goes away, the problem is on your end: check your .emacs. &lt;/li&gt;
 &lt;li&gt;If "emacs -q" has problems and "emacs -Q" does not, it's caused by your distro or local admin.&lt;/li&gt;
-&lt;/ul&gt;</summary></entry></feed>
+&lt;/ul&gt;</summary><content type="html">&lt;ul&gt;
+&lt;li&gt;If you start emacs with "emacs -q" and the problem goes away, the problem is on your end: check your .emacs. &lt;/li&gt;
+&lt;li&gt;If "emacs -q" has problems and "emacs -Q" does not, it's caused by your distro or local admin.&lt;/li&gt;
+&lt;/ul&gt;</content></entry></feed>

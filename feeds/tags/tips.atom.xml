@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - tips</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/tags/tips.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2013-11-22T15:23:00-03:00</updated><entry><title>Postgresql Tips n' Tricks</title><link href="http://tty.cl/postgresql-tips-n-tricks.html" rel="alternate"></link><published>2013-11-22T15:23:00-03:00</published><updated>2013-11-22T15:23:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-11-22:/postgresql-tips-n-tricks.html</id><summary type="html">&lt;ul class="simple"&gt;
+&lt;li&gt;pg_stat_activity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;pg_stat_activity&lt;/a&gt;
+is a view that belongs to the postgresql catalog, it helps you to view the
+status of the queries that are in execution, the explanation of each column
+can be found in the postgresql manual &lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;The Statistics Collector&lt;/a&gt;
+section (I don't want to do a simply copy-paste, so …&lt;/p&gt;</summary><content type="html">&lt;ul class="simple"&gt;
+&lt;li&gt;pg_stat_activity&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;pg_stat_activity&lt;/a&gt;
+is a view that belongs to the postgresql catalog, it helps you to view the
+status of the queries that are in execution, the explanation of each column
+can be found in the postgresql manual &lt;a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html"&gt;The Statistics Collector&lt;/a&gt;
+section (I don't want to do a simply copy-paste, so see the official documentation).&lt;/p&gt;
+&lt;table border="1" class="docutils"&gt;
+&lt;colgroup&gt;
+&lt;col width="30%" /&gt;
+&lt;col width="49%" /&gt;
+&lt;col width="21%" /&gt;
+&lt;/colgroup&gt;
+&lt;thead valign="bottom"&gt;
+&lt;tr&gt;&lt;th class="head"&gt;Column&lt;/th&gt;
+&lt;th class="head"&gt;Type&lt;/th&gt;
+&lt;th class="head"&gt;Modifiers&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody valign="top"&gt;
+&lt;tr&gt;&lt;td&gt;datid&lt;/td&gt;
+&lt;td&gt;oid&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;datname&lt;/td&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;procpid&lt;/td&gt;
+&lt;td&gt;integer&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;usesysid&lt;/td&gt;
+&lt;td&gt;oid&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;usename&lt;/td&gt;
+&lt;td&gt;name&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;current_query&lt;/td&gt;
+&lt;td&gt;text&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;waiting&lt;/td&gt;
+&lt;td&gt;boolean&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;xact_start&lt;/td&gt;
+&lt;td&gt;timestamp with time zone&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;query_start&lt;/td&gt;
+&lt;td&gt;timestamp with time zone&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;backend_start&lt;/td&gt;
+&lt;td&gt;timestamp with time zone&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;client_addr&lt;/td&gt;
+&lt;td&gt;inet&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;client_port&lt;/td&gt;
+&lt;td&gt;integer&lt;/td&gt;
+&lt;td&gt;&amp;nbsp;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;pg_stat_activity&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;If you want to view the queries that are stuck (usually due to a lock or simply waiting for I/O) you can execute the following query:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;SELECT&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="k"&gt;FROM&lt;/span&gt; &lt;span class="n"&gt;pg_stat_activity&lt;/span&gt; &lt;span class="k"&gt;WHERE&lt;/span&gt; &lt;span class="n"&gt;waiting&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;TRUE&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</content><category term="postgresql"></category><category term="tips"></category></entry><entry><title>Skype in GNU/Debian AMD64</title><link href="http://tty.cl/skype-in-gnudebian-amd64.html" rel="alternate"></link><published>2013-02-18T04:59:00-03:00</published><updated>2013-02-18T04:59:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-02-18:/skype-in-gnudebian-amd64.html</id><summary type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Check if your system has i386 arch support enabled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg --print-foreign-architectures
+i386
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;If you don't have i386 support enable it with the following commands:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dpkg --add-architecture i386
+# apt-get update
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Then install the skype's dependencies with the following command:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# apt-get install libqtgui4:i386 \
+      libqtwebkit4 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Check if your system has i386 arch support enabled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg --print-foreign-architectures
+i386
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;If you don't have i386 support enable it with the following commands:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dpkg --add-architecture i386
+# apt-get update
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Then install the skype's dependencies with the following command:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# apt-get install libqtgui4:i386 \
+      libqtwebkit4:i386 \
+      libqt4-network:i386 \
+      libqtcore4:i386 \
+      libxss1:i386 \
+      lib32stdc++6 \
+      libxv1:i386 \
+      libasound2:i386 \
+      libqt4-dbus:i386 \
+      libssl1.0.0:i386 \
+      libasound2-plugins:i386 \
+      libqt4-xml \
+      libqtcore4 \
+      libqtdbus4 \
+      qdbus
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;And then you are ready to install skype&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dpkg -i skype-debian_4.1.0.20-1_i386.deb
+&lt;/pre&gt;&lt;/div&gt;</content><category term="debian"></category><category term="skype"></category><category term="tips"></category></entry><entry><title>rxvt-unicode</title><link href="http://tty.cl/rxvt-unicode.html" rel="alternate"></link><published>2011-06-11T23:10:00-04:00</published><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2011-06-11:/rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+default terminal since at least 4 years ago. I started using it after getting
+ tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aptitude install rxvt-unicode …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+default terminal since at least 4 years ago. I started using it after getting
+ tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aptitude install rxvt-unicode
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you want to use it as your default x-terminal-emulator you have to
+set the proper alternative like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;update-alternatives --set x-terminal-emulator /usr/bin/urxvt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The configuration must go on your ~/.Xdefaults file, here is my configuration&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;URxvt.foreground: grey90
+URxvt.cursorColor: #729fcf
+URxvt.font: -xos4-terminus-medium-r-normal--14-140-72-72-c-80-iso8859-15
+URxvt.scrollBar: False
+URxvt.shading: 50
+URxvt.transparent: True
+URxvt.fade: 80
+URxvt.fadeColor: #e9b96e
+URxvt.tintColor: #5c5c5c
+URxvt*urgentOnBell: true
+URxvt*urllauncher: iceweasel
+URxvt*matcher.button:        3
+URxvt*depth: 24
+URxvt*background: rgba:0000/0000/0000/dddd
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once you put the configuration you can reload it using this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;xrdb -merge ~/.Xdefaults
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Remember to install the terminus fonts if you want to use my configuration&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;aptitude install xfonts-terminus xfonts-terminus-dos xfonts-terminus-oblique
+&lt;/pre&gt;&lt;/div&gt;</content><category term="debian"></category><category term="linux"></category><category term="tips"></category><category term="rxvt"></category></entry></feed>

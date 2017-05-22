@@ -1,24 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/articles.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2016-08-14T00:00:00-04:00</updated><entry><title>Lynx: accept cookies always</title><link href="http://tty.cl/lynx-accept-cookies-always.html" rel="alternate"></link><published>2016-08-14T00:00:00-04:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2016-08-14:lynx-accept-cookies-always.html</id><summary type="html">&lt;p&gt;From time to time I need to use &lt;a href="https://packages.ubuntu.com/lynx"&gt;lynx&lt;/a&gt; (or
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - articles</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/articles.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2017-05-21T00:00:00-04:00</updated><entry><title>Add remote lxd server as a cloud in Juju (2.x)</title><link href="http://tty.cl/add-remote-lxd-server-as-a-cloud-in-juju-2x.html" rel="alternate"></link><published>2017-05-21T00:00:00-04:00</published><updated>2017-05-21T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2017-05-21:/add-remote-lxd-server-as-a-cloud-in-juju-2x.html</id><summary type="html">&lt;p&gt;&lt;a href="https://jujucharms.com/"&gt;Juju 2.x&lt;/a&gt; have the ability to add
+&lt;a href="https://linuxcontainers.org/lxd/"&gt;LXD&lt;/a&gt; as &lt;a href="https://jujucharms.com/docs/stable/clouds-LXD"&gt;a
+provisioner&lt;/a&gt;, by default it can
+easily use a local lxd (&lt;code&gt;juju bootstrap lxd&lt;/code&gt;), but how could we use a remote
+lxd?, the following instructions will guide you to achieve this:&lt;/p&gt;
+&lt;p&gt;SSH into the remote server (e.g. &lt;code&gt;192.168 …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://jujucharms.com/"&gt;Juju 2.x&lt;/a&gt; have the ability to add
+&lt;a href="https://linuxcontainers.org/lxd/"&gt;LXD&lt;/a&gt; as &lt;a href="https://jujucharms.com/docs/stable/clouds-LXD"&gt;a
+provisioner&lt;/a&gt;, by default it can
+easily use a local lxd (&lt;code&gt;juju bootstrap lxd&lt;/code&gt;), but how could we use a remote
+lxd?, the following instructions will guide you to achieve this:&lt;/p&gt;
+&lt;p&gt;SSH into the remote server (e.g. &lt;code&gt;192.168.10.2&lt;/code&gt;) and configure lxd to accept
+incoming connections and set a password.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(192.168.10.2)$ lxc config set core.https_address &amp;quot;[::]&amp;quot;
+(192.168.10.2)$ lxc config set core.trust_password some-secret-string
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now in the machine where juju commands will be ran (A.K.A. juju client) add the
+remote lxd daemon, this is done to easily get the server's certificate.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ lxc remote add 192.168.10.2 --accept-certificate --password=some-secret-string
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create a yaml configuration file that will be used by juju to add the cloud,
+this is how it should look like.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# file: some-remote.yaml&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;clouds&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;type&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;lxd&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;auth-types&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;interactive&lt;/span&gt;&lt;span class="p p-Indicator"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;certificate&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;regions&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+      &lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="l l-Scalar l-Scalar-Plain"&gt;endpoint&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;192.168.10.2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add the cloud definition to juju:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju add-cloud some-remote some-remote.yaml
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create the credentials.yaml file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# file: credentials.yaml&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;auth-type&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;certificate&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;client-cert&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;-----BEGIN CERTIFICATE-----&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.crt&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;-----END CERTIFICATE-----&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;client-key&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;-----BEGIN RSA PRIVATE KEY-----&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.key&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;-----END RSA PRIVATE KEY-----&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;server-cert&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;-----BEGIN CERTIFICATE-----&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.crt&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;-----END CERTIFICATE-----&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add the credentials to juju:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju add-credential some-remote -f credentials.yaml
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Verify the cloud was added correctly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju clouds
+Cloud           Regions  Default          Type            Description
+aws                  14  us-east-1        ec2             Amazon Web Services
+aws-china             1  cn-north-1       ec2             Amazon China
+aws-gov               1  us-gov-west-1    ec2             Amazon (USA Government)
+azure                24  centralus        azure           Microsoft Azure
+azure-china           2  chinaeast        azure           Microsoft Azure China
+cloudsigma            5  hnl              cloudsigma      CloudSigma Cloud
+google                7  us-east1         gce             Google Cloud Platform
+joyent                6  eu-ams-1         joyent          Joyent Cloud
+oracle-compute        5  uscom-central-1  oracle-compute  Oracle Cloud
+rackspace             6  dfw              rackspace       Rackspace Cloud
+localhost             1  localhost        lxd             LXD Container Hypervisor
+some-remote           1  some-remote      lxd             LXD Container Hypervisor
+
+Try &amp;#39;list-regions &amp;lt;cloud&amp;gt;&amp;#39; to see available regions.
+&amp;#39;show-cloud &amp;lt;cloud&amp;gt;&amp;#39; or &amp;#39;regions --format yaml &amp;lt;cloud&amp;gt;&amp;#39; can be used to see region endpoints.
+&amp;#39;add-cloud&amp;#39; can add private clouds or private infrastructure.
+Update the known public clouds with &amp;#39;update-clouds&amp;#39;.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Bootstrap a new controller using the added cloud provider&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju bootstrap some-remote
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once the bootstrap is done, verify the controller was correctly spun in the
+remote lxd daemon:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ lxc list 192.168.10.2:
++---------------+---------+--------------------------------+------+------------+-----------+
+|     NAME      |  STATE  |              IPV4              | IPV6 |    TYPE    | SNAPSHOTS |
++---------------+---------+--------------------------------+------+------------+-----------+
+| juju-ec8b3d-0 | RUNNING | 192.168.10.42 (eth0)           |      | PERSISTENT | 0         |
++---------------+---------+--------------------------------+------+------------+-----------+
+(juju-client)$ juju status -m controller
+Model       Controller   Cloud/Region             Version
+controller  snowspeeder  snowspeeder/snowspeeder  2.1.2
+
+App  Version  Status  Scale  Charm  Store  Rev  OS  Notes
+
+Unit  Workload  Agent  Machine  Public address  Ports  Message
+
+Machine  State    DNS            Inst id        Series  AZ  Message
+0        started  192.168.10.42  juju-ec8b3d-0  xenial      Running
+&lt;/pre&gt;&lt;/div&gt;</content><category term="juju"></category><category term="lxd"></category><category term="ubuntu"></category></entry><entry><title>Lynx: accept cookies always</title><link href="http://tty.cl/lynx-accept-cookies-always.html" rel="alternate"></link><published>2016-08-14T00:00:00-04:00</published><updated>2016-08-14T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2016-08-14:/lynx-accept-cookies-always.html</id><summary type="html">&lt;p&gt;From time to time I need to use &lt;a href="https://packages.ubuntu.com/lynx"&gt;lynx&lt;/a&gt; (or
+any other text based browser like &lt;a href="https://packages.ubuntu.com/links"&gt;links&lt;/a&gt;),
+for some reason my fingers usually type &lt;code&gt;lynx&lt;/code&gt;, but having to accept cookies
+every time a new domain tries to send it to me it's annoying, so here is how
+you configure it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;From time to time I need to use &lt;a href="https://packages.ubuntu.com/lynx"&gt;lynx&lt;/a&gt; (or
 any other text based browser like &lt;a href="https://packages.ubuntu.com/links"&gt;links&lt;/a&gt;),
 for some reason my fingers usually type &lt;code&gt;lynx&lt;/code&gt;, but having to accept cookies
 every time a new domain tries to send it to me it's annoying, so here is how
 you configure it to always accept them.&lt;/p&gt;
 &lt;p&gt;Add this to your &lt;code&gt;~/.bashrc&lt;/code&gt; file:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;LYNX_CFG=~/.lynx.cfg
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;LYNX_CFG=~/.lynx.cfg
 export LYNX_CFG
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;Then in &lt;code&gt;~/.lynx.cfg&lt;/code&gt;:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;INCLUDE:/etc/lynx-cur/lynx.cfg
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;INCLUDE:/etc/lynx-cur/lynx.cfg
 FORCE_SSL_COOKIES_SECURE:TRUE
 SET_COOKIES:TRUE
 ACCEPT_ALL_COOKIES:TRUE
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;And voila!&lt;/p&gt;</summary></entry><entry><title>Multiple Local Environments with Juju</title><link href="http://tty.cl/multiple-local-environments-with-juju.html" rel="alternate"></link><published>2015-01-23T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2015-01-23:multiple-local-environments-with-juju.html</id><summary type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png" /&gt;&lt;/p&gt;
+&lt;p&gt;And voila!&lt;/p&gt;</content></entry><entry><title>Multiple Local Environments with Juju</title><link href="http://tty.cl/multiple-local-environments-with-juju.html" rel="alternate"></link><published>2015-01-23T00:00:00-03:00</published><updated>2015-01-23T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2015-01-23:/multiple-local-environments-with-juju.html</id><summary type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://juju.ubuntu.com/"&gt;Juju&lt;/a&gt; has the ability to use lxc or kvm to deploy
+services, this is done by the
+&lt;a href="https://juju.ubuntu.com/docs/config-local.html"&gt;local provider&lt;/a&gt;, but
+sometimes during development you may want to have one environment up-n-running
+all the time for testing and you may need another one to run
+&lt;a href="https://juju.ubuntu.com/docs/tools-amulet.html"&gt;amulet&lt;/a&gt; tests, well at the
+beginning …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://juju.ubuntu.com/"&gt;Juju&lt;/a&gt; has the ability to use lxc or kvm to deploy
 services, this is done by the
 &lt;a href="https://juju.ubuntu.com/docs/config-local.html"&gt;local provider&lt;/a&gt;, but
@@ -28,7 +157,7 @@ all the time for testing and you may need another one to run
 beginning this wasn't obvious to me that this could be achieved, but then I
 found how to do it :)&lt;/p&gt;
 &lt;p&gt;Here is how you can have two different environments:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;environments&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;environments&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
   &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
     &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt;
     &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;series&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;trusty&lt;/span&gt;
@@ -47,11 +176,19 @@ found how to do it :)&lt;/p&gt;
 
 &lt;p&gt;That is the relevant portion of my &lt;code&gt;~/.juju/environments.yaml&lt;/code&gt;, I use one environment with &lt;code&gt;kvm&lt;/code&gt; and the other one with &lt;code&gt;lxc&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;If you're curious, the trick is to change the &lt;code&gt;state-port&lt;/code&gt; and &lt;code&gt;api-port&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;I hope this helps you.&lt;/p&gt;</summary><category term="juju"></category></entry><entry><title>Deploy a Python WSGI app with a Celery worker in Heroku</title><link href="http://tty.cl/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html" rel="alternate"></link><published>2014-02-24T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-02-24:deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html</id><summary type="html">&lt;p&gt;This article explains how to deploy a WSGI python web app + a
+&lt;p&gt;I hope this helps you.&lt;/p&gt;</content><category term="juju"></category></entry><entry><title>Deploy a Python WSGI app with a Celery worker in Heroku</title><link href="http://tty.cl/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html" rel="alternate"></link><published>2014-02-24T00:00:00-03:00</published><updated>2014-02-24T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-02-24:/deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html</id><summary type="html">&lt;p&gt;This article explains how to deploy a WSGI python web app + a
 &lt;a href="http://www.celeryproject.org"&gt;celery&lt;/a&gt; worker.&lt;/p&gt;
 &lt;p&gt;A recommended reading before moving forward with Heroku is
 &lt;a href="https://devcenter.heroku.com/articles/process-model"&gt;The Process Model&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Jimsy" src="/images/jimsy.png" /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Jimsy" src="/images/jimsy.png"&gt;&lt;/p&gt;
+&lt;h1&gt;The Application&lt;/h1&gt;
+&lt;p&gt;The application that we are going to deploy to heroku has the following components:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WSGI App, it can be a &lt;a href="https://www.djangoproject.com/"&gt;Django&lt;/a&gt; or …&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;p&gt;This article explains how to deploy a WSGI python web app + a
+&lt;a href="http://www.celeryproject.org"&gt;celery&lt;/a&gt; worker.&lt;/p&gt;
+&lt;p&gt;A recommended reading before moving forward with Heroku is
+&lt;a href="https://devcenter.heroku.com/articles/process-model"&gt;The Process Model&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Jimsy" src="/images/jimsy.png"&gt;&lt;/p&gt;
 &lt;h1&gt;The Application&lt;/h1&gt;
 &lt;p&gt;The application that we are going to deploy to heroku has the following components:&lt;/p&gt;
 &lt;ul&gt;
@@ -187,7 +324,7 @@ Use `heroku addons:docs cloudamqp` to view documentation.
 &lt;h1&gt;Adjusting Settings&lt;/h1&gt;
 &lt;p&gt;Heroku passes to your app environment variables with the configuration, this a common practice in the PaaS ecosystem, so you need to modify your app to read config values from it.&lt;/p&gt;
 &lt;p&gt;Here are examples to setup Celery and Django:&lt;/p&gt;
-&lt;div class="codehilite"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;dj_database_url&lt;/span&gt;
 
 &lt;span class="n"&gt;DEFAULT_AMQP&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;amqp://guest:guest@localhost//&amp;quot;&lt;/span&gt;
@@ -293,7 +430,12 @@ Installed 0 object(s) from 0 fixture(s)
 &lt;p&gt;We have the app running and a celery worker, now it's moment to assign a
 decent domain and other minor settings, heroku provides an option called
 &lt;a href="https://devcenter.heroku.com/articles/production-check"&gt;Production Check&lt;/a&gt;,
-you should use it before going live with your site.&lt;/p&gt;</summary><category term="development"></category></entry><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><published>2014-01-22T00:00:00-03:00</published><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+you should use it before going live with your site.&lt;/p&gt;</content><category term="development"></category></entry><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><published>2014-01-22T00:00:00-03:00</published><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
+&lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
+development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
+and &lt;a href="http://en.wikipedia.org/wiki/Continuous_delivery"&gt;continuous delivery&lt;/a&gt;.
+To read more about them I recommend you to read &lt;a href="http://www.amazon.com/Continuous-Integration-Improving-Software-Reducing/dp/0321336380/ref=sr_1_1?ie=UTF8&amp;amp;qid=1390443569&amp;amp;sr=8-1&amp;amp;keywords=continuous+integration"&gt;"Continuous Integration: Improving Software Quality and Reducing …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
 version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
 &lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
 development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
@@ -308,7 +450,11 @@ repositories for the latest information about how they work.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/freyes/vagrant-puppet-example"&gt;Vagrant and Puppet recipes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/freyes/flask-hello-world"&gt;Flask hello world&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</summary><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry><entry><title>MySQL and the Key Cache Buffer</title><link href="http://tty.cl/mysql-and-the-key-cache-buffer.html" rel="alternate"></link><published>2011-12-18T00:00:00-03:00</published><author><name>Jonathan Gonzalez</name></author><id>tag:tty.cl,2011-12-18:mysql-and-the-key-cache-buffer.html</id><summary type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
+&lt;/ul&gt;</content><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry><entry><title>MySQL and the Key Cache Buffer</title><link href="http://tty.cl/mysql-and-the-key-cache-buffer.html" rel="alternate"></link><published>2011-12-18T00:00:00-03:00</published><updated>2011-12-18T00:00:00-03:00</updated><author><name>Jonathan Gonzalez</name></author><id>tag:tty.cl,2011-12-18:/mysql-and-the-key-cache-buffer.html</id><summary type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
+&lt;p&gt;It's always important to recognize why this happened, well, here in my
+work a few weeks ago I set up a &lt;a href="http://code.google.com/p/mysql-cacti-templates/"&gt;few new templates&lt;/a&gt; for our &lt;a href="http://www.cacti.net/"&gt;Cacti&lt;/a&gt;, among
+many useful templates it comes with some very handy templates for
+&lt;a href="http://www.mysql.com"&gt;MySQL&lt;/a&gt;, it comes with a pretty useful …&lt;/p&gt;</summary><content type="html">&lt;h1&gt;Why did I learn?&lt;/h1&gt;
 &lt;p&gt;It's always important to recognize why this happened, well, here in my
 work a few weeks ago I set up a &lt;a href="http://code.google.com/p/mysql-cacti-templates/"&gt;few new templates&lt;/a&gt; for our &lt;a href="http://www.cacti.net/"&gt;Cacti&lt;/a&gt;, among
 many useful templates it comes with some very handy templates for
@@ -320,17 +466,21 @@ of this article&lt;/p&gt;
 &lt;p&gt;Since you may not have cacti installed you may need to know what do
 you have and how it's working now.&lt;/p&gt;
 &lt;p&gt;First the value of your 'key buffer size':&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sql
-show variables like 'key%';&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="n"&gt;variables&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;key%&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;This will show at least, two good things that may be useful for you,
 'key buffer size', yes the size of our key buffer! and
 'key cache block size' useful to end our tiny article&lt;/p&gt;
 &lt;p&gt;Well, now we have to know how the key buffer its used:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sql
-show status like 'Key%';&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;show&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="k"&gt;like&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;Key%&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;All the rows returned from this command are useful! I'll use and
 example of one of our servers:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;mysql&amp;gt; show status like 'Key%';
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mysql&amp;gt; show status like &amp;#39;Key%&amp;#39;;
 +------------------------+-----------+
 | Variable_name          | Value     |
 +------------------------+-----------+
@@ -342,7 +492,10 @@ example of one of our servers:&lt;/p&gt;
 | Key_write_requests     | 9268658   |
 | Key_writes             | 397761    |
 +------------------------+-----------+
-7 rows in set (0.00 sec)&lt;/code&gt;&lt;/p&gt;
+7 rows in set (0.00 sec)
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;We now have all the data we need to evaluate  our current situation.&lt;/p&gt;
 &lt;h1&gt;Use the collected data&lt;/h1&gt;
 &lt;p&gt;We will suppose that the value of 'key buffer size' it's '402653184'
@@ -353,10 +506,16 @@ transformation:&lt;/p&gt;
 &lt;p&gt;We have a Key cache buffer of 384MB which looks like a lot of space,
 but how much of that space it's currently used? well, you will have to
 do simple calculation:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;key_buffer_usage = ( Key_blocks_unused * key_cache_block_size ) / key_buffer_size ) * 100&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;key_buffer_usage = ( Key_blocks_unused * key_cache_block_size ) / key_buffer_size ) * 100
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;So with our collected that we will suppose that the value of
 'key cache block size' it's 1024 which it's the default value.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;( (240934 * 1024) / 402653184 ) * 100 = 61.2&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;( (240934 * 1024) / 402653184 ) * 100 = 61.2
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;So, we have about 61.2 percent of our buffer used, ok this seems to be
 right, but there's another data we may find useful! look this extract
 from the &lt;a href="http://dev.mysql.com/doc/"&gt;MySQL Documentation&lt;/a&gt;:&lt;/p&gt;
@@ -364,7 +523,10 @@ from the &lt;a href="http://dev.mysql.com/doc/"&gt;MySQL Documentation&lt;/a&gt;
 0.01."&lt;/p&gt;
 &lt;p&gt;Ok, what the heck this guys mean by that? Well, let's try our maths to
 calculate our ratio!&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;key_reads_ratio =  ( Key_reads / Key_read_requests ) * 100&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;key_reads_ratio =  ( Key_reads / Key_read_requests ) * 100
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;And with our data it will be something like:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;( 321341 / 211305615 ) * 100 = 0.152074046&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;So, we have a ratio of about 0.15, this doesn't seem a lot to me, but
@@ -377,8 +539,10 @@ can't restart your database right?&lt;/p&gt;
 &lt;p&gt;Well, if you access your database as 'root' user you can start to
 throw a few commands to set these values!&lt;/p&gt;
 &lt;p&gt;Let's say we want to set up our key buffer, we should do this:&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sql
-set global key_buffer_size=512*1024*1024;&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;set&lt;/span&gt; &lt;span class="k"&gt;global&lt;/span&gt; &lt;span class="n"&gt;key_buffer_size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;512&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1024&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
 &lt;p&gt;Thus, we will set our key_buffer to 512M and our system will have a
 lot of more key cached and our ratio will go down! awesome right? but
 wait, there's a tricks an some cautions you may want to take!&lt;/p&gt;
@@ -393,4 +557,4 @@ will have to wait less.&lt;/p&gt;
 &lt;p&gt;Well, I'll still working with some &lt;a href="http://www.mysql.com]"&gt;MySQL&lt;/a&gt; optimization things, so, I'll
 probably upload more things related to this kind of optimizations.&lt;/p&gt;
 &lt;p&gt;Remember, creating graphs of your system will always help you to
-diagnostic your system =)&lt;/p&gt;</summary><category term="mysql"></category><category term="tuning"></category><category term="database"></category><category term="cache"></category></entry></feed>
+diagnostic your system =)&lt;/p&gt;</content><category term="mysql"></category><category term="tuning"></category><category term="database"></category><category term="cache"></category></entry></feed>

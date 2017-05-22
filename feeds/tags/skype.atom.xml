@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - skype</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/tags/skype.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2013-02-18T04:59:00-03:00</updated><entry><title>Skype in GNU/Debian AMD64</title><link href="http://tty.cl/skype-in-gnudebian-amd64.html" rel="alternate"></link><published>2013-02-18T04:59:00-03:00</published><updated>2013-02-18T04:59:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-02-18:/skype-in-gnudebian-amd64.html</id><summary type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Check if your system has i386 arch support enabled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg --print-foreign-architectures
+i386
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;If you don't have i386 support enable it with the following commands:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dpkg --add-architecture i386
+# apt-get update
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Then install the skype's dependencies with the following command:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# apt-get install libqtgui4:i386 \
+      libqtwebkit4 …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;How to install Skype in Debian amd64&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Check if your system has i386 arch support enabled&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dpkg --print-foreign-architectures
+i386
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;If you don't have i386 support enable it with the following commands:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dpkg --add-architecture i386
+# apt-get update
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;Then install the skype's dependencies with the following command:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# apt-get install libqtgui4:i386 \
+      libqtwebkit4:i386 \
+      libqt4-network:i386 \
+      libqtcore4:i386 \
+      libxss1:i386 \
+      lib32stdc++6 \
+      libxv1:i386 \
+      libasound2:i386 \
+      libqt4-dbus:i386 \
+      libssl1.0.0:i386 \
+      libasound2-plugins:i386 \
+      libqt4-xml \
+      libqtcore4 \
+      libqtdbus4 \
+      qdbus
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;And then you are ready to install skype&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# dpkg -i skype-debian_4.1.0.20-1_i386.deb
+&lt;/pre&gt;&lt;/div&gt;</content><category term="debian"></category><category term="skype"></category><category term="tips"></category></entry></feed>

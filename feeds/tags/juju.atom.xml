@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - juju</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl//feeds/tags/juju.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2017-05-21T00:00:00-04:00</updated><entry><title>Add remote lxd server as a cloud in Juju (2.x)</title><link href="http://tty.cl/add-remote-lxd-server-as-a-cloud-in-juju-2x.html" rel="alternate"></link><published>2017-05-21T00:00:00-04:00</published><updated>2017-05-21T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2017-05-21:/add-remote-lxd-server-as-a-cloud-in-juju-2x.html</id><summary type="html">&lt;p&gt;&lt;a href="https://jujucharms.com/"&gt;Juju 2.x&lt;/a&gt; have the ability to add
+&lt;a href="https://linuxcontainers.org/lxd/"&gt;LXD&lt;/a&gt; as &lt;a href="https://jujucharms.com/docs/stable/clouds-LXD"&gt;a
+provisioner&lt;/a&gt;, by default it can
+easily use a local lxd (&lt;code&gt;juju bootstrap lxd&lt;/code&gt;), but how could we use a remote
+lxd?, the following instructions will guide you to achieve this:&lt;/p&gt;
+&lt;p&gt;SSH into the remote server (e.g. &lt;code&gt;192.168 …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://jujucharms.com/"&gt;Juju 2.x&lt;/a&gt; have the ability to add
+&lt;a href="https://linuxcontainers.org/lxd/"&gt;LXD&lt;/a&gt; as &lt;a href="https://jujucharms.com/docs/stable/clouds-LXD"&gt;a
+provisioner&lt;/a&gt;, by default it can
+easily use a local lxd (&lt;code&gt;juju bootstrap lxd&lt;/code&gt;), but how could we use a remote
+lxd?, the following instructions will guide you to achieve this:&lt;/p&gt;
+&lt;p&gt;SSH into the remote server (e.g. &lt;code&gt;192.168.10.2&lt;/code&gt;) and configure lxd to accept
+incoming connections and set a password.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(192.168.10.2)$ lxc config set core.https_address &amp;quot;[::]&amp;quot;
+(192.168.10.2)$ lxc config set core.trust_password some-secret-string
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now in the machine where juju commands will be ran (A.K.A. juju client) add the
+remote lxd daemon, this is done to easily get the server's certificate.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ lxc remote add 192.168.10.2 --accept-certificate --password=some-secret-string
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create a yaml configuration file that will be used by juju to add the cloud,
+this is how it should look like.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# file: some-remote.yaml&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;clouds&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;type&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;lxd&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;auth-types&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;interactive&lt;/span&gt;&lt;span class="p p-Indicator"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;certificate&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;regions&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+      &lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+        &lt;span class="l l-Scalar l-Scalar-Plain"&gt;endpoint&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;192.168.10.2&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add the cloud definition to juju:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju add-cloud some-remote some-remote.yaml
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Create the credentials.yaml file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# file: credentials.yaml&lt;/span&gt;
+&lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+  &lt;span class="l l-Scalar l-Scalar-Plain"&gt;some-remote&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;auth-type&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="l l-Scalar l-Scalar-Plain"&gt;certificate&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;client-cert&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;-----BEGIN CERTIFICATE-----&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.crt&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;-----END CERTIFICATE-----&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;client-key&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;-----BEGIN RSA PRIVATE KEY-----&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.key&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;-----END RSA PRIVATE KEY-----&lt;/span&gt;
+    &lt;span class="l l-Scalar l-Scalar-Plain"&gt;server-cert&lt;/span&gt;&lt;span class="p p-Indicator"&gt;:&lt;/span&gt; &lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+      &lt;span class="no"&gt;-----BEGIN CERTIFICATE-----&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.crt&lt;/span&gt;
+      &lt;span class="no"&gt;...&lt;/span&gt;
+      &lt;span class="no"&gt;-----END CERTIFICATE-----&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Add the credentials to juju:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju add-credential some-remote -f credentials.yaml
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Verify the cloud was added correctly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju clouds
+Cloud           Regions  Default          Type            Description
+aws                  14  us-east-1        ec2             Amazon Web Services
+aws-china             1  cn-north-1       ec2             Amazon China
+aws-gov               1  us-gov-west-1    ec2             Amazon (USA Government)
+azure                24  centralus        azure           Microsoft Azure
+azure-china           2  chinaeast        azure           Microsoft Azure China
+cloudsigma            5  hnl              cloudsigma      CloudSigma Cloud
+google                7  us-east1         gce             Google Cloud Platform
+joyent                6  eu-ams-1         joyent          Joyent Cloud
+oracle-compute        5  uscom-central-1  oracle-compute  Oracle Cloud
+rackspace             6  dfw              rackspace       Rackspace Cloud
+localhost             1  localhost        lxd             LXD Container Hypervisor
+some-remote           1  some-remote      lxd             LXD Container Hypervisor
+
+Try &amp;#39;list-regions &amp;lt;cloud&amp;gt;&amp;#39; to see available regions.
+&amp;#39;show-cloud &amp;lt;cloud&amp;gt;&amp;#39; or &amp;#39;regions --format yaml &amp;lt;cloud&amp;gt;&amp;#39; can be used to see region endpoints.
+&amp;#39;add-cloud&amp;#39; can add private clouds or private infrastructure.
+Update the known public clouds with &amp;#39;update-clouds&amp;#39;.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Bootstrap a new controller using the added cloud provider&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ juju bootstrap some-remote
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once the bootstrap is done, verify the controller was correctly spun in the
+remote lxd daemon:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;(juju-client)$ lxc list 192.168.10.2:
++---------------+---------+--------------------------------+------+------------+-----------+
+|     NAME      |  STATE  |              IPV4              | IPV6 |    TYPE    | SNAPSHOTS |
++---------------+---------+--------------------------------+------+------------+-----------+
+| juju-ec8b3d-0 | RUNNING | 192.168.10.42 (eth0)           |      | PERSISTENT | 0         |
++---------------+---------+--------------------------------+------+------------+-----------+
+(juju-client)$ juju status -m controller
+Model       Controller   Cloud/Region             Version
+controller  snowspeeder  snowspeeder/snowspeeder  2.1.2
+
+App  Version  Status  Scale  Charm  Store  Rev  OS  Notes
+
+Unit  Workload  Agent  Machine  Public address  Ports  Message
+
+Machine  State    DNS            Inst id        Series  AZ  Message
+0        started  192.168.10.42  juju-ec8b3d-0  xenial      Running
+&lt;/pre&gt;&lt;/div&gt;</content><category term="juju"></category><category term="lxd"></category><category term="ubuntu"></category></entry><entry><title>Multiple Local Environments with Juju</title><link href="http://tty.cl/multiple-local-environments-with-juju.html" rel="alternate"></link><published>2015-01-23T00:00:00-03:00</published><updated>2015-01-23T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2015-01-23:/multiple-local-environments-with-juju.html</id><summary type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://juju.ubuntu.com/"&gt;Juju&lt;/a&gt; has the ability to use lxc or kvm to deploy
+services, this is done by the
+&lt;a href="https://juju.ubuntu.com/docs/config-local.html"&gt;local provider&lt;/a&gt;, but
+sometimes during development you may want to have one environment up-n-running
+all the time for testing and you may need another one to run
+&lt;a href="https://juju.ubuntu.com/docs/tools-amulet.html"&gt;amulet&lt;/a&gt; tests, well at the
+beginning …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://juju.ubuntu.com/"&gt;Juju&lt;/a&gt; has the ability to use lxc or kvm to deploy
+services, this is done by the
+&lt;a href="https://juju.ubuntu.com/docs/config-local.html"&gt;local provider&lt;/a&gt;, but
+sometimes during development you may want to have one environment up-n-running
+all the time for testing and you may need another one to run
+&lt;a href="https://juju.ubuntu.com/docs/tools-amulet.html"&gt;amulet&lt;/a&gt; tests, well at the
+beginning this wasn't obvious to me that this could be achieved, but then I
+found how to do it :)&lt;/p&gt;
+&lt;p&gt;Here is how you can have two different environments:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;environments&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+  &lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt;
+    &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;series&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;trusty&lt;/span&gt;
+    &lt;span class="n"&gt;lxc&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+    &lt;span class="n"&gt;container&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;kvm&lt;/span&gt;
+    &lt;span class="n"&gt;network&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bridge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;br0&lt;/span&gt;
+  &lt;span class="n"&gt;lxc&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;local&lt;/span&gt;
+    &lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;series&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;trusty&lt;/span&gt;
+    &lt;span class="n"&gt;lxc&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="kc"&gt;true&lt;/span&gt;
+    &lt;span class="n"&gt;network&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bridge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;lxcbr0&lt;/span&gt;
+    &lt;span class="n"&gt;state&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;37018&lt;/span&gt;
+    &lt;span class="n"&gt;api&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;17071&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That is the relevant portion of my &lt;code&gt;~/.juju/environments.yaml&lt;/code&gt;, I use one environment with &lt;code&gt;kvm&lt;/code&gt; and the other one with &lt;code&gt;lxc&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you're curious, the trick is to change the &lt;code&gt;state-port&lt;/code&gt; and &lt;code&gt;api-port&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I hope this helps you.&lt;/p&gt;</content><category term="juju"></category></entry></feed>

@@ -26,8 +26,6 @@
         <div id="top-nav-list" class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">
 
-                <li><a href="http://tty.cl/pages/about.html">About</a></li>
-                <li><a href="http://tty.cl/pages/contact.html">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -54,7 +52,7 @@ times, because I knew that emacs were powerful, but the default
 configuration shows you a simple text editor that look awful, without
 syntax highlight, without anti-alias, a color schema that really
 sucks.</p>
-<p>In GNU/Linux ...</p>
+<p>In GNU/Linux …</p>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -66,17 +64,21 @@ sucks.</p>
 <address class="vcard author">By <a class="url fn" href="http://tty.cl/author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
       <div class="article-summary">
         <p>I hope you enjoy disecting my emacs config :D</p>
-<p>```elisp
-;; to debug the .emacs file
-(setq debug-on-error nil)</p>
-<p>;; setup the default mode to use
-;;Text mode is happier than Fundamental mode ;-)
-(setq default-major-mode 'text-mode)</p>
-<p>;; define the mail and name
-(setq user-mail-address "your@mail.com")
-(setq user-full-name "Your Name")</p>
-<p>;;;;;;;;;;;;,;
-;; UI setup ...</p>
+<div class="highlight"><pre><span></span><span class="c1">;; to debug the .emacs file</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">debug-on-error</span> <span class="no">nil</span><span class="p">)</span>
+
+<span class="c1">;; setup the default mode to use</span>
+<span class="c1">;;Text mode is happier than Fundamental mode ;-)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">default-major-mode</span> <span class="ss">&#39;text-mode</span><span class="p">)</span>
+
+<span class="c1">;; define the mail and name</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">user-mail-address</span> <span class="s">&quot;your@mail.com&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nf">user-full-name</span> <span class="s">&quot;Your Name&quot;</span><span class="p">)</span>
+
+<span class="c1">;;;;;;;;;;;;,;</span>
+<span class="c1">;; UI setup ;;</span>
+<span class="c1">;;;;;;;;;;;;;;</span>
+<span class="p">(</span><span class="nb">require …</span></pre></div>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -90,10 +92,10 @@ sucks.</p>
         <p>This is my configuration for erc</p>
 <p>erc-cmd-NP function send the current track being played to the current chat buffer (channel or private).</p>
 <p>The connect- functions provide a quick access to the defined IRC server.</p>
-<div class="codehilite"><pre><span></span><span class="c1">;;</span>
+<div class="highlight"><pre><span></span><span class="c1">;;</span>
 <span class="c1">;; erc.el</span>
 <span class="c1">;; Login : &lt;freyes@wampa&gt;</span>
-<span class="c1">;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes ...</span></pre></div>
+<span class="c1">;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes …</span></pre></div>
       </div>
     </li>
     <li class="article clearfix bradius6">
@@ -108,7 +110,7 @@ sucks.</p>
 <p>The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. </p>
 <h2>Example</h2>
 <p>Here it is an example of how a presentation file should look like</p>
-<div class="codehilite"><pre><span></span><span class="c1">#+TITLE:     Org Mode and Beamer ...</span></pre></div>
+<div class="highlight"><pre><span></span><span class="c1">#+TITLE:     Org Mode and Beamer …</span></pre></div>
       </div>
     </li>
     <li class="article clearfix bradius6">

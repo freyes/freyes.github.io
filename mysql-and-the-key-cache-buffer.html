@@ -34,8 +34,6 @@
         <div id="top-nav-list" class="collapse navbar-collapse">
           <ul class="nav navbar-nav pull-right">
 
-                <li><a href="http://tty.cl/pages/about.html">About</a></li>
-                <li><a href="http://tty.cl/pages/contact.html">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -73,17 +71,21 @@ of this article</p>
 <p>Since you may not have cacti installed you may need to know what do
 you have and how it's working now.</p>
 <p>First the value of your 'key buffer size':</p>
-<p><code>sql
-show variables like 'key%';</code></p>
+<div class="highlight"><pre><span></span><span class="k">show</span> <span class="n">variables</span> <span class="k">like</span> <span class="s1">&#39;key%&#39;</span><span class="p">;</span>
+</pre></div>
+
+
 <p>This will show at least, two good things that may be useful for you,
 'key buffer size', yes the size of our key buffer! and
 'key cache block size' useful to end our tiny article</p>
 <p>Well, now we have to know how the key buffer its used:</p>
-<p><code>sql
-show status like 'Key%';</code></p>
+<div class="highlight"><pre><span></span><span class="k">show</span> <span class="n">status</span> <span class="k">like</span> <span class="s1">&#39;Key%&#39;</span><span class="p">;</span>
+</pre></div>
+
+
 <p>All the rows returned from this command are useful! I'll use and
 example of one of our servers:</p>
-<p><code>mysql&gt; show status like 'Key%';
+<div class="highlight"><pre><span></span>mysql&gt; show status like &#39;Key%&#39;;
 +------------------------+-----------+
 | Variable_name          | Value     |
 +------------------------+-----------+
@@ -95,7 +97,10 @@ example of one of our servers:</p>
 | Key_write_requests     | 9268658   |
 | Key_writes             | 397761    |
 +------------------------+-----------+
-7 rows in set (0.00 sec)</code></p>
+7 rows in set (0.00 sec)
+</pre></div>
+
+
 <p>We now have all the data we need to evaluate  our current situation.</p>
 <h1>Use the collected data</h1>
 <p>We will suppose that the value of 'key buffer size' it's '402653184'
@@ -106,10 +111,16 @@ transformation:</p>
 <p>We have a Key cache buffer of 384MB which looks like a lot of space,
 but how much of that space it's currently used? well, you will have to
 do simple calculation:</p>
-<p><code>key_buffer_usage = ( Key_blocks_unused * key_cache_block_size ) / key_buffer_size ) * 100</code></p>
+<div class="highlight"><pre><span></span>key_buffer_usage = ( Key_blocks_unused * key_cache_block_size ) / key_buffer_size ) * 100
+</pre></div>
+
+
 <p>So with our collected that we will suppose that the value of
 'key cache block size' it's 1024 which it's the default value.</p>
-<p><code>( (240934 * 1024) / 402653184 ) * 100 = 61.2</code></p>
+<div class="highlight"><pre><span></span>( (240934 * 1024) / 402653184 ) * 100 = 61.2
+</pre></div>
+
+
 <p>So, we have about 61.2 percent of our buffer used, ok this seems to be
 right, but there's another data we may find useful! look this extract
 from the <a href="http://dev.mysql.com/doc/">MySQL Documentation</a>:</p>
@@ -117,7 +128,10 @@ from the <a href="http://dev.mysql.com/doc/">MySQL Documentation</a>:</p>
 0.01."</p>
 <p>Ok, what the heck this guys mean by that? Well, let's try our maths to
 calculate our ratio!</p>
-<p><code>key_reads_ratio =  ( Key_reads / Key_read_requests ) * 100</code></p>
+<div class="highlight"><pre><span></span>key_reads_ratio =  ( Key_reads / Key_read_requests ) * 100
+</pre></div>
+
+
 <p>And with our data it will be something like:</p>
 <p><code>( 321341 / 211305615 ) * 100 = 0.152074046</code></p>
 <p>So, we have a ratio of about 0.15, this doesn't seem a lot to me, but
@@ -130,8 +144,10 @@ can't restart your database right?</p>
 <p>Well, if you access your database as 'root' user you can start to
 throw a few commands to set these values!</p>
 <p>Let's say we want to set up our key buffer, we should do this:</p>
-<p><code>sql
-set global key_buffer_size=512*1024*1024;</code></p>
+<div class="highlight"><pre><span></span><span class="k">set</span> <span class="k">global</span> <span class="n">key_buffer_size</span><span class="o">=</span><span class="mi">512</span><span class="o">*</span><span class="mi">1024</span><span class="o">*</span><span class="mi">1024</span><span class="p">;</span>
+</pre></div>
+
+
 <p>Thus, we will set our key_buffer to 512M and our system will have a
 lot of more key cached and our ratio will go down! awesome right? but
 wait, there's a tricks an some cautions you may want to take!</p>
@@ -148,9 +164,13 @@ probably upload more things related to this kind of optimizations.</p>
 <p>Remember, creating graphs of your system will always help you to
 diagnostic your system =)</p>
   </div>
-  <div class="pull-right">
-    <a href="https://twitter.com/share?text=MySQL and the Key Cache Buffer&url=http%3A//tty.cl/mysql-and-the-key-cache-buffer.html&via=gnusis" type="button" class="btn btn-info">
-      <i class="fa fa-twitter-square"></i> Tweet</a>
+  <div class="row">
+      <div class="span6">          <a href="tag/mysql.html"><span class="label label-default">mysql</span></a>          <a href="tag/tuning.html"><span class="label label-default">tuning</span></a>          <a href="tag/database.html"><span class="label label-default">database</span></a>          <a href="tag/cache.html"><span class="label label-default">cache</span></a>      </div>
+      <div class="span6">
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text=MySQL and the Key Cache Buffer&url=http%3A//tty.cl/mysql-and-the-key-cache-buffer.html&via=gnusis" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+      </div>
   </div>
 </div>
 
