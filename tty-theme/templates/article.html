@@ -41,11 +41,19 @@
   <div class="content-body">
     {{ article.content }}
   </div>
-  {% if TWITTER_SHARE %}
-  <div class="pull-right">
-    <a href="https://twitter.com/share?text={{ article.title|striptags }}&url={{ SITEURL|urlencode }}/{{ article.url|urlencode }}&via={{ TWITTER_ID }}" type="button" class="btn btn-info">
-      <i class="fa fa-twitter-square"></i> Tweet</a>
+  <div class="row">
+      <div class="span6">
+          {%- for tag in article.tags %}
+          <a href="{{tag.url}}"><span class="label label-default">{{tag}}</span></a>
+          {%- endfor %}
+      </div>
+      <div class="span6">
+          {% if TWITTER_SHARE %}
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text={{ article.title|striptags }}&url={{ SITEURL|urlencode }}/{{ article.url|urlencode }}&via={{ TWITTER_ID }}" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+          {% endif %}
+      </div>
   </div>
-  {% endif %}
 </div>
 {% endblock %}
