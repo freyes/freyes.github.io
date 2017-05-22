@@ -51,4 +51,13 @@ LINKEDIN_ID = "freyesas"
 GITHUB_ID = "freyes"
 FLICKR_ID = "freyes"
 TWITTER_SHARE = True
-MD_EXTENSIONS = ['tables', 'codehilite']
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.fenced_code': {},
+        'markdown.extensions.codehilite': {'css_class': 'highlight'},
+        'markdown.extensions.tables': {},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}
