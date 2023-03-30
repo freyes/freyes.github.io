@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - vagrant</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl/feeds/tags/vagrant.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2014-01-22T00:00:00-03:00</updated><subtitle>Random thoughts and knowledge</subtitle><entry><title>Deploying a Python WSGI app with Vagrant and Puppet</title><link href="http://tty.cl/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="alternate"></link><published>2014-01-22T00:00:00-03:00</published><updated>2014-01-22T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2014-01-22:/deploying-a-python-wsgi-app-with-vagrant-and-puppet.html</id><summary type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
+&lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
+development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
+and &lt;a href="http://en.wikipedia.org/wiki/Continuous_delivery"&gt;continuous delivery&lt;/a&gt;.
+To read more about them I recommend you to read &lt;a href="http://www.amazon.com/Continuous-Integration-Improving-Software-Reducing/dp/0321336380/ref=sr_1_1?ie=UTF8&amp;amp;qid=1390443569&amp;amp;sr=8-1&amp;amp;keywords=continuous+integration"&gt;"Continuous Integration: Improving Software Quality and Reducing …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;These days the tendency among software companies is to have everything under
+version control systems (i.e. &lt;a href="http://git-scm.com/"&gt;Git&lt;/a&gt;,
+&lt;a href="http://mercurial.selenic.com/"&gt;Mercurial&lt;/a&gt;), all these is part of two software
+development strategies: &lt;a href="http://en.wikipedia.org/wiki/Continuous_integration"&gt;continuous integration&lt;/a&gt;
+and &lt;a href="http://en.wikipedia.org/wiki/Continuous_delivery"&gt;continuous delivery&lt;/a&gt;.
+To read more about them I recommend you to read &lt;a href="http://www.amazon.com/Continuous-Integration-Improving-Software-Reducing/dp/0321336380/ref=sr_1_1?ie=UTF8&amp;amp;qid=1390443569&amp;amp;sr=8-1&amp;amp;keywords=continuous+integration"&gt;"Continuous Integration: Improving Software Quality and Reducing Risk"&lt;/a&gt;
+and &lt;a href="http://www.amazon.com/Continuous-Delivery-Deployment-Automation-Addison-Wesley/dp/0321601912/ref=sr_1_3?ie=UTF8&amp;amp;qid=1390443569&amp;amp;sr=8-3&amp;amp;keywords=continuous+integration"&gt;"Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation"&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;So I took &lt;a href="http://www.vagrantup.com/"&gt;Vagrant&lt;/a&gt; to provision the machines that
+will run my &lt;a href="https://github.com/freyes/flask-hello-world"&gt;example webapp&lt;/a&gt;, and
+&lt;a href="http://puppetlabs.com"&gt;Puppet&lt;/a&gt; will take care of configuring my system.&lt;/p&gt;
+&lt;p&gt;My recipes are in continuous development, so you should refer to the git
+repositories for the latest information about how they work.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/freyes/vagrant-puppet-example"&gt;Vagrant and Puppet recipes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/freyes/flask-hello-world"&gt;Flask hello world&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><category term="articles"></category><category term="python"></category><category term="vagrant"></category><category term="puppet"></category><category term="wsgi"></category></entry></feed>

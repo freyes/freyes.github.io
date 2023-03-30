@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>TTY.cl</title>
+        <meta charset="utf-8" />
+        <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Full Atom Feed" />
+        <link href="http://tty.cl//feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Categories Atom Feed" />
+
+
+
+    <meta name="tags" contents="mikrotik" />
+    <meta name="tags" contents="openvpn" />
+    <meta name="tags" contents="networking" />
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
+        <link href="/theme/css/style.css" rel="stylesheet">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+
+<body id="index" class="home">
+  <div id="header-wrapper" class="navbar navbar-fixed-top">
+    <div id="header">
+      <div class="container">
+        <div class="logo navbar-header">
+          <a class="navbar-brand" href=".." title="me">
+            <img class="image" height="38" width="38" src="/theme/images/logo.png" />
+            <span class="name">TTY.cl</span>
+          </a>
+          <p class="subtitle">Random thoughts and knowledge</p>
+        </div>
+        <div id="top-nav-list" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="content-wrapper">
+    <div class="container">
+      <p class="socialconnect">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
+<div class="content brarius6">
+  <h1 class="page-title">
+    <a href="../drafts/mikrotik-openvpn-setup.html" rel="bookmark"
+       title="Permalink to Mikrotik OpenVPN Setup">
+      Mikrotik OpenVPN Setup
+    </a>
+  </h1>
+  <div class="page-subtitle">
+    <abbr class="published" title="2016-08-14T00:00:00-04:00">
+      Sun 14 August 2016
+    </abbr>
+    <address class="vcard author">
+      By <a class="url fn" href="../author/felipe-reyes.html">Felipe Reyes</a>
+    </address>
+  </div>
+  <div class="content-body">
+    <h1>Scenario</h1>
+<ul>
+<li>Site A<ul>
+<li>OpenVPN Server</li>
+<li>LAN: 192.168.88.0/24</li>
+<li>WAN connected to interface ether1-gateway</li>
+</ul>
+</li>
+<li>Site B<ul>
+<li>OpenVpn Client</li>
+<li>LAN: 192.168.20.0/24</li>
+</ul>
+</li>
+<li>Road Warrior (laptop)</li>
+</ul>
+<h2>Requirements</h2>
+<ul>
+<li>Nodes connected to any network should be able to connect any other node via
+routes</li>
+</ul>
+<h1>Certificates creation</h1>
+<p>...</p>
+<h1>Server configuration</h1>
+<ol>
+<li>
+<p>Create bridge for the VPN clients</p>
+<p><code>/interface bridge add bridge=vpn-bridge</code></p>
+</li>
+<li>
+<p>Create a pool of IP addresses to be used by the dhcp clients without a
+binding for their account</p>
+<p>```
+/ip pool add name=ovpn ranges=172.20.20.21-172.20.20.99</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Create</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="kd">def</span><span class="n">ault</span><span class="w"> </span><span class="n">encryption</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">server</span>
+
+<span class="w">    </span><span class="err">```</span>
+<span class="w">    </span><span class="o">/</span><span class="n">ppp</span><span class="w"> </span><span class="n">profile</span>
+<span class="w">    </span><span class="n">set</span><span class="w"> </span><span class="o">*</span><span class="n">FFFFFFFE</span><span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="n">bridge</span><span class="o">=</span><span class="n">vpn</span><span class="o">-</span><span class="n">bridge</span><span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="n">change</span><span class="o">-</span><span class="n">tcp</span><span class="o">-</span><span class="n">mss</span><span class="o">=</span><span class="kd">def</span><span class="n">ault</span><span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="n">local</span><span class="o">-</span><span class="n">address</span><span class="o">=</span><span class="mf">172.20.20.1</span><span class="w"> </span><span class="err">\</span>
+<span class="w">  </span><span class="c1">remote-address=ovpn \</span>
+<span class="w">  </span><span class="n">use</span><span class="o">-</span><span class="n">encryption</span><span class="o">=</span><span class="n">required</span>
+<span class="w">  </span><span class="err">```</span>
+
+<span class="mf">1.</span><span class="w"> </span><span class="n">Create</span><span class="w"> </span><span class="n">encryption</span><span class="w"> </span><span class="n">profiles</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">have</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="mf">1</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="n">this</span>
+<span class="w">   </span><span class="n">is</span><span class="w"> </span><span class="n">needed</span><span class="w"> </span><span class="kr">to</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">specific</span><span class="w"> </span><span class="n">IP</span><span class="w"> </span><span class="n">addresses</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="n">client</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="kr">on</span><span class="n">ce</span><span class="w"> </span><span class="n">they</span><span class="w"> </span><span class="n">are</span>
+<span class="w">   </span><span class="n">connected</span><span class="w"> </span><span class="n">they</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">clearly</span><span class="w"> </span><span class="n">identified</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">eventually</span><span class="w"> </span><span class="n">apply</span><span class="w"> </span><span class="n">firewall</span>
+<span class="w">   </span><span class="n">rules</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">case</span><span class="w"> </span><span class="n">it</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">needed</span>
+
+<span class="w">    </span><span class="err">```</span>
+<span class="o">/</span><span class="n">ppp</span><span class="w"> </span><span class="n">profile</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="n">ovpn</span><span class="o">-</span><span class="n">siteA</span><span class="w"> </span><span class="err">\</span>
+<span class="w">    </span><span class="n">bridge</span><span class="o">=</span><span class="n">vpn</span><span class="o">-</span><span class="n">bridge</span><span class="w"> </span><span class="err">\</span>
+<span class="w">    </span><span class="n">local</span><span class="o">-</span><span class="n">address</span><span class="o">=</span><span class="mf">172.20.20.30</span><span class="w"> </span><span class="err">\</span>
+<span class="w">    </span><span class="c1">remote-address=172.20.20.31 \</span>
+<span class="w">    </span><span class="n">use</span><span class="o">-</span><span class="n">encryption</span><span class="o">=</span><span class="n">required</span>
+</code></pre></div>
+
+<ol>
+<li>
+<p>Create user, you have to create 1 user per client as the user is related to
+   the encryption profile previously created</p>
+<p><code>/ppp secret add name=siteA password=foobar profile=ovpn-siteA service=ovpn</code></p>
+</li>
+<li>
+<p>Configure the server (encryption methods, certificates, etc)</p>
+<p><code>/interface ovpn-server \
+  set auth=sha1 \
+  certificate=deathstar.crt_0 \
+  cipher=aes256 \
+  default-profile=default \
+  enabled=yes \
+  keepalive-timeout=disabled \
+  require-client-certificate=yes</code></p>
+</li>
+<li>
+<p>Create 1 OpenVPN server binding pero user created. This will create a
+   static interface per user allowing the manipulation of its traffic.</p>
+<p><code>/interface ovpn-server add name=ovpn-siteA user=siteA</code></p>
+</li>
+</ol>
+  </div>
+  <div class="row">
+      <div class="span6">          <a href="tag/mikrotik.html"><span class="label label-default">mikrotik</span></a>          <a href="tag/openvpn.html"><span class="label label-default">openvpn</span></a>          <a href="tag/networking.html"><span class="label label-default">networking</span></a>      </div>
+      <div class="span6">
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text=Mikrotik OpenVPN Setup&url=../drafts/mikrotik-openvpn-setup.html&via=gnusis" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  <div id="footer-wrapper">
+    <div id="footer" class="container clearfix">
+      <p class="copyrights pull-left">Copyright ©2013 Felipe Reyes. All rights reserved.</p>
+      <p class="socialconnect footer pull-right">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
+    </div>
+  </div>
+</body>
+</html>

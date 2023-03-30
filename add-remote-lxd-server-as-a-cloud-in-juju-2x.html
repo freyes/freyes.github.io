@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>TTY.cl</title>
+        <meta charset="utf-8" />
+        <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Full Atom Feed" />
+        <link href="http://tty.cl//feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Categories Atom Feed" />
+
+
+
+    <meta name="tags" contents="juju" />
+    <meta name="tags" contents="lxd" />
+    <meta name="tags" contents="ubuntu" />
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
+        <link href="/theme/css/style.css" rel="stylesheet">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+
+<body id="index" class="home">
+  <div id="header-wrapper" class="navbar navbar-fixed-top">
+    <div id="header">
+      <div class="container">
+        <div class="logo navbar-header">
+          <a class="navbar-brand" href="." title="me">
+            <img class="image" height="38" width="38" src="/theme/images/logo.png" />
+            <span class="name">TTY.cl</span>
+          </a>
+          <p class="subtitle">Random thoughts and knowledge</p>
+        </div>
+        <div id="top-nav-list" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="content-wrapper">
+    <div class="container">
+      <p class="socialconnect">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
+<div class="content brarius6">
+  <h1 class="page-title">
+    <a href="./add-remote-lxd-server-as-a-cloud-in-juju-2x.html" rel="bookmark"
+       title="Permalink to Add remote lxd server as a cloud in Juju (2.x)">
+      Add remote lxd server as a cloud in Juju (2.x)
+    </a>
+  </h1>
+  <div class="page-subtitle">
+    <abbr class="published" title="2017-05-21T00:00:00-04:00">
+      Sun 21 May 2017
+    </abbr>
+    <address class="vcard author">
+      By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a>
+    </address>
+  </div>
+  <div class="content-body">
+    <p><a href="https://jujucharms.com/">Juju 2.x</a> have the ability to add
+<a href="https://linuxcontainers.org/lxd/">LXD</a> as <a href="https://jujucharms.com/docs/stable/clouds-LXD">a
+provisioner</a>, by default it can
+easily use a local lxd (<code>juju bootstrap lxd</code>), but how could we use a remote
+lxd?, the following instructions will guide you to achieve this:</p>
+<p>SSH into the remote server (e.g. <code>192.168.10.2</code>) and configure lxd to accept
+incoming connections and set a password.</p>
+<div class="highlight"><pre><span></span><code>(192.168.10.2)$ lxc config set core.https_address &quot;[::]&quot;
+(192.168.10.2)$ lxc config set core.trust_password some-secret-string
+</code></pre></div>
+
+<p>Now in the machine where juju commands will be ran (A.K.A. juju client) add the
+remote lxd daemon, this is done to easily get the server's certificate.</p>
+<div class="highlight"><pre><span></span><code>(juju-client)$ lxc remote add 192.168.10.2 --accept-certificate --password=some-secret-string
+</code></pre></div>
+
+<p>Create a yaml configuration file that will be used by juju to add the cloud,
+this is how it should look like.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># file: some-remote.yaml</span>
+<span class="nt">clouds</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">some-remote</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lxd</span>
+<span class="w">    </span><span class="nt">auth-types</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">interactive</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">certificate</span><span class="p p-Indicator">]</span>
+<span class="w">    </span><span class="nt">regions</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">some-remote</span><span class="p">:</span>
+<span class="w">        </span><span class="nt">endpoint</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.10.2</span>
+</code></pre></div>
+
+<p>Add the cloud definition to juju:</p>
+<div class="highlight"><pre><span></span><code>(juju-client)$ juju add-cloud some-remote some-remote.yaml
+</code></pre></div>
+
+<p>Create the credentials.yaml file:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># file: credentials.yaml</span>
+<span class="nt">some-remote</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">some-remote</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">auth-type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">certificate</span>
+<span class="w">    </span><span class="nt">client-cert</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">-----BEGIN CERTIFICATE-----</span>
+<span class="w">      </span><span class="no">...</span>
+<span class="w">      </span><span class="no">INSERT THE CONTENT OF ~/.config/lxc/client.crt</span>
+<span class="w">      </span><span class="no">...</span>
+<span class="w">      </span><span class="no">-----END CERTIFICATE-----</span>
+<span class="w">    </span><span class="nt">client-key</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">-----BEGIN RSA PRIVATE KEY-----</span>
+<span class="w">      </span><span class="no">...</span>
+<span class="w">      </span><span class="no">INSERT THE CONTENT OF ~/.config/lxc/client.key</span>
+<span class="w">      </span><span class="no">...</span>
+<span class="w">      </span><span class="no">-----END RSA PRIVATE KEY-----</span>
+<span class="w">    </span><span class="nt">server-cert</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">      </span><span class="no">-----BEGIN CERTIFICATE-----</span>
+<span class="w">      </span><span class="no">...</span>
+<span class="w">      </span><span class="no">INSERT THE CONTENT OF ~/.config/lxc/client.crt</span>
+<span class="w">      </span><span class="no">...</span>
+<span class="w">      </span><span class="no">-----END CERTIFICATE-----</span>
+</code></pre></div>
+
+<p>Add the credentials to juju:</p>
+<div class="highlight"><pre><span></span><code>(juju-client)$ juju add-credential some-remote -f credentials.yaml
+</code></pre></div>
+
+<p>Verify the cloud was added correctly:</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="n">juju</span><span class="o">-</span><span class="n">client</span><span class="p">)</span><span class="err">$</span><span class="w"> </span><span class="n">juju</span><span class="w"> </span><span class="n">clouds</span>
+<span class="n">Cloud</span><span class="w">           </span><span class="n">Regions</span><span class="w">  </span><span class="n">Default</span><span class="w">          </span><span class="n">Type</span><span class="w">            </span><span class="n">Description</span>
+<span class="n">aws</span><span class="w">                  </span><span class="mh">14</span><span class="w">  </span><span class="n">us</span><span class="o">-</span><span class="n">east</span><span class="o">-</span><span class="mh">1</span><span class="w">        </span><span class="n">ec2</span><span class="w">             </span><span class="n">Amazon</span><span class="w"> </span><span class="n">Web</span><span class="w"> </span><span class="n">Services</span>
+<span class="n">aws</span><span class="o">-</span><span class="n">china</span><span class="w">             </span><span class="mh">1</span><span class="w">  </span><span class="n">cn</span><span class="o">-</span><span class="n">north</span><span class="o">-</span><span class="mh">1</span><span class="w">       </span><span class="n">ec2</span><span class="w">             </span><span class="n">Amazon</span><span class="w"> </span><span class="n">China</span>
+<span class="n">aws</span><span class="o">-</span><span class="n">gov</span><span class="w">               </span><span class="mh">1</span><span class="w">  </span><span class="n">us</span><span class="o">-</span><span class="n">gov</span><span class="o">-</span><span class="n">west</span><span class="o">-</span><span class="mh">1</span><span class="w">    </span><span class="n">ec2</span><span class="w">             </span><span class="n">Amazon</span><span class="w"> </span><span class="p">(</span><span class="n">USA</span><span class="w"> </span><span class="n">Government</span><span class="p">)</span>
+<span class="n">azure</span><span class="w">                </span><span class="mh">24</span><span class="w">  </span><span class="n">centralus</span><span class="w">        </span><span class="n">azure</span><span class="w">           </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Azure</span>
+<span class="n">azure</span><span class="o">-</span><span class="n">china</span><span class="w">           </span><span class="mh">2</span><span class="w">  </span><span class="n">chinaeast</span><span class="w">        </span><span class="n">azure</span><span class="w">           </span><span class="n">Microsoft</span><span class="w"> </span><span class="n">Azure</span><span class="w"> </span><span class="n">China</span>
+<span class="n">cloudsigma</span><span class="w">            </span><span class="mh">5</span><span class="w">  </span><span class="n">hnl</span><span class="w">              </span><span class="n">cloudsigma</span><span class="w">      </span><span class="n">CloudSigma</span><span class="w"> </span><span class="n">Cloud</span>
+<span class="n">google</span><span class="w">                </span><span class="mh">7</span><span class="w">  </span><span class="n">us</span><span class="o">-</span><span class="n">east1</span><span class="w">         </span><span class="n">gce</span><span class="w">             </span><span class="n">Google</span><span class="w"> </span><span class="n">Cloud</span><span class="w"> </span><span class="n">Platform</span>
+<span class="n">joyent</span><span class="w">                </span><span class="mh">6</span><span class="w">  </span><span class="n">eu</span><span class="o">-</span><span class="n">ams</span><span class="o">-</span><span class="mh">1</span><span class="w">         </span><span class="n">joyent</span><span class="w">          </span><span class="n">Joyent</span><span class="w"> </span><span class="n">Cloud</span>
+<span class="n">oracle</span><span class="o">-</span><span class="n">compute</span><span class="w">        </span><span class="mh">5</span><span class="w">  </span><span class="n">uscom</span><span class="o">-</span><span class="n">central</span><span class="o">-</span><span class="mh">1</span><span class="w">  </span><span class="n">oracle</span><span class="o">-</span><span class="n">compute</span><span class="w">  </span><span class="n">Oracle</span><span class="w"> </span><span class="n">Cloud</span>
+<span class="n">rackspace</span><span class="w">             </span><span class="mh">6</span><span class="w">  </span><span class="n">dfw</span><span class="w">              </span><span class="n">rackspace</span><span class="w">       </span><span class="n">Rackspace</span><span class="w"> </span><span class="n">Cloud</span>
+<span class="n">localhost</span><span class="w">             </span><span class="mh">1</span><span class="w">  </span><span class="n">localhost</span><span class="w">        </span><span class="n">lxd</span><span class="w">             </span><span class="n">LXD</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="n">Hypervisor</span>
+<span class="n">some</span><span class="o">-</span><span class="n">remote</span><span class="w">           </span><span class="mh">1</span><span class="w">  </span><span class="n">some</span><span class="o">-</span><span class="n">remote</span><span class="w">      </span><span class="n">lxd</span><span class="w">             </span><span class="n">LXD</span><span class="w"> </span><span class="n">Container</span><span class="w"> </span><span class="n">Hypervisor</span>
+
+<span class="n">Try</span><span class="w"> </span><span class="p">&#39;</span><span class="n">list</span><span class="o">-</span><span class="n">regions</span><span class="w"> </span><span class="o">&lt;</span><span class="n">cloud</span><span class="o">&gt;</span><span class="p">&#39;</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">see</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="n">regions</span><span class="p">.</span>
+<span class="p">&#39;</span><span class="n">show</span><span class="o">-</span><span class="n">cloud</span><span class="w"> </span><span class="o">&lt;</span><span class="n">cloud</span><span class="o">&gt;</span><span class="p">&#39;</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="p">&#39;</span><span class="n">regions</span><span class="w"> </span><span class="o">--</span><span class="n">format</span><span class="w"> </span><span class="n">yaml</span><span class="w"> </span><span class="o">&lt;</span><span class="n">cloud</span><span class="o">&gt;</span><span class="p">&#39;</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">see</span><span class="w"> </span><span class="n">region</span><span class="w"> </span><span class="n">endpoints</span><span class="p">.</span>
+<span class="p">&#39;</span><span class="n">add</span><span class="o">-</span><span class="n">cloud</span><span class="p">&#39;</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">private</span><span class="w"> </span><span class="n">clouds</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">private</span><span class="w"> </span><span class="n">infrastructure</span><span class="p">.</span>
+<span class="n">Update</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">known</span><span class="w"> </span><span class="n">public</span><span class="w"> </span><span class="n">clouds</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="p">&#39;</span><span class="n">update</span><span class="o">-</span><span class="n">clouds</span><span class="p">&#39;.</span>
+</code></pre></div>
+
+<p>Bootstrap a new controller using the added cloud provider</p>
+<div class="highlight"><pre><span></span><code>(juju-client)$ juju bootstrap some-remote
+</code></pre></div>
+
+<p>Once the bootstrap is done, verify the controller was correctly spun in the
+remote lxd daemon:</p>
+<div class="highlight"><pre><span></span><code><span class="c">(juju</span><span class="nb">-</span><span class="c">client)$ lxc list 192</span><span class="nt">.</span><span class="c">168</span><span class="nt">.</span><span class="c">10</span><span class="nt">.</span><span class="c">2:</span>
+<span class="nb">+---------------+---------+--------------------------------+------+------------+-----------+</span>
+<span class="c">|     NAME      |  STATE  |              IPV4              | IPV6 |    TYPE    | SNAPSHOTS |</span>
+<span class="nb">+---------------+---------+--------------------------------+------+------------+-----------+</span>
+<span class="c">| juju</span><span class="nb">-</span><span class="c">ec8b3d</span><span class="nb">-</span><span class="c">0 | RUNNING | 192</span><span class="nt">.</span><span class="c">168</span><span class="nt">.</span><span class="c">10</span><span class="nt">.</span><span class="c">42 (eth0)           |      | PERSISTENT | 0         |</span>
+<span class="nb">+---------------+---------+--------------------------------+------+------------+-----------+</span>
+<span class="c">(juju</span><span class="nb">-</span><span class="c">client)$ juju status </span><span class="nb">-</span><span class="c">m controller</span>
+<span class="c">Model       Controller   Cloud/Region             Version</span>
+<span class="c">controller  snowspeeder  snowspeeder/snowspeeder  2</span><span class="nt">.</span><span class="c">1</span><span class="nt">.</span><span class="c">2</span>
+
+<span class="c">App  Version  Status  Scale  Charm  Store  Rev  OS  Notes</span>
+
+<span class="c">Unit  Workload  Agent  Machine  Public address  Ports  Message</span>
+
+<span class="c">Machine  State    DNS            Inst id        Series  AZ  Message</span>
+<span class="c">0        started  192</span><span class="nt">.</span><span class="c">168</span><span class="nt">.</span><span class="c">10</span><span class="nt">.</span><span class="c">42  juju</span><span class="nb">-</span><span class="c">ec8b3d</span><span class="nb">-</span><span class="c">0  xenial      Running</span>
+</code></pre></div>
+  </div>
+  <div class="row">
+      <div class="span6">          <a href="tag/juju.html"><span class="label label-default">juju</span></a>          <a href="tag/lxd.html"><span class="label label-default">lxd</span></a>          <a href="tag/ubuntu.html"><span class="label label-default">ubuntu</span></a>      </div>
+      <div class="span6">
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text=Add remote lxd server as a cloud in Juju (2.x)&url=./add-remote-lxd-server-as-a-cloud-in-juju-2x.html&via=gnusis" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  <div id="footer-wrapper">
+    <div id="footer" class="container clearfix">
+      <p class="copyrights pull-left">Copyright ©2013 Felipe Reyes. All rights reserved.</p>
+      <p class="socialconnect footer pull-right">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
+    </div>
+  </div>
+</body>
+</html>

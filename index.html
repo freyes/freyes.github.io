@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <title>TTY.cl</title>
+        <meta charset="utf-8" />
+        <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Full Atom Feed" />
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
+        <link href="/theme/css/style.css" rel="stylesheet">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+
+<body id="index" class="home">
+  <div id="header-wrapper" class="navbar navbar-fixed-top">
+    <div id="header">
+      <div class="container">
+        <div class="logo navbar-header">
+          <a class="navbar-brand" href="." title="me">
+            <img class="image" height="38" width="38" src="/theme/images/logo.png" />
+            <span class="name">TTY.cl</span>
+          </a>
+          <p class="subtitle">Random thoughts and knowledge</p>
+        </div>
+        <div id="top-nav-list" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="content-wrapper">
+    <div class="container">
+      <p class="socialconnect">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
+
+<div class="content content-list">
+  <ol class="article-list">
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./add-remote-lxd-server-as-a-cloud-in-juju-2x.html" rel="bookmark" title="Permalink to Add remote lxd server as a cloud in Juju (2.x)">Add remote lxd server as a cloud in Juju (2.x)</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2017-05-21T00:00:00-04:00"> Sun 21 May 2017 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p><a href="https://jujucharms.com/">Juju 2.x</a> have the ability to add
+<a href="https://linuxcontainers.org/lxd/">LXD</a> as <a href="https://jujucharms.com/docs/stable/clouds-LXD">a
+provisioner</a>, by default it can
+easily use a local lxd (<code>juju bootstrap lxd</code>), but how could we use a remote
+lxd?, the following instructions will guide you to achieve this:</p>
+<p>SSH into the remote server (e.g. <code>192.168 …</code></p>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./lynx-accept-cookies-always.html" rel="bookmark" title="Permalink to Lynx: accept cookies always">Lynx: accept cookies always</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2016-08-14T00:00:00-04:00"> Sun 14 August 2016 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p>From time to time I need to use <a href="https://packages.ubuntu.com/lynx">lynx</a> (or
+any other text based browser like <a href="https://packages.ubuntu.com/links">links</a>),
+for some reason my fingers usually type <code>lynx</code>, but having to accept cookies
+every time a new domain tries to send it to me it's annoying, so here is how
+you configure it …</p>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./multiple-local-environments-with-juju.html" rel="bookmark" title="Permalink to Multiple Local Environments with Juju">Multiple Local Environments with Juju</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2015-01-23T00:00:00-03:00"> Fri 23 January 2015 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p><img alt="juju man" src="/images/JuJu-man.png"></p>
+<p><a href="https://juju.ubuntu.com/">Juju</a> has the ability to use lxc or kvm to deploy
+services, this is done by the
+<a href="https://juju.ubuntu.com/docs/config-local.html">local provider</a>, but
+sometimes during development you may want to have one environment up-n-running
+all the time for testing and you may need another one to run
+<a href="https://juju.ubuntu.com/docs/tools-amulet.html">amulet</a> tests, well at the
+beginning …</p>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./deploy-a-python-wsgi-app-with-a-celery-worker-in-heroku.html" rel="bookmark" title="Permalink to Deploy a Python WSGI app with a Celery worker in Heroku">Deploy a Python WSGI app with a Celery worker in Heroku</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2014-02-24T00:00:00-03:00"> Mon 24 February 2014 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p>This article explains how to deploy a WSGI python web app + a
+<a href="http://www.celeryproject.org">celery</a> worker.</p>
+<p>A recommended reading before moving forward with Heroku is
+<a href="https://devcenter.heroku.com/articles/process-model">The Process Model</a>.</p>
+<p><img alt="Jimsy" src="/images/jimsy.png"></p>
+<h1>The Application</h1>
+<p>The application that we are going to deploy to heroku has the following components:</p>
+<ul>
+<li>WSGI App, it can be a <a href="https://www.djangoproject.com/">Django</a> or …</li></ul>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./deploying-a-python-wsgi-app-with-vagrant-and-puppet.html" rel="bookmark" title="Permalink to Deploying a Python WSGI app with Vagrant and Puppet">Deploying a Python WSGI app with Vagrant and Puppet</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2014-01-22T00:00:00-03:00"> Wed 22 January 2014 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p>These days the tendency among software companies is to have everything under
+version control systems (i.e. <a href="http://git-scm.com/">Git</a>,
+<a href="http://mercurial.selenic.com/">Mercurial</a>), all these is part of two software
+development strategies: <a href="http://en.wikipedia.org/wiki/Continuous_integration">continuous integration</a>
+and <a href="http://en.wikipedia.org/wiki/Continuous_delivery">continuous delivery</a>.
+To read more about them I recommend you to read <a href="http://www.amazon.com/Continuous-Integration-Improving-Software-Reducing/dp/0321336380/ref=sr_1_1?ie=UTF8&amp;qid=1390443569&amp;sr=8-1&amp;keywords=continuous+integration">"Continuous Integration: Improving Software Quality and Reducing …</a></p>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./how-to-start-with-emacs.html" rel="bookmark" title="Permalink to How to start with Emacs">How to start with Emacs</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2013-12-03T00:00:00-03:00"> Tue 03 December 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <h2>Part 0</h2>
+<p>Before I could really be productive with emacs, I failed a couple of
+times, because I knew that emacs were powerful, but the default
+configuration shows you a simple text editor that look awful, without
+syntax highlight, without anti-alias, a color schema that really
+sucks.</p>
+<p>In GNU/Linux …</p>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./emacs.html" rel="bookmark" title="Permalink to .emacs">.emacs</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2013-12-02T00:00:00-03:00"> Mon 02 December 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p>I hope you enjoy disecting my emacs config :D</p>
+<div class="highlight"><pre><span></span><code><span class="c1">;; to debug the .emacs file</span>
+<span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">debug-on-error</span><span class="w"> </span><span class="no">nil</span><span class="p">)</span>
+
+<span class="c1">;; setup the default mode to use</span>
+<span class="c1">;;Text mode is happier than Fundamental mode ;-)</span>
+<span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">default-major-mode</span><span class="w"> </span><span class="ss">&#39;text-mode</span><span class="p">)</span>
+
+<span class="c1">;; define the mail and name</span>
+<span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">user-mail-address</span><span class="w"> </span><span class="s">&quot;your@mail.com&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nf">user-full-name</span><span class="w"> </span><span class="s">&quot;Your Name&quot;</span><span class="p">)</span>
+
+<span class="c1">;;;;;;;;;;;;,;</span>
+<span class="c1">;; UI setup ;;</span>
+<span class="c1">;;;;;;;;;;;;;;</span>
+<span class="p">(</span><span class="nb">require …</span></code></pre></div>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./erc.html" rel="bookmark" title="Permalink to erc">erc</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2013-12-02T00:00:00-03:00"> Mon 02 December 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p>This is my configuration for erc</p>
+<p>erc-cmd-NP function send the current track being played to the current chat buffer (channel or private).</p>
+<p>The connect- functions provide a quick access to the defined IRC server.</p>
+<div class="highlight"><pre><span></span><code><span class="c1">;;</span>
+<span class="c1">;; erc.el</span>
+<span class="c1">;; Login : &lt;freyes@wampa&gt;</span>
+<span class="c1">;; Started on  Mon Aug 30 23:04:16 2010 Felipe Reyes …</span></code></pre></div>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./org-mode-and-beamer.html" rel="bookmark" title="Permalink to Org-mode and Beamer">Org-mode and Beamer</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2013-12-02T00:00:00-03:00"> Mon 02 December 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <h2>Overview</h2>
+<p>The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. </p>
+<h2>Example</h2>
+<p>Here it is an example of how a presentation file should look like</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#+TITLE:     Org Mode and Beamer …</span></code></pre></div>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./postgresql-tips-n-tricks.html" rel="bookmark" title="Permalink to Postgresql Tips n' Tricks">Postgresql Tips n' Tricks</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2013-11-22T15:23:00-03:00"> Fri 22 November 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <ul class="simple">
+<li>pg_stat_activity</li>
+</ul>
+<p><a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html">pg_stat_activity</a>
+is a view that belongs to the postgresql catalog, it helps you to view the
+status of the queries that are in execution, the explanation of each column
+can be found in the postgresql manual <a class="reference external" href="http://www.postgresql.org/docs/current/static/monitoring-stats.html">The Statistics Collector</a>
+section (I don't want to do a simply copy-paste, so …</p>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./skype-in-gnudebian-amd64.html" rel="bookmark" title="Permalink to Skype in GNU/Debian AMD64">Skype in GNU/Debian AMD64</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2013-02-18T04:59:00-03:00"> Mon 18 February 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p>How to install Skype in Debian amd64</p>
+<ul>
+<li>Check if your system has i386 arch support enabled</li>
+</ul>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>dpkg<span class="w"> </span>--print-foreign-architectures
+i386
+</code></pre></div>
+
+<ul>
+<li>If you don't have i386 support enable it with the following commands:</li>
+</ul>
+<div class="highlight"><pre><span></span><code># dpkg --add-architecture i386
+# apt-get update
+</code></pre></div>
+
+<ul>
+<li>Then install the skype's dependencies with the following command:</li>
+</ul>
+<div class="highlight"><pre><span></span><code># apt-get install libqtgui4:i386 \
+      libqtwebkit4 …</code></pre></div>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./c-snippets.html" rel="bookmark" title="Permalink to C Snippets">C Snippets</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2013-01-01T00:00:00-03:00"> Tue 01 January 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <h2>Simple Swap Function</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">swap</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="p">){</span>
+<span class="w">  </span><span class="o">*</span><span class="n">a</span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="o">+*</span><span class="n">b</span><span class="p">;</span>
+<span class="w">  </span><span class="o">*</span><span class="n">b</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
+<span class="w">  </span><span class="o">*</span><span class="n">a</span><span class="o">=*</span><span class="n">a</span><span class="o">-*</span><span class="n">b</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;before: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">  </span><span class="n">swap</span><span class="p">(</span><span class="o">&amp;</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">printf</span><span class="p">(</span><span class="s">&quot;after: a: %d - b: %d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">a …</span></code></pre></div>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./emacs-tips.html" rel="bookmark" title="Permalink to Emacs Tips">Emacs Tips</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2013-01-01T00:00:00-03:00"> Tue 01 January 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <ul>
+<li>If you start emacs with "emacs -q" and the problem goes away, the problem is on your end: check your .emacs. </li>
+<li>If "emacs -q" has problems and "emacs -Q" does not, it's caused by your distro or local admin.</li>
+</ul>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./python-snippets.html" rel="bookmark" title="Permalink to Python Snippets">Python Snippets</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2013-01-01T00:00:00-03:00"> Tue 01 January 2013 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <h2>Property</h2>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">Property</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">,</span> <span class="n">fdel</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
+    <span class="n">fdoc</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="vm">__doc__</span>
+    <span class="k">return</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">,</span> <span class="n">fdel</span><span class="p">,</span> <span class="n">fdoc</span><span class="p">)</span>
+</code></pre></div>
+
+<h3>Usage Example</h3>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">TtyExample</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@Property</span>
+    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+        <span class="s2">&quot;The name&quot;</span>
+        <span class="k">def</span> <span class="nf">fget</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
+
+        <span class="k">def</span> <span class="nf">fset</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">basestring</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="n">value …</span></code></pre></div>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./mercurial.html" rel="bookmark" title="Permalink to Mercurial">Mercurial</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2012-12-03T17:42:08-03:00"> Mon 03 December 2012 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p>This is my mercurial configuration (~/.hgrc)</p>
+<div class="highlight"><pre><span></span><code><span class="k">[ui]</span>
+<span class="na">username</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">Foo Bar &lt;foobar@example.com&gt;</span>
+<span class="na">merge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">emacs</span>
+
+<span class="k">[extensions]</span>
+<span class="na">pager</span><span class="w"> </span><span class="o">=</span>
+<span class="na">rebase</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="na">churn</span><span class="w"> </span><span class="o">=</span>
+<span class="na">hgshelve</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">~/.hg.d/hgshelve.py</span>
+<span class="na">keyword</span><span class="w"> </span><span class="o">=</span>
+<span class="na">fetch</span><span class="w"> </span><span class="o">=</span>
+<span class="na">activity</span><span class="o">=</span><span class="s">~/.hg.d/hgactivity/activity.py</span>
+<span class="na">mq</span><span class="w"> </span><span class="o">=</span>
+<span class="na">hg_histedit</span><span class="o">=</span><span class="s">~/.hg.d/hg_histedit.py</span>
+<span class="na">color</span><span class="w"> </span><span class="o">=</span>
+
+<span class="k">[diff]</span>
+<span class="na">git</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">on</span>
+
+<span class="k">[pager]</span>
+<span class="na">pager</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">LESS=&#39;FSRX&#39; less</span>
+<span class="na">attend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">glog</span>
+
+<span class="k">[keywordmaps …</span></code></pre></div>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./mysql-and-the-key-cache-buffer.html" rel="bookmark" title="Permalink to MySQL and the Key Cache Buffer">MySQL and the Key Cache Buffer</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2011-12-18T00:00:00-03:00"> Sun 18 December 2011 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/jonathan-gonzalez.html">Jonathan Gonzalez</a></address>      </div>
+      <div class="article-summary">
+        <h1>Why did I learn?</h1>
+<p>It's always important to recognize why this happened, well, here in my
+work a few weeks ago I set up a <a href="http://code.google.com/p/mysql-cacti-templates/">few new templates</a> for our <a href="http://www.cacti.net/">Cacti</a>, among
+many useful templates it comes with some very handy templates for
+<a href="http://www.mysql.com">MySQL</a>, it comes with a pretty useful …</p>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./rxvt-unicode.html" rel="bookmark" title="Permalink to rxvt-unicode">rxvt-unicode</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2011-06-11T23:10:00-04:00"> Sat 11 June 2011 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p>The Rxvt terminal is a really good terminal emulator, actually it has been my
+default terminal since at least 4 years ago. I started using it after getting
+ tired of gnome-terminal (it's too fat and heavy for me).</p>
+<p><img alt="Screenshot" src="./images/urxvt_shot.20110601.jpg"></p>
+<p>To install it you just must do the follow:</p>
+<div class="highlight"><pre><span></span><code>aptitude install rxvt-unicode …</code></pre></div>
+      </div>
+    </li>
+    <li class="article clearfix bradius6">
+      <h2 class="page-title">
+        <a href="./about-me.html" rel="bookmark" title="Permalink to About Me">About Me</a>
+      </h2>
+      <div class="page-subtitle">
+        <abbr class="published" title="2010-10-10T00:00:00-04:00"> Sun 10 October 2010 </abbr>
+<address class="vcard author">By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a></address>      </div>
+      <div class="article-summary">
+        <p>A Software Engineer, Debian enthusiast, free and open source software
+developer (or at least I try)</p>
+<ul>
+<li><a href="http://www.flickr.com/photos/freyes">Flickr</a></li>
+<li><a href="http://www.linkedin.com/in/freyesas">Linkedin</a></li>
+<li><a href="https://www.ohloh.net/accounts/freyes">Ohloh</a></li>
+</ul>
+<p><img alt="Yeah, that's me." src="/images/freyes.jpg"></p>
+<p><a href="http://www.fsf.org/register_form?referrer=9394"><img src="/images/freyes-fsf-member.png" alt="[FSF Associate Member]" width="88" height="31" /></a> Proud FSF associate member :)</p>
+<h2>GNU/Linux Distributions Used</h2>
+<ul>
+<li>RedHat (6.0, 6.2, 7.3)</li>
+<li>Slackware (unknown version)</li>
+<li>Suse (unknown version)</li>
+<li><a href="http://www.debian.org">Debian</a> <a href="http://www.debian.org/releases/woody/">Woody</a>, <a href="http://www.debian.org/releases/sarge">Sarge</a>, <a href="http://www.debian.org/releases/etch/">Etch</a>, <a href="http://www.debian.org/releases/lenny/">Lenny</a>, <a href="http://www.debian.org/releases/squeeze">Squeeze</a>, <a href="http://www.debian.org/releases/unstable">Sid</a>.</li>
+<li><a href="http://www.ubuntu.com">Ubuntu</a> (4.10 …</li></ul>
+      </div>
+    </li>
+  </ol>
+</div>
+
+    </div>
+  </div>
+
+  <div id="footer-wrapper">
+    <div id="footer" class="container clearfix">
+      <p class="copyrights pull-left">Copyright ©2013 Felipe Reyes. All rights reserved.</p>
+      <p class="socialconnect footer pull-right">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
+    </div>
+  </div>
+</body>
+</html>

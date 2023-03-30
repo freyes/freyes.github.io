@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <title>TTY.cl</title>
+        <meta charset="utf-8" />
+        <link href="http://tty.cl//feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Full Atom Feed" />
+        <link href="http://tty.cl//feeds/{slug}.atom.xml" type="application/atom+xml" rel="alternate" title="TTY.cl Categories Atom Feed" />
+
+
+
+
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/theme/css/pygment.css" rel="stylesheet">
+        <link href="/theme/css/style.css" rel="stylesheet">
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+</head>
+
+<body id="index" class="home">
+  <div id="header-wrapper" class="navbar navbar-fixed-top">
+    <div id="header">
+      <div class="container">
+        <div class="logo navbar-header">
+          <a class="navbar-brand" href="." title="me">
+            <img class="image" height="38" width="38" src="/theme/images/logo.png" />
+            <span class="name">TTY.cl</span>
+          </a>
+          <p class="subtitle">Random thoughts and knowledge</p>
+        </div>
+        <div id="top-nav-list" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav pull-right">
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="content-wrapper">
+    <div class="container">
+      <p class="socialconnect">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
+<div class="content brarius6">
+  <h1 class="page-title">
+    <a href="./org-mode-and-beamer.html" rel="bookmark"
+       title="Permalink to Org-mode and Beamer">
+      Org-mode and Beamer
+    </a>
+  </h1>
+  <div class="page-subtitle">
+    <abbr class="published" title="2013-12-02T00:00:00-03:00">
+      Mon 02 December 2013
+    </abbr>
+    <address class="vcard author">
+      By <a class="url fn" href="./author/felipe-reyes.html">Felipe Reyes</a>
+    </address>
+  </div>
+  <div class="content-body">
+    <h2>Overview</h2>
+<p>The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. </p>
+<h2>Example</h2>
+<p>Here it is an example of how a presentation file should look like</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#+TITLE:     Org Mode and Beamer</span>
+<span class="c1">#+AUTHOR:    Felipe Reyes</span>
+<span class="c1">#+EMAIL:     freyes@tty.cl</span>
+<span class="c1">#+DATE:      2011-08-25 Tue</span>
+<span class="c1">#+DESCRIPTION:</span>
+<span class="c1">#+KEYWORDS:  org-mode, beamer, tutorial</span>
+<span class="c1">#+OPTIONS:   H:3 num:t toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t &lt;:t</span>
+<span class="c1">#+OPTIONS:   TeX:t LaTeX:t skip:nil d:nil todo:t pri:nil tags:not-in-toc</span>
+<span class="c1">#+INFOJS_OPT: view:nil toc:nil ltoc:nil mouse:underline buttons:0 path:http://orgmode.org/org-info.js</span>
+<span class="c1">#+EXPORT_SELECT_TAGS: export</span>
+<span class="c1">#+EXPORT_EXCLUDE_TAGS: noexport</span>
+<span class="c1">#+LINK_UP:   </span>
+<span class="c1">#+LINK_HOME: </span>
+<span class="c1">#+LaTeX_CLASS: beamer</span>
+<span class="c1">#+BEAMER_HEADER_EXTRA: \usetheme{Madrid}\usecolortheme{default}</span>
+<span class="c1">#+MACRO: BEAMERMODE presentation</span>
+<span class="c1">#+MACRO: BEAMERINSTITUTE tty.cl</span>
+<span class="c1">#+BEAMER_FRAME_LEVEL: 2</span>
+<span class="c1">#+STARTUP: beamer</span>
+
+<span class="o">*</span> <span class="n">Org</span> <span class="n">Mode</span> <span class="ow">and</span> <span class="n">Beamer</span>
+<span class="o">**</span> <span class="n">Overview</span>
+   <span class="o">-</span> <span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">bullet</span> <span class="nb">list</span>
+     <span class="o">-</span> <span class="n">nested</span> <span class="n">items</span>
+     <span class="o">-</span> <span class="n">more</span> <span class="n">items</span>
+   <span class="o">-</span> <span class="n">Resume</span> <span class="n">the</span> <span class="n">top</span> <span class="n">level</span> <span class="nb">list</span>
+<span class="o">**</span> <span class="n">Numbered</span> <span class="n">List</span>
+   <span class="mi">1</span><span class="p">)</span> <span class="n">one</span>
+   <span class="mi">2</span><span class="p">)</span> <span class="n">two</span>
+   <span class="mi">3</span><span class="p">)</span> <span class="n">three</span>
+<span class="o">**</span> <span class="n">Source</span> <span class="n">Code</span> <span class="n">Example</span>
+<span class="c1">#+BEGIN_LaTeX</span>
+\<span class="n">begin</span><span class="p">{</span><span class="n">lstlisting</span><span class="p">}[</span><span class="n">language</span><span class="o">=</span><span class="n">python</span><span class="p">]</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">def</span> <span class="nf">my_fun</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;.&quot;</span><span class="p">):</span>
+    <span class="nb">print</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+\<span class="n">end</span><span class="p">{</span><span class="n">lstlisting</span><span class="p">}</span>
+<span class="c1">#+END_LaTeX</span>
+</code></pre></div>
+
+<p>Let's review it by section</p>
+<ul>
+<li>First you just need to set the basic information about your presentation (title, author, email, date, description and keywords)</li>
+<li>Then you indicate if you want some extra options in each slide</li>
+<li><code>BEAMER_HEADER_EXTRA</code>: include raw LaTeX statements, this is used to define the beamer's theme, in this case we are using the theme <em>Madrid</em> with the <em>default</em> color theme.</li>
+<li><code>BEAMERMODE</code>: set the presentation mode in beamer</li>
+<li><code>BEAMERINSTITUTE</code>: let you define your college, business, etc.</li>
+<li>At the end we just write our slides, each level 2 section is a slide.</li>
+</ul>
+<p>You can open the file [[file:org-mode.beamer.presentation.org]] in emacs and use the shortcut <code>C-c C-e p</code> to generate a pdf of the presentation. The produced pdf can be downloaded [[file:org-mode.beamer.presentation.pdf][here]]</p>
+<h2>Setup</h2>
+<p>Execute the following command in Debian or Ubuntu</p>
+<pre>
+sudo apt-get install texlive-extra-utils \
+    texlive-binaries \
+    latex-beamer \
+    texlive-latex-extra
+</pre>
+
+<p>Add the following to your <em>.emacs</em> file:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">;; beamer</span>
+<span class="c1">;; #+LaTeX_CLASS: beamer in org files</span>
+<span class="p">(</span><span class="nb">unless</span><span class="w"> </span><span class="p">(</span><span class="nb">boundp</span><span class="w"> </span><span class="ss">&#39;org-export-latex-classes</span><span class="p">)</span>
+<span class="w">  </span><span class="p">(</span><span class="k">setq</span><span class="w"> </span><span class="nv">org-export-latex-classes</span><span class="w"> </span><span class="no">nil</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">add-to-list</span><span class="w"> </span><span class="ss">&#39;org-export-latex-classes</span>
+<span class="w">  </span><span class="c1">;; beamer class, for presentations</span>
+<span class="w">  </span><span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;beamer&quot;</span>
+<span class="w">     </span><span class="s">&quot;\\documentclass[11pt]{beamer}\n</span>
+<span class="s">      \\mode&lt;{{{beamermode}}}&gt;\n</span>
+<span class="s">      \\beamertemplateballitem\n</span>
+<span class="s">      \\setbeameroption{show notes}</span>
+<span class="s">      \\usepackage[utf8]{inputenc}\n</span>
+<span class="s">      \\usepackage[T1]{fontenc}\n</span>
+<span class="s">      \\usepackage{hyperref}\n</span>
+<span class="s">      \\usepackage{color}</span>
+<span class="s">      \\usepackage{listings}</span>
+<span class="s">      \\lstset{numbers=none,language=[ISO]C++,tabsize=4,</span>
+<span class="s">  frame=single,</span>
+<span class="s">  basicstyle=\\small,</span>
+<span class="s">  showspaces=false,showstringspaces=false,</span>
+<span class="s">  showtabs=false,</span>
+<span class="s">  keywordstyle=\\color{blue}\\bfseries,</span>
+<span class="s">  commentstyle=\\color{red},</span>
+<span class="s">  }\n</span>
+<span class="s">      \\usepackage{verbatim}\n</span>
+<span class="s">      \\institute{{{{beamerinstitute}}}}\n          </span>
+<span class="s">       \\subject{{{{beamersubject}}}}\n&quot;</span>
+
+<span class="w">     </span><span class="p">(</span><span class="s">&quot;\\section{%s}&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;\\section*{%s}&quot;</span><span class="p">)</span>
+
+<span class="w">     </span><span class="p">(</span><span class="s">&quot;\\begin{frame}[fragile]\\frametitle{%s}&quot;</span>
+<span class="w">       </span><span class="s">&quot;\\end{frame}&quot;</span>
+<span class="w">       </span><span class="s">&quot;\\begin{frame}[fragile]\\frametitle{%s}&quot;</span>
+<span class="w">       </span><span class="s">&quot;\\end{frame}&quot;</span><span class="p">)))</span>
+
+<span class="c1">;; letter class, for formal letters</span>
+<span class="p">(</span><span class="nv">add-to-list</span><span class="w"> </span><span class="ss">&#39;org-export-latex-classes</span>
+<span class="w">  </span><span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;letter&quot;</span>
+<span class="w">     </span><span class="s">&quot;\\documentclass[11pt]{letter}\n</span>
+<span class="s">      \\usepackage[utf8]{inputenc}\n</span>
+<span class="s">      \\usepackage[T1]{fontenc}\n</span>
+<span class="s">      \\usepackage{color}&quot;</span>
+
+<span class="w">     </span><span class="p">(</span><span class="s">&quot;\\section{%s}&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;\\section*{%s}&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">(</span><span class="s">&quot;\\subsection{%s}&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;\\subsection*{%s}&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">(</span><span class="s">&quot;\\subsubsection{%s}&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;\\subsubsection*{%s}&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">(</span><span class="s">&quot;\\paragraph{%s}&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;\\paragraph*{%s}&quot;</span><span class="p">)</span>
+<span class="w">     </span><span class="p">(</span><span class="s">&quot;\\subparagraph{%s}&quot;</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="s">&quot;\\subparagraph*{%s}&quot;</span><span class="p">)))</span>
+</code></pre></div>
+
+<h2>Links</h2>
+<ul>
+<li><a href="https://bitbucket.org/rivanvx/beamer/wiki/Home">Beamer development repo</a></li>
+<li><a href="http://orgmode.org/worg/org-tutorials/org-beamer/tutorial.html">Worg beamer tutorial</a></li>
+<li><a href="http://orgmode.org/manual/Beamer-class-export.html">org-mode beamer</a></li>
+<li><a href="http://emacs-fu.blogspot.com/2009/10/writing-presentations-with-org-mode-and.html">emacs-fu: writing presentations with org-mode and beamer</a></li>
+</ul>
+  </div>
+  <div class="row">
+      <div class="span6">      </div>
+      <div class="span6">
+          <div class="pull-right">
+              <a href="https://twitter.com/share?text=Org-mode and Beamer&url=./org-mode-and-beamer.html&via=gnusis" type="button" class="btn btn-info"><i class="fa fa-twitter-square"></i> Tweet</a>
+          </div>
+      </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  <div id="footer-wrapper">
+    <div id="footer" class="container clearfix">
+      <p class="copyrights pull-left">Copyright ©2013 Felipe Reyes. All rights reserved.</p>
+      <p class="socialconnect footer pull-right">
+<a href="https://twitter.com/gnusis" title="Connect on Twitter"><i class="fa fa-twitter"></i></a><a href="https://www.linkedin.com/in/" title="Connect on LinkedIn"><i class="fa fa-linkedin"></i></a><a href="#" title="Connect on GitHub"><i class="fa fa-github"></i></a><a href="https://www.flickr.com/photos/freyes" title="Connect on Flickr"><i class="fa fa-flickr"></i></a>      </p>
+    </div>
+  </div>
+</body>
+</html>

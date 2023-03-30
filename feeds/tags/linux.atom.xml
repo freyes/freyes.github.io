@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - linux</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl/feeds/tags/linux.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2011-06-11T23:10:00-04:00</updated><subtitle>Random thoughts and knowledge</subtitle><entry><title>rxvt-unicode</title><link href="http://tty.cl/rxvt-unicode.html" rel="alternate"></link><published>2011-06-11T23:10:00-04:00</published><updated>2011-06-11T23:10:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2011-06-11:/rxvt-unicode.html</id><summary type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+default terminal since at least 4 years ago. I started using it after getting
+ tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;aptitude install rxvt-unicode …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;The Rxvt terminal is a really good terminal emulator, actually it has been my
+default terminal since at least 4 years ago. I started using it after getting
+ tired of gnome-terminal (it's too fat and heavy for me).&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Screenshot" src="http://tty.cl/images/urxvt_shot.20110601.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;To install it you just must do the follow:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;aptitude install rxvt-unicode
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you want to use it as your default x-terminal-emulator you have to
+set the proper alternative like this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;update-alternatives --set x-terminal-emulator /usr/bin/urxvt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The configuration must go on your ~/.Xdefaults file, here is my configuration&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nl"&gt;foreground:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;grey90&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nl"&gt;cursorColor:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="mf"&gt;729f&lt;/span&gt;&lt;span class="n"&gt;cf&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nl"&gt;font:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;xos4&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;terminus&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;medium&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;normal&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="mh"&gt;14&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;140&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;72&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;72&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;80&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;iso8859&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;15&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nl"&gt;scrollBar:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;False&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nl"&gt;shading:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;50&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nl"&gt;transparent:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;True&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nl"&gt;fade:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;80&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nl"&gt;fadeColor:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="n"&gt;e9b96e&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nl"&gt;tintColor:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;#&lt;/span&gt;&lt;span class="mh"&gt;5&lt;/span&gt;&lt;span class="n"&gt;c5c5c&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nl"&gt;urgentOnBell:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;true&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nl"&gt;urllauncher:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;iceweasel&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;matcher&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nl"&gt;button:&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="mh"&gt;3&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nl"&gt;depth:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mh"&gt;24&lt;/span&gt;
+&lt;span class="n"&gt;URxvt&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nl"&gt;background:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;rgba:&lt;/span&gt;&lt;span class="mh"&gt;0000&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mh"&gt;0000&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mh"&gt;0000&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dddd&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Once you put the configuration you can reload it using this&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;xrdb&lt;span class="w"&gt; &lt;/span&gt;-merge&lt;span class="w"&gt; &lt;/span&gt;~/.Xdefaults
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Remember to install the terminus fonts if you want to use my configuration&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;aptitude&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;xfonts-terminus&lt;span class="w"&gt; &lt;/span&gt;xfonts-terminus-dos&lt;span class="w"&gt; &lt;/span&gt;xfonts-terminus-oblique
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Tools"></category><category term="debian"></category><category term="linux"></category><category term="tips"></category><category term="rxvt"></category></entry></feed>

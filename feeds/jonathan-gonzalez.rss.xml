@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>TTY.cl - Jonathan Gonzalez</title><link>http://tty.cl/</link><description>Random thoughts and knowledge</description><lastBuildDate>Sun, 18 Dec 2011 00:00:00 -0300</lastBuildDate><item><title>MySQL and the Key Cache Buffer</title><link>http://tty.cl/mysql-and-the-key-cache-buffer.html</link><description>&lt;h1&gt;Why did I learn?&lt;/h1&gt;
+&lt;p&gt;It's always important to recognize why this happened, well, here in my
+work a few weeks ago I set up a &lt;a href="http://code.google.com/p/mysql-cacti-templates/"&gt;few new templates&lt;/a&gt; for our &lt;a href="http://www.cacti.net/"&gt;Cacti&lt;/a&gt;, among
+many useful templates it comes with some very handy templates for
+&lt;a href="http://www.mysql.com"&gt;MySQL&lt;/a&gt;, it comes with a pretty useful …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Jonathan Gonzalez</dc:creator><pubDate>Sun, 18 Dec 2011 00:00:00 -0300</pubDate><guid isPermaLink="false">tag:tty.cl,2011-12-18:/mysql-and-the-key-cache-buffer.html</guid><category>articles</category><category>mysql</category><category>tuning</category><category>database</category><category>cache</category></item></channel></rss>

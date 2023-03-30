@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - juju</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl/feeds/tags/juju.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2017-05-21T00:00:00-04:00</updated><subtitle>Random thoughts and knowledge</subtitle><entry><title>Add remote lxd server as a cloud in Juju (2.x)</title><link href="http://tty.cl/add-remote-lxd-server-as-a-cloud-in-juju-2x.html" rel="alternate"></link><published>2017-05-21T00:00:00-04:00</published><updated>2017-05-21T00:00:00-04:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2017-05-21:/add-remote-lxd-server-as-a-cloud-in-juju-2x.html</id><summary type="html">&lt;p&gt;&lt;a href="https://jujucharms.com/"&gt;Juju 2.x&lt;/a&gt; have the ability to add
+&lt;a href="https://linuxcontainers.org/lxd/"&gt;LXD&lt;/a&gt; as &lt;a href="https://jujucharms.com/docs/stable/clouds-LXD"&gt;a
+provisioner&lt;/a&gt;, by default it can
+easily use a local lxd (&lt;code&gt;juju bootstrap lxd&lt;/code&gt;), but how could we use a remote
+lxd?, the following instructions will guide you to achieve this:&lt;/p&gt;
+&lt;p&gt;SSH into the remote server (e.g. &lt;code&gt;192.168 …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://jujucharms.com/"&gt;Juju 2.x&lt;/a&gt; have the ability to add
+&lt;a href="https://linuxcontainers.org/lxd/"&gt;LXD&lt;/a&gt; as &lt;a href="https://jujucharms.com/docs/stable/clouds-LXD"&gt;a
+provisioner&lt;/a&gt;, by default it can
+easily use a local lxd (&lt;code&gt;juju bootstrap lxd&lt;/code&gt;), but how could we use a remote
+lxd?, the following instructions will guide you to achieve this:&lt;/p&gt;
+&lt;p&gt;SSH into the remote server (e.g. &lt;code&gt;192.168.10.2&lt;/code&gt;) and configure lxd to accept
+incoming connections and set a password.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;(192.168.10.2)$ lxc config set core.https_address &amp;quot;[::]&amp;quot;
+(192.168.10.2)$ lxc config set core.trust_password some-secret-string
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now in the machine where juju commands will be ran (A.K.A. juju client) add the
+remote lxd daemon, this is done to easily get the server's certificate.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;(juju-client)$ lxc remote add 192.168.10.2 --accept-certificate --password=some-secret-string
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Create a yaml configuration file that will be used by juju to add the cloud,
+this is how it should look like.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# file: some-remote.yaml&lt;/span&gt;
+&lt;span class="nt"&gt;clouds&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;some-remote&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;lxd&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;auth-types&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;[&lt;/span&gt;&lt;span class="nv"&gt;interactive&lt;/span&gt;&lt;span class="p p-Indicator"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;certificate&lt;/span&gt;&lt;span class="p p-Indicator"&gt;]&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;regions&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="nt"&gt;some-remote&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="nt"&gt;endpoint&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;192.168.10.2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the cloud definition to juju:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;(juju-client)$ juju add-cloud some-remote some-remote.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Create the credentials.yaml file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# file: credentials.yaml&lt;/span&gt;
+&lt;span class="nt"&gt;some-remote&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="nt"&gt;some-remote&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;auth-type&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="l l-Scalar l-Scalar-Plain"&gt;certificate&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;client-cert&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;-----BEGIN CERTIFICATE-----&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;...&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.crt&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;...&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;-----END CERTIFICATE-----&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;client-key&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;-----BEGIN RSA PRIVATE KEY-----&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;...&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.key&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;...&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;-----END RSA PRIVATE KEY-----&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="nt"&gt;server-cert&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p p-Indicator"&gt;|&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;-----BEGIN CERTIFICATE-----&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;...&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;INSERT THE CONTENT OF ~/.config/lxc/client.crt&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;...&lt;/span&gt;
+&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="no"&gt;-----END CERTIFICATE-----&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add the credentials to juju:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;(juju-client)$ juju add-credential some-remote -f credentials.yaml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Verify the cloud was added correctly:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;juju&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;client&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;juju&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;clouds&lt;/span&gt;
+&lt;span class="n"&gt;Cloud&lt;/span&gt;&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="n"&gt;Regions&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Default&lt;/span&gt;&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="n"&gt;Type&lt;/span&gt;&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="n"&gt;Description&lt;/span&gt;
+&lt;span class="n"&gt;aws&lt;/span&gt;&lt;span class="w"&gt;                  &lt;/span&gt;&lt;span class="mh"&gt;14&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;us&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;east&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;ec2&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="n"&gt;Amazon&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Web&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Services&lt;/span&gt;
+&lt;span class="n"&gt;aws&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;china&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;cn&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;north&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="n"&gt;ec2&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="n"&gt;Amazon&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;China&lt;/span&gt;
+&lt;span class="n"&gt;aws&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gov&lt;/span&gt;&lt;span class="w"&gt;               &lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;us&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;gov&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;west&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;ec2&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="n"&gt;Amazon&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;USA&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Government&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;azure&lt;/span&gt;&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="mh"&gt;24&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;centralus&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;azure&lt;/span&gt;&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="n"&gt;Microsoft&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Azure&lt;/span&gt;
+&lt;span class="n"&gt;azure&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;china&lt;/span&gt;&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="mh"&gt;2&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;chinaeast&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;azure&lt;/span&gt;&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="n"&gt;Microsoft&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Azure&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;China&lt;/span&gt;
+&lt;span class="n"&gt;cloudsigma&lt;/span&gt;&lt;span class="w"&gt;            &lt;/span&gt;&lt;span class="mh"&gt;5&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;hnl&lt;/span&gt;&lt;span class="w"&gt;              &lt;/span&gt;&lt;span class="n"&gt;cloudsigma&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="n"&gt;CloudSigma&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Cloud&lt;/span&gt;
+&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="mh"&gt;7&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;us&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;east1&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="n"&gt;gce&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="n"&gt;Google&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Cloud&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Platform&lt;/span&gt;
+&lt;span class="n"&gt;joyent&lt;/span&gt;&lt;span class="w"&gt;                &lt;/span&gt;&lt;span class="mh"&gt;6&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;eu&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ams&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="w"&gt;         &lt;/span&gt;&lt;span class="n"&gt;joyent&lt;/span&gt;&lt;span class="w"&gt;          &lt;/span&gt;&lt;span class="n"&gt;Joyent&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Cloud&lt;/span&gt;
+&lt;span class="n"&gt;oracle&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;compute&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="mh"&gt;5&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;uscom&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;central&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;oracle&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;compute&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;Oracle&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Cloud&lt;/span&gt;
+&lt;span class="n"&gt;rackspace&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="mh"&gt;6&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;dfw&lt;/span&gt;&lt;span class="w"&gt;              &lt;/span&gt;&lt;span class="n"&gt;rackspace&lt;/span&gt;&lt;span class="w"&gt;       &lt;/span&gt;&lt;span class="n"&gt;Rackspace&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Cloud&lt;/span&gt;
+&lt;span class="n"&gt;localhost&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;localhost&lt;/span&gt;&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="n"&gt;lxd&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="n"&gt;LXD&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Container&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Hypervisor&lt;/span&gt;
+&lt;span class="n"&gt;some&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;remote&lt;/span&gt;&lt;span class="w"&gt;           &lt;/span&gt;&lt;span class="mh"&gt;1&lt;/span&gt;&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;some&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;remote&lt;/span&gt;&lt;span class="w"&gt;      &lt;/span&gt;&lt;span class="n"&gt;lxd&lt;/span&gt;&lt;span class="w"&gt;             &lt;/span&gt;&lt;span class="n"&gt;LXD&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Container&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Hypervisor&lt;/span&gt;
+
+&lt;span class="n"&gt;Try&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;list&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;regions&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;cloud&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;see&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;available&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;regions&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="p"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;show&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cloud&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;cloud&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;or&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;regions&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;yaml&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;cloud&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;can&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;be&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;used&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;see&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;region&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;endpoints&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="p"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cloud&lt;/span&gt;&lt;span class="p"&gt;&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;can&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;private&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;clouds&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;or&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;private&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;infrastructure&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;
+&lt;span class="n"&gt;Update&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;the&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;known&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;public&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;clouds&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;with&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;clouds&lt;/span&gt;&lt;span class="p"&gt;&amp;#39;.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Bootstrap a new controller using the added cloud provider&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;(juju-client)$ juju bootstrap some-remote
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Once the bootstrap is done, verify the controller was correctly spun in the
+remote lxd daemon:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c"&gt;(juju&lt;/span&gt;&lt;span class="nb"&gt;-&lt;/span&gt;&lt;span class="c"&gt;client)$ lxc list 192&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;168&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;10&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;2:&lt;/span&gt;
+&lt;span class="nb"&gt;+---------------+---------+--------------------------------+------+------------+-----------+&lt;/span&gt;
+&lt;span class="c"&gt;|     NAME      |  STATE  |              IPV4              | IPV6 |    TYPE    | SNAPSHOTS |&lt;/span&gt;
+&lt;span class="nb"&gt;+---------------+---------+--------------------------------+------+------------+-----------+&lt;/span&gt;
+&lt;span class="c"&gt;| juju&lt;/span&gt;&lt;span class="nb"&gt;-&lt;/span&gt;&lt;span class="c"&gt;ec8b3d&lt;/span&gt;&lt;span class="nb"&gt;-&lt;/span&gt;&lt;span class="c"&gt;0 | RUNNING | 192&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;168&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;10&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;42 (eth0)           |      | PERSISTENT | 0         |&lt;/span&gt;
+&lt;span class="nb"&gt;+---------------+---------+--------------------------------+------+------------+-----------+&lt;/span&gt;
+&lt;span class="c"&gt;(juju&lt;/span&gt;&lt;span class="nb"&gt;-&lt;/span&gt;&lt;span class="c"&gt;client)$ juju status &lt;/span&gt;&lt;span class="nb"&gt;-&lt;/span&gt;&lt;span class="c"&gt;m controller&lt;/span&gt;
+&lt;span class="c"&gt;Model       Controller   Cloud/Region             Version&lt;/span&gt;
+&lt;span class="c"&gt;controller  snowspeeder  snowspeeder/snowspeeder  2&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;1&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;2&lt;/span&gt;
+
+&lt;span class="c"&gt;App  Version  Status  Scale  Charm  Store  Rev  OS  Notes&lt;/span&gt;
+
+&lt;span class="c"&gt;Unit  Workload  Agent  Machine  Public address  Ports  Message&lt;/span&gt;
+
+&lt;span class="c"&gt;Machine  State    DNS            Inst id        Series  AZ  Message&lt;/span&gt;
+&lt;span class="c"&gt;0        started  192&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;168&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;10&lt;/span&gt;&lt;span class="nt"&gt;.&lt;/span&gt;&lt;span class="c"&gt;42  juju&lt;/span&gt;&lt;span class="nb"&gt;-&lt;/span&gt;&lt;span class="c"&gt;ec8b3d&lt;/span&gt;&lt;span class="nb"&gt;-&lt;/span&gt;&lt;span class="c"&gt;0  xenial      Running&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="articles"></category><category term="juju"></category><category term="lxd"></category><category term="ubuntu"></category></entry><entry><title>Multiple Local Environments with Juju</title><link href="http://tty.cl/multiple-local-environments-with-juju.html" rel="alternate"></link><published>2015-01-23T00:00:00-03:00</published><updated>2015-01-23T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2015-01-23:/multiple-local-environments-with-juju.html</id><summary type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://juju.ubuntu.com/"&gt;Juju&lt;/a&gt; has the ability to use lxc or kvm to deploy
+services, this is done by the
+&lt;a href="https://juju.ubuntu.com/docs/config-local.html"&gt;local provider&lt;/a&gt;, but
+sometimes during development you may want to have one environment up-n-running
+all the time for testing and you may need another one to run
+&lt;a href="https://juju.ubuntu.com/docs/tools-amulet.html"&gt;amulet&lt;/a&gt; tests, well at the
+beginning …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img alt="juju man" src="/images/JuJu-man.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://juju.ubuntu.com/"&gt;Juju&lt;/a&gt; has the ability to use lxc or kvm to deploy
+services, this is done by the
+&lt;a href="https://juju.ubuntu.com/docs/config-local.html"&gt;local provider&lt;/a&gt;, but
+sometimes during development you may want to have one environment up-n-running
+all the time for testing and you may need another one to run
+&lt;a href="https://juju.ubuntu.com/docs/tools-amulet.html"&gt;amulet&lt;/a&gt; tests, well at the
+beginning this wasn't obvious to me that this could be achieved, but then I
+found how to do it :)&lt;/p&gt;
+&lt;p&gt;Here is how you can have two different environments:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;environments&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;series&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;trusty&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;lxc&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;container&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;kvm&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;network&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bridge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;br0&lt;/span&gt;
+&lt;span class="w"&gt;  &lt;/span&gt;&lt;span class="n"&gt;lxc&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;type&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;local&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="k"&gt;default&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;series&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;trusty&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;lxc&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;clone&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;true&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;network&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;bridge&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;lxcbr0&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;state&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;37018&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;api&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;17071&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That is the relevant portion of my &lt;code&gt;~/.juju/environments.yaml&lt;/code&gt;, I use one environment with &lt;code&gt;kvm&lt;/code&gt; and the other one with &lt;code&gt;lxc&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;If you're curious, the trick is to change the &lt;code&gt;state-port&lt;/code&gt; and &lt;code&gt;api-port&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;I hope this helps you.&lt;/p&gt;</content><category term="articles"></category><category term="juju"></category></entry></feed>
