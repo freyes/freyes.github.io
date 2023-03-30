@@ -8,7 +8,7 @@ The Rxvt terminal is a really good terminal emulator, actually it has been my
 default terminal since at least 4 years ago. I started using it after getting
  tired of gnome-terminal (it's too fat and heavy for me).
 
-![Screenshot]({filename}/images/urxvt_shot.20110601.jpg)
+![Screenshot]({static}/images/urxvt_shot.20110601.jpg)
 
 To install it you just must do the follow:
 
