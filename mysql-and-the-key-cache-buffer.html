@@ -83,19 +83,19 @@ you have and how it's working now.</p>
 
 <p>All the rows returned from this command are useful! I'll use and
 example of one of our servers:</p>
-<div class="highlight"><pre><span></span><code><span class="nv">mysql</span><span class="o">&gt;</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="nv">status</span><span class="w"> </span><span class="nv">like</span><span class="w"> </span><span class="s1">&#39;Key%&#39;</span><span class="c1">;</span>
-<span class="o">+------------------------+-----------+</span>
-<span class="o">|</span><span class="w"> </span><span class="nv">Variable_name</span><span class="w">          </span><span class="o">|</span><span class="w"> </span><span class="nv">Value</span><span class="w">     </span><span class="o">|</span>
-<span class="o">+------------------------+-----------+</span>
-<span class="o">|</span><span class="w"> </span><span class="nv">Key_blocks_not_flushed</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="w">         </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="nv">Key_blocks_unused</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mi">240934</span><span class="w">    </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="nv">Key_blocks_used</span><span class="w">        </span><span class="o">|</span><span class="w"> </span><span class="mi">97093</span><span class="w">     </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="nv">Key_read_requests</span><span class="w">      </span><span class="o">|</span><span class="w"> </span><span class="mi">211305615</span><span class="w"> </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="nv">Key_reads</span><span class="w">              </span><span class="o">|</span><span class="w"> </span><span class="mi">321341</span><span class="w">    </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="nv">Key_write_requests</span><span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="mi">9268658</span><span class="w">   </span><span class="o">|</span>
-<span class="o">|</span><span class="w"> </span><span class="nv">Key_writes</span><span class="w">             </span><span class="o">|</span><span class="w"> </span><span class="mi">397761</span><span class="w">    </span><span class="o">|</span>
-<span class="o">+------------------------+-----------+</span>
-<span class="mi">7</span><span class="w"> </span><span class="nv">rows</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">set</span><span class="w"> </span><span class="ss">(</span><span class="mi">0</span>.<span class="mi">00</span><span class="w"> </span><span class="nv">sec</span><span class="ss">)</span>
+<div class="highlight"><pre><span></span><code>mysql&gt; show status like &#39;Key%&#39;;
++------------------------+-----------+
+| Variable_name          | Value     |
++------------------------+-----------+
+| Key_blocks_not_flushed | 0         |
+| Key_blocks_unused      | 240934    |
+| Key_blocks_used        | 97093     |
+| Key_read_requests      | 211305615 |
+| Key_reads              | 321341    |
+| Key_write_requests     | 9268658   |
+| Key_writes             | 397761    |
++------------------------+-----------+
+7 rows in set (0.00 sec)
 </code></pre></div>
 
 <p>We now have all the data we need to evaluate  our current situation.</p>
@@ -108,12 +108,12 @@ transformation:</p>
 <p>We have a Key cache buffer of 384MB which looks like a lot of space,
 but how much of that space it's currently used? well, you will have to
 do simple calculation:</p>
-<div class="highlight"><pre><span></span><code>key_buffer_usage = ( Key_blocks_unused * key_cache_block_size ) / key_buffer_size ) * 100
+<div class="highlight"><pre><span></span><code>key_buffer_usage = ( Key_blocks_unused <span class="gs">* key_cache_block_size ) / key_buffer_size ) *</span> 100
 </code></pre></div>
 
 <p>So with our collected that we will suppose that the value of
 'key cache block size' it's 1024 which it's the default value.</p>
-<div class="highlight"><pre><span></span><code>( (240934 * 1024) / 402653184 ) * 100 = 61.2
+<div class="highlight"><pre><span></span><code>( (240934 <span class="gs">* 1024) / 402653184 ) *</span> 100 = 61.2
 </code></pre></div>
 
 <p>So, we have about 61.2 percent of our buffer used, ok this seems to be

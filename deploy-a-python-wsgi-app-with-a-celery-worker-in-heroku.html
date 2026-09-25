@@ -224,8 +224,8 @@ Use `heroku addons:docs cloudamqp` to view documentation.
 <h1>Adjusting Settings</h1>
 <p>Heroku passes to your app environment variables with the configuration, this a common practice in the PaaS ecosystem, so you need to modify your app to read config values from it.</p>
 <p>Here are examples to setup Celery and Django:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">dj_database_url</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dj_database_url</span>
 
 <span class="n">DEFAULT_AMQP</span> <span class="o">=</span> <span class="s2">&quot;amqp://guest:guest@localhost//&quot;</span>
 <span class="n">DEFAULT_DB</span> <span class="o">=</span> <span class="s2">&quot;postgres://localhost&quot;</span>

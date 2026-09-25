@@ -46,25 +46,25 @@
 <address class="vcard author">By <a class="url fn" href="../author/felipe-reyes.html">Felipe Reyes</a></address>            </div>
             <div class="article-summary">
                 <h2>Property</h2>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">Property</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">Property</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
     <span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">,</span> <span class="n">fdel</span> <span class="o">=</span> <span class="n">f</span><span class="p">()</span>
     <span class="n">fdoc</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="vm">__doc__</span>
     <span class="k">return</span> <span class="nb">property</span><span class="p">(</span><span class="n">fget</span><span class="p">,</span> <span class="n">fset</span><span class="p">,</span> <span class="n">fdel</span><span class="p">,</span> <span class="n">fdoc</span><span class="p">)</span>
 </code></pre></div>
 
 <h3>Usage Example</h3>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">TtyExample</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">TtyExample</span> <span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@Property</span>
-    <span class="k">def</span> <span class="nf">name</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
         <span class="s2">&quot;The name&quot;</span>
-        <span class="k">def</span> <span class="nf">fget</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">fget</span> <span class="p">(</span><span class="bp">self</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_name</span>
 
-        <span class="k">def</span> <span class="nf">fset</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">fset</span> <span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
             <span class="k">assert</span> <span class="nb">isinstance</span> <span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">basestring</span><span class="p">)</span>
             <span class="k">assert</span> <span class="n">value …</span></code></pre></div>
             </div>

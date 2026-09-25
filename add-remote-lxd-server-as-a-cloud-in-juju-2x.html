@@ -65,8 +65,8 @@ easily use a local lxd (<code>juju bootstrap lxd</code>), but how could we use a
 lxd?, the following instructions will guide you to achieve this:</p>
 <p>SSH into the remote server (e.g. <code>192.168.10.2</code>) and configure lxd to accept
 incoming connections and set a password.</p>
-<div class="highlight"><pre><span></span><code>(192.168.10.2)$ lxc config set core.https_address &quot;[::]&quot;
-(192.168.10.2)$ lxc config set core.trust_password some-secret-string
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="m m-Double">192.168.10.2</span><span class="p">)</span><span class="err">$</span><span class="w"> </span><span class="nx">lxc</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">core</span><span class="p">.</span><span class="nx">https_address</span><span class="w"> </span><span class="s">&quot;[::]&quot;</span>
+<span class="p">(</span><span class="m m-Double">192.168.10.2</span><span class="p">)</span><span class="err">$</span><span class="w"> </span><span class="nx">lxc</span><span class="w"> </span><span class="nx">config</span><span class="w"> </span><span class="nx">set</span><span class="w"> </span><span class="nx">core</span><span class="p">.</span><span class="nx">trust_password</span><span class="w"> </span><span class="nx">some</span><span class="o">-</span><span class="nx">secret</span><span class="o">-</span><span class="kt">string</span>
 </code></pre></div>
 
 <p>Now in the machine where juju commands will be ran (A.K.A. juju client) add the

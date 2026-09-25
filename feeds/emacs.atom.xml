@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - emacs</title><link href="http://tty.cl/" rel="alternate"></link><link href="http://tty.cl/feeds/emacs.atom.xml" rel="self"></link><id>http://tty.cl/</id><updated>2013-12-03T00:00:00-03:00</updated><subtitle>Random thoughts and knowledge</subtitle><entry><title>How to start with Emacs</title><link href="http://tty.cl/how-to-start-with-emacs.html" rel="alternate"></link><published>2013-12-03T00:00:00-03:00</published><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-03:/how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - emacs</title><link href="http://tty.cl/" rel="alternate"/><link href="http://tty.cl/feeds/emacs.atom.xml" rel="self"/><id>http://tty.cl/</id><updated>2013-12-03T00:00:00-03:00</updated><subtitle>Random thoughts and knowledge</subtitle><entry><title>How to start with Emacs</title><link href="http://tty.cl/how-to-start-with-emacs.html" rel="alternate"/><published>2013-12-03T00:00:00-03:00</published><updated>2013-12-03T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-03:/how-to-start-with-emacs.html</id><summary type="html">&lt;h2&gt;Part 0&lt;/h2&gt;
 &lt;p&gt;Before I could really be productive with emacs, I failed a couple of
 times, because I knew that emacs were powerful, but the default
 configuration shows you a simple text editor that look awful, without
@@ -184,7 +184,7 @@ C mode.&lt;/p&gt;
 
 &lt;span class="c1"&gt;;;; Prevent Extraneous Tabs&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;setq-default&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;indent-tabs-mode&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="emacs"></category></entry><entry><title>.emacs</title><link href="http://tty.cl/emacs.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="emacs"/></entry><entry><title>.emacs</title><link href="http://tty.cl/emacs.html" rel="alternate"/><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/emacs.html</id><summary type="html">&lt;p&gt;I hope you enjoy disecting my emacs config :D&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;;; to debug the .emacs file&lt;/span&gt;
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;debug-on-error&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="no"&gt;nil&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 
@@ -713,7 +713,7 @@ C mode.&lt;/p&gt;
 &lt;span class="p"&gt;;;&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;interactive&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;;;&lt;/span&gt;  &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;let&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;parens&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;require&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;spaces&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 &lt;span class="p"&gt;;;&lt;/span&gt;    &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;insert&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pair&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="emacs"></category></entry><entry><title>erc</title><link href="http://tty.cl/erc.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="emacs"/></entry><entry><title>erc</title><link href="http://tty.cl/erc.html" rel="alternate"/><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/erc.html</id><summary type="html">&lt;p&gt;This is my configuration for erc&lt;/p&gt;
 &lt;p&gt;erc-cmd-NP function send the current track being played to the current chat buffer (channel or private).&lt;/p&gt;
 &lt;p&gt;The connect- functions provide a quick access to the defined IRC server.&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;;;&lt;/span&gt;
@@ -762,7 +762,7 @@ C mode.&lt;/p&gt;
 &lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="ss"&gt;:full-name&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Felipe Reyes&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 
 &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;setq&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;erc-auto-query&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="ss"&gt;&amp;#39;frame&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="emacs"></category></entry><entry><title>Org-mode and Beamer</title><link href="http://tty.cl/org-mode-and-beamer.html" rel="alternate"></link><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="emacs"/></entry><entry><title>Org-mode and Beamer</title><link href="http://tty.cl/org-mode-and-beamer.html" rel="alternate"/><published>2013-12-02T00:00:00-03:00</published><updated>2013-12-02T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-12-02:/org-mode-and-beamer.html</id><summary type="html">&lt;h2&gt;Overview&lt;/h2&gt;
 &lt;p&gt;The LaTeX class beamer allows production of high quality presentations using LaTeX and pdf processing. Org-mode has special support for turning an Org-mode file or tree into a beamer presentation. &lt;/p&gt;
 &lt;h2&gt;Example&lt;/h2&gt;
 &lt;p&gt;Here it is an example of how a presentation file should look like&lt;/p&gt;
@@ -803,9 +803,9 @@ C mode.&lt;/p&gt;
 &lt;span class="o"&gt;**&lt;/span&gt; &lt;span class="n"&gt;Source&lt;/span&gt; &lt;span class="n"&gt;Code&lt;/span&gt; &lt;span class="n"&gt;Example&lt;/span&gt;
 &lt;span class="c1"&gt;#+BEGIN_LaTeX&lt;/span&gt;
 \&lt;span class="n"&gt;begin&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;lstlisting&lt;/span&gt;&lt;span class="p"&gt;}[&lt;/span&gt;&lt;span class="n"&gt;language&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;os&lt;/span&gt;
 
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;my_fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;my_fun&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="nb"&gt;print&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;listdir&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
 \&lt;span class="n"&gt;end&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="n"&gt;lstlisting&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
 &lt;span class="c1"&gt;#+END_LaTeX&lt;/span&gt;
@@ -887,7 +887,7 @@ sudo apt-get install texlive-extra-utils \
 &lt;li&gt;&lt;a href="http://orgmode.org/worg/org-tutorials/org-beamer/tutorial.html"&gt;Worg beamer tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://orgmode.org/manual/Beamer-class-export.html"&gt;org-mode beamer&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://emacs-fu.blogspot.com/2009/10/writing-presentations-with-org-mode-and.html"&gt;emacs-fu: writing presentations with org-mode and beamer&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content><category term="emacs"></category></entry><entry><title>Emacs Tips</title><link href="http://tty.cl/emacs-tips.html" rel="alternate"></link><published>2013-01-01T00:00:00-03:00</published><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:/emacs-tips.html</id><content type="html">&lt;ul&gt;
+&lt;/ul&gt;</content><category term="emacs"/></entry><entry><title>Emacs Tips</title><link href="http://tty.cl/emacs-tips.html" rel="alternate"/><published>2013-01-01T00:00:00-03:00</published><updated>2013-01-01T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2013-01-01:/emacs-tips.html</id><content type="html">&lt;ul&gt;
 &lt;li&gt;If you start emacs with "emacs -q" and the problem goes away, the problem is on your end: check your .emacs. &lt;/li&gt;
 &lt;li&gt;If "emacs -q" has problems and "emacs -Q" does not, it's caused by your distro or local admin.&lt;/li&gt;
-&lt;/ul&gt;</content><category term="emacs"></category></entry></feed>
+&lt;/ul&gt;</content><category term="emacs"/></entry></feed>

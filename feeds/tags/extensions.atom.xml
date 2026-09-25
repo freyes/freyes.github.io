@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>TTY.cl - extensions</title><link href="http://tty.cl/" rel="alternate"/><link href="http://tty.cl/feeds/tags/extensions.atom.xml" rel="self"/><id>http://tty.cl/</id><updated>2026-09-25T00:00:00-03:00</updated><subtitle>Random thoughts and knowledge</subtitle><entry><title>Snooze notifications in GNOME Shell</title><link href="http://tty.cl/snooze-notifications-in-gnome-shell.html" rel="alternate"/><published>2026-09-25T00:00:00-03:00</published><updated>2026-09-25T00:00:00-03:00</updated><author><name>Felipe Reyes</name></author><id>tag:tty.cl,2026-09-25:/snooze-notifications-in-gnome-shell.html</id><summary type="html">&lt;p&gt;Notifications are a double-edged sword. They're useful when they tell you
+something you need to act on - a message from a colleague, a calendar reminder,
+a CI pipeline that just failed. But they're useless when they pop up at the
+wrong time and you can't do anything about them yet …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Notifications are a double-edged sword. They're useful when they tell you
+something you need to act on - a message from a colleague, a calendar reminder,
+a CI pipeline that just failed. But they're useless when they pop up at the
+wrong time and you can't do anything about them yet.&lt;/p&gt;
+&lt;p&gt;You dismiss them, and then you forget. The chat message goes unanswered for
+hours. The calendar event happens without you. You meant to get back to it,
+but the notification is gone and so is your train of thought.&lt;/p&gt;
+&lt;p&gt;This has been bothering me for years. Email clients solved this decades ago
+with a "snooze" button - why can't every notification have one?&lt;/p&gt;
+&lt;p&gt;So I wrote a GNOME Shell extension that does exactly that.&lt;/p&gt;
+&lt;h2&gt;What it does&lt;/h2&gt;
+&lt;p&gt;The extension adds a &lt;strong&gt;Snooze&lt;/strong&gt; button to every notification popup in GNOME
+Shell. Click it, and the notification disappears, but only temporarily. After
+a configurable delay, it comes right back as if it were new.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Snooze button on a notification" src="https://raw.githubusercontent.com/freyes/gnome-extension-snooze-notification/main/screenshot.png"&gt;&lt;/p&gt;
+&lt;p&gt;The default delay is 5 minutes, but you can set it anywhere between 1 and 120
+minutes through the extension's preferences:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;gnome&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;prefs&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;snooze&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;notification&lt;/span&gt;&lt;span class="nv"&gt;@freyes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;io&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;How it works under the hood&lt;/h2&gt;
+&lt;p&gt;I didn't want to reinvent the wheel here. The extension hooks into GNOME Shell's
+own notification machinery. When you hit Snooze, it calls the same hide path the
+shell uses internally, so there shouldn't be risk of focus stealing or
+fullscreen leaks. The notification is marked as "unseen" again, and when the
+timer fires, GNOME Shell re-banners it exactly as if it had just arrived.&lt;/p&gt;
+&lt;p&gt;A few things to be aware of:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Snoozes live &lt;strong&gt;in memory only&lt;/strong&gt;. If you lock your screen, log out, or
+  disable the extension, snoozed notifications are lost (they re-appear as
+  unseen rather than being silently dropped).&lt;/li&gt;
+&lt;li&gt;The Snooze button appears on &lt;strong&gt;popup banners&lt;/strong&gt;, not in the message tray /
+  calendar list.&lt;/li&gt;
+&lt;li&gt;If Do Not Disturb is active when a snooze expires, the notification lands
+  quietly in the message list instead of popping up.&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Desktop"/><category term="gnome"/><category term="extensions"/><category term="javascript"/><category term="desktop"/></entry></feed>
