@@ -1,2 +1,2 @@
-pelican[markdown]
+pelican[markdown]~=4.12.0
 ghp-import

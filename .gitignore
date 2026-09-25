@@ -5,3 +5,4 @@ pelican.pid
 srv.pid
 cache/
 .tox
+.omo/

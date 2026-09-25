@@ -63,7 +63,7 @@ pelican -s publishconf.py       # production (absolute URLs)
 Pushing to the `src` branch triggers the GitHub Actions workflow, which:
 
 1. Checks out the repository
-2. Sets up Python 3.10
+2. Sets up Python 3.14
 3. Installs dependencies via tox
 4. Generates the static site with `tox -e publish`
 5. Deploys the `output/` directory to the `master` branch (GitHub Pages)
